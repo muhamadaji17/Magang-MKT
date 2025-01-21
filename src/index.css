@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.error {
+  font-size: 10px;
+  color: red;
+  margin-top: 2px;
+}
+
+input[type="password"] {
+  font-size: 10px;
+}
+
+input {
+  letter-spacing: 1px;
+}
