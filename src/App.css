@@ -1,0 +1,5 @@
+.bg_auth {
+  background-image: url("/images/bg_auth.jpg");
+  background-size: cover;
+  background-position: center;
+}
