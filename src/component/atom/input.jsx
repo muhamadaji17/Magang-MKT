@@ -20,6 +20,7 @@ const Input = ({
       label={label}
       variant="outlined"
       focused={onFocus}
+      name={name}
       disabled={disabled}
       {...register(name, addOptionError)}
       className={`w-full bg-white ${className}`}

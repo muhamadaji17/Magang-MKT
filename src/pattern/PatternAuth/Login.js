@@ -11,8 +11,8 @@ export const inputLogin = [
     name: "username",
     className: "",
     grid: "12",
-    addOptionError: errorOptions.user_phone,
-    error: "user_phone",
+    addOptionError: errorOptions.username,
+    error: "username",
   },
   {
     jenisInput: "input",
@@ -25,7 +25,7 @@ export const inputLogin = [
     className: "",
     icon: FaEye,
     onClick: true,
-    addOptionError: errorOptions.user_password,
-    error: "user_password",
+    addOptionError: errorOptions.password,
+    error: "password",
   },
 ];

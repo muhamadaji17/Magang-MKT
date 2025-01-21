@@ -23,6 +23,7 @@ export const errorOptions = {
   shift_name: { required: "Nama Shift is Required" },
   jam_masuk: { required: "Jam Masuk is Required" },
   jam_keluar: { required: "Jam Keluar is Required" },
+  username: { required: "Username is Required" },
 
   password: {
     required: "Password is Required",

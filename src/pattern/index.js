@@ -1,5 +1,5 @@
 import { errorOptions } from "./PatternError";
-import { handleSubmit } from "./handleButton";
+import { handleSubmitData, handleShowPassword } from "./handleButton";
 import { inputLogin } from "./PatternAuth/Login";
 
-export { errorOptions, handleSubmit, inputLogin };
+export { errorOptions, handleSubmitData, inputLogin, handleShowPassword };

@@ -1,3 +1,7 @@
-export const handleSubmit = (data, postData) => {
+export const handleSubmitData = (data, postData) => {
   postData(data);
+};
+
+export const handleShowPassword = (setShowPassword, showPassword) => {
+  setShowPassword(!showPassword);
 };
