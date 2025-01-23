@@ -1,14 +1,13 @@
-/* eslint-disable react/prop-types */
-const Button = ({ children, className, type, disabled, ...props }) => {
+const Button = ({ children, type, className }) => {
   return (
-    <button
-      {...props}
-      type={type}
-      disabled={disabled}
-      className={`py-2   font-semibold  dark:text-white rounded-md  ${className}`}
-    >
-      {children}
-    </button>
+    <>
+      <button
+        className={`p-2 w-full bg-primary rounded-md ${className}`}
+        type={type}
+      >
+        {children}
+      </button>
+    </>
   );
 };
 
