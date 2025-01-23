@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#7754F6",
+        primary: "#1C4385",
+        accent: "#D0B171",
       },
       fontFamily: {
         Inter: "Inter",
