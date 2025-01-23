@@ -1,7 +1,7 @@
-export default function Label({ htmlfor, variant, children }) {
+export const Label = ({ htmlfor, children, ...props }) => {
     return (
-        <label htmlFor={htmlfor} className={variant}>
+        <label htmlFor={htmlfor} {...props}>
             {children}
         </label>
     );
-}
+};
