@@ -1,8 +1,8 @@
 import Container from "../../component/atom/Container";
 import Section from "../../component/atom/Section";
-import FormLogin from "../../component/organism/FormLogin";
+import FormRegister from "../../component/organism/FormRegister";
 
-const Login = () => {
+const Register = () => {
   return (
     <>
       <Section>
@@ -15,7 +15,7 @@ const Login = () => {
             />
           </div>
           <div className="w-1/2 h-full justify-center items-center flex">
-            <FormLogin />
+            <FormRegister />
           </div>
         </Container>
       </Section>
@@ -23,4 +23,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
