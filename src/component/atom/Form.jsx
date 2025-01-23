@@ -1,10 +1,7 @@
-const Form = ({ children, className, onSubmit }) => {
+const Form = ({ className, children }) => {
   return (
     <>
-      <form
-        onSubmit={onSubmit}
-        className={`p-2 rounded-md border-2 flex flex-col gap-2 w-1/3 ${className}`}
-      >
+      <form className={`border-2 p-4 rounded-md ${className} `}>
         {children}
       </form>
     </>
