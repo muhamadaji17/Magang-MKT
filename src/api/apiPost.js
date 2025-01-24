@@ -12,10 +12,6 @@ export const apiCall = async (
       data
     );
 
-    if (response.data.status === true) {
-      successCallback(response.data.message);
-    }
-
     return response.data;
   } catch (error) {
     errorCallback(error.response?.data?.message || "Terjadi kesalahan");

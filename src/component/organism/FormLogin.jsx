@@ -23,15 +23,16 @@ const FormLogin = () => {
 
   const onSubmit = async (data) => {
     try {
-      await apiCall(
-        "/login",
-        {
-          username: data.username,
-          password: data.password,
-        },
-        (message) => showAlert("Success", message, "success", 2000),
-        (message) => showAlert("Error", message, "error", 2000)
-      );
+      const res = await apiCall("/login", {
+        username: data.username,
+        password: data.password,
+      });
+
+      if (res.status === true) {
+        showAlert("Success", res.message, "success", 2000);
+      } else {
+        showAlert("Error", res.message, "error", 2000);
+      }
       console.log(data);
     } catch (error) {
       showAlert("Error", error.response.data.message, "error", 2000);

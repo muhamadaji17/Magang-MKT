@@ -7,9 +7,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import showAlert from "../../utils/ShowAlert";
 import { apiCall } from "../../api/apiPost";
+import axios from "axios";
+import { useState } from "react";
 
 const FormRegister = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const {
     register,
@@ -25,24 +29,56 @@ const FormRegister = () => {
     },
   });
 
+  const successCallback = () => {
+    showAlert("Success", res.message, "success", 5000);
+  };
+
+  const errorCallback = () => {
+    showAlert("Error", res.message, "error", 5000);
+  };
+
   const onSubmit = async (data) => {
     try {
-      await apiCall(
+      const res = await apiCall(
         "/register",
         {
           username: data.username,
           password: data.password,
           email: data.email,
           phone_number: data.phone_number,
-        },
-        (message) => showAlert("Success", message, "success", 2000),
-        (message) => showAlert("Error", message, "error", 2000)
+        }
+        // showAlert("Success", res.message, "success", 5000),
+        // showAlert("Error", res.message, "error", 5000)
       );
-      navigate("/auth/login");
-      console.log(data);
+      if (res.status === true) {
+        showAlert("Success", res.message, "success", 5000);
+        navigate("/auth/login");
+      } else {
+        showAlert("Error", res.message, "error", 5000);
+      }
+
+      console.log(res);
     } catch (error) {
-      showAlert("Error", error.response.data.message, "error", 2000);
+      console.log(error);
     }
+
+    // try {
+    //   const res = await apiCall("/register", {
+    //     username: data.username,
+    //     password: data.password,
+    //     email: data.email,
+    //     phone_number: data.phone_number,
+    //   });
+    //   if (res.data.status === true) {
+    //     showAlert("Success", res.data.message, "success", 5000);
+    //     navigate("/auth/login");
+    //   } else {
+    //     showAlert("Error", res.data.message, "error", 5000);
+    //   }
+    //   console.log(res);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
