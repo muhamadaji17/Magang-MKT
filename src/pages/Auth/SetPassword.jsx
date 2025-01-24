@@ -11,29 +11,36 @@ import { useLoginForm } from "../../hook/useLoginForm";
 import usePasswordToggle from "../../hook/usePasswordToogle";
 import useOtpStore from "../../store/otpStore";
 import showAlert from "../../utils/ShowAlert";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import TextError from "../../component/atom/TextError";
 
 const SetPassword = () => {
   const { showPassword, handlePasswordToggle } = usePasswordToggle();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useLoginForm({
-    newPassword: "",
+  } = useForm({
+    password: "",
     confirm_password: "",
   });
   const { otpData } = useOtpStore();
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/set-password`,
-        {
-          password: data.newPassword,
-          otp: otpData.otp,
-          phone_number: otpData.phone_number,
-        }
-      );
+      const res = await apiCall("/set-pass", {
+        password: data.password,
+        otp: otpData.otp,
+        phone_number: otpData.phone_number,
+      });
+      if (res.status === true) {
+        showAlert("Success", res.message, "success", 5000);
+        navigate("/auth/login");
+      } else {
+        showAlert("Error", res.message, "error", 5000);
+      }
       console.log(res.data);
     } catch (error) {
       showAlert("Error", error.config.data);
@@ -55,15 +62,21 @@ const SetPassword = () => {
             <Input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
-              id="newPassword"
-              {...register("newPassword", { required: true })}
+              id="password"
+              {...register("password", { required: true })}
             />
+            {errors.password && (
+              <TextError>{errors.password.message}</TextError>
+            )}
             <Input
               type={showPassword ? "text" : "password"}
               placeholder="Confirm Password"
               id="confirm-password"
               {...register("confirm_password", { required: true })}
             />
+            {errors.confirm_password && (
+              <TextError>{errors.confirm_password.message}</TextError>
+            )}
             <div className="w-full flex justify-start items-center">
               <ShowPassword
                 checked={showPassword}

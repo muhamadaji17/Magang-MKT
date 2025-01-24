@@ -9,6 +9,7 @@ import { apiCall } from "../../api/apiPost";
 import { useLoginForm } from "../../hook/useLoginForm";
 import ShowPassword from "../moleculs/ShowPassword";
 import usePasswordToggle from "../../hook/usePasswordToogle";
+import TextError from "../atom/TextError";
 
 const FormLogin = () => {
   const {
@@ -61,9 +62,7 @@ const FormLogin = () => {
             required: "Username harus diisi",
           })}
         />
-        {errors.username && (
-          <p className="text-red-500">{errors.username.message}</p>
-        )}
+        {errors.username && <TextError>{errors.username.message}</TextError>}
         <Input
           type={showPassword ? "text" : "password"}
           id="password"
@@ -75,9 +74,7 @@ const FormLogin = () => {
             required: "Password harus diisi",
           })}
         />
-        {errors.password && (
-          <p className="text-red-500">{errors.password.message}</p>
-        )}
+        {errors.password && <TextError>{errors.password.message}</TextError>}
         <div className="w-full flex justify-between items-center text-sm">
           <ShowPassword
             checked={showPassword}
