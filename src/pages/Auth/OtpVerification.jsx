@@ -7,6 +7,7 @@ import Section from "../../component/atom/Section";
 import FormTitle from "../../component/moleculs/FormTitle";
 import useOtpStore from "../../store/otpStore";
 import showAlert from "../../utils/ShowAlert";
+import { useNavigate } from "react-router-dom";
 
 const OtpVerification = () => {
   const { otpData } = useOtpStore();
@@ -17,9 +18,12 @@ const OtpVerification = () => {
     },
   });
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     if (data.otp === otpData.otp) {
       showAlert("Success", "OTP is Valid", "success");
+      navigate("/auth/login");
     } else {
       showAlert("Error", "OTP is Invalid", "error");
     }
