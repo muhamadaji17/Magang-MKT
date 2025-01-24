@@ -1,17 +1,24 @@
 import axios from "axios";
 
-const apiPost = async (endpoint, data) => {
-  const response = await axios.post(
-    `${import.meta.env.VITE_API_URL}/${endpoint}`,
-    data,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  console.log(response.data);
-  return response.data;
-};
+export const apiCall = async (
+  endpoint,
+  data,
+  successCallback,
+  errorCallback
+) => {
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}${endpoint}`,
+      data
+    );
 
-export default apiPost;
+    if (response.data.status === true) {
+      successCallback(response.data.message);
+    }
+
+    return response.data;
+  } catch (error) {
+    errorCallback(error.response?.data?.message || "Terjadi kesalahan");
+    throw error;
+  }
+};
