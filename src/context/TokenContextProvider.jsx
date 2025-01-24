@@ -1,18 +1,20 @@
-import React, { createContext, useEffect, useState } from "react";
-const TokenContext = createContext();
+import React, { createContext, useState } from "react";
+const AccessTokenContext = createContext();
 
 const TokenContextProvider = ({ children }) => {
-  const [token, setToken] = useState("");
+  const [accessToken, setAccessToken] = useState("");
 
   const handleLogin = (values) => {
-    setToken(values);
+    setAccessToken(values);
   };
 
   return (
-    <TokenContext.Provider value={{ token, handleLogin }}>
+    <AccessTokenContext.Provider
+      value={{ accessToken, setAccessToken, handleLogin }}
+    >
       {children}
-    </TokenContext.Provider>
+    </AccessTokenContext.Provider>
   );
 };
 
-export { TokenContextProvider, TokenContext };
+export { TokenContextProvider, AccessTokenContext };

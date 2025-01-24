@@ -1,0 +1,35 @@
+import React from "react";
+import { LayoutAuth } from "../../component/layouts";
+import { inputLogin } from "../../pattern/PatternAuth/Login";
+import Form from "../../component/organism/Form";
+import { handleSubmitData, useAccessToken } from "../../pattern";
+import { LoginService } from "../../service";
+import { useNavigate } from "react-router";
+
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const { accessToken, setAccessToken } = useAccessToken();
+  return (
+    <>
+      <LayoutAuth title={"Form Login"}>
+        <Form
+          dataForm={inputLogin}
+          buttonName={"Login"}
+          authFor={"login"}
+          handleSubmitData={(data, resetField, setLoadingButton) => {
+            handleSubmitData({
+              data,
+              resetField,
+              navigate,
+              setLoading: setLoadingButton,
+              postData: LoginService,
+              setState: setAccessToken,
+            });
+          }}
+        />
+      </LayoutAuth>
+    </>
+  );
+};
+
+export default LoginPage;
