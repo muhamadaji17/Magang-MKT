@@ -1,6 +1,4 @@
-import Container from "../../component/atom/Container";
-import Section from "../../component/atom/Section";
-import FormRegister from "../../component/organism/FormRegister";
+import { Container, Section, FormRegister } from "../../component/index";
 
 const Register = () => {
   return (

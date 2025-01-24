@@ -1,14 +1,17 @@
-import { useForm } from "react-hook-form";
-import Button from "../../component/atom/Button";
-import Container from "../../component/atom/Container";
-import Form from "../../component/atom/Form";
-import Input from "../../component/atom/Input";
-import Section from "../../component/atom/Section";
-import FormTitle from "../../component/moleculs/FormTitle";
 import useOtpStore from "../../store/otpStore";
 import showAlert from "../../utils/ShowAlert";
 import { useNavigate } from "react-router-dom";
 import { useLoginForm } from "../../hook/useLoginForm";
+
+import {
+  Button,
+  Container,
+  Form,
+  Input,
+  Section,
+  FormTitle,
+  TextError,
+} from "../../component/index";
 
 const OtpVerification = () => {
   const { otpData } = useOtpStore();
@@ -54,6 +57,7 @@ const OtpVerification = () => {
                 maxLength: 6,
               })}
             />
+            {errors.otp && <TextError>{errors.otp.message}</TextError>}
             <Button className="text-white" type="submit">
               {isSubmitting ? "Loading..." : "Submit"}
             </Button>

@@ -1,14 +1,18 @@
 import { apiCall } from "../../api/apiPost";
-import Button from "../../component/atom/Button";
-import Container from "../../component/atom/Container";
-import Form from "../../component/atom/Form";
-import Input from "../../component/atom/Input";
-import Section from "../../component/atom/Section";
-import FormTitle from "../../component/moleculs/FormTitle";
 import useOtpSore from "../../store/otpStore";
 import showAlert from "../../utils/ShowAlert";
 import { useNavigate } from "react-router-dom";
 import { useLoginForm } from "../../hook/useLoginForm";
+
+import {
+  Button,
+  Container,
+  Form,
+  Input,
+  Section,
+  FormTitle,
+  TextError,
+} from "../../component/index";
 
 const ForgotPassword = () => {
   const { otpData, setOtpData } = useOtpSore();
@@ -81,6 +85,9 @@ const ForgotPassword = () => {
                 required: "Phone Number is Required",
               })}
             />
+            {errors.phone_number && (
+              <TextError>{errors.phone_number.message}</TextError>
+            )}
             <Button className="text-white">
               {isSubmitting ? "Loading" : "Submit"}
             </Button>

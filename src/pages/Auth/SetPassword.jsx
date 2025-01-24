@@ -1,19 +1,20 @@
-import axios from "axios";
 import { apiCall } from "../../api/apiPost";
-import Button from "../../component/atom/Button";
-import Container from "../../component/atom/Container";
-import Form from "../../component/atom/Form";
-import Input from "../../component/atom/Input";
-import Section from "../../component/atom/Section";
-import FormTitle from "../../component/moleculs/FormTitle";
-import ShowPassword from "../../component/moleculs/ShowPassword";
-import { useLoginForm } from "../../hook/useLoginForm";
 import usePasswordToggle from "../../hook/usePasswordToogle";
 import useOtpStore from "../../store/otpStore";
 import showAlert from "../../utils/ShowAlert";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import TextError from "../../component/atom/TextError";
+
+import {
+  Button,
+  Container,
+  ShowPassword,
+  Form,
+  Input,
+  Section,
+  FormTitle,
+  TextError,
+} from "../../component/index";
 
 const SetPassword = () => {
   const { showPassword, handlePasswordToggle } = usePasswordToggle();
