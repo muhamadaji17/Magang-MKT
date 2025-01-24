@@ -1,3 +1,2 @@
-import { useGlobalHook } from "./useGlobalHook";
-
-export { useGlobalHook };
+export { default as useLoginForm } from "./useLoginForm";
+export { default as usePasswordToggle } from "./usePasswordToggle";
