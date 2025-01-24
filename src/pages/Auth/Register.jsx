@@ -1,35 +1,34 @@
-/* eslint-disable react/prop-types */
 import { LayoutAuth } from "../../component/layout";
 import { FormInputan } from "../../component/organism";
 import { useGlobalHook } from "../../hook";
 import {
   handleShowPassword,
   handleSubmitData,
-  inputLogin,
+  inputRegister,
 } from "../../pattern";
-import { LoginService } from "../../service";
+import { RegisterService } from "../../service";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const { showPassword, setShowPassword } = useGlobalHook();
 
   return (
     <>
-      <LayoutAuth judul={"Login"}>
+      <LayoutAuth judul={"Register"}>
         {/* <h1>hai</h1> */}
         <FormInputan
-          dataForm={inputLogin}
-          handleSubmitData={(data) => handleSubmitData(data, LoginService)}
+          dataForm={inputRegister}
+          handleSubmitData={(data) => handleSubmitData(data, RegisterService)}
           namaButton1={"Login"}
           handleClick={() => handleShowPassword(setShowPassword, showPassword)}
           setShowPassword={setShowPassword}
           showPassword={showPassword}
-          questAccount={"Belum Punya Akun ? "}
-          actionAccountName={"Klik disini"}
-          linkQuestAccount={"/register"}
+          questAccount={"Sudah Punya Akun ? "}
+          actionAccountName={"Login Sekarang"}
+          linkQuestAccount={"/"}
         />
       </LayoutAuth>
     </>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

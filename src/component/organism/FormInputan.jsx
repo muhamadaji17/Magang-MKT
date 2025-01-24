@@ -3,6 +3,8 @@ import { FaCheck, FaEyeSlash } from "react-icons/fa";
 import { MoleculsAutocomplete } from "../molecul";
 import { Button, Input } from "../atom";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { errorOptions } from "../../pattern";
 
 export const FormInputan = ({
   dataForm,
@@ -15,13 +17,21 @@ export const FormInputan = ({
   showPassword,
   handleClick,
   loadingButton,
+  LinkOptional,
+  namaLink,
+  actionAccountName,
+  linkQuestAccount,
+  questAccount,
 }) => {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
+    watch,
   } = useForm();
+  const password = watch("user_password_new");
+
   return (
     <div className="overflow-hidden">
       <div className="grid grid-cols-12 md:gap-5 gap-0 mt-5">
@@ -85,7 +95,16 @@ export const FormInputan = ({
                   onChange={data.onChange}
                   // onChange={data.onChange == "chnageImage" ? handleFoto : null}
                   defaultValue={data.defaultValue}
-                  addOptionError={data.addOptionError}
+                  // addOptionError={data.addOptionError}
+                  addOptionError={
+                    data.name === "user_password_new_confirm"
+                      ? {
+                          ...errorOptions.user_password_new_confirm,
+                          validate: (value) =>
+                            value === password || "Kata sandi tidak sama",
+                        }
+                      : data.addOptionError
+                  }
                 />
                 {data.icon ? (
                   <div className="absolute right-4 top-5" onClick={handleClick}>
@@ -108,6 +127,16 @@ export const FormInputan = ({
           </div>
         ))}
       </div>
+      {LinkOptional && (
+        <div className="">
+          <Link
+            to={`${LinkOptional ? LinkOptional : "#"}`}
+            className="hover:underline hover:text-blue-600 text-blue-500 underline text-sm"
+          >
+            {namaLink}
+          </Link>
+        </div>
+      )}
       <div>
         {handleClose ? (
           <div className={`grid grid-cols-2 gap-5`}>
@@ -145,6 +174,17 @@ export const FormInputan = ({
             )}
           </Button>
         ) : null}
+        {actionAccountName && (
+          <div className="justify-center flex mt-4">
+            <p className="mr-2">{questAccount} </p>
+            <Link
+              to={linkQuestAccount}
+              className="text-[#d1b18e] hover:underline"
+            >
+              {actionAccountName}
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

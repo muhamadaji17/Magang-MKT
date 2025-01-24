@@ -5,3 +5,8 @@ export const handleSubmitData = (data, postData) => {
 export const handleShowPassword = (setShowPassword, showPassword) => {
   setShowPassword(!showPassword);
 };
+
+export const handleLogout = () => {
+  sessionStorage.clear();
+  window.location.reload();
+};

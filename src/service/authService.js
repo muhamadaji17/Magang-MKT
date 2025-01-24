@@ -5,9 +5,15 @@ export const LoginService = async (data) => {
   //     username
   // }
   try {
-    const response = await POST_AUTH("auth/login", data);
+    await POST_AUTH("auth/login", data);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-    console.log(response);
+export const RegisterService = async (data) => {
+  try {
+    await POST_AUTH("auth/register", data);
   } catch (error) {
     console.error(error);
   }
