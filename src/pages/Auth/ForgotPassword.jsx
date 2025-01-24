@@ -53,7 +53,7 @@ const ForgotPassword = () => {
       );
       console.log(response);
 
-      handleSaveOtp(response.payload.otp);
+      handleSaveOtp(response.payload);
       navigate("/auth/forgot-password/otp-verification");
     } catch (error) {
       console.log("error");

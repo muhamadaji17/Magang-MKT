@@ -18,7 +18,6 @@ const OtpVerification = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(otpData.otp);
     if (data.otp === otpData.otp) {
       showAlert("Success", "OTP is Valid", "success");
     } else {
@@ -26,6 +25,7 @@ const OtpVerification = () => {
     }
   };
 
+  console.log(otpData.otp);
   return (
     <>
       <Section>
