@@ -51,8 +51,16 @@ export const Dashboard = () => {
                 <div className='bg-slate-100 p-5 w-full'>
                     <h1 className='text-2xl font-semibold mb-4'>Dashboard</h1>
 
-                    <div className='w-40 h-40 bg-white shadow rounded-md flex items-center justify-center'>
-                        <p className='text-gray-700'>Test</p>
+                    <div className='w-64 h-64 bg-gradient-to-r from-[#4E65FF] to-[#92EFFD] flex flex-col justify-center items-center shadow-md rounded-md text-white'>
+                        <div className='h-16 flex items-center justify-center w-full'>
+                            <h2 className='text-xl text-center font-semibold'>
+                                Total Employee
+                            </h2>
+                        </div>
+
+                        <div className='flex-1 flex justify-center items-center w-full'>
+                            <p className='text-3xl font-semibold'>24</p>
+                        </div>
                     </div>
                 </div>
             </div>
