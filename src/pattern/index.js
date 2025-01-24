@@ -8,6 +8,7 @@ import {
     handleShowConfirmPassword,
 } from './handleButton';
 import { errorOptions } from './PatternError';
+import { DashboardBreadcrumb, EmployeeBreadcrumb } from './Breadcrumb';
 
 export {
     errorOptions,
@@ -18,4 +19,6 @@ export {
     inputSettingPassword,
     inputForgotPassword,
     handleShowConfirmPassword,
+    DashboardBreadcrumb,
+    EmployeeBreadcrumb,
 };

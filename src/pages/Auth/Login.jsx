@@ -1,13 +1,17 @@
 import { FormAuth } from '/src/components/organisms';
-import { AuthTemplate } from '/src/components/templates';
-import { LinkAuth } from '/src/components/atoms';
-import { handleShowPassword, handleSubmitData, inputLogin } from '/src/pattern';
-import { LoginService } from '/src/services';
-import { useGlobalHook } from '/src/hook';
+import { AuthTemplate } from '../../components/templates';
+import { LinkAuth } from '../../components/atoms';
+import {
+    handleShowPassword,
+    handleSubmitData,
+    inputLogin,
+} from '../../pattern';
+import { LoginService } from '../../services';
+import { useGlobalHook } from '../../hook';
 import { useNavigate } from 'react-router-dom';
-import { useStore } from '/src/store/store';
+import { useStore } from '../../store/store';
 
-export const LoginPage = () => {
+const Login = () => {
     const { showPassword, setShowPassword, loading, setLoading } =
         useGlobalHook();
     const navigate = useNavigate();
@@ -52,3 +56,5 @@ export const LoginPage = () => {
         </AuthTemplate>
     );
 };
+
+export default Login;

@@ -1,6 +1,6 @@
 import { Input, Label, Errors } from '../atoms';
 
-export const InputForm = ({
+const InputForm = ({
     labelText,
     labelStyle,
     id,
@@ -28,3 +28,5 @@ export const InputForm = ({
         </div>
     );
 };
+
+export default InputForm;

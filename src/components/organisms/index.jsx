@@ -1,3 +1,3 @@
-import { FormAuth } from './FormAuth';
+import FormAuth from './FormAuth';
 
 export { FormAuth };

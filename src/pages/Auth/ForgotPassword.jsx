@@ -1,24 +1,23 @@
 import { GiDialPadlock } from 'react-icons/gi';
-import { useStore } from '/src/store/store';
+import { useStore } from '../../store/store';
 import { useNavigate } from 'react-router-dom';
-import { FormAuth } from '/src/components/organisms';
-import { inputForgotPassword } from '/src/pattern';
-import { Header } from '/src/components/molecules/Header';
-import { handleSubmitData } from '/src/pattern/handleButton';
-import { ForgotPasswordService } from '/src/services';
-import { SupportAuthTemplate } from '/src/components/templates';
+import { FormAuth } from '../../components/organisms';
+import { inputForgotPassword, handleSubmitData } from '../../pattern';
+import { HeaderAuth } from '../../components/molecules';
+import { ForgotPasswordService } from '../../services';
+import { SupportAuthTemplate } from '../../components/templates';
 import { useGlobalHook } from '../../hook';
 
-export const ForgotPassword = () => {
+const ForgotPassword = () => {
     const navigate = useNavigate();
     const { updateAccount } = useStore();
     const { loading, setLoading } = useGlobalHook();
 
     return (
         <SupportAuthTemplate>
-            <Header iconHeader={GiDialPadlock} titleText='Forgot Password?'>
+            <HeaderAuth iconHeader={GiDialPadlock} titleText='Forgot Password?'>
                 Please enter the phone number associated with your account
-            </Header>
+            </HeaderAuth>
             <FormAuth
                 dataForm={inputForgotPassword}
                 buttonName='Send'
@@ -38,3 +37,5 @@ export const ForgotPassword = () => {
         </SupportAuthTemplate>
     );
 };
+
+export default ForgotPassword;

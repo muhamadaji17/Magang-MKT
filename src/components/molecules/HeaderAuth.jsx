@@ -1,4 +1,4 @@
-export const Header = ({
+const HeaderAuth = ({
     iconHeader: IconHeader,
     iconTitle: IconTitle,
     titleText,
@@ -21,3 +21,5 @@ export const Header = ({
         </>
     );
 };
+
+export default HeaderAuth;

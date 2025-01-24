@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export const LinkAuth = ({ text, path, link }) => {
+const LinkAuth = ({ text, path, link }) => {
     return (
         <span className='text-sm flex gap-1'>
             {text}
@@ -10,3 +10,5 @@ export const LinkAuth = ({ text, path, link }) => {
         </span>
     );
 };
+
+export default LinkAuth;

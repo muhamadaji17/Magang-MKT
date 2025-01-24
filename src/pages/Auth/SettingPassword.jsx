@@ -1,21 +1,21 @@
 import { MdOutlineResetTv } from 'react-icons/md';
 import { RxReset } from 'react-icons/rx';
-import { useStore } from '/src/store/store';
-import { inputSettingPassword } from '/src/pattern';
+import { useStore } from '../../store/store';
+import { inputSettingPassword } from '../../pattern';
 import { useNavigate } from 'react-router-dom';
-import { Header } from '/src/components/molecules/Header';
-import { Errors } from '/src/components/atoms';
-import { SupportAuthTemplate } from '/src/components/templates';
-import { FormAuth } from '/src/components/organisms';
+import { HeaderAuth } from '../../components/molecules';
+import { Errors } from '../../components/atoms';
+import { SupportAuthTemplate } from '../../components/templates';
+import { FormAuth } from '../../components/organisms';
 import {
     handleShowPassword,
     handleSubmitData,
     handleShowConfirmPassword,
-} from '/src/pattern/handleButton';
-import { SettingPasswordService } from '/src/services';
-import { useGlobalHook } from '/src/hook/useGlobalHook';
+} from '../../pattern';
+import { SettingPasswordService } from '../../services';
+import { useGlobalHook } from '../../hook';
 
-export const SettingPassword = () => {
+const SettingPassword = () => {
     const navigate = useNavigate();
     const { account } = useStore();
     const {
@@ -29,7 +29,7 @@ export const SettingPassword = () => {
 
     return (
         <SupportAuthTemplate>
-            <Header
+            <HeaderAuth
                 iconHeader={MdOutlineResetTv}
                 iconTitle={RxReset}
                 titleText='Reset your password'
@@ -42,7 +42,7 @@ export const SettingPassword = () => {
                     If it is more than 5 minutes, it will be redirected to the
                     previous page.
                 </Errors>
-            </Header>
+            </HeaderAuth>
             <FormAuth
                 dataForm={inputSettingPassword}
                 buttonName='Send'
@@ -73,3 +73,5 @@ export const SettingPassword = () => {
         </SupportAuthTemplate>
     );
 };
+
+export default SettingPassword;

@@ -1,9 +1,9 @@
-export const AuthTemplate = ({ title, titleBg, descriptionBg, children }) => {
+const AuthTemplate = ({ title, titleBg, descriptionBg, children }) => {
     return (
         <div className='grid lg:grid-cols-[2fr,1.5fr] rounded-lg h-screen'>
             <div className='flex flex-col items-center justify-center space-y-4'>
                 <h2 className='font-bold text-2xl md:text-3xl'>{title}</h2>
-                <div className='flex flex-col items-center gap-2'>
+                <div className='flex flex-col items-center w-[90%] lg:w-full gap-2'>
                     {children}
                 </div>
             </div>
@@ -16,3 +16,5 @@ export const AuthTemplate = ({ title, titleBg, descriptionBg, children }) => {
         </div>
     );
 };
+
+export default AuthTemplate;

@@ -1,14 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
-    RegisterPage,
-    LoginPage,
+    Register,
+    Login,
     ForgotPassword,
     SettingPassword,
     Dashboard,
+    Employee,
 } from '../pages';
-import { LoginRoute } from './LoginRoute';
-import { NotLoginRoute } from './NotLoginRoute';
-import { PhoneRoute } from './PhoneRoute';
+import ProtectedRoute from './ProtectedRoute';
 
 export default function Routers() {
     return (
@@ -17,41 +16,49 @@ export default function Routers() {
                 <Route
                     path='/dashboard'
                     element={
-                        <LoginRoute>
+                        <ProtectedRoute type='login'>
                             <Dashboard />
-                        </LoginRoute>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/employee'
+                    element={
+                        <ProtectedRoute type='login'>
+                            <Employee />
+                        </ProtectedRoute>
                     }
                 />
                 <Route
                     path='/login'
                     element={
-                        <NotLoginRoute>
-                            <LoginPage />
-                        </NotLoginRoute>
+                        <ProtectedRoute type='not-login'>
+                            <Login />
+                        </ProtectedRoute>
                     }
                 />
                 <Route
                     path='/register'
                     element={
-                        <NotLoginRoute>
-                            <RegisterPage />
-                        </NotLoginRoute>
+                        <ProtectedRoute type='not-login'>
+                            <Register />
+                        </ProtectedRoute>
                     }
                 />
                 <Route
                     path='/forgot-password'
                     element={
-                        <NotLoginRoute>
+                        <ProtectedRoute type='not-login'>
                             <ForgotPassword />
-                        </NotLoginRoute>
+                        </ProtectedRoute>
                     }
                 />
                 <Route
                     path='/setting-password'
                     element={
-                        <PhoneRoute>
+                        <ProtectedRoute type='phone'>
                             <SettingPassword />
-                        </PhoneRoute>
+                        </ProtectedRoute>
                     }
                 />
             </Routes>

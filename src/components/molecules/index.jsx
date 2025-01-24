@@ -1,4 +1,4 @@
-import { InputForm } from './InputForm';
-import { Header } from './Header';
+import InputForm from './InputForm';
+import HeaderAuth from './HeaderAuth';
 
-export { InputForm, Header };
+export { InputForm, HeaderAuth };

@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
-import { InputForm } from '/src/components/molecules';
-import { Button } from '/src/components/atoms';
+import { InputForm } from '../molecules';
+import { Button } from '../atoms';
 
-export const FormAuth = ({
+const FormAuth = ({
     dataForm,
     handleSubmitData,
     handleClick,
@@ -76,3 +76,5 @@ export const FormAuth = ({
         </form>
     );
 };
+
+export default FormAuth;

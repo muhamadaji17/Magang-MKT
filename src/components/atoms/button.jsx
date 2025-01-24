@@ -1,4 +1,4 @@
-export const Button = ({ className, children, disable }) => {
+const Button = ({ className, children, disable }) => {
     return (
         <button
             type='submit'
@@ -9,3 +9,5 @@ export const Button = ({ className, children, disable }) => {
         </button>
     );
 };
+
+export default Button;

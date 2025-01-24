@@ -1,16 +1,16 @@
-import { FormAuth } from '/src/components/organisms';
-import { AuthTemplate } from '/src/components/templates';
-import { LinkAuth } from '/src/components/atoms';
+import { FormAuth } from '../../components/organisms';
+import { AuthTemplate } from '../../components/templates';
+import { LinkAuth } from '../../components/atoms';
 import {
     handleShowPassword,
     handleSubmitData,
     inputRegister,
-} from '/src/pattern';
-import { RegisterService } from '/src/services';
-import { useGlobalHook } from '/src/hook';
+} from '../../pattern';
+import { RegisterService } from '../../services';
+import { useGlobalHook } from '../../hook';
 import { useNavigate } from 'react-router-dom';
 
-export const RegisterPage = () => {
+const Register = () => {
     const { showPassword, setShowPassword, loading, setLoading } =
         useGlobalHook();
     const navigate = useNavigate();
@@ -44,3 +44,5 @@ export const RegisterPage = () => {
         </AuthTemplate>
     );
 };
+
+export default Register;

@@ -1,4 +1,4 @@
-export const Input = ({ id, register, addOptionError, ...props }) => {
+const Input = ({ id, register, addOptionError, ...props }) => {
     return (
         <input
             id={id}
@@ -9,3 +9,5 @@ export const Input = ({ id, register, addOptionError, ...props }) => {
         />
     );
 };
+
+export default Input;

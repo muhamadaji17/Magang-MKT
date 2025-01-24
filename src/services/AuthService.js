@@ -1,5 +1,5 @@
 import { POST_AUTH } from '../api';
-import { AlertForm } from '../utils/SweetAlert';
+import AlertForm from '../utils/SweetAlert';
 
 export const RegisterService = async (data, navigate, reset, setLoading) => {
     setLoading(true);
@@ -14,7 +14,6 @@ export const RegisterService = async (data, navigate, reset, setLoading) => {
         console.log(response);
         navigate('/login');
     } catch (error) {
-        reset();
         AlertForm({
             icon: 'error',
             text: error.response.data.message,
@@ -52,7 +51,6 @@ export const LoginService = async (
         console.log(response);
         navigate('/dashboard');
     } catch (error) {
-        reset();
         AlertForm({
             icon: 'error',
             text: error.response.data.message,
@@ -86,7 +84,6 @@ export const ForgotPasswordService = async (
             updateAccount({
                 phone_number: data.phone_number,
             });
-            reset();
             AlertForm({
                 icon: 'success',
                 text: response.data.message,
@@ -127,7 +124,6 @@ export const SettingPasswordService = async (
                 title: 'Reset Password Failed',
             });
         } else {
-            reset();
             AlertForm({
                 icon: 'success',
                 text: response.data.message,

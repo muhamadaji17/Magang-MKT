@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { IoPeopleSharp } from 'react-icons/io5';
 import BreadCrumb from '../utils/Breadcrumb';
-import { DashboardBreadcrumb } from '../pattern';
+import { EmployeeBreadcrumb } from '../pattern';
 
-const Dashboard = () => {
+const Employee = () => {
     return (
         <div className='flex flex-col h-screen'>
             <nav className='w-full h-16 border-b flex justify-between items-center bg-white px-12 z-40 shadow-md'>
@@ -47,8 +47,8 @@ const Dashboard = () => {
             </nav>
             <div className='bg-slate-100 flex-1 p-5 w-full pl-28 h-screen space-y-3'>
                 <div className='flex items-center justify-between'>
-                    <h1 className='text-2xl font-semibold'>Dashboard</h1>
-                    <BreadCrumb items={DashboardBreadcrumb} />
+                    <h1 className='text-2xl font-semibold'>Employee</h1>
+                    <BreadCrumb items={EmployeeBreadcrumb} />
                 </div>
 
                 <div className='grid grid-cols-2 gap-4'>
@@ -88,4 +88,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default Employee;
