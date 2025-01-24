@@ -22,7 +22,7 @@ export const Dashboard = () => {
             </nav>
             <div className='h-screen flex pt-16'>
                 <div className='h-full w-24 hover:w-60 flex flex-col transition-all group items-center bg-white border-r shadow-md'>
-                    <ul className='space-y-4 w-full'>
+                    <ul className='space-y-4 mt-5 w-full'>
                         <li>
                             <Link
                                 href='/'
@@ -42,7 +42,7 @@ export const Dashboard = () => {
                             >
                                 <IoPeopleSharp className='w-6 h-6' />
                                 <span className='hidden group-hover:block'>
-                                    Karyawan
+                                    Employee
                                 </span>
                             </Link>
                         </li>
