@@ -4,11 +4,46 @@ import Input from "../atom/Input";
 import ShowPassword from "../moleculs/ShowPassword";
 import Form from "../atom/Form";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import showAlert from "../../utils/ShowAlert";
+import { apiCall } from "../../api/apiPost";
 
 const FormLogin = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "onSubmit",
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = async (data) => {
+    try {
+      await apiCall(
+        "/login",
+        {
+          username: data.username,
+          password: data.password,
+        },
+        (message) => showAlert("Success", message, "success", 2000),
+        (message) => showAlert("Error", message, "error", 2000)
+      );
+      console.log(data);
+    } catch (error) {
+      showAlert("Error", error.response.data.message, "error", 2000);
+    }
+  };
+
   return (
     <>
-      <Form className="w-2/3 flex flex-col gap-4 shadow-xl">
+      <Form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-2/3 flex flex-col gap-4 shadow-xl"
+      >
         <FormTitle
           title="Welcome Back!"
           description="Please enter your details"
@@ -20,7 +55,11 @@ const FormLogin = () => {
           type="text"
           id="username"
           placeholder="Masukkan Username"
+          {...register("username", {
+            required: "Username harus diisi",
+          })}
         />
+        {errors.username && <p>{errors.username.message}</p>}
         <Input
           type="password"
           id="password"
@@ -28,12 +67,18 @@ const FormLogin = () => {
           htmlFor="password"
           label="password"
           labelName="Password"
+          {...register("password", {
+            required: "Password harus diisi",
+          })}
         />
+        {errors.password && <p>{errors.password.message}</p>}
         <div className="w-full flex justify-between items-center text-sm">
           <ShowPassword />
-          <p className="font-semibold text-primary cursor-pointer">
-            Forgot Password
-          </p>
+          <Link to={"/auth/forgot-password"}>
+            <p className="font-semibold text-primary cursor-pointer">
+              Forgot Password
+            </p>
+          </Link>
         </div>
         <Button className="text-white">Submit</Button>
         <p className="text-center">
