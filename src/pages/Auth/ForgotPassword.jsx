@@ -6,21 +6,19 @@ import Input from "../../component/atom/Input";
 import Section from "../../component/atom/Section";
 import FormTitle from "../../component/moleculs/FormTitle";
 import useOtpSore from "../../store/otpStore";
-import { useForm } from "react-hook-form";
 import showAlert from "../../utils/ShowAlert";
 import { useNavigate } from "react-router-dom";
+import { useLoginForm } from "../../hook/useLoginForm";
 
 const ForgotPassword = () => {
   const { otpData, setOtpData } = useOtpSore();
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({
-    mode: "onSubmit",
-    defaultValues: {
-      phone_number: "",
-    },
+    formState: { errors, isSubmitting },
+  } = useLoginForm({
+    phone_number: "",
   });
 
   const navigate = useNavigate();
@@ -43,14 +41,14 @@ const ForgotPassword = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await apiCall(
-        "/forgot-password",
-        {
-          phone_number: data.phone_number,
-        },
-        (message) => showAlert("Success", message, "success"),
-        (message) => showAlert("Error", message, "error", 2000)
-      );
+      const response = await apiCall("/forgot-password", {
+        phone_number: data.phone_number,
+      });
+      if (response.status === true) {
+        showAlert("Success", response.message, "success", 5000);
+      } else {
+        showAlert("Error", response.message, "error", 5000);
+      }
       console.log(response);
 
       handleSaveOtp(response.payload);
@@ -83,7 +81,9 @@ const ForgotPassword = () => {
                 required: "Phone Number is Required",
               })}
             />
-            <Button className="text-white">Submit</Button>
+            <Button className="text-white">
+              {isSubmitting ? "Loading" : "Submit"}
+            </Button>
           </Form>
         </Container>
       </Section>

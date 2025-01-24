@@ -1,25 +1,26 @@
 import Button from "../atom/Button";
 import FormTitle from "../moleculs/FormTitle";
 import Input from "../atom/Input";
-import ShowPassword from "../moleculs/ShowPassword";
 import Form from "../atom/Form";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import showAlert from "../../utils/ShowAlert";
+import useState from "react";
 import { apiCall } from "../../api/apiPost";
+import { useLoginForm } from "../../hook/useLoginForm";
+import ShowPassword from "../moleculs/ShowPassword";
+import usePasswordToggle from "../../hook/usePasswordToogle";
 
 const FormLogin = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({
-    mode: "onSubmit",
-    defaultValues: {
-      username: "",
-      password: "",
-    },
+    formState: { errors, isSubmitting },
+  } = useLoginForm({
+    username: "",
+    password: "",
   });
+
+  const { showPassword, handlePasswordToggle } = usePasswordToggle();
 
   const onSubmit = async (data) => {
     try {
@@ -60,9 +61,11 @@ const FormLogin = () => {
             required: "Username harus diisi",
           })}
         />
-        {errors.username && <p>{errors.username.message}</p>}
+        {errors.username && (
+          <p className="text-red-500">{errors.username.message}</p>
+        )}
         <Input
-          type="password"
+          type={showPassword ? "text" : "password"}
           id="password"
           placeholder="Password"
           htmlFor="password"
@@ -72,16 +75,25 @@ const FormLogin = () => {
             required: "Password harus diisi",
           })}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && (
+          <p className="text-red-500">{errors.password.message}</p>
+        )}
         <div className="w-full flex justify-between items-center text-sm">
-          <ShowPassword />
+          <ShowPassword
+            checked={showPassword}
+            onChange={handlePasswordToggle}
+            id="show-password"
+            label="Show Password"
+          />
           <Link to={"/auth/forgot-password"}>
             <p className="font-semibold text-primary cursor-pointer">
               Forgot Password
             </p>
           </Link>
         </div>
-        <Button className="text-white">Submit</Button>
+        <Button className="text-white">
+          {isSubmitting ? "Loading..." : "Login"}
+        </Button>
         <p className="text-center">
           Don't have an account?{" "}
           <Link to={"/auth/register"}>

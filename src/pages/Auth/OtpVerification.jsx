@@ -8,14 +8,17 @@ import FormTitle from "../../component/moleculs/FormTitle";
 import useOtpStore from "../../store/otpStore";
 import showAlert from "../../utils/ShowAlert";
 import { useNavigate } from "react-router-dom";
+import { useLoginForm } from "../../hook/useLoginForm";
 
 const OtpVerification = () => {
   const { otpData } = useOtpStore();
-  const { register, handleSubmit } = useForm({
-    mode: "onSubmit",
-    defaultValues: {
-      otp: "",
-    },
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useLoginForm({
+    otp: "",
   });
 
   const navigate = useNavigate();
@@ -23,7 +26,7 @@ const OtpVerification = () => {
   const onSubmit = async (data) => {
     if (data.otp === otpData.otp) {
       showAlert("Success", "OTP is Valid", "success");
-      navigate("/auth/login");
+      navigate("/auth/forgot-password/otp-verification/set-password");
     } else {
       showAlert("Error", "OTP is Invalid", "error");
     }
@@ -52,7 +55,7 @@ const OtpVerification = () => {
               })}
             />
             <Button className="text-white" type="submit">
-              Submit
+              {isSubmitting ? "Loading..." : "Submit"}
             </Button>
           </Form>
         </Container>
