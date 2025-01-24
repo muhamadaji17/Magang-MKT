@@ -1,3 +1,13 @@
-import { RegisterService } from './AuthService';
+import {
+    RegisterService,
+    LoginService,
+    ForgotPasswordService,
+    SettingPasswordService,
+} from './AuthService';
 
-export { RegisterService };
+export {
+    RegisterService,
+    LoginService,
+    ForgotPasswordService,
+    SettingPasswordService,
+};

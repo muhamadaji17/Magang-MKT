@@ -1,6 +1,6 @@
 import { errorOptions } from '../PatternError';
 
-export const InputForgotPassword = [
+export const inputForgotPassword = [
     {
         jenisInputan: 'input',
         type: 'text',

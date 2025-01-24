@@ -1,3 +1,4 @@
 import { InputForm } from './InputForm';
+import { Header } from './Header';
 
-export { InputForm };
+export { InputForm, Header };

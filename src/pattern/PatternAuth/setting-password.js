@@ -1,7 +1,7 @@
 import { errorOptions } from '../PatternError';
 import { IoIosEye, IoMdEyeOff } from 'react-icons/io';
 
-export const InputSettingPassword = [
+export const inputSettingPassword = [
     {
         jenisInputan: 'input',
         type: 'text',

@@ -1,4 +1,4 @@
-export const HeaderAuth = ({
+export const Header = ({
     iconHeader: IconHeader,
     iconTitle: IconTitle,
     titleText,
@@ -6,7 +6,7 @@ export const HeaderAuth = ({
 }) => {
     return (
         <>
-            <IconHeader className='w-32 h-32 text-blue-500 drop-shadow-2xl' />
+            <IconHeader className='w-32 h-32 text-blue-600 drop-shadow-2xl' />
             {IconTitle ? (
                 <div className='flex items-center gap-2'>
                     <h1 className='font-bold text-2xl'>{titleText}</h1>

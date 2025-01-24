@@ -6,12 +6,13 @@ import {
     handleSubmitData,
     inputRegister,
 } from '/src/pattern';
-import { RegisterService } from '/src/services/AuthService';
+import { RegisterService } from '/src/services';
 import { useGlobalHook } from '/src/hook';
 import { useNavigate } from 'react-router-dom';
 
 export const RegisterPage = () => {
-    const { showPassword, setShowPassword } = useGlobalHook();
+    const { showPassword, setShowPassword, loading, setLoading } =
+        useGlobalHook();
     const navigate = useNavigate();
 
     return (
@@ -23,13 +24,20 @@ export const RegisterPage = () => {
             <FormAuth
                 dataForm={inputRegister}
                 handleSubmitData={(data, reset) =>
-                    handleSubmitData(data, RegisterService, navigate, reset)
+                    handleSubmitData(
+                        data,
+                        RegisterService,
+                        navigate,
+                        reset,
+                        setLoading
+                    )
                 }
                 handleClick={() =>
                     handleShowPassword(setShowPassword, showPassword)
                 }
                 showPassword={showPassword}
                 buttonName='Register'
+                loading={loading}
                 buttonWidth='w-24'
             />
             <LinkAuth text='Have an account?' path='/login' link='sign in' />

@@ -11,6 +11,7 @@ export const FormAuth = ({
     buttonName,
     buttonWidth,
     handleConfirmPassword,
+    loading,
 }) => {
     const {
         register,
@@ -49,7 +50,7 @@ export const FormAuth = ({
                     ) : null}
                     {data.showPasswordIcon && (
                         <div
-                            className='absolute top-9 right-2 cursor-pointer'
+                            className='absolute top-10 right-2 cursor-pointer'
                             onClick={() => {
                                 if (data.name === 'password') {
                                     handleClick();
@@ -68,7 +69,9 @@ export const FormAuth = ({
                 </div>
             ))}
             <div className='text-center lg:text-end'>
-                <Button className={`${buttonWidth} h-10`}>{buttonName}</Button>
+                <Button className={buttonWidth} disable={loading}>
+                    {buttonName}
+                </Button>
             </div>
         </form>
     );

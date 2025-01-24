@@ -38,7 +38,14 @@ export default function Routers() {
                         </NotLoginRoute>
                     }
                 />
-                <Route path='/forgot-password' element={<ForgotPassword />} />
+                <Route
+                    path='/forgot-password'
+                    element={
+                        <NotLoginRoute>
+                            <ForgotPassword />
+                        </NotLoginRoute>
+                    }
+                />
                 <Route
                     path='/setting-password'
                     element={

@@ -1,7 +1,8 @@
 import { POST_AUTH } from '../api';
 import { AlertForm } from '../utils/SweetAlert';
 
-export const RegisterService = async (data, navigate, reset) => {
+export const RegisterService = async (data, navigate, reset, setLoading) => {
+    setLoading(true);
     try {
         const response = await POST_AUTH('auth/register', data);
         reset();
@@ -20,13 +21,28 @@ export const RegisterService = async (data, navigate, reset) => {
             title: 'Register Failed',
         });
         console.log(error);
+    } finally {
+        setLoading(false);
     }
 };
 
-export const LoginService = async (data, navigate, reset, setAccessToken) => {
+export const LoginService = async (
+    data,
+    navigate,
+    reset,
+    updateAccount,
+    setLoading
+) => {
+    setLoading(true);
     try {
         const response = await POST_AUTH('auth/login', data);
-        setAccessToken(response.data.data.accessToken);
+        const spec = {
+            accessToken: response.data.data.accessToken,
+            username: response.data.data.username,
+            role_name: response.data.data.roleName,
+            company: response.data.data.company,
+        };
+        updateAccount(spec);
         reset();
         AlertForm({
             icon: 'success',
@@ -43,20 +59,23 @@ export const LoginService = async (data, navigate, reset, setAccessToken) => {
             title: 'Login Failed',
         });
         console.log(error);
+    } finally {
+        setLoading(false);
     }
 };
 
 export const ForgotPasswordService = async (
     data,
-    setPhoneNumber,
+    updateAccount,
     navigate,
-    reset
+    reset,
+    setLoading
 ) => {
+    setLoading(true);
     try {
         const response = await POST_AUTH('auth/forgot-password', data);
         if (!response.data.status) {
             reset();
-            setPhoneNumber(false);
             AlertForm({
                 icon: 'error',
                 text: response.data.message,
@@ -64,7 +83,9 @@ export const ForgotPasswordService = async (
             });
             console.log(response);
         } else {
-            setPhoneNumber(response.data.payload.phone_number);
+            updateAccount({
+                phone_number: data.phone_number,
+            });
             reset();
             AlertForm({
                 icon: 'success',
@@ -76,12 +97,28 @@ export const ForgotPasswordService = async (
         }
     } catch (error) {
         console.error(error);
+    } finally {
+        setLoading(false);
     }
 };
 
-export const SettingPasswordService = async (data, navigate, reset) => {
+export const SettingPasswordService = async (
+    data,
+    navigate,
+    reset,
+    setLoading,
+    account
+) => {
+    setLoading(true);
+    const { otp, password } = data;
+    const { phone_number } = account;
+
     try {
-        const response = await POST_AUTH('auth/set-pass', data);
+        const response = await POST_AUTH('auth/set-pass', {
+            otp,
+            phone_number,
+            password,
+        });
         if (!response.data.status) {
             reset();
             AlertForm({
@@ -89,7 +126,6 @@ export const SettingPasswordService = async (data, navigate, reset) => {
                 text: response.data.message,
                 title: 'Reset Password Failed',
             });
-            console.log(response);
         } else {
             reset();
             AlertForm({
