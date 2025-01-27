@@ -1,3 +1,3 @@
 import Form from "./Form";
-
-export { Form };
+import Sidebar from "./Sidebar";
+export { Form, Sidebar };

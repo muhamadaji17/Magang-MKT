@@ -5,7 +5,7 @@ import { inputResetPassword } from "./PatternAuth/ResetPassword";
 import { errorOptions } from "./PatternError";
 import { handleShowPassword } from "./HandleButton";
 import { handleSubmitData } from "./HandleButton";
-
+``;
 export {
   inputLogin,
   inputRegister,

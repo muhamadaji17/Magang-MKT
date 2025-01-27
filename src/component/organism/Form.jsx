@@ -77,8 +77,11 @@ const Form = ({ dataForm, authFor, buttonName, handleSubmitData }) => {
           )}
 
           <Button
-            className={`bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 rounded-md w-full px-1 py-2 text-white mt-5`}
+            className={`${
+              loadingButton ? "opacity-50" : ""
+            } bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 rounded-md w-full px-1 py-2 text-white mt-5`}
             type={"submit"}
+            disabled={loadingButton}
           >
             {loadingButton ? "Loading...." : buttonName}
           </Button>
