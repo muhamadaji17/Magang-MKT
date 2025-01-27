@@ -1,6 +1,6 @@
+import { AccessTokenContext } from "../context/AccessTokenProvider";
 import { PhoneNumberContext } from "../context/PhoneNumberProvider";
-import { AccessTokenContext } from "../context/TokenContextProvider";
-import { useCustomContext } from "../hook";
+import { useCustomContext } from "./useCustomContext";
 
 export const useAccessToken = () => {
   return useCustomContext(AccessTokenContext);

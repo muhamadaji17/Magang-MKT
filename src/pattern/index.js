@@ -5,7 +5,6 @@ import { inputResetPassword } from "./PatternAuth/ResetPassword";
 import { errorOptions } from "./PatternError";
 import { handleShowPassword } from "./HandleButton";
 import { handleSubmitData } from "./HandleButton";
-import { useAccessToken, usePhoneNumber } from "./HookCustomContext";
 
 export {
   inputLogin,
@@ -15,6 +14,4 @@ export {
   errorOptions,
   handleShowPassword,
   handleSubmitData,
-  useAccessToken,
-  usePhoneNumber,
 };

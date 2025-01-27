@@ -1,10 +1,11 @@
+import AccessTokenProvider from "./context/AccessTokenProvider";
 import Routers from "./route/Routers";
 
 function App() {
   return (
-    <div className="w-full h-full">
+    <AccessTokenProvider>
       <Routers />
-    </div>
+    </AccessTokenProvider>
   );
 }
 

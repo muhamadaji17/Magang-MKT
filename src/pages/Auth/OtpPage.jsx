@@ -1,9 +1,10 @@
 import React from "react";
-import { handleSubmitData, inputOtp, usePhoneNumber } from "../../pattern";
+import { handleSubmitData, inputOtp } from "../../pattern";
 import { useNavigate } from "react-router";
 import { LayoutAuth } from "../../component/layouts";
 import { Form } from "../../component/organism";
 import { OtpService } from "../../service";
+import { usePhoneNumber } from "../../hook";
 
 const OtpPage = () => {
   const { setPhoneNumber } = usePhoneNumber();

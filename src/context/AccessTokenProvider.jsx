@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 const AccessTokenContext = createContext();
 
-const TokenContextProvider = ({ children }) => {
+const AccessTokenProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState("");
 
   const handleLogin = (values) => {
@@ -17,4 +17,6 @@ const TokenContextProvider = ({ children }) => {
   );
 };
 
-export { TokenContextProvider, AccessTokenContext };
+export { AccessTokenContext };
+
+export default AccessTokenProvider;

@@ -1,14 +1,10 @@
 import React from "react";
-
 import { useNavigate } from "react-router";
 import { LayoutAuth } from "../../component/layouts";
 import { Form } from "../../component/organism";
-import {
-  handleSubmitData,
-  inputResetPassword,
-  usePhoneNumber,
-} from "../../pattern";
+import { handleSubmitData, inputResetPassword } from "../../pattern";
 import { ResetPasswordService } from "../../service";
+import { usePhoneNumber } from "../../hook";
 
 const ResetPasswordPage = () => {
   const { phoneNumber } = usePhoneNumber();
