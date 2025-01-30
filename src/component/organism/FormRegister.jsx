@@ -1,13 +1,10 @@
-import Button from "../atom/Button";
-import FormTitle from "../moleculs/FormTitle";
-import Input from "../atom/Input";
-import Form from "../atom/Form";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import showAlert from "../../utils/ShowAlert";
 import { apiCall } from "../../api/apiPost";
-import ShowPassword from "../moleculs/ShowPassword";
 import usePasswordToggle from "../../hook/usePasswordToogle";
+import { showAlert, dataRegister } from "../../utils/index";
+
+import { Button, FormTitle, Input, Form, ShowPassword } from "../index";
 
 const FormRegister = () => {
   const navigate = useNavigate();
@@ -27,7 +24,7 @@ const FormRegister = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await apiCall("/register", {
+      const res = await apiCall("/auth/register", {
         username: data.username,
         password: data.password,
         email: data.email,
@@ -57,62 +54,24 @@ const FormRegister = () => {
           title="Register Account!"
           description="Please enter your details"
         />
-        <Input
-          label="username"
-          labelName="Username"
-          htmlFor="username"
-          type="text"
-          id="username"
-          placeholder="Masukkan Username"
-          {...register("username", {
-            required: "Username is Required",
-          })}
-        />
-        {errors.username && (
-          <p className="text-red-500">{errors.username.message}</p>
-        )}
-        <Input
-          type={showPassword ? "text" : "password"}
-          id="password"
-          placeholder="Password"
-          minLength={6}
-          htmlFor="password"
-          label="password"
-          labelName="Password"
-          {...register("password", {
-            required: "password is Required",
-            minLength: { value: 6 },
-          })}
-        />
-        {errors.password && (
-          <p className="text-red-500">{errors.password.message}</p>
-        )}
-        <Input
-          type="email"
-          id="email"
-          placeholder="example@gmail.com"
-          htmlFor="email"
-          label="email"
-          labelName="Email"
-          {...register("email", {
-            required: "Email is Required",
-          })}
-        />
-        {errors.email && <p className="text-red-500">{errors.email.message}</p>}
-        <Input
-          type="tel"
-          id="phone_number"
-          placeholder="08xxxxxxxxxx"
-          htmlFor="phone-number"
-          label="phone-number"
-          labelName="Phone Number"
-          {...register("phone_number", {
-            required: "Phone Number is Required",
-          })}
-        />
-        {errors.phone_number && (
-          <p className="text-red-500">{errors.phone_number.message}</p>
-        )}
+        {dataRegister.map((input, index) => (
+          <div key={index}>
+            <Input
+              index={index}
+              type={
+                input.id === "password" && !showPassword ? "password" : "text"
+              }
+              id={input.id}
+              placeholder={input.placeholder}
+              label={input.labelName}
+              labelName={input.labelName}
+              {...register(input.id, input.validation)}
+            />
+            {errors[input.id] && (
+              <p className="text-red-500">{errors[input.id].message}</p>
+            )}
+          </div>
+        ))}
         <div className="w-full flex justify-between items-center text-sm">
           <ShowPassword
             checked={showPassword}

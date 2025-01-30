@@ -1,10 +1,7 @@
 const Button = ({ children, type, className }) => {
   return (
     <>
-      <button
-        className={`p-2 w-full bg-primary rounded-md ${className}`}
-        type={type}
-      >
+      <button className={`p-2 bg-primary rounded-md ${className}`} type={type}>
         {children}
       </button>
     </>

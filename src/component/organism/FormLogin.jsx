@@ -1,17 +1,24 @@
-import Button from "../atom/Button";
-import FormTitle from "../moleculs/FormTitle";
-import Input from "../atom/Input";
-import Form from "../atom/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import showAlert from "../../utils/ShowAlert";
-import useState from "react";
 import { apiCall } from "../../api/apiPost";
 import { useLoginForm } from "../../hook/useLoginForm";
-import ShowPassword from "../moleculs/ShowPassword";
 import usePasswordToggle from "../../hook/usePasswordToogle";
-import TextError from "../atom/TextError";
+
+import {
+  TextError,
+  Button,
+  Input,
+  Form,
+  FormTitle,
+  ShowPassword,
+} from "../index";
+import { dataLogin } from "../../utils/dataLogin";
+import useAuthStore from "../../store/useAuthStore";
 
 const FormLogin = () => {
+  const navigate = useNavigate();
+  const { login } = useAuthStore();
+
   const {
     register,
     handleSubmit,
@@ -25,16 +32,19 @@ const FormLogin = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await apiCall("/login", {
+      const res = await apiCall("/auth/login", {
         username: data.username,
         password: data.password,
       });
 
       if (res.status === true) {
+        login(res.data.accessToken);
         showAlert("Success", res.message, "success", 2000);
       } else {
         showAlert("Error", res.message, "error", 2000);
       }
+      navigate("/");
+      console.log(res.data);
       console.log(data);
     } catch (error) {
       showAlert("Error", error.response.data.message, "error", 2000);
@@ -51,30 +61,23 @@ const FormLogin = () => {
           title="Welcome Back!"
           description="Please enter your details"
         />
-        <Input
-          label="username"
-          labelName="Username"
-          htmlFor="username"
-          type="text"
-          id="username"
-          placeholder="Masukkan Username"
-          {...register("username", {
-            required: "Username harus diisi",
-          })}
-        />
-        {errors.username && <TextError>{errors.username.message}</TextError>}
-        <Input
-          type={showPassword ? "text" : "password"}
-          id="password"
-          placeholder="Password"
-          htmlFor="password"
-          label="password"
-          labelName="Password"
-          {...register("password", {
-            required: "Password harus diisi",
-          })}
-        />
-        {errors.password && <TextError>{errors.password.message}</TextError>}
+        {dataLogin.map((input, index) => (
+          <div key={index}>
+            <Input
+              type={
+                input.id === "password" && !showPassword ? "password" : "text"
+              }
+              id={input.id}
+              placeholder={input.placeholder}
+              label={input.labelName}
+              labelName={input.labelName}
+              {...register(input.id, input.validation)}
+            />
+            {errors[input.id] && (
+              <TextError>{errors[input.id].message}</TextError>
+            )}
+          </div>
+        ))}
         <div className="w-full flex justify-between items-center text-sm">
           <ShowPassword
             checked={showPassword}
