@@ -14,10 +14,11 @@ const RegisterPage = () => {
         <Form
           dataForm={inputRegister}
           buttonName={"Daftar"}
-          handleSubmitData={(data, resetField) => {
+          handleSubmitData={(data, resetField, setLoading) => {
             handleSubmitData({
               data,
               resetField,
+              setLoading,
               navigate,
               postData: RegisterService,
             });

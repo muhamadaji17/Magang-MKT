@@ -8,7 +8,6 @@ import { usePhoneNumber } from "../../hook";
 
 const OtpPage = () => {
   const { setPhoneNumber } = usePhoneNumber();
-
   const navigate = useNavigate();
 
   return (
@@ -16,10 +15,11 @@ const OtpPage = () => {
       <Form
         dataForm={inputOtp}
         buttonName={"Kirim kode OTP"}
-        handleSubmitData={(data, resetField) =>
+        handleSubmitData={(data, resetField, setLoading) =>
           handleSubmitData({
             data,
             resetField,
+            setLoading,
             postData: OtpService,
             navigate,
             setState: setPhoneNumber,

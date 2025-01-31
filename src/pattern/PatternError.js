@@ -10,8 +10,8 @@ export const errorOptions = {
   password: {
     required: "Password is Required",
     minLength: {
-      value: 5,
-      message: "Password must be at least 5 characters",
+      value: 4,
+      message: "Password must be at least 4 characters",
     },
   },
   confirmPassword: {
@@ -20,7 +20,13 @@ export const errorOptions = {
       return value === password || "Password doesn't match";
     },
   },
-  username: { required: "Username is Required" },
+  username: {
+    required: "Username is Required",
+    minLength: {
+      value: 5,
+      message: "Username must be at least 5 characters",
+    },
+  },
   codeOtp: {
     required: "Code OTP is Required",
     pattern: {

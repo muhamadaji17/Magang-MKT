@@ -40,7 +40,7 @@ export const inputRegister = [
     error: "password",
   },
   {
-    placeholder: "admin",
+    placeholder: "081234",
     type: "tel",
     title: "Phone: ",
     name: "phone_number",

@@ -21,21 +21,26 @@ export const LoginService = async ({
       sessionStorage.setItem("accessToken", response.data.data.accessToken);
       setState(response.data.data.accessToken);
       resetField();
-      setLoading(false);
       navigate("/");
     }
   } catch (error) {
     console.log(error);
-    setLoading(false);
     TriggerAlert({
       title: "Gagal!",
       icon: "error",
       text: error.status === 404 ? error.response.data.message : error.message,
     });
+  } finally {
+    setLoading(false);
   }
 };
 
-export const RegisterService = async ({ data, resetField, navigate }) => {
+export const RegisterService = async ({
+  data,
+  resetField,
+  navigate,
+  setLoading,
+}) => {
   try {
     const response = await POST_AUTH("register", data);
 
@@ -47,6 +52,12 @@ export const RegisterService = async ({ data, resetField, navigate }) => {
       });
       navigate("/login");
       resetField();
+    } else {
+      TriggerAlert({
+        title: "Gagal!",
+        icon: "error",
+        text: response.data.message,
+      });
     }
     console.log(response);
   } catch (error) {
@@ -56,14 +67,22 @@ export const RegisterService = async ({ data, resetField, navigate }) => {
       icon: "error",
       text: error.message,
     });
+  } finally {
+    setLoading(false);
   }
 };
 
-export const OtpService = async ({ data, resetField, setState, navigate }) => {
+export const OtpService = async ({
+  data,
+  resetField,
+  setState,
+  navigate,
+  setLoading,
+}) => {
   try {
     const response = await POST_AUTH("forgot-password", data);
     console.log(response);
-    if (response.data.status === true) {
+    if (response.data.status) {
       TriggerAlert({
         title: "Berhasil!",
         icon: "success",
@@ -86,10 +105,17 @@ export const OtpService = async ({ data, resetField, setState, navigate }) => {
       icon: "error",
       text: error.message,
     });
+  } finally {
+    setLoading(false);
   }
 };
 
-export const ResetPasswordService = async ({ data, resetField, navigate }) => {
+export const ResetPasswordService = async ({
+  data,
+  resetField,
+  navigate,
+  setLoading,
+}) => {
   const { codeOtp: otp, phone_number, password } = data;
   console.log(data);
 
@@ -97,7 +123,7 @@ export const ResetPasswordService = async ({ data, resetField, navigate }) => {
   try {
     const response = await POST_AUTH("set-pass", body);
     console.log(response);
-    if (response.data.status === true) {
+    if (response.data.status) {
       TriggerAlert({
         title: "Berhasil!",
         icon: "success",
@@ -106,6 +132,12 @@ export const ResetPasswordService = async ({ data, resetField, navigate }) => {
 
       resetField();
       navigate("/login");
+    } else {
+      TriggerAlert({
+        title: "Gagal!",
+        icon: "error",
+        text: response.data.message,
+      });
     }
   } catch (error) {
     console.error(error);
@@ -114,5 +146,7 @@ export const ResetPasswordService = async ({ data, resetField, navigate }) => {
       icon: "error",
       text: error.message,
     });
+  } finally {
+    setLoading(false);
   }
 };

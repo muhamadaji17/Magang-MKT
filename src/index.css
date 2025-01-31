@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* html,
+body {
+  overflow: hidden;
+} */
+
 .error {
   font-size: 10px;
   color: red;

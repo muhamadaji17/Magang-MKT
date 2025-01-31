@@ -10,3 +10,14 @@ export const POST_AUTH = async (endpoint, data) => {
 
   return response;
 };
+
+export const GET = async (endpoint, accessToken) => {
+  const url_api = `${import.meta.env.VITE_URL_CRUD}/${endpoint}`;
+  const response = await axios.get(url_api, {
+    headers: {
+      "x-token": `mktech ${accessToken}`,
+    },
+  });
+
+  return response;
+};

@@ -14,10 +14,11 @@ const ResetPasswordPage = () => {
       <Form
         dataForm={inputResetPassword}
         buttonName={"Reset Password"}
-        handleSubmitData={(data, resetField) =>
+        handleSubmitData={(data, resetField, setLoading) =>
           handleSubmitData({
             data: { ...data, phone_number: phoneNumber },
             resetField,
+            setLoading,
             navigate,
             postData: ResetPasswordService,
           })
