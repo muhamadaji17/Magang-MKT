@@ -1,52 +1,24 @@
 import React, { useState } from "react";
-import { BsPeople } from "react-icons/bs";
-import { RxDashboard } from "react-icons/rx";
-import { Link, Outlet, useLocation, useParams } from "react-router";
-import { CiUser } from "react-icons/ci";
+import { Outlet, useLocation } from "react-router";
 import { Breadcrumb } from "../molecules";
-import Navbar from "../organism/Navbar";
+import { Modal, Navbar, Sidebar } from "../organism";
 
 const LayoutDashboard = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(true);
   const location = useLocation();
-  const titlePage = location.pathname.slice(1).toLocaleUpperCase();
+  const firstLetter = location.pathname.slice(1, 2).toLocaleUpperCase();
+  const titlePage = firstLetter + location.pathname.slice(2);
 
   return (
     <div className="min-h-screen bg-custom-gray">
       <Navbar />
       <div className="flex w-full h-screen ">
-        <div className="w-1/6 min-h-screen border-r-2 p-4 bg-white">
-          <nav className="">
-            <ul className="flex flex-col gap-3">
-              <li className="hover:bg-blue-500 hover:text-white text-sm rounded-md cursor-pointer bg-blue-500 text-white">
-                <Link to={"/"} className="gap-2 p-2 flex items-center ">
-                  <RxDashboard />
-                  Dashboard
-                </Link>
-              </li>
-              <li className="hover:bg-blue-500 hover:text-white text-sm rounded-md cursor-pointer">
-                <Link to={"/karyawan"} className="gap-2 p-2 flex items-center ">
-                  <BsPeople />
-                  Karyawan
-                </Link>
-              </li>
-              <li className="hover:bg-blue-500 hover:text-white text-sm rounded-md cursor-pointer">
-                <Link
-                  to={"/departement"}
-                  className="gap-2 p-2  flex items-center "
-                >
-                  <CiUser />
-                  Departemen
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        <Sidebar />
 
-        <main className="w-full py-5 px-7 overflow-y-auto">
+        <main className="w-full py-5 px-7 overflow-y-auto mr-3">
           <div className="flex justify-between items-center mb-10">
             <h1 className="text-2xl font-semibold">
-              {titlePage ? titlePage : "Dashboard"}
+              {titlePage ? titlePage : "Dahsboard"}
             </h1>
             <Breadcrumb />
           </div>

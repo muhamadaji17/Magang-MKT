@@ -1,11 +1,17 @@
-import { Link, useNavigate } from "react-router-dom"; // Pastikan menggunakan 'react-router-dom'
+import { Link } from "react-router-dom";
 import { Button } from "../atoms";
 import { useForm } from "react-hook-form";
 import { InputForm } from "../molecules/index";
 import { handleShowPassword } from "../../pattern";
 import { useGlobalHook } from "../../hook/index";
 
-const Form = ({ dataForm, authFor, buttonName, handleSubmitData }) => {
+const Form = ({
+  dataForm,
+  authFor,
+  buttonName,
+  handleSubmitData,
+  buttonBg,
+}) => {
   const { loadingButton, setLoadingButton } = useGlobalHook();
   const { showPassword, setShowPassword } = useGlobalHook();
 
@@ -77,9 +83,11 @@ const Form = ({ dataForm, authFor, buttonName, handleSubmitData }) => {
           )}
 
           <Button
-            className={`${
-              loadingButton ? "opacity-50" : ""
-            } bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 rounded-md w-full px-1 py-2 text-white mt-5`}
+            className={`${loadingButton ? "opacity-50" : ""} ${
+              !buttonBg
+                ? "bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700"
+                : buttonBg
+            } rounded-md w-full px-1 py-2 text-white mt-5`}
             type={"submit"}
             disabled={loadingButton}
           >

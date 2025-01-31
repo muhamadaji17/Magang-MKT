@@ -10,6 +10,7 @@ import { useAccessToken } from "../../hook";
 const LoginPage = () => {
   const navigate = useNavigate();
   const { accessToken, setAccessToken } = useAccessToken();
+
   return (
     <>
       <LayoutAuth title={"Form Login"}>

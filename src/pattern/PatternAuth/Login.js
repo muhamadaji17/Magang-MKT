@@ -1,5 +1,5 @@
 import { FaEye } from "react-icons/fa";
-import { errorOptions } from "../index";
+import { errorOptions } from "../PatternError";
 
 export const inputLogin = [
   {

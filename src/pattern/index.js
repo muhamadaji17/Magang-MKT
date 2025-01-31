@@ -6,14 +6,16 @@ import { errorOptions } from "./PatternError";
 import { handleShowPassword } from "./HandleButton";
 import { handleSubmitData } from "./HandleButton";
 import { tableConfig } from "./PatternTable/Departemen";
+import { navLinkSidebar } from "./LinkPattern";
 
 export {
   inputLogin,
   inputRegister,
   inputOtp,
   inputResetPassword,
-  errorOptions,
   tableConfig,
+  errorOptions,
+  navLinkSidebar,
   handleShowPassword,
   handleSubmitData,
 };
