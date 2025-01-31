@@ -18,7 +18,7 @@ import {
 
 const Table = () => {
   const navigate = useNavigate();
-  const { token, username } = useAuthStore();
+  const { token, username, logout } = useAuthStore();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -32,6 +32,11 @@ const Table = () => {
   const response = async () => {
     const result = await apiGet("/crud/departement", token);
     setData(result.payload);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/auth/login");
   };
 
   const label = [
@@ -93,7 +98,12 @@ const Table = () => {
           <h1>
             Hello, <span className="font-bold">{username}!</span>
           </h1>
-          <Button className="px-4 py-2 text-white text-sm">Logout</Button>
+          <Button
+            onClick={handleLogout}
+            className="px-4 py-2 text-white text-sm"
+          >
+            Logout
+          </Button>
         </div>
         <div className="flex justify-between items-center w-full">
           <h1>Dashboard</h1>
