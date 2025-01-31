@@ -3,18 +3,25 @@ import Cookies from "js-cookie";
 
 const useAuthStore = create((set) => ({
   token: Cookies.get("authToken") || null,
-  login: (accessToken) => {
+  username: Cookies.get("username") || null,
+  login: (accessToken, username) => {
     Cookies.set("authToken", accessToken, {
       expires: 1,
       secure: true,
       sameSite: "Strict",
     });
-    set({ token: accessToken });
+    Cookies.set("username", username, {
+      expires: 1,
+      secure: true,
+      sameSite: "Strict",
+    });
+    set({ token: accessToken, username: username });
   },
 
   logout: () => {
     Cookies.remove("authToken");
-    set({ token: null });
+    Cookies.remove("username");
+    set({ token: null, username: null });
   },
 }));
 

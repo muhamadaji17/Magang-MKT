@@ -80,7 +80,7 @@ const FormRegister = () => {
             label="Show Password"
           />
         </div>
-        <Button className="text-white">
+        <Button className="text-white px-4 py-2">
           {isSubmitting ? "loading" : "Submit"}
         </Button>
         <p className="text-center">

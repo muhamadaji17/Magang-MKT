@@ -1,10 +1,7 @@
 const Form = ({ className, children, onSubmit }) => {
   return (
     <>
-      <form
-        onSubmit={onSubmit}
-        className={`border-2 p-4 rounded-md ${className} `}
-      >
+      <form onSubmit={onSubmit} className={`p-4 rounded-md ${className} `}>
         {children}
       </form>
     </>

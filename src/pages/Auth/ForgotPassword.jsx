@@ -45,7 +45,7 @@ const ForgotPassword = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await apiCall("/forgot-password", {
+      const response = await apiCall("/auth/forgot-password", {
         phone_number: data.phone_number,
       });
       if (response.status === true) {
@@ -88,7 +88,7 @@ const ForgotPassword = () => {
             {errors.phone_number && (
               <TextError>{errors.phone_number.message}</TextError>
             )}
-            <Button className="text-white">
+            <Button className="text-white px-4 py-2">
               {isSubmitting ? "Loading" : "Submit"}
             </Button>
           </Form>

@@ -5,6 +5,7 @@ import ForgotPassword from "../pages/Auth/ForgotPassword";
 import OtpVerification from "../pages/Auth/OtpVerification";
 import SetPassword from "../pages/Auth/SetPassword";
 import Home from "../pages/Home";
+import NotFound from "../pages/NotFound";
 
 const Routers = () => {
   return (
@@ -24,6 +25,7 @@ const Routers = () => {
           path="/auth/forgot-password/otp-verification/set-password"
           element={<SetPassword />}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

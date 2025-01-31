@@ -64,7 +64,7 @@ const SetPassword = () => {
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               id="password"
-              {...register("password", { required: true })}
+              {...register("password", { required: "Password is required" })}
             />
             {errors.password && (
               <TextError>{errors.password.message}</TextError>
@@ -73,7 +73,9 @@ const SetPassword = () => {
               type={showPassword ? "text" : "password"}
               placeholder="Confirm Password"
               id="confirm-password"
-              {...register("confirm_password", { required: true })}
+              {...register("confirm_password", {
+                required: "Confirm Password is required",
+              })}
             />
             {errors.confirm_password && (
               <TextError>{errors.confirm_password.message}</TextError>
@@ -86,7 +88,7 @@ const SetPassword = () => {
                 label="Show Password"
               />
             </div>
-            <Button className="text-white">
+            <Button className="text-white px-4 py-2">
               {isSubmitting ? "Loading..." : "Submit"}
             </Button>
           </Form>

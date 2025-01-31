@@ -38,14 +38,13 @@ const FormLogin = () => {
       });
 
       if (res.status === true) {
-        login(res.data.accessToken);
+        login(res.data.accessToken, res.data.username);
         showAlert("Success", res.message, "success", 2000);
+        console.log(res);
       } else {
         showAlert("Error", res.message, "error", 2000);
       }
       navigate("/");
-      console.log(res.data);
-      console.log(data);
     } catch (error) {
       showAlert("Error", error.response.data.message, "error", 2000);
     }
@@ -91,7 +90,7 @@ const FormLogin = () => {
             </p>
           </Link>
         </div>
-        <Button className="text-white">
+        <Button className="text-white px-4 py-2">
           {isSubmitting ? "Loading..." : "Login"}
         </Button>
         <p className="text-center">

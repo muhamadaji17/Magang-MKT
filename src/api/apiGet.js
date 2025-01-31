@@ -14,7 +14,7 @@ export const apiGet = async (endpoint, token) => {
 
     return response.data;
   } catch (error) {
-    console.log(error) || "Terjadi kesalahan";
+    // console.log(error) || "Terjadi kesalahan";
     throw error;
   }
 };
