@@ -9,7 +9,7 @@ const FormAuth = ({
     showPassword,
     showConfirmPassword,
     buttonName,
-    buttonWidth,
+    buttonStyle,
     handleConfirmPassword,
     loading,
 }) => {
@@ -68,8 +68,8 @@ const FormAuth = ({
                     )}
                 </div>
             ))}
-            <div className='text-center lg:text-end'>
-                <Button className={buttonWidth} disable={loading}>
+            <div className='flex justify-center lg:justify-end'>
+                <Button className={buttonStyle} disable={loading}>
                     {buttonName}
                 </Button>
             </div>

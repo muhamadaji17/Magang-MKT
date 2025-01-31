@@ -8,7 +8,6 @@ export const useStore = create((set) => ({
         company: '',
         phone_number: '',
     },
-    // Fungsi untuk mengupdate sebagian dari `account`
     updateAccount: (updatedData) =>
         set((state) => ({
             account: {

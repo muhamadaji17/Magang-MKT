@@ -1,5 +1,4 @@
-const DashboardBreadcrumb = [{ name: 'Dashboard', link: '/dashboard' }];
+const employeeBreadcrumb = [{ name: 'Employee', link: '/employee' }];
+const departmentBreadcrumb = [{ name: 'Department', link: '/department' }];
 
-const EmployeeBreadcrumb = [{ name: 'Employee', link: '/dashboard' }];
-
-export { DashboardBreadcrumb, EmployeeBreadcrumb };
+export { employeeBreadcrumb, departmentBreadcrumb };

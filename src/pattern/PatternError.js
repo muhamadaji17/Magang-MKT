@@ -1,13 +1,13 @@
 export const errorOptions = {
     username: {
-        required: 'Username must be more than 1 Characters',
+        required: 'Username must be more than 1 characters',
         minLength: {
             value: 1,
-            message: 'Username must be more than 1 Characters',
+            message: 'Username must be more than 1 characters',
         },
         maxLength: {
             value: 32,
-            message: 'Username must be less than 32 Characters',
+            message: 'Username must be less than 32 characters',
         },
         pattern: {
             value: /^[\w]/,
@@ -18,18 +18,18 @@ export const errorOptions = {
         required: 'Email is required',
         pattern: {
             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            message: 'Invalid Email',
+            message: 'Invalid email',
         },
     },
     password: {
         required: 'Password is required',
         minLength: {
             value: 8,
-            message: 'Password must be more than 8 Characters',
+            message: 'Password must be more than 8 characters',
         },
         maxLength: {
             value: 32,
-            message: 'Password must be less than 32 Characters',
+            message: 'Password must be less than 32 characters',
         },
     },
     phone_number: {
@@ -51,5 +51,27 @@ export const errorOptions = {
         required: 'Confirm Password is required',
         validate: (value, { password }) =>
             value === password || 'Passwords do not match',
+    },
+    departement_code: {
+        required: 'Department code is required',
+        minLength: {
+            value: 4,
+            message: 'Department code must be more than 4 characters',
+        },
+        maxLength: {
+            value: 4,
+            message: 'Department code must be less than 4 characters',
+        },
+    },
+    nama_departement: {
+        required: 'Please input the department name',
+        minLength: {
+            value: 5,
+            message: 'Department name must be more than 5 characters',
+        },
+        maxLength: {
+            value: 32,
+            message: 'Department name must be less than 8 characters',
+        },
     },
 };

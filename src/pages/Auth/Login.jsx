@@ -1,4 +1,4 @@
-import { FormAuth } from '/src/components/organisms';
+import { FormAuth } from '../../components/organisms';
 import { AuthTemplate } from '../../components/templates';
 import { LinkAuth } from '../../components/atoms';
 import {
@@ -41,7 +41,7 @@ const Login = () => {
                 showPassword={showPassword}
                 loading={loading}
                 buttonName='Login'
-                buttonWidth='w-24'
+                buttonStyle='w-24 text-white bg-blue-600 hover:bg-blue-800'
             />
             <LinkAuth
                 text='forgot password?'

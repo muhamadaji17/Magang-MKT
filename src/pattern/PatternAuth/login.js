@@ -1,4 +1,4 @@
-import { errorOptions } from '../PatternError';
+import { errorOptions } from '../patternError';
 import { IoIosEye, IoMdEyeOff } from 'react-icons/io';
 
 export const inputLogin = [

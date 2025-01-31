@@ -1,14 +1,19 @@
 import { inputRegister } from './PatternAuth/register';
 import { inputLogin } from './PatternAuth/login';
-import { inputForgotPassword } from './PatternAuth/forgot-password';
-import { inputSettingPassword } from './PatternAuth/setting-password';
+import { inputForgotPassword } from './PatternAuth/forgotPassword';
+import { inputSettingPassword } from './PatternAuth/settingPassword';
+import { inputAddDepartment } from './AddData/department';
+import { departmentTablePattern } from './Table/departmentTable';
 import {
     handleSubmitData,
     handleShowPassword,
     handleShowConfirmPassword,
+    handleShowModal,
+    handleModal,
 } from './handleButton';
-import { errorOptions } from './PatternError';
-import { DashboardBreadcrumb, EmployeeBreadcrumb } from './Breadcrumb';
+import { errorOptions } from './patternError';
+import { employeeBreadcrumb, departmentBreadcrumb } from './breadcrumb';
+import { sidebarLink } from './sidebarPattern';
 
 export {
     errorOptions,
@@ -19,6 +24,11 @@ export {
     inputSettingPassword,
     inputForgotPassword,
     handleShowConfirmPassword,
-    DashboardBreadcrumb,
-    EmployeeBreadcrumb,
+    employeeBreadcrumb,
+    inputAddDepartment,
+    departmentBreadcrumb,
+    departmentTablePattern,
+    sidebarLink,
+    handleShowModal,
+    handleModal,
 };

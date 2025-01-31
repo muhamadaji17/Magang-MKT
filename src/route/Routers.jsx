@@ -6,6 +6,8 @@ import {
     SettingPassword,
     Dashboard,
     Employee,
+    LandingPage,
+    Department,
 } from '../pages';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -13,6 +15,7 @@ export default function Routers() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path='/' element={<LandingPage />} />
                 <Route
                     path='/dashboard'
                     element={
@@ -27,6 +30,14 @@ export default function Routers() {
                         <ProtectedRoute type='login'>
                             <Employee />
                         </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/department'
+                    element={
+                        // <ProtectedRoute type='login'>
+                        <Department />
+                        // </ProtectedRoute>
                     }
                 />
                 <Route

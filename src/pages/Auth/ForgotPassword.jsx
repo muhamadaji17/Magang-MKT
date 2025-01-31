@@ -21,7 +21,7 @@ const ForgotPassword = () => {
             <FormAuth
                 dataForm={inputForgotPassword}
                 buttonName='Send'
-                buttonWidth='w-full'
+                buttonStyle='w-24 text-white bg-blue-600 hover:bg-blue-800'
                 loading={loading}
                 handleSubmitData={(data, reset) =>
                     handleSubmitData(

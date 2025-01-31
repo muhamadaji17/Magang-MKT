@@ -1,4 +1,4 @@
-import { errorOptions } from '../PatternError';
+import { errorOptions } from '../patternError';
 
 export const inputForgotPassword = [
     {

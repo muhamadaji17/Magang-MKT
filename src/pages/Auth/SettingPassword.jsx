@@ -35,8 +35,8 @@ const SettingPassword = () => {
                 titleText='Reset your password'
             >
                 <p>
-                    please Set your new password below and don&apos;t make sure
-                    your password is secure.
+                    please set your new password below and make sure your
+                    password is secure.
                 </p>
                 <Errors>
                     If it is more than 5 minutes, it will be redirected to the
@@ -46,7 +46,7 @@ const SettingPassword = () => {
             <FormAuth
                 dataForm={inputSettingPassword}
                 buttonName='Send'
-                buttonWidth='w-full'
+                buttonStyle='w-24 text-white bg-blue-600 hover:bg-blue-800'
                 loading={loading}
                 handleClick={() =>
                     handleShowPassword(setShowPassword, showPassword)

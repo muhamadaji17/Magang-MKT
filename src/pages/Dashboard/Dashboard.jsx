@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { IoPeopleSharp } from 'react-icons/io5';
-import BreadCrumb from '../utils/Breadcrumb';
-import { DashboardBreadcrumb } from '../pattern';
+import { BreadCrumb } from '../../utils';
 
 const Dashboard = () => {
     return (
-        <div className='flex flex-col h-screen'>
+        <div className='flex flex-col min-h-svh'>
             <nav className='w-full h-16 border-b flex justify-between items-center bg-white px-12 z-40 shadow-md'>
                 <h1 className='font-bold text-2xl text-blue-600'>MKT</h1>
                 <div className='flex items-center gap-2 cursor-pointer'>
@@ -31,7 +30,6 @@ const Dashboard = () => {
                             </span>
                         </Link>
                     </li>
-
                     <li>
                         <Link
                             to='/employee'
@@ -43,16 +41,28 @@ const Dashboard = () => {
                             </span>
                         </Link>
                     </li>
+                    <li>
+                        <Link
+                            to='/department'
+                            className='text-blue-600 h-20 flex items-center justify-center hover:bg-slate-100 gap-2 group'
+                        >
+                            <IoPeopleSharp className='w-6 h-6' />
+                            <span className='hidden group-hover:block'>
+                                Department
+                            </span>
+                        </Link>
+                    </li>
                 </ul>
             </nav>
             <div className='bg-slate-100 flex-1 p-5 w-full pl-28 h-screen space-y-3'>
-                <div className='flex items-center justify-between'>
-                    <h1 className='text-2xl font-semibold'>Dashboard</h1>
-                    <BreadCrumb items={DashboardBreadcrumb} />
+                <div>
+                    <div className='flex items-center justify-between'>
+                        <h1 className='text-2xl font-semibold'>Dashboard</h1>
+                        <BreadCrumb />
+                    </div>
                 </div>
-
                 <div className='grid grid-cols-2 gap-4'>
-                    <div className='h-80 bg-gradient-to-r from-[#C33764] to-[#1D2671] flex flex-col justify-center items-center shadow-md rounded-md text-white'>
+                    <div className='h-80 bg-gradient-to-r from-[#191714] to-[#2234AE] flex flex-col justify-center items-center shadow-md rounded-md text-white'>
                         <div className='h-16 flex items-center justify-center w-full'>
                             <h2 className='text-xl text-center font-semibold'>
                                 Total Employee
@@ -62,7 +72,7 @@ const Dashboard = () => {
                             <p className='text-3xl font-semibold'>24</p>
                         </div>
                     </div>
-                    <div className='h-80 bg-gradient-to-r from-[#C33764] to-[#1D2671] flex flex-col justify-center items-center shadow-md rounded-md text-white'>
+                    <div className='h-80 bg-gradient-to-r from-[#191714] to-[#2234AE] flex flex-col justify-center items-center shadow-md rounded-md text-white'>
                         <div className='h-16 flex items-center justify-center w-full'>
                             <h2 className='text-xl text-center font-semibold'>
                                 Total Department
@@ -72,7 +82,7 @@ const Dashboard = () => {
                             <p className='text-3xl font-semibold'>24</p>
                         </div>
                     </div>
-                    <div className='h-80 bg-gradient-to-r from-[#C33764] to-[#1D2671] flex flex-col justify-center items-center shadow-md rounded-md text-white'>
+                    <div className='h-80 bg-gradient-to-r from-[#191714] to-[#2234AE] flex flex-col justify-center items-center shadow-md rounded-md text-white'>
                         <div className='h-16 flex items-center justify-center w-full'>
                             <h2 className='text-xl text-center font-semibold'>
                                 Total Division

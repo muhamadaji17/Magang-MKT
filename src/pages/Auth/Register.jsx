@@ -38,7 +38,7 @@ const Register = () => {
                 showPassword={showPassword}
                 buttonName='Register'
                 loading={loading}
-                buttonWidth='w-24'
+                buttonStyle='w-24 text-white bg-blue-600 hover:bg-blue-800'
             />
             <LinkAuth text='Have an account?' path='/login' link='sign in' />
         </AuthTemplate>
