@@ -18,7 +18,7 @@ import {
 
 const Table = () => {
   const navigate = useNavigate();
-  const { token } = useAuthStore();
+  const { token, username } = useAuthStore();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -89,6 +89,10 @@ const Table = () => {
   return (
     <>
       <div className="flex flex-col w-full justify-between items-center rounded-md py-1 gap-2">
+        <div className="w-full flex justify-between items-center">
+          <h1>{username}</h1>
+          <Button className="px-4 py-2 text-white text-sm">Logout</Button>
+        </div>
         <div className="flex justify-between items-center w-full">
           <h1>Dashboard</h1>
           <SearchTable />
