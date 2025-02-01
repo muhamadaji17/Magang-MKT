@@ -44,7 +44,7 @@ const DepartemenPage = () => {
       {datas && (
         <Table
           dataTable={datas}
-          tableConfig={tableConfig.departemen}
+          tableConfig={tableConfig}
           setShowModal={setShowModal}
         />
       )}
