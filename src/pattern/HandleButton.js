@@ -1,15 +1,34 @@
 export const handleSubmitData = ({
   data,
-  resetField,
+  dataId,
   postData,
+  resetField,
   state,
   setState,
   navigate,
+  accessToken,
+  setShowModal,
+  setUpdateData,
   setLoading,
 }) => {
-  postData({ data, resetField, state, setState, navigate, setLoading });
+  postData({
+    data,
+    dataId,
+    resetField,
+    state,
+    setState,
+    navigate,
+    setLoading,
+    setShowModal,
+    accessToken,
+    setUpdateData,
+  });
 };
 
 export const handleShowPassword = (showPassword, setShowPassword) => {
   setShowPassword(!showPassword);
+};
+
+export const handleShowModal = (isShowModal, setShowModal) => {
+  setShowModal(isShowModal);
 };

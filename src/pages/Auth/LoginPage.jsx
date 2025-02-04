@@ -9,7 +9,7 @@ import { useAccessToken } from "../../hook";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { accessToken, setAccessToken } = useAccessToken();
+  const { setAccessToken } = useAccessToken();
 
   return (
     <>

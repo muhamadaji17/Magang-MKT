@@ -1,10 +1,10 @@
 import React from "react";
 
-const TableHead = ({ tableConfig }) => {
+const TableHead = ({ className, titles }) => {
   return (
-    <thead className={tableConfig.classNameHead}>
+    <thead className={className || ""}>
       <tr>
-        {tableConfig.headDescription.map((title, index) => (
+        {titles.map((title, index) => (
           <th scope="col" className="px-6 py-3" key={index}>
             {title}
           </th>

@@ -1,11 +1,19 @@
 import React from "react";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { Button } from "../atoms";
 
-const Navbar = () => {
+const Navbar = ({ handleShowSidebar }) => {
   return (
-    <nav className="sticky top-0 w-full z-10 bg-white drop-shadow-lg">
-      <div className="flex justify-between items-center px-6 py-4">
-        <div>
-          <h1>Logo</h1>
+    <nav className="fixed top-0 w-full z-30 bg-white drop-shadow-lg">
+      <div className="flex justify-between items-center px-3 md:px-6 py-4">
+        <div className="flex gap-3">
+          <Button
+            onClick={handleShowSidebar}
+            className="text-2xl mt-1 md:hidden"
+          >
+            <RxHamburgerMenu />
+          </Button>
+          <h1 className="font-bold text-2xl">Logo</h1>
         </div>
 
         <div className="flex items-center gap-2">

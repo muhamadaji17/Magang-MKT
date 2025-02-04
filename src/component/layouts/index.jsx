@@ -1,4 +1,4 @@
 import LayoutAuth from "./LayoutAuth";
 import LayoutDashboard from "./LayoutDashboard";
-
-export { LayoutAuth, LayoutDashboard };
+import LayoutModal from "./LayoutModal";
+export { LayoutAuth, LayoutDashboard, LayoutModal };

@@ -4,7 +4,9 @@ export const useGlobalHook = () => {
   const [loadingButton, setLoadingButton] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [datas, setDatas] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [updateData, setUpdateData] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   return {
     loadingButton,
@@ -13,7 +15,11 @@ export const useGlobalHook = () => {
     setShowPassword,
     datas,
     setDatas,
-    showModal,
-    setShowModal,
+    showAddModal,
+    setShowAddModal,
+    updateData,
+    setUpdateData,
+    showEditModal,
+    setShowEditModal,
   };
 };

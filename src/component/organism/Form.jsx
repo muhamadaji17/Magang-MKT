@@ -7,6 +7,7 @@ import { useGlobalHook } from "../../hook/index";
 
 const Form = ({
   dataForm,
+  defaultValue,
   authFor,
   buttonName,
   handleSubmitData,
@@ -40,6 +41,7 @@ const Form = ({
               <InputForm
                 data={data}
                 error={errors[data.name]}
+                defaultValue={defaultValue}
                 register={register}
                 showPassword={
                   data.name !== "confirmPassword"

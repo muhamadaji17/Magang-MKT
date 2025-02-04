@@ -8,6 +8,7 @@ const InputForm = ({
   showPassword,
   setShowPassword,
   handleClickIcon,
+  defaultValue,
   error,
 }) => {
   return (
@@ -21,6 +22,7 @@ const InputForm = ({
         type={!showPassword ? data.type : "text"}
         register={register}
         placeholder={data.placeholder}
+        defaultValue={defaultValue}
         name={data.name}
         addOptionError={data.addOptionError}
         className={data.inputClassName}

@@ -5,4 +5,27 @@ import {
   ResetPasswordService,
 } from "./authService";
 
-export { LoginService, RegisterService, OtpService, ResetPasswordService };
+import {
+  addDataDepartementService,
+  editDataDepartementService,
+  getDataDepartementService,
+  deleteDataDepartementService,
+} from "./departementService";
+
+// const departementServie = {
+//   add: addDataDepartementService,
+//   get: getDataDepartementService,
+//   delete: deleteDataDepartementService,
+//   edit: editDataDepartementService
+// }
+
+export {
+  LoginService,
+  RegisterService,
+  OtpService,
+  ResetPasswordService,
+  addDataDepartementService,
+  editDataDepartementService,
+  getDataDepartementService,
+  deleteDataDepartementService,
+};

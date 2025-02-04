@@ -34,4 +34,18 @@ export const errorOptions = {
       message: "Only nymbers are allowed",
     },
   },
+  departementName: {
+    required: "Departement Name is Required",
+    minLength: {
+      value: 2,
+      message: "Departemen Name muts be at least 2 characters",
+    },
+  },
+  departementCode: {
+    required: "Departement Code is Required",
+    minLength: {
+      value: 5,
+      message: "Departemen Code muts be at least 5 characters",
+    },
+  },
 };

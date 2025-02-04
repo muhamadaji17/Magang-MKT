@@ -5,7 +5,7 @@ import { inputResetPassword } from "./PatternAuth/ResetPassword";
 import { errorOptions } from "./PatternError";
 import { handleShowPassword } from "./HandleButton";
 import { handleSubmitData } from "./HandleButton";
-import { tableConfig } from "./PatternTable/Departemen";
+import { tableDepartemen } from "./PatternTable/tableConfig";
 import { navLinkSidebar } from "./LinkPattern";
 
 export {
@@ -13,9 +13,9 @@ export {
   inputRegister,
   inputOtp,
   inputResetPassword,
-  tableConfig,
   errorOptions,
   navLinkSidebar,
+  tableDepartemen,
   handleShowPassword,
   handleSubmitData,
 };

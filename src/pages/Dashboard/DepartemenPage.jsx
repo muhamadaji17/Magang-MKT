@@ -1,56 +1,64 @@
-import React, { useEffect } from "react";
-import { DataDepartementService } from "../../service/getDataTableService";
-import { useAccessToken } from "../../hook/useGlobalContext";
-import { useGlobalHook } from "../../hook";
-import { Modal, Table } from "../../component/organism";
-import { tableConfig } from "../../pattern/PatternTable/Departemen";
+import React, { useEffect, useState } from "react";
+import { useDepartementHook } from "../../hook";
+import { Table } from "../../component/organism";
+import { tableDepartemen } from "../../pattern";
+import {
+  inputAddDepartement,
+  inputEditDepartement,
+} from "../../pattern/PatternInputModal/Departement";
+import { HeaderContent } from "../../component/molecules";
+import {
+  getDataDepartementService,
+  addDataDepartementService,
+  deleteDataDepartementService,
+  editDataDepartementService,
+} from "../../service";
 
 const DepartemenPage = () => {
-  const { datas, setDatas } = useGlobalHook();
-  const { accessToken } = useAccessToken();
-  const { showModal, setShowModal } = useGlobalHook();
-
-  const inputAddData = [
-    {
-      placeholder: "Teknologi Informasi",
-      type: "text",
-      title: "Nama Departemen: ",
-      name: "nama_departement",
-      labelClassName: "text-[12px] font-semibold text-slate-700",
-      inputClassName:
-        "w-full rounded-md py-2 px-3 placeholder:text-[12px] border outline-none border-slate-400 my-2 text-sm",
-
-      // addOptionError: errorOptions.username,
-    },
-    {
-      placeholder: "0X12B",
-      type: "text",
-      title: "Kode Departemen: ",
-      name: "departement_code",
-      labelClassName: "text-[12px] font-semibold text-slate-700",
-      inputClassName:
-        "w-full rounded-md py-2 px-3 placeholder:text-[12px] border outline-none border-slate-400 my-2 text-sm",
-
-      // addOptionError: errorOptions.username,
-    },
-  ];
+  const {
+    datas,
+    setDatas,
+    accessToken,
+    showAddModal,
+    setShowAddModal,
+    showEditModal,
+    setShowEditModal,
+    updateData,
+    setUpdateData,
+  } = useDepartementHook();
+  const [dataId, setDataId] = useState("");
 
   useEffect(() => {
-    DataDepartementService(accessToken, setDatas);
-  }, []);
+    getDataDepartementService(accessToken, setDatas, setUpdateData);
+  }, [updateData]);
 
   return (
     <div className="">
+      <HeaderContent
+        service={addDataDepartementService}
+        accessToken={accessToken}
+        showAddModal={showAddModal}
+        setShowAddModal={setShowAddModal}
+        setUpdateData={setUpdateData}
+        inputDataForm={inputAddDepartement}
+        dataId={dataId}
+        setDataId={setDataId}
+      />
       {datas && (
         <Table
           dataTable={datas}
-          tableConfig={tableConfig}
-          setShowModal={setShowModal}
+          accessToken={accessToken}
+          tableConfig={tableDepartemen}
+          dataId={dataId}
+          setDataId={setDataId}
+          editService={editDataDepartementService}
+          deleteService={deleteDataDepartementService}
+          dataForm={inputEditDepartement}
+          showEditModal={showEditModal}
+          setShowEditModal={setShowEditModal}
+          setUpdateData={setUpdateData}
+          classNameHead={"text-xs text-white text-center uppercase bg-blue-700"}
         />
-      )}
-
-      {showModal && (
-        <Modal dataForm={inputAddData} setShowModal={setShowModal} />
       )}
     </div>
   );
