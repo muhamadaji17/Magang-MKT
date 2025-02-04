@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { apiCall } from "../../api/apiPost";
+import { apiPost } from "../../api/apiCall";
 import usePasswordToggle from "../../hook/usePasswordToogle";
 import { showAlert, dataRegister } from "../../utils/index";
 
@@ -24,7 +24,7 @@ const FormRegister = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await apiCall("/auth/register", {
+      const res = await apiPost("/auth/register", {
         username: data.username,
         password: data.password,
         email: data.email,

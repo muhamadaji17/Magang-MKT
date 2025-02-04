@@ -1,4 +1,4 @@
-import { apiCall } from "../../api/apiPost";
+import { apiPost } from "../../api/apiCall";
 import useOtpSore from "../../store/otpStore";
 import showAlert from "../../utils/ShowAlert";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +45,7 @@ const ForgotPassword = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await apiCall("/auth/forgot-password", {
+      const response = await apiPost("/auth/forgot-password", {
         phone_number: data.phone_number,
       });
       if (response.status === true) {

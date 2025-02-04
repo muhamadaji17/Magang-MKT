@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import showAlert from "../../utils/ShowAlert";
-import { apiCall } from "../../api/apiPost";
 import { useLoginForm } from "../../hook/useLoginForm";
 import usePasswordToggle from "../../hook/usePasswordToogle";
 
@@ -32,7 +31,7 @@ const FormLogin = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await apiCall("/auth/login", {
+      const res = await apiPost("/auth/login", {
         username: data.username,
         password: data.password,
       });

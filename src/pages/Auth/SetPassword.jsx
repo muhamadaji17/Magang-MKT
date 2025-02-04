@@ -1,4 +1,4 @@
-import { apiCall } from "../../api/apiPost";
+import { apiPost } from "../../api/apiCall";
 import usePasswordToggle from "../../hook/usePasswordToogle";
 import useOtpStore from "../../store/otpStore";
 import showAlert from "../../utils/ShowAlert";
@@ -31,7 +31,7 @@ const SetPassword = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await apiCall("/set-pass", {
+      const res = await apiPost("/set-pass", {
         password: data.password,
         otp: otpData.otp,
         phone_number: otpData.phone_number,
