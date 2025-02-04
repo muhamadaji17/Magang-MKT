@@ -21,22 +21,11 @@ const Table = () => {
   const { token, username, logout } = useAuthStore();
 
   useEffect(() => {
-    response();
     if (!token) {
       showAlert("Warning!", "Silahkan login terlebih dahulu", "warning", 5000);
       navigate("/auth/login");
     }
   }, [token, navigate]);
-
-  const response = async () => {
-    const result = await apiGet("/crud/departement", token);
-    setData(result.payload);
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate("/auth/login");
-  };
 
   const { isModalOpen, openModal, closeModal } = useModal();
 
@@ -55,18 +44,7 @@ const Table = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full justify-between items-center rounded-md py-1 gap-2">
-        <div className="w-full flex justify-between items-center">
-          <h1>
-            Hello, <span className="font-bold">{username}!</span>
-          </h1>
-          <Button
-            onClick={handleLogout}
-            className="px-4 py-2 text-white text-sm"
-          >
-            Logout
-          </Button>
-        </div>
+      <div className="flex flex-col w-full justify-between items-center bg-slate-300 gap-2 px-6 pt-10">
         <div className="flex justify-between items-center w-full">
           <h1>Dashboard</h1>
           <SearchTable />
@@ -115,43 +93,6 @@ const Table = () => {
             </div>
           </Form>
         </Modal>
-        {/* <table className="table-fixed border-2 w-full">
-          <thead>
-            <tr className="text-center bg-primary text-white">
-              {label.map((label, index) => (
-                <th key={index} className="text-start font-semibold py-2 px-4">
-                  {label.name}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {limitedData.map((data, index) => (
-              <tr key={index} className="border-2">
-                <td className="text-start px-4 py-2">
-                  {data.created_admin.username}
-                </td>
-                <td className="text-start px-4 py-2">
-                  {data.departement_code}
-                </td>
-                <td className="text-start px-4 py-2">
-                  {data.nama_departement}
-                </td>
-                <td className="text-start px-4 py-2">
-                  {new Date(data.created_admin.createdAt).toLocaleDateString(
-                    "id"
-                  )}
-                </td>
-                <td className=" space-x-2 px-4 py-2">
-                  <Button className="text-white text-sm px-4 py-2">Edit</Button>
-                  <Button className="text-white bg-red-600 text-sm px-4 py-2">
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
         <TableData />
       </div>
     </>

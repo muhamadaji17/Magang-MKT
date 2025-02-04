@@ -38,3 +38,23 @@ export const apiGet = async (endpoint, token) => {
     throw error;
   }
 };
+
+export const apiPut = async (endpoint, data, token) => {
+  try {
+    const response = await axios.put(
+      `${import.meta.env.VITE_API_URL}${endpoint}`,
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-token": `mktech ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error) || "Terjadi kesalahan";
+    throw error;
+  }
+};
