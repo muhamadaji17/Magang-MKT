@@ -10,6 +10,7 @@ import {
     Department,
 } from '../pages';
 import ProtectedRoute from './ProtectedRoute';
+import { DashboardTemplate } from '../components/templates';
 
 export default function Routers() {
     return (
@@ -19,27 +20,16 @@ export default function Routers() {
                 <Route
                     path='/dashboard'
                     element={
-                        <ProtectedRoute type='login'>
-                            <Dashboard />
-                        </ProtectedRoute>
-                    }
-                />
-                <Route
-                    path='/employee'
-                    element={
-                        <ProtectedRoute type='login'>
-                            <Employee />
-                        </ProtectedRoute>
-                    }
-                />
-                <Route
-                    path='/department'
-                    element={
                         // <ProtectedRoute type='login'>
-                        <Department />
+                        <DashboardTemplate />
                         // </ProtectedRoute>
                     }
-                />
+                >
+                    <Route index element={<Dashboard />} />
+                    <Route path='employee' element={<Employee />} />
+                    <Route path='department' element={<Department />} />
+                </Route>
+
                 <Route
                     path='/login'
                     element={

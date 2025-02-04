@@ -11,7 +11,7 @@ import { useGlobalHook } from '../../hook';
 const ForgotPassword = () => {
     const navigate = useNavigate();
     const { updateAccount } = useStore();
-    const { loading, setLoading } = useGlobalHook();
+    const { loadingButton, setLoadingButton } = useGlobalHook();
 
     return (
         <SupportAuthTemplate>
@@ -22,7 +22,7 @@ const ForgotPassword = () => {
                 dataForm={inputForgotPassword}
                 buttonName='Send'
                 buttonStyle='w-24 text-white bg-blue-600 hover:bg-blue-800'
-                loading={loading}
+                loading={loadingButton}
                 handleSubmitData={(data, reset) =>
                     handleSubmitData(
                         data,
@@ -30,7 +30,7 @@ const ForgotPassword = () => {
                         updateAccount,
                         navigate,
                         reset,
-                        setLoading
+                        setLoadingButton
                     )
                 }
             />

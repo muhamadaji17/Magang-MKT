@@ -1,0 +1,101 @@
+import { IoMdClose } from 'react-icons/io';
+import FormAuth from './FormAuth';
+import { handleSubmitData, handleDeleteData } from '../../pattern';
+import { CiWarning } from 'react-icons/ci';
+const ModalLayout = ({
+    titleModal,
+    dataForm,
+    setShowModal,
+    handleShowModal,
+    handleModal,
+    trigger,
+    loading,
+    setLoading,
+    accessToken,
+    addService,
+    getId,
+    type,
+    handleCancelModalId,
+    setReGetDatas,
+}) => {
+    return (
+        <div
+            ref={trigger}
+            className='fixed inset-0 bg-transparent drop-shadow-md backdrop-blur-md flex items-center justify-center z-50'
+            onClick={(e) => handleModal(e, trigger, setShowModal)}
+        >
+            {type === 'delete' ? (
+                <div className='bg-white w-[400px] lg:h-[250px] justify-center gap-9 flex flex-col p-6'>
+                    <div className='space-y-3'>
+                        <div className='flex flex-col items-center justify-center'>
+                            <CiWarning className='text-6xl text-[#FF4D4D]' />
+                            <h1 className='font-bold text-2xl'>Warning!</h1>
+                            <p className='text-sm'>
+                                Are you sure? this action cannot be undone.
+                            </p>
+                        </div>
+                    </div>
+                    <div className='flex gap-4 justify-center items-center'>
+                        <button
+                            className='bg-[#ECECEC] w-[144px] h-[44px] rounded'
+                            onClick={handleCancelModalId}
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            className='bg-[#FF4D4D] w-[144px] h-[44px] rounded text-white'
+                            onClick={() =>
+                                handleDeleteData(
+                                    getId,
+                                    addService,
+                                    accessToken,
+                                    setShowModal,
+                                    setLoading,
+                                    setReGetDatas
+                                )
+                            }
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            ) : (
+                <div className='bg-white rounded-lg p-2 w-[1100px] h-[700px] relative flex flex-col'>
+                    <div>
+                        <h1 className='text-2xl font-semibold text-center p-2'>
+                            {titleModal}
+                        </h1>
+                        <div className='absolute top-3 right-2 w-[24px] h-[24px] rounded-full cursor-pointer'>
+                            <IoMdClose
+                                className='w-full h-full rounded-full'
+                                onClick={handleShowModal}
+                            />
+                        </div>
+                    </div>
+                    <div className='flex items-center justify-center flex-1 flex-col overflow-y-auto'>
+                        <FormAuth
+                            dataForm={dataForm}
+                            handleSubmitData={(data, reset) =>
+                                handleSubmitData(
+                                    data,
+                                    addService,
+                                    accessToken,
+                                    setShowModal,
+                                    reset,
+                                    setLoading,
+                                    setReGetDatas,
+                                    getId
+                                )
+                            }
+                            loading={loading}
+                            buttonName='Send'
+                            buttonStyle='w-24 text-white bg-blue-600 hover:bg-blue-800'
+                        />
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default ModalLayout;

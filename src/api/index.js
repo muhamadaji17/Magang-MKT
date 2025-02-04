@@ -38,3 +38,29 @@ export const GET_DATAS = async (endpoint, token) => {
     );
     return response;
 };
+
+export const PUT_DATAS = async (endpoint, data, accessToken) => {
+    const response = await axios.put(
+        `${import.meta.env.VITE_BASE_URL_DEV}/${endpoint}`,
+        data,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-token': `mktech ${accessToken}`,
+            },
+        }
+    );
+    return response;
+};
+
+export const DELETE_DATAS = async (endpoint, accessToken) => {
+    const response = await axios.delete(
+        `${import.meta.env.VITE_BASE_URL_DEV}/${endpoint}`,
+        {
+            headers: {
+                'x-token': `mktech ${accessToken}`,
+            },
+        }
+    );
+    return response;
+};

@@ -1,5 +1,6 @@
 import InputForm from './InputForm';
-import HeaderAuth from './HeaderAuth';
 import Navlink from './Navlink';
+import DashboardHeader from './DashboardHeader';
+import HeaderAuth from './HeaderAuth';
 
-export { InputForm, HeaderAuth, Navlink };
+export { InputForm, DashboardHeader, Navlink, HeaderAuth };

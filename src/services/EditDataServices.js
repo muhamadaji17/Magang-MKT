@@ -1,28 +1,29 @@
-import { POST_DATAS } from '../api';
+import { PUT_DATAS } from '../api';
 import AlertForm from '../utils/SweetAlert';
 
-export const AddDepartmentService = async (
+export const EditDepartmentService = async (
     data,
     accessToken,
     setShowModal,
     reset,
     setLoading,
-    setReGetDatas
+    setReGetDatas,
+    id
 ) => {
     try {
         setLoading(true);
-        const response = await POST_DATAS(
-            'crud/departement',
+        const response = await PUT_DATAS(
+            `crud/departement/${id}`,
             data,
             accessToken
         );
+        console.log(response);
         reset();
         AlertForm({
             icon: 'success',
             text: response.data.message,
             title: 'success',
         });
-        console.log(response);
         setReGetDatas(false);
         setShowModal(false);
     } catch (error) {

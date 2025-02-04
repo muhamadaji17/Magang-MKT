@@ -3,25 +3,26 @@ import BreadCrumb from '../../utils/Breadcrumb';
 import {
     departmentBreadcrumb,
     handleModal,
+    handleShowModal,
     inputAddDepartment,
+    inputEditDepartment,
+    handleShowModalId,
+    handleCancelModalId,
 } from '../../pattern';
-import { Button } from '../../components/atoms';
 import { useEffect } from 'react';
-import { useStore } from '../../store/store';
 import { Loading } from '../../utils';
-import { Searchbar } from '../../utils';
 import { Table } from '../../components/organisms';
-import { departmentTablePattern, sidebarLink } from '../../pattern';
-import HeaderDashboard from '../../components/molecules/HeaderDashboard';
-import { useGlobalHook } from '../../hook';
-import { AddDepartmentService, GetDepartmentsServices } from '../../services';
-import { DashboardTemplate } from '../../components/templates';
-import { handleShowModal } from '../../pattern';
+import { departmentTablePattern } from '../../pattern';
+import { DashboardHeader } from '../../components/molecules';
+import { useDashboardHook } from '../../hook';
+import {
+    AddDepartmentService,
+    GetDepartmentsServices,
+    EditDepartmentService,
+    DeleteDepartmentService,
+} from '../../services';
 
 const Department = () => {
-    const store = useStore();
-    const accessToken = store.account.accessToken;
-
     const {
         datas,
         setDatas,
@@ -30,69 +31,100 @@ const Department = () => {
         showAddModal,
         setShowAddModal,
         trigger,
-    } = useGlobalHook();
+        accessToken,
+        loading,
+        setLoading,
+        getId,
+        setGetId,
+        showModalId,
+        setShowModalId,
+        modalType,
+        setModalType,
+        reGetDatas,
+        setReGetDatas,
+    } = useDashboardHook();
 
     useEffect(() => {
-        setLoadingDatas(true);
-        if (accessToken) {
-            GetDepartmentsServices(accessToken, setDatas, setLoadingDatas);
+        if (accessToken && !reGetDatas) {
+            GetDepartmentsServices(
+                accessToken,
+                setDatas,
+                setLoadingDatas,
+                setReGetDatas
+            );
         }
-    }, [accessToken]);
+    }, [reGetDatas]);
 
     return (
-        <DashboardTemplate
-            sidebarLink={sidebarLink}
-            showAddModal={showAddModal}
-            setShowAddModal={setShowAddModal}
-            handleShowModal={() =>
-                handleShowModal(showAddModal, setShowAddModal)
-            }
-            handleModal={(e) => handleModal(e, trigger, setShowAddModal)}
-            trigger={trigger}
-            loading={loadingDatas}
-            setLoading={setLoadingDatas}
-            accessToken={accessToken}
-            addService={AddDepartmentService}
-            dataForm={inputAddDepartment}
-            titleModal={'Add New Department'}
-        >
-            <HeaderDashboard
+        <>
+            <DashboardHeader
                 title='Department'
                 breadcrumb={BreadCrumb}
                 breadcrumbPattern={departmentBreadcrumb}
-            >
-                <Searchbar />
-                <Button
-                    className='w-16 text-black border hover:bg-slate-200'
-                    disable={false}
-                >
-                    <MdNavigateBefore className='w-5 h-5' />
-                </Button>
-                <Button
-                    className='w-16 text-black border hover:bg-slate-200'
-                    disable={false}
-                >
-                    <MdNavigateNext className='w-5 h-5' />
-                </Button>
-                <Button
-                    type='button'
-                    className='w-48 text-white bg-blue-600 hover:bg-blue-800'
-                    disable={false}
-                    onClick={() =>
-                        handleShowModal(showAddModal, setShowAddModal)
-                    }
-                >
-                    Add new Department
-                </Button>
-            </HeaderDashboard>
+                handleShowModal={(type) => {
+                    handleShowModal(
+                        showAddModal,
+                        setShowAddModal,
+                        setModalType,
+                        type
+                    );
+                }}
+                showAddModal={showAddModal}
+                setShowAddModal={setShowAddModal}
+                buttonTextAddData='Add Department'
+                handleModal={handleModal}
+                trigger={trigger}
+                loading={loading}
+                setLoading={setLoading}
+                accessToken={accessToken}
+                addService={AddDepartmentService}
+                dataForm={inputAddDepartment}
+                titleModal='Add Department'
+                setDatas={setDatas}
+                setLoadingDatas={setLoadingDatas}
+                type={modalType}
+                setReGetDatas={setReGetDatas}
+            />
             {loadingDatas ? (
                 <div className='w-full flex items-center justify-center'>
                     <Loading />
                 </div>
             ) : (
-                <Table headers={departmentTablePattern} datas={datas} />
+                <Table
+                    headers={departmentTablePattern}
+                    datas={datas}
+                    editService={EditDepartmentService}
+                    deleteService={DeleteDepartmentService}
+                    accessToken={accessToken}
+                    trigger={trigger}
+                    loading={loading}
+                    setLoading={setLoading}
+                    setShowModalId={setShowModalId}
+                    showModalId={showModalId}
+                    handleShowModalId={(id, type) => {
+                        handleShowModalId(
+                            showModalId,
+                            setShowModalId,
+                            setGetId,
+                            id,
+                            setModalType,
+                            type
+                        );
+                    }}
+                    handleModal={handleModal}
+                    dataForm={inputEditDepartment}
+                    titleModal='Edit Department'
+                    getId={getId}
+                    type={modalType}
+                    handleCancelModalId={() =>
+                        handleCancelModalId(showModalId, setShowModalId)
+                    }
+                    setReGetDatas={setReGetDatas}
+                    paginationIconNext={MdNavigateNext}
+                    paginationIconPrev={MdNavigateBefore}
+                />
             )}
-        </DashboardTemplate>
+        </>
     );
 };
 

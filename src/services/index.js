@@ -4,8 +4,13 @@ import {
     ForgotPasswordService,
     SettingPasswordService,
 } from './AuthService';
-import { GetDepartmentsServices } from './GetService';
+import {
+    GetDepartmentsServices,
+    GetDepartmentByIdService,
+} from './GetDataService';
 import { AddDepartmentService } from './AddDataServices';
+import { EditDepartmentService } from './EditDataServices';
+import { DeleteDepartmentService } from './DeleteDataServices';
 
 export {
     RegisterService,
@@ -14,4 +19,7 @@ export {
     SettingPasswordService,
     GetDepartmentsServices,
     AddDepartmentService,
+    EditDepartmentService,
+    GetDepartmentByIdService,
+    DeleteDepartmentService,
 };

@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useStore } from '../../store/store';
 
 const Login = () => {
-    const { showPassword, setShowPassword, loading, setLoading } =
+    const { showPassword, setShowPassword, loadingButton, setLoadingButton } =
         useGlobalHook();
     const navigate = useNavigate();
     const { updateAccount } = useStore();
@@ -32,14 +32,14 @@ const Login = () => {
                         navigate,
                         reset,
                         updateAccount,
-                        setLoading
+                        setLoadingButton
                     )
                 }
                 handleClick={() =>
                     handleShowPassword(setShowPassword, showPassword)
                 }
                 showPassword={showPassword}
-                loading={loading}
+                loading={loadingButton}
                 buttonName='Login'
                 buttonStyle='w-24 text-white bg-blue-600 hover:bg-blue-800'
             />

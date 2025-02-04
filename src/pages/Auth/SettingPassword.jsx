@@ -23,8 +23,8 @@ const SettingPassword = () => {
         setShowPassword,
         showConfirmPassword,
         setShowConfirmPassword,
-        loading,
-        setLoading,
+        loadingButton,
+        setLoadingButton,
     } = useGlobalHook();
 
     return (
@@ -47,7 +47,7 @@ const SettingPassword = () => {
                 dataForm={inputSettingPassword}
                 buttonName='Send'
                 buttonStyle='w-24 text-white bg-blue-600 hover:bg-blue-800'
-                loading={loading}
+                loading={loadingButton}
                 handleClick={() =>
                     handleShowPassword(setShowPassword, showPassword)
                 }
@@ -65,7 +65,7 @@ const SettingPassword = () => {
                         SettingPasswordService,
                         navigate,
                         reset,
-                        setLoading,
+                        setLoadingButton,
                         account
                     )
                 }

@@ -43,7 +43,7 @@ const Dashboard = () => {
                     </li>
                     <li>
                         <Link
-                            to='/department'
+                            to='/dashboard/department'
                             className='text-blue-600 h-20 flex items-center justify-center hover:bg-slate-100 gap-2 group'
                         >
                             <IoPeopleSharp className='w-6 h-6' />

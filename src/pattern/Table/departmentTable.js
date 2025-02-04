@@ -6,3 +6,12 @@ export const departmentTablePattern = [
     'Date Created',
     'Action',
 ];
+
+export const departmentTableData = [
+    {
+        1: 'nama_departement',
+        2: 'departement_code',
+        3: 'createdAt',
+        4: 'created_admin.username',
+    },
+];

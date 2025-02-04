@@ -11,7 +11,7 @@ import { useGlobalHook } from '../../hook';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-    const { showPassword, setShowPassword, loading, setLoading } =
+    const { showPassword, setShowPassword, loadingButton, setLoadingButton } =
         useGlobalHook();
     const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const Register = () => {
                         RegisterService,
                         navigate,
                         reset,
-                        setLoading
+                        setLoadingButton
                     )
                 }
                 handleClick={() =>
@@ -37,7 +37,7 @@ const Register = () => {
                 }
                 showPassword={showPassword}
                 buttonName='Register'
-                loading={loading}
+                loading={loadingButton}
                 buttonStyle='w-24 text-white bg-blue-600 hover:bg-blue-800'
             />
             <LinkAuth text='Have an account?' path='/login' link='sign in' />

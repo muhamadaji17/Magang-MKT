@@ -66,7 +66,7 @@ export const errorOptions = {
     nama_departement: {
         required: 'Please input the department name',
         minLength: {
-            value: 5,
+            value: 1,
             message: 'Department name must be more than 5 characters',
         },
         maxLength: {

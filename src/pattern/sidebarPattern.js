@@ -9,12 +9,12 @@ export const sidebarLink = [
         text: 'Dashboard',
     },
     {
-        href: '/employee',
+        href: '/dashboard/employee',
         icon: IoPeopleSharp,
         text: 'Employee',
     },
     {
-        href: '/department',
+        href: '/dashboard/department',
         icon: HiOutlineOfficeBuilding,
         text: 'Department',
     },

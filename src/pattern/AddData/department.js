@@ -20,3 +20,15 @@ export const inputAddDepartment = [
         addOptionError: errorOptions.nama_departement,
     },
 ];
+
+export const inputEditDepartment = [
+    {
+        jenisInputan: 'input',
+        type: 'text',
+        title: 'Department Name',
+        name: 'nama_departement',
+        placeholder: 'Animasi',
+        error: 'nama_departement',
+        addOptionError: errorOptions.nama_departement,
+    },
+];
