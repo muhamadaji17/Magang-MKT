@@ -1,5 +1,6 @@
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { LuLayoutDashboard } from "react-icons/lu";
+import { Link, useLocation } from "react-router-dom";
 
 const Side = ({ children }) => {
   const sideName = [
@@ -15,6 +16,8 @@ const Side = ({ children }) => {
     },
   ];
 
+  const location = useLocation();
+
   return (
     <>
       <aside
@@ -24,17 +27,23 @@ const Side = ({ children }) => {
       >
         <div className="h-full px-3 py-4 flex overflow-y-auto bg-primary">
           <ul className="space-y-2 font-medium">
-            {sideName.map((side, index) => (
-              <li key={index}>
-                <a
-                  href="#"
-                  className="flex items-center p-2 rounded-lg text-white hover:text-accent"
-                >
-                  <side.icon size={30} />
-                  <span className="ms-3">{side.name}</span>
-                </a>
-              </li>
-            ))}
+            {sideName.map((side, index) => {
+              const isActive = location.pathname === side.path;
+
+              return (
+                <li key={index}>
+                  <Link
+                    to={side.path}
+                    className={`flex items-center p-2 rounded-lg text-white ${
+                      isActive ? "text-accent" : "hover:text-accent"
+                    }`}
+                  >
+                    <side.icon size={30} />
+                    <span className="ms-3">{side.name}</span>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </aside>

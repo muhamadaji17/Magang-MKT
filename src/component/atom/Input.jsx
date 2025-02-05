@@ -20,7 +20,7 @@ const Input = forwardRef(
       <>
         <div className="flex flex-col">
           {label && (
-            <label className="font-semibold" htmlFor={htmlFor}>
+            <label className="text-sm" htmlFor={htmlFor}>
               {labelName}
             </label>
           )}

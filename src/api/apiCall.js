@@ -58,3 +58,22 @@ export const apiPut = async (endpoint, data, token) => {
     throw error;
   }
 };
+
+export const apiDelete = async (endpoint, token) => {
+  try {
+    const response = await axios.delete(
+      `${import.meta.env.VITE_API_URL}${endpoint}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-token": `mktech ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error) || "Terjadi kesalahan";
+    throw error;
+  }
+};

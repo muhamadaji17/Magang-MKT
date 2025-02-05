@@ -13,10 +13,12 @@ import {
 } from "../index";
 import { dataLogin } from "../../utils/dataLogin";
 import useAuthStore from "../../store/useAuthStore";
+import { apiPost } from "../../api/apiCall";
 
 const FormLogin = () => {
   const navigate = useNavigate();
   const { login } = useAuthStore();
+  const { showPassword, handlePasswordToggle } = usePasswordToggle();
 
   const {
     register,
@@ -27,25 +29,24 @@ const FormLogin = () => {
     password: "",
   });
 
-  const { showPassword, handlePasswordToggle } = usePasswordToggle();
-
   const onSubmit = async (data) => {
     try {
-      const res = await apiPost("/auth/login", {
+      const response = await apiPost("/auth/login", {
         username: data.username,
         password: data.password,
       });
 
-      if (res.status === true) {
-        login(res.data.accessToken, res.data.username);
-        showAlert("Success", res.message, "success", 2000);
-        console.log(res);
+      if (response.status === true) {
+        login(response.data.accessToken, response.data.username);
+        showAlert("Success", response.message, "success", 5000);
+        navigate("/");
       } else {
-        showAlert("Error", res.message, "error", 2000);
+        showAlert("Error", response.message, "error", 5000);
       }
-      navigate("/");
+
+      console.log(response);
     } catch (error) {
-      showAlert("Error", error.response.data.message, "error", 2000);
+      console.log(error);
     }
   };
 

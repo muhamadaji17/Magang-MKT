@@ -5,6 +5,7 @@ import { Button, Form, FormTitle, Input, Modal } from "../index";
 import useModal from "../../hook/useModal";
 import { useForm } from "react-hook-form";
 import { showAlert } from "../../utils";
+import { editDepartement } from "../../utils/dataInput";
 
 const TableData = () => {
   const [data, setData] = useState([]);
@@ -24,14 +25,14 @@ const TableData = () => {
     },
   });
 
-  const response = async () => {
+  const fetchData = async () => {
     const result = await apiGet("/crud/departement", token);
     setData(result.payload);
   };
 
   useEffect(() => {
-    response();
-  }, [data]);
+    fetchData();
+  }, []);
 
   const label = [
     { name: "Username" },
@@ -59,10 +60,8 @@ const TableData = () => {
         token
       );
       showAlert("Success", response.message, "success", 5000);
-      console.log("Data berhasil diperbarui:", response);
-      // Setelah berhasil, tutup modal dan perbarui data
+      fetchData();
       closeModal();
-      response();
     } catch (error) {
       console.error("Gagal memperbarui data:", error);
     }
@@ -103,44 +102,10 @@ const TableData = () => {
               <td className="space-x-2 px-4 py-2">
                 <Button
                   onClick={() => handleEditClick(data)} // Pass data yang ingin diedit
-                  className="text-white text-sm px-4 py-2"
+                  className="text-white text-sm px-4 py-2 bg-success"
                 >
                   Edit
                 </Button>
-                <Modal isOpen={isModalOpen} closeModal={closeModal}>
-                  <FormTitle title="Edit Departement" />
-                  <Form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    <Input
-                      type="text"
-                      name="nama_departement"
-                      placeholder="Departement"
-                      className="w-full"
-                      {...register("nama_departement", {
-                        required: "Nama departement wajib diisi",
-                      })}
-                    />
-                    {errors.nama_departement && (
-                      <p className="text-red-500 text-sm">
-                        {errors.nama_departement.message}
-                      </p>
-                    )}
-                    <div className="w-full flex justify-center items-center space-x-4">
-                      <Button
-                        className="text-white bg-gray-500 text-sm px-4 py-2"
-                        onClick={closeModal}
-                      >
-                        Close
-                      </Button>
-                      <Button
-                        type="submit"
-                        className="text-white bg-blue-500 text-sm px-4 py-2"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? "Updating ..." : "Update Changes"}
-                      </Button>
-                    </div>
-                  </Form>
-                </Modal>
                 <Button className="text-white bg-red-600 text-sm px-4 py-2">
                   Delete
                 </Button>
@@ -149,6 +114,43 @@ const TableData = () => {
           ))}
         </tbody>
       </table>
+      <Modal isOpen={isModalOpen} closeModal={closeModal}>
+        <FormTitle title="Edit Departement" />
+        <Form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {editDepartement.map((input, index) => (
+            <div key={index}>
+              <Input
+                type={input.type}
+                name={input.id}
+                placeholder={input.placeholder}
+                className="w-full"
+                {...register(input.id, input.validation)}
+              />
+
+              {errors.nama_departement && (
+                <p className="text-red-500 text-sm">
+                  {errors.nama_departement.message}
+                </p>
+              )}
+            </div>
+          ))}
+          <div className="w-full flex justify-center items-center space-x-4">
+            <Button
+              className="text-white bg-red-500 text-sm px-4 py-2"
+              onClick={closeModal}
+            >
+              Close
+            </Button>
+            <Button
+              type="submit"
+              className="text-white bg-green-500 text-sm px-4 py-2"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Updating ..." : "Update Changes"}
+            </Button>
+          </div>
+        </Form>
+      </Modal>
     </>
   );
 };
