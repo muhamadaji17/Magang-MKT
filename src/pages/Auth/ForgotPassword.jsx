@@ -88,7 +88,7 @@ const ForgotPassword = () => {
             {errors.phone_number && (
               <TextError>{errors.phone_number.message}</TextError>
             )}
-            <Button className="text-white px-4 py-2">
+            <Button className="text-white px-4 py-2 bg-primary">
               {isSubmitting ? "Loading" : "Submit"}
             </Button>
           </Form>

@@ -58,7 +58,7 @@ const OtpVerification = () => {
               })}
             />
             {errors.otp && <TextError>{errors.otp.message}</TextError>}
-            <Button className="text-white px-4 py-2" type="submit">
+            <Button className="text-white px-4 py-2 bg-primary" type="submit">
               {isSubmitting ? "Loading..." : "Submit"}
             </Button>
           </Form>

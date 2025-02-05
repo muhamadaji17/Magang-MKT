@@ -34,8 +34,8 @@ const Side = ({ children }) => {
                 <li key={index}>
                   <Link
                     to={side.path}
-                    className={`flex items-center p-2 rounded-lg text-white ${
-                      isActive ? "text-accent" : "hover:text-accent"
+                    className={`flex items-center p-2 rounded-lg  ${
+                      isActive ? "text-accent" : "hover:text-accent text-white"
                     }`}
                   >
                     <side.icon size={30} />

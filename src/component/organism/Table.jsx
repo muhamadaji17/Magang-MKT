@@ -1,7 +1,7 @@
 import { apiPost } from "../../api/apiCall";
 import useAuthStore from "../../store/useAuthStore";
 import { showAlert } from "../../utils";
-import { Button, SearchTable, BreadCrumbs } from "../index";
+import { Button, SearchTable } from "../index";
 import useModal from "../../hook/useModal";
 import useDepartementForm from "../../hook/useDepartementForm";
 import ModalDepartement from "./ModalDepartement";
@@ -24,29 +24,26 @@ const Table = ({ children }) => {
 
   return (
     <>
-      <div className="flex flex-col w-full justify-between items-center pb-10 bg-slate-300 gap-2 px-6 pt-10">
-        <div className="flex justify-between items-center w-full">
-          <BreadCrumbs />
-          <SearchTable />
-          <Button
-            onClick={openModal}
-            className="text-white text-sm px-4 py-2 bg-primary"
-          >
-            Add Departement
-          </Button>
-        </div>
-
-        <ModalDepartement
-          onSubmit={onSubmit}
-          closeModal={closeModal}
-          handleSubmit={handleSubmit}
-          register={register}
-          errors={errors}
-          isSubmitting={isSubmitting}
-          isModalOpen={isModalOpen}
-        />
-        {children}
+      <div className="flex justify-between items-center w-full py-4">
+        <SearchTable />
+        <Button
+          onClick={openModal}
+          className="text-white text-sm px-4 py-2 bg-primary"
+        >
+          Add Departement
+        </Button>
       </div>
+
+      <ModalDepartement
+        onSubmit={onSubmit}
+        closeModal={closeModal}
+        handleSubmit={handleSubmit}
+        register={register}
+        errors={errors}
+        isSubmitting={isSubmitting}
+        isModalOpen={isModalOpen}
+      />
+      {children}
     </>
   );
 };

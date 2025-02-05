@@ -16,3 +16,4 @@ export { default as ShowPassword } from "./moleculs/ShowPassword";
 
 export { default as FormLogin } from "./organism/FormLogin";
 export { default as FormRegister } from "./organism/FormRegister";
+export { default as ModalDepartement } from "./organism/ModalDepartement";

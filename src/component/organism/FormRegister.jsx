@@ -2,7 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { apiPost } from "../../api/apiCall";
 import usePasswordToggle from "../../hook/usePasswordToogle";
-import { showAlert, dataRegister } from "../../utils/index";
+import { showAlert } from "../../utils/index";
+import dataRegister from "../../utils/dataRegister";
 
 import { Button, FormTitle, Input, Form, ShowPassword } from "../index";
 
@@ -80,7 +81,7 @@ const FormRegister = () => {
             label="Show Password"
           />
         </div>
-        <Button className="text-white px-4 py-2">
+        <Button className="text-white px-4 py-2 bg-primary">
           {isSubmitting ? "loading" : "Submit"}
         </Button>
         <p className="text-center">
