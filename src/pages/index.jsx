@@ -1,3 +1,21 @@
-import LoginPage from "./Auth/Login";
+import {
+  Login,
+  Register,
+  SetPassword,
+  ForgotPassword,
+  OtpVerification,
+} from "./Auth/index";
+import Dashboard from "./Dashboard";
+import Departement from "./Departement";
+import NotFound from "./NotFound";
 
-export { LoginPage };
+export {
+  Login,
+  Register,
+  SetPassword,
+  ForgotPassword,
+  OtpVerification,
+  Dashboard,
+  Departement,
+  NotFound,
+};

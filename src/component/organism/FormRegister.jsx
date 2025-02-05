@@ -49,7 +49,7 @@ const FormRegister = () => {
     <>
       <Form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-2/3 flex flex-col gap-4 shadow-xl"
+        className="w-2/3 flex flex-col gap-4 shadow-xl bg-white"
       >
         <FormTitle
           title="Register Account!"

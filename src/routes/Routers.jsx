@@ -1,32 +1,38 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "../pages/Auth/Login";
-import Register from "../pages/Auth/Register";
-import ForgotPassword from "../pages/Auth/ForgotPassword";
-import OtpVerification from "../pages/Auth/OtpVerification";
-import SetPassword from "../pages/Auth/SetPassword";
-import Departement from "../pages/Departement";
-import NotFound from "../pages/NotFound";
-import Dashboard from "../pages/Dashboard";
+
+import {
+  Dashboard,
+  Departement,
+  NotFound,
+  SetPassword,
+  OtpVerification,
+  ForgotPassword,
+  Register,
+  Login,
+} from "../pages/index";
 
 const Routers = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/departement" element={<Departement />} />
+        {/* Main routes */}
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/departement" element={<Departement />} />
+
+        {/* Auth routes */}
+        <Route path="/auth">
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route path="forgot-password">
+            <Route index element={<ForgotPassword />} />
+            <Route path="otp-verification">
+              <Route index element={<OtpVerification />} />
+              <Route path="set-password" element={<SetPassword />} />
+            </Route>
+          </Route>
         </Route>
-        <Route path="/auth/register" element={<Register />} />
-        <Route path="/auth/login" element={<Login />} />
-        <Route path="/auth/forgot-password" element={<ForgotPassword />} />
-        <Route
-          path="/auth/forgot-password/otp-verification"
-          element={<OtpVerification />}
-        />
-        <Route
-          path="/auth/forgot-password/otp-verification/set-password"
-          element={<SetPassword />}
-        />
+
+        {/* 404 route */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

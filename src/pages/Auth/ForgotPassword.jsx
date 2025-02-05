@@ -68,7 +68,7 @@ const ForgotPassword = () => {
         <Container className="h-full flex justify-center items-center">
           <Form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-4 bg-white"
           >
             <FormTitle
               title="Send OTP"

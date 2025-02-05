@@ -54,7 +54,7 @@ const SetPassword = () => {
         <Container className="flex justify-center items-center h-full">
           <Form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-4 bg-white"
           >
             <FormTitle
               title="Set Password"

@@ -42,7 +42,7 @@ const OtpVerification = () => {
         <Container className="flex justify-center items-center h-full">
           <Form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-4 bg-white"
           >
             <FormTitle title="OTP Verification" description="Enter your OTP" />
             <Input
