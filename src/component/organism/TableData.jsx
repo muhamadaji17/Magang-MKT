@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiGet, apiPost, apiPut } from "../../api/apiCall";
 import useAuthStore from "../../store/useAuthStore";
-import { Button, SearchTable, ModalDepartement } from "../index";
+import { Button, SearchTable, ModalDepartement, ModalEdit } from "../index";
 import useModal from "../../hook/useModal";
 import { useForm } from "react-hook-form";
 import { showAlert } from "../../utils";
@@ -10,7 +10,6 @@ import { editDepartement } from "../../utils/dataInput";
 import useEditModal from "../../hook/useEditModal";
 import TableHeader from "../atom/TableHeader";
 import TableBody from "../atom/TableBody";
-import ModalEdit from "./ModalEdit";
 
 const TableData = () => {
   const [data, setData] = useState([]);

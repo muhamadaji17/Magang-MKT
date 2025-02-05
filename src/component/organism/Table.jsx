@@ -4,7 +4,7 @@ import { showAlert } from "../../utils";
 import { Button, SearchTable } from "../index";
 import useModal from "../../hook/useModal";
 import useDepartementForm from "../../hook/useDepartementForm";
-import ModalDepartement from "./ModalDepartement";
+import ModalDepartement from "../moleculs/ModalDepartement";
 
 const Table = ({ children }) => {
   const { token } = useAuthStore();

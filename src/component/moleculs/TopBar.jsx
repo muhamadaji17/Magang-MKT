@@ -13,7 +13,7 @@ const TopBar = () => {
 
   return (
     <>
-      <div className="w-full flex justify-between items-center p-5">
+      <div className="w-full bg-white shadow-xl flex justify-between items-center p-5">
         <h1 className="text-xl">
           Hello, <span className="font-bold">{username}!</span>
         </h1>
