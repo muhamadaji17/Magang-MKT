@@ -3,37 +3,40 @@ import { Input, Label } from "../atoms";
 import { FaEyeSlash } from "react-icons/fa";
 
 const InputForm = ({
-  data,
+  inputConfig,
   register,
   showPassword,
   setShowPassword,
   handleClickIcon,
-  defaultValue,
   error,
 }) => {
   return (
-    <div className="flex flex-col relative">
-      <Label htmlFor={data.name} className={data.labelClassName}>
-        {data.title}
-      </Label>
+    <div className={`flex flex-col relative`}>
+      {inputConfig.title && (
+        <Label
+          htmlFor={inputConfig.name}
+          className="text-[12px]  text-slate-700"
+        >
+          {inputConfig.title}
+        </Label>
+      )}
 
       <Input
-        id={data.name}
-        type={!showPassword ? data.type : "text"}
+        id={inputConfig.name}
+        type={!showPassword ? inputConfig.type : "text"}
         register={register}
-        placeholder={data.placeholder}
-        defaultValue={defaultValue}
-        name={data.name}
-        addOptionError={data.addOptionError}
-        className={data.inputClassName}
+        placeholder={inputConfig.placeholder}
+        name={inputConfig.name}
+        addOptionError={inputConfig.addOptionError}
+        className={`rounded-md py-2 px-3 placeholder:text-[12px] border outline-none border-slate-400 my-2 text-sm`}
       />
 
-      {data.icon && (
+      {inputConfig.type === "password" && (
         <div
           className="absolute top-9 right-3 cursor-pointer"
           onClick={() => handleClickIcon(showPassword, setShowPassword)}
         >
-          {showPassword ? <FaEyeSlash /> : <data.icon />}
+          {showPassword ? <FaEyeSlash /> : <inputConfig.icon />}
         </div>
       )}
 

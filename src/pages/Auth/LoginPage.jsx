@@ -1,11 +1,11 @@
 import React from "react";
 import { LayoutAuth } from "../../component/layouts";
 import { inputLogin } from "../../pattern/PatternAuth/Login";
-import Form from "../../component/organism/Form";
 import { handleSubmitData } from "../../pattern";
 import { LoginService } from "../../service";
 import { useNavigate } from "react-router";
 import { useAccessToken } from "../../hook";
+import { Form } from "../../component/organism";
 
 const LoginPage = () => {
   const navigate = useNavigate();

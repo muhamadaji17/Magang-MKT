@@ -1,7 +1,7 @@
 import { TriggerAlert } from "../utils/TriggerAlert";
 import { POST_DATA, PUT_DATA, GET, DELETE } from "../api";
 
-export const addDataDepartementService = async ({
+const addDataDepartementService = async ({
   accessToken,
   data,
   setLoading,
@@ -35,7 +35,7 @@ export const addDataDepartementService = async ({
   }
 };
 
-export const editDataDepartementService = async ({
+const editDataDepartementService = async ({
   accessToken,
   data,
   dataId,
@@ -70,22 +70,32 @@ export const editDataDepartementService = async ({
   }
 };
 
-export const getDataDepartementService = async (
+const getDataDepartementService = async (
   accessToken,
-  setState,
-  setUpdateData
+  setDatas,
+  setUpdateData,
+
+  setSearchQuery
 ) => {
   try {
     const response = await GET("departement", accessToken);
-    setState(response.data.payload);
+    const parsing = response.data.payload.map((data) => ({
+      nama_departement: data.nama_departement,
+      departement_code: data.departement_code,
+      username: data.created_admin.username,
+      createdAt: data.createdAt,
+      id: data.id,
+    }));
+    setDatas(parsing);
     setUpdateData(true);
+    setSearchQuery("");
     console.log(response);
   } catch (error) {
     console.log(error);
   }
 };
 
-export const deleteDataDepartementService = async ({
+const deleteDataDepartementService = async ({
   accessToken,
   setLoading,
   setShowModal,
@@ -98,7 +108,7 @@ export const deleteDataDepartementService = async ({
     if (response.data.status) {
       setUpdateData(false);
       TriggerAlert({
-        text: "Data telah dihapus",
+        text: "Data berhasil dihapus",
         title: "Berhasil!",
         icon: "success",
       });
@@ -116,4 +126,36 @@ export const deleteDataDepartementService = async ({
     setLoading(false);
     setShowModal(false);
   }
+};
+
+const searchDataDepartementService = async (
+  accessToken,
+  setDatas,
+  query,
+  setUpdateData
+) => {
+  try {
+    const response = await GET(
+      `departement/by?nama_departement=${query}`,
+      accessToken
+    );
+    const parsing = response.data.payload.map((data) => ({
+      nama_departement: data.nama_departement,
+      departement_code: data.departement_code,
+      username: data.created_admin.username,
+      createdAt: data.createdAt,
+      id: data.id,
+    }));
+    setDatas(parsing), setUpdateData(true);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const departementService = {
+  add: addDataDepartementService,
+  get: getDataDepartementService,
+  delete: deleteDataDepartementService,
+  edit: editDataDepartementService,
+  search: searchDataDepartementService,
 };

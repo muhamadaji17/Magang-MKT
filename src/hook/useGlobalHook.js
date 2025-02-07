@@ -1,16 +1,20 @@
 import { useState } from "react";
 
 export const useGlobalHook = () => {
-  const [loadingButton, setLoadingButton] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [datas, setDatas] = useState(null);
   const [updateData, setUpdateData] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
+  const [showModalWithId, setShowModalWithId] = useState(false);
+  const [getDataColumn, setGetDataColumn] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [disabledButton, setDisabledButton] = useState(false);
+  const [typeModal, setTypeModal] = useState("");
 
   return {
-    loadingButton,
-    setLoadingButton,
+    loading,
+    setLoading,
     showPassword,
     setShowPassword,
     datas,
@@ -19,7 +23,15 @@ export const useGlobalHook = () => {
     setShowAddModal,
     updateData,
     setUpdateData,
-    showEditModal,
-    setShowEditModal,
+    showModalWithId,
+    setShowModalWithId,
+    getDataColumn,
+    setGetDataColumn,
+    searchQuery,
+    setSearchQuery,
+    disabledButton,
+    setDisabledButton,
+    typeModal,
+    setTypeModal,
   };
 };

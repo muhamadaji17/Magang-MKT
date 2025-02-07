@@ -12,6 +12,7 @@ import {
 import ProtectRoute from "./ProtectRoute";
 import { PhoneNumberProvider } from "../context";
 import { LayoutDashboard } from "../component/layouts";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const Routers = () => {
   return (
@@ -48,6 +49,8 @@ const Routers = () => {
             </PhoneNumberProvider>
           }
         />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

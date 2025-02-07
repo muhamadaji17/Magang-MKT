@@ -5,8 +5,9 @@ import { inputResetPassword } from "./PatternAuth/ResetPassword";
 import { errorOptions } from "./PatternError";
 import { handleShowPassword } from "./HandleButton";
 import { handleSubmitData } from "./HandleButton";
-import { tableDepartemen } from "./PatternTable/tableConfig";
+import { tableColumnDepartement } from "./PatternTable/tableDataColumn";
 import { navLinkSidebar } from "./LinkPattern";
+import { disabledButtonIfNoChange } from "./disabledButtonIfNoChange";
 
 export {
   inputLogin,
@@ -15,7 +16,8 @@ export {
   inputResetPassword,
   errorOptions,
   navLinkSidebar,
-  tableDepartemen,
   handleShowPassword,
   handleSubmitData,
+  tableColumnDepartement,
+  disabledButtonIfNoChange,
 };

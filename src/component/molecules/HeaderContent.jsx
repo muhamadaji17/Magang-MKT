@@ -1,25 +1,27 @@
 import React from "react";
 import { Button } from "../atoms";
-import SearchBar from "./SearchBar";
 import { Form } from "../organism";
 import { handleShowModal, handleSubmitData } from "../../pattern/HandleButton";
 import { LayoutModal } from "../layouts";
-
+import { Searchbar } from "../molecules";
+import { useAccessToken } from "../../hook";
+import { departementService } from "../../service";
 const HeaderContent = ({
   showAddModal,
   setShowAddModal,
   inputDataForm,
-  service,
   setUpdateData,
-  accessToken,
-  dataId,
+  inputValue,
+  handleSearch,
 }) => {
+  const { accessToken } = useAccessToken();
+
   return (
-    <div>
-      <div className="flex justify-between mb-3">
-        <SearchBar />
+    <header>
+      <div className="flex justify-end gap-3 items-end mb-2">
+        <Searchbar handleSearch={handleSearch} inputValue={inputValue} />
         <Button
-          className={"bg-blue-600 text-sm px-3 text-white rounded-md"}
+          className={"bg-blue-600 text-sm p-2 mb-[9px] text-white rounded-md"}
           onClick={() => handleShowModal(true, setShowAddModal)}
         >
           Tambah Data
@@ -38,8 +40,7 @@ const HeaderContent = ({
           handleSubmitData={(data, resetField, setLoading) =>
             handleSubmitData({
               data,
-              dataId,
-              postData: service,
+              postData: departementService.add,
               resetField,
               setShowModal: setShowAddModal,
               setLoading,
@@ -49,7 +50,7 @@ const HeaderContent = ({
           }
         />
       </LayoutModal>
-    </div>
+    </header>
   );
 };
 

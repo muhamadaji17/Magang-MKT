@@ -3,12 +3,14 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { Button } from "../atoms";
 import { handleShowModal } from "../../pattern/HandleButton";
 
-const ConfirmDelete = ({ setShowModal, handleSubmitData }) => {
+const ConfirmDelete = ({ setShowModal, dataName, handleSubmitData }) => {
   return (
     <div className="w-full">
       <div className="flex justify-center items-center flex-col">
         <RiDeleteBin5Line className="text-4xl mb-3" />
-        <span>Apakah anda yakin ingin menghapus data ini ?</span>
+        <span className="text-center">
+          Yakin ingin menghapus{` "${dataName}"?`}
+        </span>
       </div>
 
       <div className="flex justify-center gap-3 mt-5">

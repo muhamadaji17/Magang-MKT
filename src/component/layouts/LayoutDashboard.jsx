@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Outlet, useLocation } from "react-router";
 import { Breadcrumb } from "../molecules";
-import { Modal, Navbar, Sidebar } from "../organism";
+import { Navbar } from "../organism";
+import { Sidebar } from "../molecules";
 
-const LayoutDashboard = ({ children }) => {
+const LayoutDashboard = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
   const firstLetter = location.pathname.slice(1, 2).toLocaleUpperCase();
@@ -18,7 +19,7 @@ const LayoutDashboard = ({ children }) => {
       <div className="flex w-full h-screen relative">
         <Sidebar show={showSidebar} />
 
-        <main className="w-full py-5 px-7 overflow-y-auto mr-3 pt-24">
+        <main className="w-full py-5 px-2 md:px-7 overflow-y-auto  pt-24">
           <div className="flex justify-between items-center mb-10">
             <h1 className="text-2xl font-semibold">
               {titlePage ? titlePage : "Dahsboard"}

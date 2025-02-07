@@ -1,22 +1,27 @@
 import React from "react";
 import { Button } from "../atoms";
-import { handleShowModal } from "../../pattern/HandleButton";
-import { useGlobalHook } from "../../hook";
+import { FaRegEdit } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
-const TableBody = ({
-  data,
-  setShowModal,
-  setValueTable,
-  setDataId,
-  setShowConfirmDelete,
-}) => {
-  const formatDate = (date) => {
-    return new Date(date).toLocaleDateString();
+const TableBody = ({ dataTable, tableConfig, handleShowModal }) => {
+  const formatDate = (data) => {
+    const date = new Date(data);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    const formattedDay = day.toString().padStart(2, 0);
+    const formattedMonth = month.toString().padStart(2, 0);
+    return `${formattedDay}-${formattedMonth}-${year}`;
+  };
+
+  const handleClick = (data, typeModal) => {
+    handleShowModal(data, typeModal);
   };
 
   return (
     <tbody className="">
-      {data.map((dataTable, index) => (
+      {dataTable?.map((data, index) => (
         <tr
           key={index}
           className="text-center bg-white border-b border-gray-200"
@@ -27,40 +32,31 @@ const TableBody = ({
           >
             {index + 1}
           </td>
-          <td
-            scope="row"
-            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-          >
-            {dataTable.nama_departement}
-          </td>
-          <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-            {dataTable.departement_code}
-          </td>
-          <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-            {dataTable.created_admin.username}
-          </td>
-          <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-            {formatDate(dataTable.createdAt)}
-          </td>
-          <td className="flex justify-center py-3 gap-2">
+          {tableConfig?.map((row) => {
+            return (
+              <td
+                key={row.key}
+                scope="row"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+              >
+                {row.key === "createdAt"
+                  ? formatDate(data[row.key])
+                  : data[row.key]}
+              </td>
+            );
+          })}
+          <td className="flex justify-center py-3 gap-3">
             <Button
-              className={"px-3 py-2 bg-green-500 rounded-md text-white"}
-              onClick={() => {
-                handleShowModal(true, setShowModal);
-                setValueTable(data[index]);
-                setDataId(dataTable.id);
-              }}
+              className={"text-2xl"}
+              onClick={() => handleClick(data, "edit")}
             >
-              Edit
+              <FaRegEdit className="text-blue-600" />
             </Button>
             <Button
-              className={"px-3 py-2 bg-red-600 rounded-md text-white"}
-              onClick={() => {
-                handleShowModal(true, setShowConfirmDelete);
-                setDataId(dataTable.id);
-              }}
+              className={"text-2xl"}
+              onClick={() => handleClick(data, "delete")}
             >
-              Delete
+              <RiDeleteBin6Line className="text-red-600" />
             </Button>
           </td>
         </tr>

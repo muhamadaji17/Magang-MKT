@@ -7,10 +7,6 @@ export const inputResetPassword = [
     type: "tel",
     title: "Code Otp ",
     name: "codeOtp",
-    labelClassName: "text-[12px] text-slate-700",
-    inputClassName:
-      "w-full rounded-md py-2 px-3 placeholder:text-[12px] border outline-none border-slate-400 my-2 text-sm",
-
     addOptionError: errorOptions.codeOtp,
     error: "codeOtp",
   },
@@ -21,9 +17,6 @@ export const inputResetPassword = [
     name: "password",
     icon: FaEye,
     onClick: true,
-    labelClassName: "text-[12px] text-slate-700",
-    inputClassName:
-      "w-full rounded-md py-2 px-3 placeholder:text-[12px] border outline-none border-slate-400 my-2 text-sm",
     addOptionError: errorOptions.password,
     error: "password",
   },
@@ -34,9 +27,6 @@ export const inputResetPassword = [
     name: "confirmPassword",
     icon: FaEye,
     onClick: true,
-    labelClassName: "text-[12px] text-slate-700",
-    inputClassName:
-      "w-full rounded-md py-2 px-3 placeholder:text-[12px] border outline-none border-slate-400 my-2 text-sm",
     addOptionError: errorOptions.confirmPassword,
     error: "confirmPassword",
   },

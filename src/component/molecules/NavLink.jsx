@@ -1,23 +1,25 @@
 import React from "react";
 
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
-const NavLink = ({ datas }) => {
+const NavLink = ({ linkPatten }) => {
+  const { pathname } = useLocation();
+
   return (
     <ul>
-      {datas.map((data, index) => (
+      {linkPatten.map((link, index) => (
         <li
-          className={`${data.className} ${
-            data.isActive ? "bg-blue-500 text-white" : ""
+          className={` hover:bg-blue-500 hover:text-white text-sm rounded-md cursor-pointer text-slate-700 my-3 ${
+            pathname === link.destinationPath ? "bg-blue-500 text-white" : ""
           }`}
           key={index}
         >
           <Link
-            to={data.destinationPath}
-            className={data.icon ? "flex gap-2 p-2 items-center" : ""}
+            to={link.destinationPath}
+            className={link.icon ? "flex gap-2 p-2 items-center" : ""}
           >
-            <data.icon />
-            {data.text}
+            <link.icon />
+            {link.text}
           </Link>
         </li>
       ))}

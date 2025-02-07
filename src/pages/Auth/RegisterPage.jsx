@@ -4,7 +4,7 @@ import { inputRegister } from "../../pattern/PatternAuth/Register";
 import { handleSubmitData } from "../../pattern";
 import { RegisterService } from "../../service/authService";
 import { Form } from "../../component/organism";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -24,6 +24,13 @@ const RegisterPage = () => {
             });
           }}
         />
+
+        <span className="mt-3 text-[12px]">
+          Sudah punya akun?{" "}
+          <Link className=" underline hover:text-blue-600" to={"/login"}>
+            Login disini!
+          </Link>
+        </span>
       </LayoutAuth>
     </>
   );
