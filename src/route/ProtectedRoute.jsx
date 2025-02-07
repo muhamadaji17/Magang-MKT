@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
-import { useStore } from '/src/store/store';
+import { useStore } from '../store/store';
 
-export const ProtectedRoute = ({ children, type }) => {
+const ProtectedRoute = ({ children, type }) => {
     const { account } = useStore();
 
     return type === 'phone' ? (

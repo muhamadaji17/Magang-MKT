@@ -6,7 +6,7 @@ const Button = ({ className, children, disable, onClick }) => {
             disabled={disable}
             onClick={onClick}
         >
-            {disable ? 'Wait...' : children}
+            {children}
         </button>
     );
 };

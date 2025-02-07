@@ -59,8 +59,8 @@ export const errorOptions = {
             message: 'Department code must be more than 4 characters',
         },
         maxLength: {
-            value: 4,
-            message: 'Department code must be less than 4 characters',
+            value: 5,
+            message: 'Department code must be less than 5 characters',
         },
     },
     nama_departement: {

@@ -8,6 +8,7 @@ import {
     Employee,
     LandingPage,
     Department,
+    Unit,
 } from '../pages';
 import ProtectedRoute from './ProtectedRoute';
 import { DashboardTemplate } from '../components/templates';
@@ -20,14 +21,15 @@ export default function Routers() {
                 <Route
                     path='/dashboard'
                     element={
-                        // <ProtectedRoute type='login'>
-                        <DashboardTemplate />
-                        // </ProtectedRoute>
+                        <ProtectedRoute type='login'>
+                            <DashboardTemplate />
+                        </ProtectedRoute>
                     }
                 >
                     <Route index element={<Dashboard />} />
                     <Route path='employee' element={<Employee />} />
                     <Route path='department' element={<Department />} />
+                    <Route path='unit' element={<Unit />} />
                 </Route>
 
                 <Route
@@ -57,9 +59,9 @@ export default function Routers() {
                 <Route
                     path='/setting-password'
                     element={
-                        <ProtectedRoute type='phone'>
-                            <SettingPassword />
-                        </ProtectedRoute>
+                        // <ProtectedRoute type='phone'>
+                        <SettingPassword />
+                        // </ProtectedRoute>
                     }
                 />
             </Routes>

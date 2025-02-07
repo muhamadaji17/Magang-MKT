@@ -1,6 +1,6 @@
 import Loading from './Loading';
 import BreadCrumb from './Breadcrumb';
 import AlertForm from './SweetAlert';
-import Searchbar from './Searchbar';
+import getDefaultValues from './getDefaultValues';
 
-export { Loading, BreadCrumb, AlertForm, Searchbar };
+export { Loading, BreadCrumb, AlertForm, getDefaultValues };

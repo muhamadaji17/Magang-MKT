@@ -6,6 +6,7 @@ import Dashboard from './Dashboard/Dashboard.jsx';
 import Employee from './Dashboard/Employee.jsx';
 import LandingPage from './LandingPage.jsx';
 import Department from './Dashboard/Department.jsx';
+import Unit from './Dashboard/Unit.jsx';
 
 export {
     Register,
@@ -16,4 +17,5 @@ export {
     Employee,
     LandingPage,
     Department,
+    Unit,
 };

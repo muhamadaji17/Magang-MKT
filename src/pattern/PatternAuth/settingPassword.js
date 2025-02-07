@@ -24,7 +24,7 @@ export const inputSettingPassword = [
         addOptionError: errorOptions.password,
     },
     {
-        jenisInputan: 'confirm',
+        jenisInputan: 'input',
         type: 'password',
         title: 'confirm password',
         name: 'confirmPassword',

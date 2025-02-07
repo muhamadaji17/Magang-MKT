@@ -7,3 +7,14 @@
         font-family: 'poppins', system-ui, sans-serif;
     }
 }
+
+@layer utilities {
+    .no-clear {
+        &::-webkit-search-cancel-button {
+            display: none;
+        }
+        &::-moz-search-cancel-button {
+            display: none;
+        }
+    }
+}

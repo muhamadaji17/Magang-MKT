@@ -1,6 +1,10 @@
 import { IoMdClose } from 'react-icons/io';
-import FormAuth from './FormAuth';
-import { handleSubmitData, handleDeleteData } from '../../pattern';
+import Form from './Form';
+import {
+    handleSubmitData,
+    handleDeleteData,
+    handleSubmitDataId,
+} from '../../pattern';
 import { CiWarning } from 'react-icons/ci';
 const ModalLayout = ({
     titleModal,
@@ -13,15 +17,15 @@ const ModalLayout = ({
     setLoading,
     accessToken,
     addService,
-    getId,
+    getDetailsData,
     type,
-    handleCancelModalId,
+    handleCancelModal,
     setReGetDatas,
 }) => {
     return (
         <div
             ref={trigger}
-            className='fixed inset-0 bg-transparent drop-shadow-md backdrop-blur-md flex items-center justify-center z-50'
+            className='fixed inset-0 drop-shadow-md bg-black/40 flex items-center justify-center z-50'
             onClick={(e) => handleModal(e, trigger, setShowModal)}
         >
             {type === 'delete' ? (
@@ -38,7 +42,7 @@ const ModalLayout = ({
                     <div className='flex gap-4 justify-center items-center'>
                         <button
                             className='bg-[#ECECEC] w-[144px] h-[44px] rounded'
-                            onClick={handleCancelModalId}
+                            onClick={handleCancelModal}
                         >
                             Cancel
                         </button>
@@ -46,7 +50,7 @@ const ModalLayout = ({
                             className='bg-[#FF4D4D] w-[144px] h-[44px] rounded text-white'
                             onClick={() =>
                                 handleDeleteData(
-                                    getId,
+                                    getDetailsData,
                                     addService,
                                     accessToken,
                                     setShowModal,
@@ -60,7 +64,7 @@ const ModalLayout = ({
                     </div>
                 </div>
             ) : (
-                <div className='bg-white rounded-lg p-2 w-[1100px] h-[700px] relative flex flex-col'>
+                <div className='bg-white rounded-lg p-2 w-[1000px] h-[600px] relative flex flex-col'>
                     <div>
                         <h1 className='text-2xl font-semibold text-center p-2'>
                             {titleModal}
@@ -73,19 +77,31 @@ const ModalLayout = ({
                         </div>
                     </div>
                     <div className='flex items-center justify-center flex-1 flex-col overflow-y-auto'>
-                        <FormAuth
+                        <Form
                             dataForm={dataForm}
-                            handleSubmitData={(data, reset) =>
-                                handleSubmitData(
-                                    data,
-                                    addService,
-                                    accessToken,
-                                    setShowModal,
-                                    reset,
-                                    setLoading,
-                                    setReGetDatas,
-                                    getId
-                                )
+                            handleSubmitData={
+                                !getDetailsData
+                                    ? (data, reset) =>
+                                          handleSubmitData(
+                                              data,
+                                              addService,
+                                              accessToken,
+                                              setShowModal,
+                                              reset,
+                                              setLoading,
+                                              setReGetDatas
+                                          )
+                                    : (data, reset) =>
+                                          handleSubmitDataId(
+                                              data,
+                                              getDetailsData.id,
+                                              addService,
+                                              accessToken,
+                                              setShowModal,
+                                              reset,
+                                              setLoading,
+                                              setReGetDatas
+                                          )
                             }
                             loading={loading}
                             buttonName='Send'

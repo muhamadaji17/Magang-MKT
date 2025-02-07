@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { HeaderAuth } from '../../components/molecules';
 import { Errors } from '../../components/atoms';
 import { SupportAuthTemplate } from '../../components/templates';
-import { FormAuth } from '../../components/organisms';
+import { Form } from '../../components/organisms';
 import {
     handleShowPassword,
     handleSubmitData,
@@ -43,7 +43,7 @@ const SettingPassword = () => {
                     previous page.
                 </Errors>
             </HeaderAuth>
-            <FormAuth
+            <Form
                 dataForm={inputSettingPassword}
                 buttonName='Send'
                 buttonStyle='w-24 text-white bg-blue-600 hover:bg-blue-800'

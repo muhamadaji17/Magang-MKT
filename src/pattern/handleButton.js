@@ -6,6 +6,10 @@ export const handleDeleteData = (id, deleteData, ...res) => {
     deleteData(id, ...res);
 };
 
+export const handleSubmitDataId = (data, id, postData, ...res) => {
+    postData(data, id, ...res);
+};
+
 export const handleShowPassword = (setShowPassword, showPassword) => {
     setShowPassword(!showPassword);
 };
@@ -22,19 +26,19 @@ export const handleShowModal = (showModal, setShowModal, setType, type) => {
     setShowModal(!showModal);
 };
 
-export const handleCancelModalId = (showModal, setShowModal) => {
+export const handleCancelModal = (showModal, setShowModal) => {
     setShowModal(!showModal);
 };
 
 export const handleShowModalId = (
     showModal,
     setShowModal,
-    setGetId,
-    id,
+    setGetDetailsData,
+    data,
     setType,
     type
 ) => {
-    setGetId(id);
+    setGetDetailsData(data);
     setType(type);
     setShowModal(!showModal);
 };

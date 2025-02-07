@@ -5,10 +5,12 @@ const Navlink = ({ href, icon: Icon, children }) => {
         <li>
             <Link
                 to={href}
-                className='text-blue-600 h-20 flex items-center justify-center hover:bg-slate-100 gap-2 group'
+                className='text-blue-600 h-20 flex items-center pl-8 hover:bg-slate-100 gap-2'
             >
                 <Icon className='w-6 h-6' />
-                <span className='hidden group-hover:block'>{children}</span>
+                <span className='lg:hidden lg:group-hover:block'>
+                    {children}
+                </span>
             </Link>
         </li>
     );

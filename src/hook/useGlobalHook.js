@@ -4,6 +4,7 @@ export const useGlobalHook = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [loadingButton, setLoadingButton] = useState(false);
+    const [disableDefaultValue, setDisableDefaultValue] = useState(false);
 
     return {
         showPassword,
@@ -12,5 +13,7 @@ export const useGlobalHook = () => {
         setShowConfirmPassword,
         loadingButton,
         setLoadingButton,
+        disableDefaultValue,
+        setDisableDefaultValue,
     };
 };

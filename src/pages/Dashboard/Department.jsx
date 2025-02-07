@@ -7,12 +7,12 @@ import {
     inputAddDepartment,
     inputEditDepartment,
     handleShowModalId,
-    handleCancelModalId,
+    handleCancelModal,
+    departmentTableData,
 } from '../../pattern';
 import { useEffect } from 'react';
 import { Loading } from '../../utils';
 import { Table } from '../../components/organisms';
-import { departmentTablePattern } from '../../pattern';
 import { DashboardHeader } from '../../components/molecules';
 import { useDashboardHook } from '../../hook';
 import {
@@ -20,6 +20,7 @@ import {
     GetDepartmentsServices,
     EditDepartmentService,
     DeleteDepartmentService,
+    SearchDepartmentServices,
 } from '../../services';
 
 const Department = () => {
@@ -34,26 +35,41 @@ const Department = () => {
         accessToken,
         loading,
         setLoading,
-        getId,
-        setGetId,
+        getDetailsData,
+        setGetDetailsData,
         showModalId,
         setShowModalId,
         modalType,
         setModalType,
         reGetDatas,
         setReGetDatas,
+        query,
+        setQuery,
     } = useDashboardHook();
 
     useEffect(() => {
-        if (accessToken && !reGetDatas) {
-            GetDepartmentsServices(
-                accessToken,
-                setDatas,
-                setLoadingDatas,
-                setReGetDatas
-            );
+        if (accessToken) {
+            if (query.trim() === '') {
+                GetDepartmentsServices(
+                    accessToken,
+                    setDatas,
+                    setLoadingDatas,
+                    setReGetDatas
+                );
+            } else {
+                const timerSearchData = setTimeout(() => {
+                    SearchDepartmentServices(
+                        query,
+                        accessToken,
+                        setDatas,
+                        setLoadingDatas,
+                        setReGetDatas
+                    );
+                }, 500);
+                return () => clearTimeout(timerSearchData);
+            }
         }
-    }, [reGetDatas]);
+    }, [query, reGetDatas]);
 
     return (
         <>
@@ -81,9 +97,10 @@ const Department = () => {
                 dataForm={inputAddDepartment}
                 titleModal='Add Department'
                 setDatas={setDatas}
-                setLoadingDatas={setLoadingDatas}
                 type={modalType}
                 setReGetDatas={setReGetDatas}
+                query={query}
+                setQuery={setQuery}
             />
             {loadingDatas ? (
                 <div className='w-full flex items-center justify-center'>
@@ -91,7 +108,6 @@ const Department = () => {
                 </div>
             ) : (
                 <Table
-                    headers={departmentTablePattern}
                     datas={datas}
                     editService={EditDepartmentService}
                     deleteService={DeleteDepartmentService}
@@ -101,27 +117,28 @@ const Department = () => {
                     setLoading={setLoading}
                     setShowModalId={setShowModalId}
                     showModalId={showModalId}
-                    handleShowModalId={(id, type) => {
+                    handleShowModalId={(data, type) => {
                         handleShowModalId(
                             showModalId,
                             setShowModalId,
-                            setGetId,
-                            id,
+                            setGetDetailsData,
+                            data,
                             setModalType,
                             type
                         );
                     }}
                     handleModal={handleModal}
-                    dataForm={inputEditDepartment}
+                    dataForm={inputEditDepartment(getDetailsData)}
                     titleModal='Edit Department'
-                    getId={getId}
+                    getDetailsData={getDetailsData}
                     type={modalType}
-                    handleCancelModalId={() =>
-                        handleCancelModalId(showModalId, setShowModalId)
+                    handleCancelModal={() =>
+                        handleCancelModal(showModalId, setShowModalId)
                     }
                     setReGetDatas={setReGetDatas}
                     paginationIconNext={MdNavigateNext}
                     paginationIconPrev={MdNavigateBefore}
+                    patterns={departmentTableData}
                 />
             )}
         </>

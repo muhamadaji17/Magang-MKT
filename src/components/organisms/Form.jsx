@@ -1,8 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { InputForm } from '../molecules';
 import { Button } from '../atoms';
+import { useFormState, useGlobalHook } from '../../hook';
+import { getDefaultValues } from '../../utils';
 
-const FormAuth = ({
+const Form = ({
     dataForm,
     handleSubmitData,
     handleClick,
@@ -18,7 +20,15 @@ const FormAuth = ({
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm();
+        watch,
+    } = useForm({
+        defaultValues: getDefaultValues(dataForm),
+    });
+
+    const { disableDefaultValue, setDisableDefaultValue } = useGlobalHook();
+    const inputValue = watch();
+
+    useFormState(dataForm, inputValue, setDisableDefaultValue);
 
     return (
         <form
@@ -31,17 +41,17 @@ const FormAuth = ({
                         <InputForm
                             labelText={data.title}
                             id={data.name}
-                            type={!showPassword ? data.type : 'text'}
-                            placeholder={data.placeholder}
-                            register={register}
-                            addOptionError={data.addOptionError}
-                            errors={errors[data.name]}
-                        />
-                    ) : data.jenisInputan === 'confirm' ? (
-                        <InputForm
-                            labelText={data.title}
-                            id={data.name}
-                            type={!showConfirmPassword ? data.type : 'text'}
+                            type={
+                                data.type === 'password'
+                                    ? data.name === 'password'
+                                        ? showPassword
+                                            ? 'text'
+                                            : 'password'
+                                        : showConfirmPassword
+                                        ? 'text'
+                                        : 'password'
+                                    : data.type
+                            }
                             placeholder={data.placeholder}
                             register={register}
                             addOptionError={data.addOptionError}
@@ -59,7 +69,9 @@ const FormAuth = ({
                                 }
                             }}
                         >
-                            {showPassword ? (
+                            {(data.name === 'password' && showPassword) ||
+                            (data.name === 'confirmPassword' &&
+                                showConfirmPassword) ? (
                                 <data.showPasswordIcon className='w-5 h-5 text-blue-600' />
                             ) : (
                                 <data.hiddenPasswordIcon className='w-5 h-5 text-blue-600' />
@@ -69,7 +81,10 @@ const FormAuth = ({
                 </div>
             ))}
             <div className='flex justify-center lg:justify-end'>
-                <Button className={buttonStyle} disable={loading}>
+                <Button
+                    className={buttonStyle}
+                    disable={loading || disableDefaultValue}
+                >
                     {buttonName}
                 </Button>
             </div>
@@ -77,4 +92,4 @@ const FormAuth = ({
     );
 };
 
-export default FormAuth;
+export default Form;

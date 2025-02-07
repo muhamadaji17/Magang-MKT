@@ -1,4 +1,4 @@
-import { FormAuth } from '../../components/organisms';
+import { Form } from '../../components/organisms';
 import { AuthTemplate } from '../../components/templates';
 import { LinkAuth } from '../../components/atoms';
 import {
@@ -23,7 +23,7 @@ const Login = () => {
             titleBg='Welcome Back!'
             descriptionBg="Let's begin"
         >
-            <FormAuth
+            <Form
                 dataForm={inputLogin}
                 handleSubmitData={(data, reset) =>
                     handleSubmitData(

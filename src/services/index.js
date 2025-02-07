@@ -5,12 +5,12 @@ import {
     SettingPasswordService,
 } from './AuthService';
 import {
+    AddDepartmentService,
+    EditDepartmentService,
+    DeleteDepartmentService,
     GetDepartmentsServices,
-    GetDepartmentByIdService,
-} from './GetDataService';
-import { AddDepartmentService } from './AddDataServices';
-import { EditDepartmentService } from './EditDataServices';
-import { DeleteDepartmentService } from './DeleteDataServices';
+    SearchDepartmentServices,
+} from './DepartmentServices';
 
 export {
     RegisterService,
@@ -20,6 +20,6 @@ export {
     GetDepartmentsServices,
     AddDepartmentService,
     EditDepartmentService,
-    GetDepartmentByIdService,
     DeleteDepartmentService,
+    SearchDepartmentServices,
 };

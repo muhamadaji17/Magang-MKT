@@ -8,10 +8,11 @@ export const useDashboardHook = () => {
     const [showAddModal, setShowAddModal] = useState(false);
     const [showModalId, setShowModalId] = useState(false);
     const [modalType, setModalType] = useState('');
-    const [getId, setGetId] = useState(null);
+    const [getDetailsData, setGetDetailsData] = useState(null);
     const [reGetDatas, setReGetDatas] = useState(false);
+    const [hamburger, setHamburger] = useState(false);
+    const [query, setQuery] = useState('');
     const trigger = useRef(null);
-
     const store = useStore();
     const accessToken = store.account.accessToken;
     const username = store.account.username;
@@ -28,13 +29,17 @@ export const useDashboardHook = () => {
         username,
         loading,
         setLoading,
-        getId,
-        setGetId,
+        getDetailsData,
+        setGetDetailsData,
         showModalId,
         setShowModalId,
         modalType,
         setModalType,
         reGetDatas,
         setReGetDatas,
+        hamburger,
+        setHamburger,
+        query,
+        setQuery,
     };
 };

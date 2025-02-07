@@ -21,7 +21,7 @@ export const inputAddDepartment = [
     },
 ];
 
-export const inputEditDepartment = [
+export const inputEditDepartment = (data) => [
     {
         jenisInputan: 'input',
         type: 'text',
@@ -30,5 +30,6 @@ export const inputEditDepartment = [
         placeholder: 'Animasi',
         error: 'nama_departement',
         addOptionError: errorOptions.nama_departement,
+        defaultValue: data,
     },
 ];

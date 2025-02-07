@@ -4,7 +4,6 @@ import { ModalLayout } from '../organisms';
 import { Button } from '../atoms';
 
 const Table = ({
-    headers,
     datas,
     editService,
     deleteService,
@@ -18,72 +17,108 @@ const Table = ({
     handleModal,
     dataForm,
     titleModal,
-    getId,
+    getDetailsData,
     type,
-    handleCancelModalId,
+    handleCancelModal,
     setReGetDatas,
     paginationIconNext: PaginationIconNext,
     paginationIconPrev: PaginationIconPrev,
+    patterns,
 }) => {
     return (
-        <div className='relative overflow-x-auto'>
-            <table className='w-full text-sm text-gray-500 dark:text-gray-400 text-center'>
-                <thead className='text-white bg-blue-950 uppercase dark:bg-gray-700 dark:text-gray-400'>
-                    <tr>
-                        {headers.map((header, i) => (
-                            <th scope='col' className='px-6 py-3 ' key={i}>
-                                {header}
+        <div>
+            <div className='relative overflow-x-auto'>
+                <table className='w-full text-xs lg:text-sm text-gray-500 text-center'>
+                    <thead className='text-white bg-blue-950 uppercase'>
+                        <tr>
+                            <th scope='col' className='px-6 py-3'>
+                                No
                             </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {datas &&
-                        datas?.data?.payload?.slice(0, 9).map((data, i) => (
-                            <tr
-                                className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200'
-                                key={data.id}
-                            >
-                                <th
-                                    scope='row'
-                                    className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
+                            {patterns &&
+                                patterns
+                                    ?.filter(
+                                        (pattern) => pattern.title !== 'id'
+                                    )
+                                    .map((pattern, i) => (
+                                        <th
+                                            scope='col'
+                                            className='px-6 py-3 '
+                                            key={i}
+                                        >
+                                            {pattern?.title}
+                                        </th>
+                                    ))}
+                            <th scope='col' className='px-6 py-3'>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {datas?.length > 0 &&
+                            datas.slice(0, 10).map((data, i) => (
+                                <tr
+                                    className='bg-white border-b border-gray-200'
+                                    key={data.id}
                                 >
-                                    {i + 1}
-                                </th>
-                                <td className='px-6 py-4'>
-                                    {data?.nama_departement}
-                                </td>
-                                <td className='px-6 py-4'>
-                                    {data?.departement_code}
-                                </td>
-                                <td className='px-6 py-4'>
-                                    {dayjs(data?.createdAt).format(
-                                        'DD-MM-YYYY (HH:mm)'
-                                    )}
-                                </td>
-                                <td className='px-6 py-4'>
-                                    {data?.created_admin?.username}
-                                </td>
-                                <td className='px-6 py-4 flex gap-3 justify-center'>
-                                    <FaRegEdit
-                                        className='w-6 h-6 cursor-pointer text-blue-500'
-                                        onClick={() =>
-                                            handleShowModalId(data.id, 'edit')
-                                        }
-                                    />
-                                    <FaTrashAlt
-                                        className='w-6 h-6 cursor-pointer text-red-500'
-                                        onClick={() =>
-                                            handleShowModalId(data.id, 'delete')
-                                        }
-                                    />
-                                </td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>
-            {datas.length > 0 && (
-                <div className='flex justify-center items-center gap-3'>
+                                    <td scope='row' className='px-6 py-4'>
+                                        {i + 1}
+                                    </td>
+                                    {patterns
+                                        ?.filter(
+                                            (value) => value.title !== 'id'
+                                        )
+                                        .map((value, index) =>
+                                            value.key === 'createdAt' ? (
+                                                <td
+                                                    key={index}
+                                                    scope='row'
+                                                    className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap'
+                                                >
+                                                    {dayjs(
+                                                        data[value.key]
+                                                    ).format(
+                                                        'DD-MM-YYYY (HH:mm)'
+                                                    )}
+                                                </td>
+                                            ) : (
+                                                <td
+                                                    key={index}
+                                                    scope='row'
+                                                    className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap'
+                                                >
+                                                    {data[value.key]}
+                                                </td>
+                                            )
+                                        )}
+                                    <td className='px-6 py-7 lg:py-4 w-full h-full flex gap-3 justify-center items-center'>
+                                        <FaRegEdit
+                                            className='w-5 h-5 lg:w-6 lg:h-6 cursor-pointer text-blue-500'
+                                            onClick={() =>
+                                                handleShowModalId(data, 'edit')
+                                            }
+                                        />
+                                        <FaTrashAlt
+                                            className='w-5 h-5 lg:w-6 lg:h-6 cursor-pointer text-red-500'
+                                            onClick={() =>
+                                                handleShowModalId(
+                                                    data.id,
+                                                    'delete'
+                                                )
+                                            }
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+            </div>
+            {datas?.length === 0 && (
+                <div className='flex justify-center border items-center p-4'>
+                    <span className='text-gray-600'>No data available</span>
+                </div>
+            )}
+            {datas?.length > 0 && (
+                <div className='flex justify-center items-center gap-3 p-4'>
                     <Button
                         className='w-16 text-black border hover:bg-slate-200'
                         disable={false}
@@ -110,9 +145,9 @@ const Table = ({
                     addService={type === 'edit' ? editService : deleteService}
                     dataForm={dataForm}
                     titleModal={titleModal}
-                    getId={getId}
+                    getDetailsData={getDetailsData}
                     type={type}
-                    handleCancelModalId={handleCancelModalId}
+                    handleCancelModal={handleCancelModal}
                     showModal={showModalId}
                     setReGetDatas={setReGetDatas}
                 />
