@@ -23,7 +23,7 @@ const Table = ({
     setReGetDatas,
     paginationIconNext: PaginationIconNext,
     paginationIconPrev: PaginationIconPrev,
-    patterns,
+    columns,
 }) => {
     return (
         <div>
@@ -34,18 +34,20 @@ const Table = ({
                             <th scope='col' className='px-6 py-3'>
                                 No
                             </th>
-                            {patterns &&
-                                patterns
+                            {columns &&
+                                columns
                                     ?.filter(
-                                        (pattern) => pattern.title !== 'id'
+                                        (column) =>
+                                            column.title !== 'id' &&
+                                            column.title !== 'id_departement'
                                     )
-                                    .map((pattern, i) => (
+                                    .map((column, i) => (
                                         <th
                                             scope='col'
                                             className='px-6 py-3 '
                                             key={i}
                                         >
-                                            {pattern?.title}
+                                            {column?.title}
                                         </th>
                                     ))}
                             <th scope='col' className='px-6 py-3'>
@@ -55,53 +57,52 @@ const Table = ({
                     </thead>
                     <tbody>
                         {datas?.length > 0 &&
-                            datas.slice(0, 10).map((data, i) => (
+                            datas.map((row, i) => (
                                 <tr
                                     className='bg-white border-b border-gray-200'
-                                    key={data.id}
+                                    key={row.id}
                                 >
                                     <td scope='row' className='px-6 py-4'>
                                         {i + 1}
                                     </td>
-                                    {patterns
+                                    {columns
                                         ?.filter(
-                                            (value) => value.title !== 'id'
+                                            (column) =>
+                                                column.title !== 'id' &&
+                                                column.title !==
+                                                    'id_departement'
                                         )
-                                        .map((value, index) =>
-                                            value.key === 'createdAt' ? (
-                                                <td
-                                                    key={index}
-                                                    scope='row'
-                                                    className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap'
-                                                >
-                                                    {dayjs(
-                                                        data[value.key]
-                                                    ).format(
-                                                        'DD-MM-YYYY (HH:mm)'
-                                                    )}
-                                                </td>
-                                            ) : (
-                                                <td
-                                                    key={index}
-                                                    scope='row'
-                                                    className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap'
-                                                >
-                                                    {data[value.key]}
-                                                </td>
-                                            )
-                                        )}
+                                        .map((column, index) => (
+                                            <td
+                                                key={index}
+                                                scope='row'
+                                                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap'
+                                            >
+                                                {row[column.key] === null
+                                                    ? '-'
+                                                    : column.key ===
+                                                          'createdAt' ||
+                                                      column.key === 'updatedAt'
+                                                    ? dayjs(
+                                                          row[column.key]
+                                                      ).format(
+                                                          'DD-MM-YYYY (HH:mm)'
+                                                      )
+                                                    : row[column.key]}
+                                            </td>
+                                        ))}
                                     <td className='px-6 py-7 lg:py-4 w-full h-full flex gap-3 justify-center items-center'>
                                         <FaRegEdit
                                             className='w-5 h-5 lg:w-6 lg:h-6 cursor-pointer text-blue-500'
                                             onClick={() =>
-                                                handleShowModalId(data, 'edit')
+                                                handleShowModalId(row, 'edit')
                                             }
                                         />
                                         <FaTrashAlt
                                             className='w-5 h-5 lg:w-6 lg:h-6 cursor-pointer text-red-500'
                                             onClick={() =>
                                                 handleShowModalId(
-                                                    data.id,
+                                                    row.id,
                                                     'delete'
                                                 )
                                             }

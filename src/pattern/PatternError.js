@@ -74,4 +74,29 @@ export const errorOptions = {
             message: 'Department name must be less than 8 characters',
         },
     },
+    id_departement: {
+        required: 'Please select the department',
+    },
+    unit_code: {
+        required: 'Please input the unit code',
+        minLength: {
+            value: 4,
+            message: 'Unit code must be more than 4 characters',
+        },
+        maxLength: {
+            value: 5,
+            message: 'Unit code must be less than 5 characters',
+        },
+    },
+    nama_unit: {
+        required: 'Please input the unit name',
+        minLength: {
+            value: 1,
+            message: 'Unit name must be more than 5 characters',
+        },
+        maxLength: {
+            value: 32,
+            message: 'Unit name must be less than 8 characters',
+        },
+    },
 };

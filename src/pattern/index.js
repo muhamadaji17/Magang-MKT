@@ -19,8 +19,14 @@ import {
     handleSubmitDataId,
 } from './handleButton';
 import { errorOptions } from './patternError';
-import { employeeBreadcrumb, departmentBreadcrumb } from './breadcrumb';
+import {
+    employeeBreadcrumb,
+    departmentBreadcrumb,
+    unitBreadcrumb,
+} from './breadcrumb';
 import { sidebarLink } from './sidebarPattern';
+import { unitTableData } from './Table/unitTable';
+import { inputAddUnit, inputEditUnit } from './PatternDashboard/unit';
 
 export {
     errorOptions,
@@ -43,4 +49,8 @@ export {
     handleCancelModal,
     handleDeleteData,
     handleSubmitDataId,
+    unitTableData,
+    inputAddUnit,
+    inputEditUnit,
+    unitBreadcrumb,
 };

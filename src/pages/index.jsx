@@ -7,6 +7,7 @@ import Employee from './Dashboard/Employee.jsx';
 import LandingPage from './LandingPage.jsx';
 import Department from './Dashboard/Department.jsx';
 import Unit from './Dashboard/Unit.jsx';
+import NotFound from './NotFound.jsx';
 
 export {
     Register,
@@ -18,4 +19,5 @@ export {
     LandingPage,
     Department,
     Unit,
+    NotFound,
 };

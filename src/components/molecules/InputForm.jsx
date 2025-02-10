@@ -7,6 +7,7 @@ const InputForm = ({
     errors,
     register,
     addOptionError,
+    variant,
     ...props
 }) => {
     return (
@@ -18,6 +19,7 @@ const InputForm = ({
                 id={id}
                 register={register}
                 addOptionError={addOptionError}
+                variant={variant}
                 {...props}
             />
             {errors && (

@@ -14,8 +14,9 @@ export const GetDepartmentsServices = async (
             id: item.id,
             nama_departement: item.nama_departement,
             departement_code: item.departement_code,
-            createdAt: item.createdAt,
             created_admin: item.created_admin.username,
+            updatedAt: item.updatedAt,
+            createdAt: item.createdAt,
         }));
         setState(datas);
         setReGetDatas(true);
@@ -84,7 +85,6 @@ export const EditDepartmentService = async (
             data,
             accessToken
         );
-        console.log(response);
         reset();
         AlertForm({
             icon: 'success',

@@ -12,6 +12,7 @@ export const useDashboardHook = () => {
     const [reGetDatas, setReGetDatas] = useState(false);
     const [hamburger, setHamburger] = useState(false);
     const [query, setQuery] = useState('');
+    const [subData, setSubData] = useState([]);
     const trigger = useRef(null);
     const store = useStore();
     const accessToken = store.account.accessToken;
@@ -41,5 +42,7 @@ export const useDashboardHook = () => {
         setHamburger,
         query,
         setQuery,
+        subData,
+        setSubData,
     };
 };

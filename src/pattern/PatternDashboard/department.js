@@ -25,6 +25,16 @@ export const inputEditDepartment = (data) => [
     {
         jenisInputan: 'input',
         type: 'text',
+        title: 'Department Code',
+        name: 'departement_code',
+        placeholder: 'X001',
+        error: 'departement_code',
+        addOptionError: errorOptions.departement_code,
+        defaultValue: data,
+    },
+    {
+        jenisInputan: 'input',
+        type: 'text',
         title: 'Department Name',
         name: 'nama_departement',
         placeholder: 'Animasi',

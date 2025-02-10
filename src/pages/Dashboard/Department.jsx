@@ -10,17 +10,14 @@ import {
     handleCancelModal,
     departmentTableData,
 } from '../../pattern';
-import { useEffect } from 'react';
 import { Loading } from '../../utils';
 import { Table } from '../../components/organisms';
 import { DashboardHeader } from '../../components/molecules';
-import { useDashboardHook } from '../../hook';
+import { useDashboardHook, useDepartmentHook } from '../../hook';
 import {
     AddDepartmentService,
-    GetDepartmentsServices,
     EditDepartmentService,
     DeleteDepartmentService,
-    SearchDepartmentServices,
 } from '../../services';
 
 const Department = () => {
@@ -47,30 +44,14 @@ const Department = () => {
         setQuery,
     } = useDashboardHook();
 
-    useEffect(() => {
-        if (accessToken) {
-            if (query.trim() === '') {
-                GetDepartmentsServices(
-                    accessToken,
-                    setDatas,
-                    setLoadingDatas,
-                    setReGetDatas
-                );
-            } else {
-                const timerSearchData = setTimeout(() => {
-                    SearchDepartmentServices(
-                        query,
-                        accessToken,
-                        setDatas,
-                        setLoadingDatas,
-                        setReGetDatas
-                    );
-                }, 500);
-                return () => clearTimeout(timerSearchData);
-            }
-        }
-    }, [query, reGetDatas]);
-
+    useDepartmentHook(
+        accessToken,
+        query,
+        setDatas,
+        setLoadingDatas,
+        setReGetDatas,
+        reGetDatas
+    );
     return (
         <>
             <DashboardHeader
@@ -138,7 +119,7 @@ const Department = () => {
                     setReGetDatas={setReGetDatas}
                     paginationIconNext={MdNavigateNext}
                     paginationIconPrev={MdNavigateBefore}
-                    patterns={departmentTableData}
+                    columns={departmentTableData}
                 />
             )}
         </>

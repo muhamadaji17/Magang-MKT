@@ -11,6 +11,12 @@ import {
     GetDepartmentsServices,
     SearchDepartmentServices,
 } from './DepartmentServices';
+import {
+    GetUnitServices,
+    AddUnitService,
+    EditUnitService,
+    DeleteUnitService,
+} from './UnitServices';
 
 export {
     RegisterService,
@@ -22,4 +28,8 @@ export {
     EditDepartmentService,
     DeleteDepartmentService,
     SearchDepartmentServices,
+    GetUnitServices,
+    AddUnitService,
+    EditUnitService,
+    DeleteUnitService,
 };

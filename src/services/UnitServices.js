@@ -12,10 +12,12 @@ export const GetUnitServices = async (
         const response = await GET_DATAS(`crud/unit`, token);
         const datas = response.data.payload.map((item) => ({
             id: item.id,
+            id_departement: item.id_departement,
             nama_unit: item.nama_unit,
-            departement_code: item.departement_code,
+            unit_code: item.unit_code,
+            nama_departement: item.id_departement_departement.nama_departement,
             createdAt: item.createdAt,
-            created_admin: item.created_admin.username,
+            updatedAt: item.updatedAt,
         }));
         setState(datas);
         setReGetDatas(true);
@@ -26,6 +28,100 @@ export const GetUnitServices = async (
             text: error.response.data.message,
             title: 'failed',
         });
+    } finally {
+        setLoading(false);
+    }
+};
+
+export const AddUnitService = async (
+    data,
+    accessToken,
+    setShowModal,
+    reset,
+    setLoading,
+    setReGetDatas
+) => {
+    try {
+        setLoading(true);
+        const response = await POST_DATAS('crud/unit', data, accessToken);
+        reset();
+        AlertForm({
+            icon: 'success',
+            text: response.data.message,
+            title: 'success',
+        });
+        setReGetDatas(false);
+        setShowModal(false);
+    } catch (error) {
+        console.log(error);
+        AlertForm({
+            icon: 'error',
+            text: error.response.data.message,
+            title: 'failed',
+        });
+        console.log(error);
+    } finally {
+        setLoading(false);
+    }
+};
+
+export const EditUnitService = async (
+    data,
+    id,
+    accessToken,
+    setShowModal,
+    reset,
+    setLoading,
+    setReGetDatas
+) => {
+    try {
+        setLoading(true);
+        const response = await PUT_DATAS(`crud/unit/${id}`, data, accessToken);
+        reset();
+        AlertForm({
+            icon: 'success',
+            text: response.data.message,
+            title: 'success',
+        });
+        setReGetDatas(false);
+        setShowModal(false);
+    } catch (error) {
+        console.log(error);
+        AlertForm({
+            icon: 'error',
+            text: error.response.data.message,
+            title: 'failed',
+        });
+        console.log(error);
+    } finally {
+        setLoading(false);
+    }
+};
+
+export const DeleteUnitService = async (
+    id,
+    accessToken,
+    setShowModal,
+    setLoading,
+    setReGetDatas
+) => {
+    try {
+        const response = await DELETE_DATAS(`crud/unit/${id}`, accessToken);
+        AlertForm({
+            icon: 'success',
+            text: response.data.message,
+            title: 'success',
+        });
+        setReGetDatas(false);
+        setShowModal(false);
+    } catch (error) {
+        console.log(error);
+        AlertForm({
+            icon: 'error',
+            text: error.response.data.message,
+            title: 'failed',
+        });
+        console.log(error);
     } finally {
         setLoading(false);
     }

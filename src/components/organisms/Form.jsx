@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { InputForm } from '../molecules';
+import { InputForm, SelectForm } from '../molecules';
 import { Button } from '../atoms';
 import { useFormState, useGlobalHook } from '../../hook';
 import { getDefaultValues } from '../../utils';
@@ -53,6 +53,38 @@ const Form = ({
                                     : data.type
                             }
                             placeholder={data.placeholder}
+                            register={register}
+                            addOptionError={data.addOptionError}
+                            errors={errors[data.name]}
+                        />
+                    ) : data.jenisInputan === 'hidden' ? (
+                        <InputForm
+                            labelText={data.title}
+                            id={data.name}
+                            variant='hidden'
+                            labelStyle='hidden'
+                            type={
+                                data.type === 'password'
+                                    ? data.name === 'password'
+                                        ? showPassword
+                                            ? 'text'
+                                            : 'password'
+                                        : showConfirmPassword
+                                        ? 'text'
+                                        : 'password'
+                                    : data.type
+                            }
+                            placeholder={data.placeholder}
+                            register={register}
+                            addOptionError={data.addOptionError}
+                            errors={errors[data.name]}
+                        />
+                    ) : data.jenisInputan === 'select' ? (
+                        <SelectForm
+                            labelText={data.title}
+                            title={data.title}
+                            id={data.name}
+                            options={data.options}
                             register={register}
                             addOptionError={data.addOptionError}
                             errors={errors[data.name]}
