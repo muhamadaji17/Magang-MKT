@@ -1,10 +1,8 @@
-import ContentLayout from "../component/layout/ContentLayout";
 import useAuthStore from "../store/useAuthStore";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { showAlert } from "../utils";
 import TableData from "../component/organism/TableData";
-import ContainerContent from "../component/atom/ContainerContent";
 
 const Home = () => {
   const { token } = useAuthStore();
@@ -19,11 +17,7 @@ const Home = () => {
 
   return (
     <>
-      <ContentLayout>
-        <ContainerContent>
-          <TableData />
-        </ContainerContent>
-      </ContentLayout>
+      <TableData />
     </>
   );
 };

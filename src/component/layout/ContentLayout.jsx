@@ -1,13 +1,17 @@
+import { Outlet } from "react-router-dom";
 import Side from "../atom/Side";
 import TopBar from "../moleculs/TopBar";
+import ContainerContent from "../atom/ContainerContent";
 
-const ContentLayout = ({ children }) => {
+const ContentLayout = () => {
   return (
     <>
       <Side>
         <div className="sm:ml-64">
           <TopBar />
-          {children}
+          <ContainerContent>
+            <Outlet />
+          </ContainerContent>
         </div>
       </Side>
     </>

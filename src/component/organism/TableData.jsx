@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import useAuthStore from "../../store/useAuthStore";
 import { Button, SearchTable, ModalDepartement, ModalEdit } from "../index";
 import { useForm } from "react-hook-form";
-import { label } from "../../pattern/PatternTableName";
+import { labelDepartement } from "../../pattern/PatternTableName";
 import { editDepartement } from "../../utils/dataInput";
-import TableHeader from "../atom/TableHeader";
-import TableBody from "../atom/TableBody";
 import { useDepartementModal } from "../../hook/useDepartementModal";
 import { fetchDepartements } from "../../service/departementService";
 import ModalDelete from "../moleculs/ModalDelete";
+import TableFlowbite from "../atom/TableFlowbite";
+import { formatDateTime } from "../../utils/formatters";
 
 const TableData = () => {
   const [data, setData] = useState([]);
@@ -70,7 +70,7 @@ const TableData = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center w-full py-4">
+      <div className="flex justify-between items-center w-full pb-4">
         <SearchTable value={searchQuery} onChange={handleSearch} />
         <Button
           onClick={openModal}
@@ -79,14 +79,34 @@ const TableData = () => {
           Add Departement
         </Button>
       </div>
-      <table className="table-fixed w-full bg-white">
-        <TableHeader labels={label} />
-        <TableBody
-          handleDeleteClick={handleDeleteDepartement}
-          handleEditClick={handleEditClick}
-          data={filteredData.slice(0, 10)}
-        />
-      </table>
+
+      <TableFlowbite label={labelDepartement}>
+        {filteredData.map((row, rowIndex) => (
+          <tr className="bg-white border-b border-gray-200" key={rowIndex}>
+            <td className="px-6 py-4">{rowIndex + 1}</td>
+            <td className="px-6 py-4">{row.created_admin.username}</td>
+            <td className="px-6 py-4">{row.departement_code}</td>
+            <td className="px-6 py-4">{row.nama_departement}</td>
+            <td className="px-6 py-4">
+              {formatDateTime(row.created_admin.createdAt)}
+            </td>
+            <td className="px-6 py-4 space-x-4">
+              <button
+                className="text-green-500 hover:text-green-700"
+                onClick={() => handleEditClick(row)}
+              >
+                Edit
+              </button>
+              <button
+                className="text-red-500 hover:text-red-700"
+                onClick={() => handleDeleteDepartement(row.id)}
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        ))}
+      </TableFlowbite>
 
       <ModalDepartement
         onSubmit={handleAddDepartement}
@@ -99,6 +119,7 @@ const TableData = () => {
       />
       <ModalEdit
         closeEditModal={closeEditModal}
+        selectedData={selectedData}
         isSubmitting={isSubmitting}
         errors={errors}
         onSubmit={handleEditDepartement}

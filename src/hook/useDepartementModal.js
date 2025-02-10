@@ -17,8 +17,12 @@ export const useDepartementModal = (token, fetchData) => {
   const closeModal = () => setIsModalOpen(false);
 
   const openEditModal = (data) => {
-    setSelectedData(data);
-    setIsEditModalOpen(true);
+    // Validasi data sebelum membuka modal
+    if (!data || !data.id || !data.nama_departement) {
+      console.error("Invalid department data:", data);
+      showAlert("Error", "Data departemen tidak valid", "error", 5000);
+      return;
+    }
   };
 
   const closeEditModal = () => setIsEditModalOpen(false);
@@ -40,28 +44,40 @@ export const useDepartementModal = (token, fetchData) => {
   };
 
   const handleEditDepartement = async (formData) => {
-    if (!selectedData) return;
-    const updatedData = {
-      ...selectedData,
-      nama_departement: formData.nama_departement,
-    };
-
     try {
+      // Validasi data yang diperlukan
+      if (!selectedData || !selectedData.id) {
+        console.error("No department selected for editing");
+        showAlert("Error", "No department selected", "error", 5000);
+        return;
+      }
+
+      const updatedData = {
+        ...selectedData,
+        nama_departement: formData.nama_departement,
+      };
+
       const response = await updateDepartement(
         selectedData.id,
         updatedData,
         token
       );
-      showAlert("Success", response.message, "success", 5000);
-      fetchData();
-      closeEditModal();
+
+      if (response) {
+        console.log(response);
+        showAlert("Success", response.message, "success", 5000);
+        await fetchData(); // Refresh data
+        closeEditModal(); // Tutup modal setelah sukses
+      }
     } catch (error) {
       console.error("Gagal Update Data", error);
+      showAlert("Error", "Gagal mengupdate departemen", "error", 5000);
     }
   };
 
   const confirmDeleteDepartement = async (id) => {
     if (dataToDelete) {
+      console.log("delete: ", dataToDelete);
       try {
         const response = await deleteDepartement(dataToDelete, token);
         showAlert("Success", response.message, "success", 5000);

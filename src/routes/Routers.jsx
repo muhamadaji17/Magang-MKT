@@ -10,14 +10,19 @@ import {
   Register,
   Login,
 } from "../pages/index";
+import Division from "../pages/Division";
+import ContentLayout from "../component/layout/ContentLayout";
 
 const Routers = () => {
   return (
     <BrowserRouter>
       <Routes>
         {/* Main routes */}
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/departement" element={<Departement />} />
+        <Route element={<ContentLayout />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/departement" element={<Departement />} />
+          <Route path="/division" element={<Division />} />
+        </Route>
 
         {/* Auth routes */}
         <Route path="/auth">

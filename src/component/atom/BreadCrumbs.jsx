@@ -6,7 +6,7 @@ const BreadCrumbs = () => {
 
   return (
     <>
-      <div className="w-full justify-start items-center">
+      <div className="w-full justify-start items-center p-2">
         <nav className="flex" aria-label="Breadcrumb">
           <ol className="inline-flex items-center md:space-x-2 rtl:space-x-reverse">
             <li className="inline-flex items-center">

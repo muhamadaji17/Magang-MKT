@@ -1,3 +1,4 @@
+import { formatDateTime } from "../../utils/formatters";
 import { Button } from "../index";
 
 const TableBody = ({ data, handleEditClick, handleDeleteClick }) => {
@@ -12,7 +13,7 @@ const TableBody = ({ data, handleEditClick, handleDeleteClick }) => {
             <td className="text-start px-4 py-2">{data.departement_code}</td>
             <td className="text-start px-4 py-2">{data.nama_departement}</td>
             <td className="text-start px-4 py-2">
-              {new Date(data.created_admin.createdAt).toLocaleDateString("id")}
+              {formatDateTime(data.created_admin.createdAt)}
             </td>
             <td className="space-x-2 px-4 py-2">
               <Button

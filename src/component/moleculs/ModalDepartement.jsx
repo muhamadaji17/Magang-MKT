@@ -40,7 +40,10 @@ const ModalDepartement = ({
             >
               Close
             </Button>
-            <Button className="px-4 py-2 w-fit text-white bg-success hover:bg-green-800">
+            <Button
+              className="px-4 py-2 w-fit text-white bg-success hover:bg-green-800"
+              type="submit"
+            >
               {isSubmitting ? "Loading..." : "Submit"}
             </Button>
           </div>
