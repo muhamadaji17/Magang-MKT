@@ -13,8 +13,11 @@ const ModalDepartement = ({
   return (
     <>
       <Modal isOpen={isModalOpen} closeModal={closeModal}>
-        <Form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <Form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
           <FormTitle title="Form Departement" />
+          <p className="text-gray-600 text-sm">
+            Enter the department name and department code here
+          </p>
           {inputDepartement.map((input, index) => (
             <div key={index}>
               <Input
@@ -32,12 +35,12 @@ const ModalDepartement = ({
           ))}
           <div className="flex justify-center gap-4 w-full h-fit">
             <Button
-              className="px-4 py-2 w-fit text-white bg-red-500"
+              className="px-4 py-2 text-gray-700 bg-gray-200 hover:bg-gray-300"
               onClick={closeModal}
             >
               Close
             </Button>
-            <Button className="px-4 py-2 w-fit text-white bg-success">
+            <Button className="px-4 py-2 w-fit text-white bg-success hover:bg-green-800">
               {isSubmitting ? "Loading..." : "Submit"}
             </Button>
           </div>

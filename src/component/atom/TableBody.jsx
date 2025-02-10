@@ -1,10 +1,10 @@
 import { Button } from "../index";
 
-const TableBody = ({ limitedData, handleEditClick }) => {
+const TableBody = ({ data, handleEditClick, handleDeleteClick }) => {
   return (
     <>
       <tbody>
-        {limitedData.map((data, index) => (
+        {data.map((data, index) => (
           <tr key={index} className="border-2">
             <td className="text-start px-4 py-2">
               {data.created_admin.username}
@@ -21,7 +21,10 @@ const TableBody = ({ limitedData, handleEditClick }) => {
               >
                 Edit
               </Button>
-              <Button className="text-white bg-red-600 text-sm px-4 py-2">
+              <Button
+                onClick={() => handleDeleteClick(data.id)}
+                className="text-white bg-red-600 text-sm px-4 py-2"
+              >
                 Delete
               </Button>
             </td>

@@ -14,6 +14,7 @@ const ModalEdit = ({
     <>
       <Modal isOpen={showEditModal} closeModal={closeEditModal}>
         <FormTitle title="Edit Departement" />
+        <p className="text-sm text-gray-600">Change departmental data here</p>
         <Form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {editDepartement.map((input, index) => (
             <div key={index}>
@@ -34,14 +35,14 @@ const ModalEdit = ({
           ))}
           <div className="w-full flex justify-center items-center space-x-4">
             <Button
-              className="text-white bg-red-500 text-sm px-4 py-2"
+              className="text-gray-700 bg-gray-200 hover:bg-gray-300 text-sm px-4 py-2"
               onClick={closeEditModal}
             >
               Close
             </Button>
             <Button
               type="submit"
-              className="text-white bg-green-500 text-sm px-4 py-2"
+              className="text-white hover:bg-green-800 bg-success text-sm px-4 py-2"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Updating ..." : "Update Changes"}
