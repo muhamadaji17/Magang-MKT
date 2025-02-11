@@ -8,6 +8,8 @@ import HeaderContent from "./HeaderContent";
 import ConfirmDelete from "./ConfirmDelete";
 import Sidebar from "./Sidebar";
 import Searchbar from "./Searchbar";
+import Dropdown from "./Dropdown";
+import Navbar from "./Navbar";
 
 export {
   InputForm,
@@ -20,4 +22,6 @@ export {
   Sidebar,
   HeaderContent,
   Searchbar,
+  Navbar,
+  Dropdown,
 };

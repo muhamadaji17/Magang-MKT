@@ -29,6 +29,6 @@ export const handleShowPassword = (showPassword, setShowPassword) => {
   setShowPassword(!showPassword);
 };
 
-export const handleShowModal = (isShowModal, setShowModal) => {
-  setShowModal(isShowModal);
+export const handleShowModal = (setShowModal) => {
+  setShowModal((prev) => !prev);
 };

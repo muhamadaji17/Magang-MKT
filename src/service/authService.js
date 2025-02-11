@@ -1,3 +1,4 @@
+import cookie from "cookiejs";
 import { POST_AUTH } from "../api";
 import { TriggerAlert } from "../utils/TriggerAlert";
 
@@ -6,7 +7,6 @@ export const LoginService = async ({
   resetField,
   navigate,
   setLoading,
-  setState,
 }) => {
   try {
     const response = await POST_AUTH("login", data);
@@ -18,8 +18,11 @@ export const LoginService = async ({
         icon: "success",
         text: response.data.message,
       });
-      sessionStorage.setItem("accessToken", response.data.data.accessToken);
-      setState(response.data.data.accessToken);
+      cookie.set("authToken", response.data.data.accessToken, {
+        expires: 7,
+        secure: true,
+        sameSite: "Strict",
+      });
       resetField();
       navigate("/");
     }
@@ -149,4 +152,8 @@ export const ResetPasswordService = async ({
   } finally {
     setLoading(false);
   }
+};
+
+export const signOut = () => {
+  cookie.remove("authToken");
 };

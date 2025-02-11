@@ -1,6 +1,5 @@
 import { handleSubmitData } from "../../pattern";
 import { Form } from "../organism/";
-import { useAccessToken } from "../../hook";
 import { IoMdClose } from "react-icons/io";
 import { Button } from "../atoms";
 import { handleShowModal } from "../../pattern/HandleButton";
@@ -14,8 +13,6 @@ const Modal = ({
   setDataTable,
   service,
 }) => {
-  const { accessToken } = useAccessToken();
-
   return (
     <div className="fixed top-0 right-0 bottom-0 left-0 z-20">
       <div
@@ -44,7 +41,6 @@ const Modal = ({
               setShowModal,
               setLoading,
               setUpdateData,
-              accessToken,
             })
           }
         />

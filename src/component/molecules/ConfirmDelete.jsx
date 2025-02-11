@@ -1,4 +1,3 @@
-import React from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { Button } from "../atoms";
 import { handleShowModal } from "../../pattern/HandleButton";
@@ -22,7 +21,7 @@ const ConfirmDelete = ({ setShowModal, dataName, handleSubmitData }) => {
         </Button>
         <Button
           className={"shadow-lg w-20 border border-black p-2 rounded-md "}
-          onClick={() => handleShowModal(false, setShowModal)}
+          onClick={() => handleShowModal(setShowModal)}
         >
           Batal
         </Button>

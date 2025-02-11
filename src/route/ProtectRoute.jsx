@@ -1,12 +1,11 @@
-import React from "react";
 import { Navigate } from "react-router";
-import { useAccessToken } from "../hook";
+import { useAuthToken } from "../hook";
 
 const ProtectRoute = ({ children }) => {
-  const { accessToken } = useAccessToken();
+  const accessToken = useAuthToken();
   if (!accessToken) return <Navigate to={"/login"} />;
 
-  return <>{children}</>;
+  return children;
 };
 
 export default ProtectRoute;

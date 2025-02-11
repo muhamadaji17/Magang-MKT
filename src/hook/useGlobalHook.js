@@ -5,7 +5,7 @@ export const useGlobalHook = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [datas, setDatas] = useState(null);
   const [updateData, setUpdateData] = useState(false);
-  const [showAddModal, setShowAddModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [showModalWithId, setShowModalWithId] = useState(false);
   const [getDataColumn, setGetDataColumn] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,12 +19,12 @@ export const useGlobalHook = () => {
     setShowPassword,
     datas,
     setDatas,
-    showAddModal,
-    setShowAddModal,
-    updateData,
-    setUpdateData,
+    showModal,
+    setShowModal,
     showModalWithId,
     setShowModalWithId,
+    updateData,
+    setUpdateData,
     getDataColumn,
     setGetDataColumn,
     searchQuery,

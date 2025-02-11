@@ -1,4 +1,3 @@
-import React from "react";
 import { LayoutAuth } from "../../component/layouts";
 import { inputRegister } from "../../pattern/PatternAuth/Register";
 import { handleSubmitData } from "../../pattern";

@@ -34,18 +34,32 @@ export const errorOptions = {
       message: "Only nymbers are allowed",
     },
   },
-  departementName: {
-    required: "Departement Name is Required",
+  nameInModal: {
+    required: "Name is Required",
     minLength: {
       value: 2,
-      message: "Departemen Name muts be at least 2 characters",
+      message: "Name must be at least 2 characters",
     },
   },
-  departementCode: {
-    required: "Departement Code is Required",
+  codeInModal: {
+    required: "Code is Required",
     minLength: {
+      value: 4,
+      message: "Code must be at least 5 characters",
+    },
+    maxLength: {
       value: 5,
-      message: "Departemen Code muts be at least 5 characters",
+      message: "Code max 5 characters",
+    },
+  },
+  selectInput: {
+    required: "Departement is Required",
+  },
+  priority: {
+    required: "Priority is Required",
+    pattern: {
+      value: /^\d+$/, // Hanya angka yang diperbolehkan
+      message: "Only nymbers are allowed",
     },
   },
 };

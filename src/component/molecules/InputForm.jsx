@@ -1,12 +1,13 @@
-import React from "react";
-import { Input, Label } from "../atoms";
+import { Input, Label, Select } from "../atoms";
 import { FaEyeSlash } from "react-icons/fa";
 
 const InputForm = ({
   inputConfig,
   register,
+  dataSelect,
   showPassword,
   setShowPassword,
+  defaultValue,
   handleClickIcon,
   error,
 }) => {
@@ -21,15 +22,32 @@ const InputForm = ({
         </Label>
       )}
 
-      <Input
-        id={inputConfig.name}
-        type={!showPassword ? inputConfig.type : "text"}
-        register={register}
-        placeholder={inputConfig.placeholder}
-        name={inputConfig.name}
-        addOptionError={inputConfig.addOptionError}
-        className={`rounded-md py-2 px-3 placeholder:text-[12px] border outline-none border-slate-400 my-2 text-sm`}
-      />
+      {inputConfig.type === "text" ||
+      inputConfig.type === "password" ||
+      inputConfig.type === "email" ||
+      inputConfig.type === "number" ||
+      inputConfig.type === "tel" ? (
+        <Input
+          id={inputConfig.name}
+          type={!showPassword ? inputConfig.type : "text"}
+          register={register}
+          defaultValue={defaultValue}
+          placeholder={inputConfig.placeholder}
+          name={inputConfig.name}
+          addOptionError={inputConfig.addOptionError}
+          className={`rounded-md py-2 px-3 placeholder:text-[12px] border outline-none border-slate-400 my-2 text-sm`}
+        />
+      ) : inputConfig.type === "select" ? (
+        <Select
+          dataSelect={dataSelect}
+          defaultValue={defaultValue}
+          placeholder={inputConfig.placeholder}
+          id={inputConfig.id}
+          name={inputConfig.name}
+          addOptionError={inputConfig.addOptionError}
+          register={register}
+        />
+      ) : null}
 
       {inputConfig.type === "password" && (
         <div

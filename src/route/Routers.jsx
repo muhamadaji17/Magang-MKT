@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 import {
   DepartemenPage,
@@ -8,11 +7,13 @@ import {
   OtpPage,
   RegisterPage,
   ResetPasswordPage,
-} from "../pages/index";
-import ProtectRoute from "./ProtectRoute";
+  NotFoundPage,
+  UnitPage,
+} from "../pages";
+import { ProtectRoute, RedirectIfAuthenticated } from "./index";
 import { PhoneNumberProvider } from "../context";
 import { LayoutDashboard } from "../component/layouts";
-import NotFoundPage from "../pages/NotFoundPage";
+import PositionPage from "../pages/Dashboard/PositionPage";
 
 const Routers = () => {
   return (
@@ -29,15 +30,33 @@ const Routers = () => {
           <Route index element={<HomePage />} />
           <Route path="/karyawan" element={<Karyawanpage />} />
           <Route path="/departement" element={<DepartemenPage />} />
+          <Route path="/unit" element={<UnitPage />} />
+          <Route path="/jabatan" element={<PositionPage />} />
         </Route>
 
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/login"
+          element={
+            <RedirectIfAuthenticated>
+              <LoginPage />
+            </RedirectIfAuthenticated>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <RedirectIfAuthenticated>
+              <RegisterPage />
+            </RedirectIfAuthenticated>
+          }
+        />
         <Route
           path="/forgot-password"
           element={
             <PhoneNumberProvider>
-              <OtpPage />
+              <RedirectIfAuthenticated>
+                <OtpPage />
+              </RedirectIfAuthenticated>
             </PhoneNumberProvider>
           }
         />
@@ -45,7 +64,9 @@ const Routers = () => {
           path="/forgot-password/reset-password"
           element={
             <PhoneNumberProvider>
-              <ResetPasswordPage />
+              <RedirectIfAuthenticated>
+                <ResetPasswordPage />
+              </RedirectIfAuthenticated>
             </PhoneNumberProvider>
           }
         />

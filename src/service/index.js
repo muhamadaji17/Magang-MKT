@@ -6,6 +6,8 @@ import {
 } from "./authService";
 
 import { departementService } from "./departementService";
+import { unitService } from "./unitService";
+import { positionService } from "./positionService";
 
 export {
   LoginService,
@@ -13,4 +15,6 @@ export {
   OtpService,
   ResetPasswordService,
   departementService,
+  unitService,
+  positionService,
 };

@@ -1,21 +1,24 @@
 import { Link } from "react-router-dom";
-import { Button } from "../atoms";
+import { Button, Select } from "../atoms";
 import { useForm } from "react-hook-form";
 import { InputForm } from "../molecules/index";
 import { disabledButtonIfNoChange, handleShowPassword } from "../../pattern";
-import { useDefaultValue, useGlobalHook } from "../../hook/index";
-import { useEffect } from "react";
+import { useAuthToken, useGlobalHook } from "../../hook/index";
+import { useEffect, useState } from "react";
 
 const Form = ({
   dataForm,
   authFor,
+  subDataService,
   buttonName,
   handleSubmitData,
   buttonBg,
 }) => {
   const { loading, setLoading } = useGlobalHook();
   const { showPassword, setShowPassword } = useGlobalHook();
+  const [dataSub, setDataSub] = useState([]);
   const { disabledButton, setDisabledButton } = useGlobalHook();
+  const accessToken = useAuthToken();
   const {
     showPassword: showConfirmPassword,
     setShowPassword: setShowConfirmPassword,
@@ -27,11 +30,20 @@ const Form = ({
     reset,
     watch,
     formState: { errors },
-  } = useForm({
-    defaultValues: useDefaultValue(dataForm),
-  });
+  } = useForm();
 
   const inputValues = watch();
+
+  useEffect(() => {
+    if (subDataService) {
+      subDataService({
+        accessToken,
+        setDatas: setDataSub,
+        setLoading,
+        isSubData: true,
+      });
+    }
+  }, [subDataService]);
 
   useEffect(() => {
     disabledButtonIfNoChange(dataForm, inputValues, setDisabledButton);
@@ -47,13 +59,15 @@ const Form = ({
       <div className="flex flex-col">
         <form onSubmit={handleSubmit(onSubmit)}>
           {dataForm?.map((input, index) => {
+            const isSelect = input.type === "select";
             return (
               <div key={index}>
                 <InputForm
+                  dataSelect={isSelect ? dataSub : null}
                   inputConfig={input}
-                  onChange={input.onChange}
                   error={errors[input.name]}
                   register={register}
+                  defaultValue={input.defaultValue}
                   showPassword={
                     input.name !== "confirmPassword"
                       ? showPassword

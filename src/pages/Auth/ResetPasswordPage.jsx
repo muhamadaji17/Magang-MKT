@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router";
 import { LayoutAuth } from "../../component/layouts";
 import { Form } from "../../component/organism";

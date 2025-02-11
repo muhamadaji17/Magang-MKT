@@ -1,20 +1,20 @@
-import React from "react";
 import { Button } from "../atoms";
 import { Form } from "../organism";
-import { handleShowModal, handleSubmitData } from "../../pattern/HandleButton";
+import { handleShowModal, handleSubmitData } from "../../pattern";
 import { LayoutModal } from "../layouts";
 import { Searchbar } from "../molecules";
-import { useAccessToken } from "../../hook";
-import { departementService } from "../../service";
+import { useAuthToken } from "../../hook";
 const HeaderContent = ({
-  showAddModal,
-  setShowAddModal,
+  showModal,
+  setShowModal,
   inputDataForm,
+  subDataService,
   setUpdateData,
+  service,
   inputValue,
   handleSearch,
 }) => {
-  const { accessToken } = useAccessToken();
+  const accessToken = useAuthToken();
 
   return (
     <header>
@@ -22,27 +22,28 @@ const HeaderContent = ({
         <Searchbar handleSearch={handleSearch} inputValue={inputValue} />
         <Button
           className={"bg-blue-600 text-sm p-2 mb-[9px] text-white rounded-md"}
-          onClick={() => handleShowModal(true, setShowAddModal)}
+          onClick={() => handleShowModal(setShowModal)}
         >
           Tambah Data
         </Button>
       </div>
 
       <LayoutModal
-        show={showAddModal}
+        show={showModal}
         title={"Tambah Data Baru"}
-        setShowModal={setShowAddModal}
+        setShowModal={setShowModal}
       >
         <Form
           dataForm={inputDataForm}
           buttonName={"Submit"}
+          subDataService={subDataService}
           buttonBg={"bg-blue-600"}
           handleSubmitData={(data, resetField, setLoading) =>
             handleSubmitData({
               data,
-              postData: departementService.add,
+              postData: service,
               resetField,
-              setShowModal: setShowAddModal,
+              setShowModal: setShowModal,
               setLoading,
               setUpdateData,
               accessToken,

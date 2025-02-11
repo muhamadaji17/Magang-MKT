@@ -1,60 +1,63 @@
-import { useDepartementHook } from "../../hook";
 import { Table } from "../../component/organism";
-import { HeaderContent } from "../../component/molecules";
-import { Spinner } from "../../utils";
 import {
-  tableColumnDepartement,
   handleSearch,
   handleShowModal,
-  inputAddDepartement,
-  inputEditDepartement,
+  tableColumnUnit,
+  inputAddUnit,
+  inputEditUnit,
 } from "../../pattern";
-import { departementService } from "../../service";
+import { departementService, unitService } from "../../service";
+import { Spinner } from "../../utils";
+import { HeaderContent } from "../../component/molecules";
+import { useUnitHook } from "../../hook";
 
-const DepartemenPage = () => {
+const UnitPage = () => {
   const {
     datas,
+    loading,
     showModal,
     setShowModal,
     showModalWithId,
     setShowModalWithId,
-    setUpdateData,
-    loading,
     searchQuery,
     setSearchQuery,
     getDataColumn,
     setGetDataColumn,
     typeModal,
     setTypeModal,
-  } = useDepartementHook();
+    setUpdateData,
+  } = useUnitHook();
 
   return (
-    <div className="">
+    <div>
       <HeaderContent
         showModal={showModal}
+        subDataService={departementService.get}
         setShowModal={setShowModal}
-        service={departementService.add}
         setUpdateData={setUpdateData}
-        inputDataForm={inputAddDepartement}
+        service={unitService.add}
+        inputDataForm={inputAddUnit}
         handleSearch={(e) => handleSearch(e.target.value, setSearchQuery)}
         inputValue={searchQuery}
       />
       {!loading ? (
         <Table
           dataTable={datas}
+          subDataService={departementService.get}
           searchQuery={searchQuery}
-          tableConfig={tableColumnDepartement}
+          tableConfig={tableColumnUnit}
+          service={unitService}
           dataColumn={getDataColumn}
           typeModal={typeModal}
-          service={departementService}
-          dataForm={inputEditDepartement(getDataColumn)}
+          dataForm={inputEditUnit(getDataColumn)}
           showModal={showModalWithId}
           setShowModal={setShowModalWithId}
           setUpdateData={setUpdateData}
           handleShowModal={(data, typeModal) => {
             handleShowModal(setShowModalWithId);
             setTypeModal(typeModal);
-            setGetDataColumn({ ...data, name: data.nama_departement });
+
+            setGetDataColumn({ ...data, name: data.nama_unit });
           }}
         />
       ) : (
@@ -67,4 +70,4 @@ const DepartemenPage = () => {
   );
 };
 
-export default DepartemenPage;
+export default UnitPage;

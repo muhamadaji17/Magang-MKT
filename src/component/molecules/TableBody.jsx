@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../atoms";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -39,7 +38,7 @@ const TableBody = ({ dataTable, tableConfig, handleShowModal }) => {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
               >
-                {row.key === "createdAt"
+                {row.key === "createdAt" || row.key === "updatedAt"
                   ? formatDate(data[row.key])
                   : data[row.key]}
               </td>

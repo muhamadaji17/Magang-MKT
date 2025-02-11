@@ -1,4 +1,3 @@
-import React from "react";
 import { handleSubmitData, inputOtp } from "../../pattern";
 import { useNavigate } from "react-router";
 import { LayoutAuth } from "../../component/layouts";

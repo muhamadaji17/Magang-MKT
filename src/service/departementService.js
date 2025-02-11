@@ -70,28 +70,43 @@ const editDataDepartementService = async ({
   }
 };
 
-const getDataDepartementService = async (
+const getDataDepartementService = async ({
   accessToken,
   setDatas,
+  setLoading,
   setUpdateData,
-
-  setSearchQuery
-) => {
+  isSubData,
+}) => {
+  setLoading(true);
   try {
     const response = await GET("departement", accessToken);
-    const parsing = response.data.payload.map((data) => ({
-      nama_departement: data.nama_departement,
-      departement_code: data.departement_code,
-      username: data.created_admin.username,
-      createdAt: data.createdAt,
-      id: data.id,
-    }));
+    const parsing = response.data.payload.map((data) => {
+      if (!isSubData) {
+        return {
+          nama_departement: data.nama_departement,
+          departement_code: data.departement_code,
+          username: data.created_admin.username,
+          createdAt: data.createdAt,
+          id: data.id,
+        };
+      } else {
+        return {
+          name: data.nama_departement,
+          value: data.id,
+          id_departement: data.id,
+        };
+      }
+    });
     setDatas(parsing);
-    setUpdateData(true);
-    setSearchQuery("");
+    if (setUpdateData) {
+      setUpdateData(true);
+    }
     console.log(response);
   } catch (error) {
     console.log(error);
+    TriggerAlert({ text: error.data.message, icon: "error", title: "Error!" });
+  } finally {
+    setLoading(false);
   }
 };
 
@@ -120,7 +135,7 @@ const deleteDataDepartementService = async ({
     TriggerAlert({
       icon: "error",
       title: "Gagal!",
-      text: error.message,
+      text: error.data.message,
     });
   } finally {
     setLoading(false);
@@ -128,15 +143,15 @@ const deleteDataDepartementService = async ({
   }
 };
 
-const searchDataDepartementService = async (
+const searchDataDepartementService = async ({
   accessToken,
   setDatas,
-  query,
-  setUpdateData
-) => {
+  searchQuery,
+  setUpdateData,
+}) => {
   try {
     const response = await GET(
-      `departement/by?nama_departement=${query}`,
+      `departement/by?nama_departement=${searchQuery}`,
       accessToken
     );
     const parsing = response.data.payload.map((data) => ({

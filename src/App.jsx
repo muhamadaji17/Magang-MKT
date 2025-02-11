@@ -1,12 +1,7 @@
-import AccessTokenProvider from "./context/AccessTokenProvider";
-import Routers from "./route/Routers";
+import { Routers } from "./route";
 
 function App() {
-  return (
-    <AccessTokenProvider>
-      <Routers />
-    </AccessTokenProvider>
-  );
+  return <Routers />;
 }
 
 export default App;

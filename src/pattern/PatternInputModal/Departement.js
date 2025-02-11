@@ -6,14 +6,14 @@ export const inputAddDepartement = [
     type: "text",
     title: "Nama Departemen: ",
     name: "nama_departement",
-    addOptionError: errorOptions.departementName,
+    addOptionError: errorOptions.nameInModal,
   },
   {
     placeholder: "0X12B",
     type: "text",
     title: "Kode Departemen: ",
     name: "departement_code",
-    addOptionError: errorOptions.departementCode,
+    addOptionError: errorOptions.codeInModal,
   },
 ];
 
@@ -23,15 +23,15 @@ export const inputEditDepartement = (data) => [
     type: "text",
     title: "Nama Departemen: ",
     name: "nama_departement",
-    addOptionError: errorOptions.departementName,
-    defaultValue: data,
+    addOptionError: errorOptions.nameInModal,
+    defaultValue: data?.nama_departement,
   },
   {
-    placeholder: "Teknologi Informasi",
+    placeholder: "0X12B",
     type: "text",
-    title: "Nama Departemen: ",
+    title: "Code Departemen: ",
     name: "departement_code",
-    addOptionError: errorOptions.departementName,
-    defaultValue: data,
+    addOptionError: errorOptions.codeInModal,
+    defaultValue: data?.departement_code,
   },
 ];

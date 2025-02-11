@@ -1,60 +1,61 @@
-import { useDepartementHook } from "../../hook";
-import { Table } from "../../component/organism";
 import { HeaderContent } from "../../component/molecules";
-import { Spinner } from "../../utils";
+import { Table } from "../../component/organism";
+import { usePositionHook } from "../../hook";
 import {
-  tableColumnDepartement,
   handleSearch,
   handleShowModal,
-  inputAddDepartement,
-  inputEditDepartement,
+  inputAddPosition,
+  inputEditPosition,
+  tableColumnPosition,
 } from "../../pattern";
-import { departementService } from "../../service";
+import { positionService } from "../../service";
+import { Spinner } from "../../utils";
 
-const DepartemenPage = () => {
+const PositionPage = () => {
   const {
     datas,
+    loading,
+    searchQuery,
+    setSearchQuery,
     showModal,
     setShowModal,
     showModalWithId,
     setShowModalWithId,
-    setUpdateData,
-    loading,
-    searchQuery,
-    setSearchQuery,
-    getDataColumn,
-    setGetDataColumn,
     typeModal,
     setTypeModal,
-  } = useDepartementHook();
+    getDataColumn,
+    setGetDataColumn,
+    setUpdateData,
+  } = usePositionHook();
 
   return (
-    <div className="">
+    <div>
       <HeaderContent
         showModal={showModal}
         setShowModal={setShowModal}
-        service={departementService.add}
         setUpdateData={setUpdateData}
-        inputDataForm={inputAddDepartement}
+        service={positionService.add}
+        inputDataForm={inputAddPosition}
         handleSearch={(e) => handleSearch(e.target.value, setSearchQuery)}
         inputValue={searchQuery}
       />
+
       {!loading ? (
         <Table
           dataTable={datas}
           searchQuery={searchQuery}
-          tableConfig={tableColumnDepartement}
+          tableConfig={tableColumnPosition}
+          service={positionService}
           dataColumn={getDataColumn}
           typeModal={typeModal}
-          service={departementService}
-          dataForm={inputEditDepartement(getDataColumn)}
+          dataForm={inputEditPosition(getDataColumn)}
           showModal={showModalWithId}
           setShowModal={setShowModalWithId}
           setUpdateData={setUpdateData}
           handleShowModal={(data, typeModal) => {
             handleShowModal(setShowModalWithId);
             setTypeModal(typeModal);
-            setGetDataColumn({ ...data, name: data.nama_departement });
+            setGetDataColumn({ ...data, name: data.nama_jabatan });
           }}
         />
       ) : (
@@ -67,4 +68,4 @@ const DepartemenPage = () => {
   );
 };
 
-export default DepartemenPage;
+export default PositionPage;
