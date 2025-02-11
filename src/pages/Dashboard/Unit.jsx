@@ -1,7 +1,6 @@
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
 import BreadCrumb from '../../utils/Breadcrumb';
 import {
-    unitBreadcrumb,
     handleModal,
     handleShowModal,
     inputAddUnit,
@@ -10,7 +9,7 @@ import {
     handleCancelModal,
     unitTableData,
 } from '../../pattern';
-import { Loading } from '../../utils';
+import { getUrlDashboard, Loading } from '../../utils';
 import { Table } from '../../components/organisms';
 import { DashboardHeader } from '../../components/molecules';
 import {
@@ -23,6 +22,7 @@ import {
     EditUnitService,
     DeleteUnitService,
 } from '../../services';
+import { useLocation } from 'react-router-dom';
 
 const Unit = () => {
     const {
@@ -67,12 +67,15 @@ const Unit = () => {
         modalType
     );
 
+    const location = useLocation();
+    const patternBreadcrumb = getUrlDashboard(location);
+
     return (
         <>
             <DashboardHeader
                 title='Unit'
                 breadcrumb={BreadCrumb}
-                breadcrumbPattern={unitBreadcrumb}
+                breadcrumbPattern={patternBreadcrumb}
                 handleShowModal={(type) => {
                     handleShowModal(
                         showAddModal,

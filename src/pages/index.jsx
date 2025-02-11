@@ -8,6 +8,7 @@ import LandingPage from './LandingPage.jsx';
 import Department from './Dashboard/Department.jsx';
 import Unit from './Dashboard/Unit.jsx';
 import NotFound from './NotFound.jsx';
+import Position from './Dashboard/Position.jsx';
 
 export {
     Register,
@@ -20,4 +21,5 @@ export {
     Department,
     Unit,
     NotFound,
+    Position,
 };

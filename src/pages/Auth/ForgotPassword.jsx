@@ -10,7 +10,7 @@ import { useGlobalHook } from '../../hook';
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
-    const { updateAccount } = useStore();
+    const { updatePhoneNumber } = useStore();
     const { loadingButton, setLoadingButton } = useGlobalHook();
 
     return (
@@ -27,7 +27,7 @@ const ForgotPassword = () => {
                     handleSubmitData(
                         data,
                         ForgotPasswordService,
-                        updateAccount,
+                        updatePhoneNumber,
                         navigate,
                         reset,
                         setLoadingButton

@@ -156,6 +156,7 @@ export const SearchDepartmentServices = async (
             nama_departement: item.nama_departement,
             departement_code: item.departement_code,
             createdAt: item.createdAt,
+            updatedAt: item.updatedAt,
             created_admin: item.created_admin.username,
         }));
         setState(datas);

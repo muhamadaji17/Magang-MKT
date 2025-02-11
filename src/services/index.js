@@ -16,7 +16,15 @@ import {
     AddUnitService,
     EditUnitService,
     DeleteUnitService,
+    SearchUnitServices,
 } from './UnitServices';
+import {
+    GetPositionServices,
+    AddPositionService,
+    EditPositionService,
+    DeletePositionService,
+    SearchPositionServices,
+} from './PositionServices';
 
 export {
     RegisterService,
@@ -32,4 +40,10 @@ export {
     AddUnitService,
     EditUnitService,
     DeleteUnitService,
+    SearchUnitServices,
+    GetPositionServices,
+    AddPositionService,
+    EditPositionService,
+    DeletePositionService,
+    SearchPositionServices,
 };

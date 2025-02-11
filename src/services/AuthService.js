@@ -38,8 +38,6 @@ export const LoginService = async (
         const spec = {
             accessToken: response.data.data.accessToken,
             username: response.data.data.username,
-            role_name: response.data.data.roleName,
-            company: response.data.data.company,
         };
         updateAccount(spec);
         reset();
@@ -64,7 +62,7 @@ export const LoginService = async (
 
 export const ForgotPasswordService = async (
     data,
-    updateAccount,
+    updatePhoneNumber,
     navigate,
     reset,
     setLoading
@@ -81,9 +79,7 @@ export const ForgotPasswordService = async (
             });
             console.log(response);
         } else {
-            updateAccount({
-                phone_number: data.phone_number,
-            });
+            updatePhoneNumber(data.phone_number);
             AlertForm({
                 icon: 'success',
                 text: response.data.message,
@@ -104,11 +100,10 @@ export const SettingPasswordService = async (
     navigate,
     reset,
     setLoading,
-    account
+    phone_number
 ) => {
     setLoading(true);
     const { otp, password } = data;
-    const { phone_number } = account;
 
     try {
         const response = await POST_AUTH('auth/set-pass', {

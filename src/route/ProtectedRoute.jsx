@@ -2,27 +2,21 @@ import { Navigate } from 'react-router-dom';
 import { useStore } from '../store/store';
 
 const ProtectedRoute = ({ children, type }) => {
-    const { account } = useStore();
+    const { account, phone_number } = useStore();
 
-    return type === 'phone' ? (
-        account.phone_number ? (
-            children
-        ) : (
-            <Navigate to='/forgot-password' />
-        )
-    ) : type === 'not-login' ? (
-        account.accessToken ? (
-            <Navigate to='/dashboard' />
-        ) : (
-            children
-        )
-    ) : type === 'login' ? (
-        account.accessToken ? (
-            children
-        ) : (
-            <Navigate to='/login' />
-        )
-    ) : null;
+    if (type === 'phone') {
+        return phone_number ? children : <Navigate to='/forgot-password' />;
+    }
+
+    if (type === 'not-login') {
+        return account.username ? <Navigate to='/dashboard' /> : children;
+    }
+
+    if (type === 'login') {
+        return account.username ? children : <Navigate to='/login' />;
+    }
+
+    return null;
 };
 
 export default ProtectedRoute;

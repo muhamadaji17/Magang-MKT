@@ -10,6 +10,7 @@ import {
     Department,
     Unit,
     NotFound,
+    Position,
 } from '../pages';
 import ProtectedRoute from './ProtectedRoute';
 import { DashboardTemplate } from '../components/templates';
@@ -31,6 +32,7 @@ export default function Routers() {
                     <Route path='employee' element={<Employee />} />
                     <Route path='department' element={<Department />} />
                     <Route path='unit' element={<Unit />} />
+                    <Route path='position' element={<Position />} />
                 </Route>
 
                 <Route

@@ -99,4 +99,33 @@ export const errorOptions = {
             message: 'Unit name must be less than 8 characters',
         },
     },
+    jabatan_code: {
+        required: 'Please input the position code',
+        minLength: {
+            value: 4,
+            message: 'Position code must be more than 4 characters',
+        },
+        maxLength: {
+            value: 5,
+            message: 'Position code must be less than 5 characters',
+        },
+    },
+    nama_jabatan: {
+        required: 'Please input the position name',
+        minLength: {
+            value: 1,
+            message: 'Position name must be more than 5 characters',
+        },
+        maxLength: {
+            value: 32,
+            message: 'Position name must be less than 8 characters',
+        },
+    },
+    priority: {
+        required: 'Please input the position priority',
+        pattern: {
+            value: /^[0-9]*$/,
+            message: 'Position priority must be a number',
+        },
+    },
 };

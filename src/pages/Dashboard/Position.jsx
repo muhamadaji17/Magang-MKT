@@ -3,24 +3,24 @@ import BreadCrumb from '../../utils/Breadcrumb';
 import {
     handleModal,
     handleShowModal,
-    inputAddDepartment,
-    inputEditDepartment,
+    inputAddPosition,
+    inputEditPosition,
     handleShowModalId,
     handleCancelModal,
-    departmentTableData,
+    PositionTableData,
 } from '../../pattern';
 import { getUrlDashboard, Loading } from '../../utils';
 import { Table } from '../../components/organisms';
 import { DashboardHeader } from '../../components/molecules';
-import { useDashboardHook, useDepartmentHook } from '../../hook';
+import { useDashboardHook, usePositionHook } from '../../hook';
 import {
-    AddDepartmentService,
-    EditDepartmentService,
-    DeleteDepartmentService,
+    AddPositionService,
+    EditPositionService,
+    DeletePositionService,
 } from '../../services';
 import { useLocation } from 'react-router-dom';
 
-const Department = () => {
+const Position = () => {
     const {
         datas,
         setDatas,
@@ -44,7 +44,7 @@ const Department = () => {
         setQuery,
     } = useDashboardHook();
 
-    useDepartmentHook(
+    usePositionHook(
         accessToken,
         query,
         setDatas,
@@ -59,7 +59,7 @@ const Department = () => {
     return (
         <>
             <DashboardHeader
-                title='Department'
+                title='Position'
                 breadcrumb={BreadCrumb}
                 breadcrumbPattern={patternBreadcrumb}
                 handleShowModal={(type) => {
@@ -72,15 +72,15 @@ const Department = () => {
                 }}
                 showAddModal={showAddModal}
                 setShowAddModal={setShowAddModal}
-                buttonTextAddData='Add Department'
+                buttonTextAddData='Add Position'
                 handleModal={handleModal}
                 trigger={trigger}
                 loading={loading}
                 setLoading={setLoading}
                 accessToken={accessToken}
-                addService={AddDepartmentService}
-                dataForm={inputAddDepartment}
-                titleModal='Add Department'
+                addService={AddPositionService}
+                dataForm={inputAddPosition}
+                titleModal='Add Position'
                 setDatas={setDatas}
                 type={modalType}
                 setReGetDatas={setReGetDatas}
@@ -94,8 +94,8 @@ const Department = () => {
             ) : (
                 <Table
                     datas={datas}
-                    editService={EditDepartmentService}
-                    deleteService={DeleteDepartmentService}
+                    editService={EditPositionService}
+                    deleteService={DeletePositionService}
                     accessToken={accessToken}
                     trigger={trigger}
                     loading={loading}
@@ -113,8 +113,8 @@ const Department = () => {
                         );
                     }}
                     handleModal={handleModal}
-                    dataForm={inputEditDepartment(getDetailsData)}
-                    titleModal='Edit Department'
+                    dataForm={inputEditPosition(getDetailsData)}
+                    titleModal='Edit Position'
                     getDetailsData={getDetailsData}
                     type={modalType}
                     handleCancelModal={() =>
@@ -123,11 +123,11 @@ const Department = () => {
                     setReGetDatas={setReGetDatas}
                     paginationIconNext={MdNavigateNext}
                     paginationIconPrev={MdNavigateBefore}
-                    columns={departmentTableData}
+                    columns={PositionTableData}
                 />
             )}
         </>
     );
 };
 
-export default Department;
+export default Position;

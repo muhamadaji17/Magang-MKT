@@ -17,7 +17,7 @@ import { useGlobalHook } from '../../hook';
 
 const SettingPassword = () => {
     const navigate = useNavigate();
-    const { account } = useStore();
+    const { phone_number } = useStore();
     const {
         showPassword,
         setShowPassword,
@@ -66,7 +66,7 @@ const SettingPassword = () => {
                         navigate,
                         reset,
                         setLoadingButton,
-                        account
+                        phone_number
                     )
                 }
             />

@@ -1,7 +1,7 @@
 import { POST_DATAS, DELETE_DATAS, PUT_DATAS, GET_DATAS } from '../api';
 import AlertForm from '../utils/SweetAlert';
 
-export const GetUnitServices = async (
+export const GetPositionServices = async (
     token,
     setState,
     setLoading,
@@ -9,15 +9,15 @@ export const GetUnitServices = async (
 ) => {
     try {
         setLoading(true);
-        const response = await GET_DATAS(`crud/unit`, token);
+        const response = await GET_DATAS(`crud/jabatan`, token);
         const datas = response.data.payload.map((item) => ({
             id: item.id,
-            id_departement: item.id_departement,
-            nama_unit: item.nama_unit,
-            unit_code: item.unit_code,
-            nama_departement: item.id_departement_departement.nama_departement,
-            createdAt: item.createdAt,
+            nama_jabatan: item.nama_jabatan,
+            jabatan_code: item.jabatan_code,
+            priority: item.priority,
+            created_admin: item.created_admin.username,
             updatedAt: item.updatedAt,
+            createdAt: item.createdAt,
         }));
         setState(datas);
         setReGetDatas(true);
@@ -33,7 +33,7 @@ export const GetUnitServices = async (
     }
 };
 
-export const AddUnitService = async (
+export const AddPositionService = async (
     data,
     accessToken,
     setShowModal,
@@ -43,7 +43,45 @@ export const AddUnitService = async (
 ) => {
     try {
         setLoading(true);
-        const response = await POST_DATAS('crud/unit', data, accessToken);
+        const response = await POST_DATAS('crud/jabatan', data, accessToken);
+        reset();
+        AlertForm({
+            icon: 'success',
+            text: response.data.message,
+            title: 'success',
+        });
+        console.log(response);
+        setReGetDatas(false);
+        setShowModal(false);
+    } catch (error) {
+        console.log(error);
+        AlertForm({
+            icon: 'error',
+            text: error.response.data.message,
+            title: 'failed',
+        });
+        console.log(error);
+    } finally {
+        setLoading(false);
+    }
+};
+
+export const EditPositionService = async (
+    data,
+    id,
+    accessToken,
+    setShowModal,
+    reset,
+    setLoading,
+    setReGetDatas
+) => {
+    try {
+        setLoading(true);
+        const response = await PUT_DATAS(
+            `crud/jabatan/${id}`,
+            data,
+            accessToken
+        );
         reset();
         AlertForm({
             icon: 'success',
@@ -65,19 +103,15 @@ export const AddUnitService = async (
     }
 };
 
-export const EditUnitService = async (
-    data,
+export const DeletePositionService = async (
     id,
     accessToken,
     setShowModal,
-    reset,
     setLoading,
     setReGetDatas
 ) => {
     try {
-        setLoading(true);
-        const response = await PUT_DATAS(`crud/unit/${id}`, data, accessToken);
-        reset();
+        const response = await DELETE_DATAS(`crud/jabatan/${id}`, accessToken);
         AlertForm({
             icon: 'success',
             text: response.data.message,
@@ -98,36 +132,7 @@ export const EditUnitService = async (
     }
 };
 
-export const DeleteUnitService = async (
-    id,
-    accessToken,
-    setShowModal,
-    setLoading,
-    setReGetDatas
-) => {
-    try {
-        const response = await DELETE_DATAS(`crud/unit/${id}`, accessToken);
-        AlertForm({
-            icon: 'success',
-            text: response.data.message,
-            title: 'success',
-        });
-        setReGetDatas(false);
-        setShowModal(false);
-    } catch (error) {
-        console.log(error);
-        AlertForm({
-            icon: 'error',
-            text: error.response.data.message,
-            title: 'failed',
-        });
-        console.log(error);
-    } finally {
-        setLoading(false);
-    }
-};
-
-export const SearchUnitServices = async (
+export const SearchPositionServices = async (
     searchData,
     token,
     setState,
@@ -137,17 +142,17 @@ export const SearchUnitServices = async (
     try {
         setLoading(true);
         const response = await GET_DATAS(
-            `crud/unit/by?nama_unit=${searchData}`,
+            `crud/jabatan/by?nama_jabatan=${searchData}`,
             token
         );
         const datas = response.data.payload.map((item) => ({
             id: item.id,
-            id_departement: item.id_departement,
-            nama_unit: item.nama_unit,
-            unit_code: item.unit_code,
-            nama_departement: item.id_departement_departement.nama_departement,
-            createdAt: item.createdAt,
+            nama_jabatan: item.nama_jabatan,
+            jabatan_code: item.jabatan_code,
+            priority: item.priority,
+            created_admin: item.created_admin.username,
             updatedAt: item.updatedAt,
+            createdAt: item.createdAt,
         }));
         setState(datas);
         setReGetDatas(true);

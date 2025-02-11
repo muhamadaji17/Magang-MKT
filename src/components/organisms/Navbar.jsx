@@ -2,7 +2,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { useStore } from '../../store/store';
 
 const Navbar = ({ setHamburger, username }) => {
-    const { updateAccount } = useStore();
+    const { logout } = useStore();
     return (
         <nav className='w-full h-16 border-b flex justify-between items-center bg-white px-2 lg:px-12 z-40 shadow-md'>
             <div className='flex items-center gap-3'>
@@ -16,18 +16,7 @@ const Navbar = ({ setHamburger, username }) => {
                 <p>
                     account: <span className='font-semibold'>{username}</span>
                 </p>
-                <p
-                    className='text-red-500 cursor-pointer'
-                    onClick={() =>
-                        updateAccount({
-                            accessToken: '',
-                            username: '',
-                            role_name: '',
-                            company: '',
-                            phone_number: '',
-                        })
-                    }
-                >
+                <p className='text-red-500 cursor-pointer' onClick={logout}>
                     logout
                 </p>
             </div>

@@ -19,14 +19,14 @@ import {
     handleSubmitDataId,
 } from './handleButton';
 import { errorOptions } from './patternError';
-import {
-    employeeBreadcrumb,
-    departmentBreadcrumb,
-    unitBreadcrumb,
-} from './breadcrumb';
 import { sidebarLink } from './sidebarPattern';
 import { unitTableData } from './Table/unitTable';
+import { PositionTableData } from './Table/PositionTable';
 import { inputAddUnit, inputEditUnit } from './PatternDashboard/unit';
+import {
+    inputAddPosition,
+    inputEditPosition,
+} from './PatternDashboard/position';
 
 export {
     errorOptions,
@@ -37,9 +37,7 @@ export {
     inputSettingPassword,
     inputForgotPassword,
     handleShowConfirmPassword,
-    employeeBreadcrumb,
     inputAddDepartment,
-    departmentBreadcrumb,
     sidebarLink,
     handleShowModal,
     handleModal,
@@ -52,5 +50,7 @@ export {
     unitTableData,
     inputAddUnit,
     inputEditUnit,
-    unitBreadcrumb,
+    PositionTableData,
+    inputAddPosition,
+    inputEditPosition,
 };

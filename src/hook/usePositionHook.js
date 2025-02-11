@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { GetUnitServices, SearchUnitServices } from '../services';
+import { GetPositionServices, SearchPositionServices } from '../services';
 
-export const useUnitHook = (
+export const usePositionHook = (
     accessToken,
     query,
     setDatas,
@@ -12,7 +12,7 @@ export const useUnitHook = (
     useEffect(() => {
         if (accessToken) {
             if (query.trim() === '') {
-                GetUnitServices(
+                GetPositionServices(
                     accessToken,
                     setDatas,
                     setLoadingDatas,
@@ -20,7 +20,7 @@ export const useUnitHook = (
                 );
             } else {
                 const timerSearchData = setTimeout(() => {
-                    SearchUnitServices(
+                    SearchPositionServices(
                         query,
                         accessToken,
                         setDatas,
