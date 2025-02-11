@@ -1,3 +1,1 @@
-import LayoutAuth from "./layoutAuth";
-
-export { LayoutAuth };
+export { default as ContentLayout } from "./ContentLayout";

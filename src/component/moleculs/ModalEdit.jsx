@@ -40,7 +40,10 @@ const ModalEdit = ({
             >
               Close
             </Button>
-            <Button className="text-white hover:bg-green-800 bg-success text-sm px-4 py-2">
+            <Button
+              onClick={onSubmit}
+              className="text-white hover:bg-green-800 bg-success text-sm px-4 py-2"
+            >
               {isSubmitting ? "Updating ..." : "Update Changes"}
             </Button>
           </div>

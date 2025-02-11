@@ -73,3 +73,30 @@ export const inputLogin = [
     validation: { required: "Password is required" },
   },
 ];
+
+export const inputUnit = [
+  {
+    id: "nama_unit",
+    type: "text",
+    placeholder: "Unit Name",
+    labelName: "Unit Name",
+    validation: { required: "Unit Name is required" },
+  },
+  {
+    id: "unit_code",
+    type: "text",
+    placeholder: "Unit Code",
+    labelName: "Unit Code",
+    validation: { required: "Unit Code is required" },
+  },
+];
+
+export const inputEditUnit = [
+  {
+    id: "nama_unit",
+    type: "text",
+    placeholder: "Unit Name",
+    labelName: "Unit Name",
+    validation: { required: "Unit Name is required" },
+  },
+];
