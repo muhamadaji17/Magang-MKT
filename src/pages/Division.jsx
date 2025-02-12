@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiGet } from "../api/apiCall";
 import useAuthStore from "../store/useAuthStore";
-import TableFlowbite from "../component/atom/TableFlowbite";
+import TableFlowbite from "../component/atom/Table";
 import { SearchTable, Button, ModalDelete, ModalEdit } from "../component";
 import { formatDateTime } from "../utils/formatters";
 import AddModal from "../component/moleculs/AddModal";

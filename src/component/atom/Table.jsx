@@ -1,4 +1,4 @@
-const TableFlowbite = ({ label, children }) => {
+const Table = ({ label, children }) => {
   return (
     <div className="relative overflow-x-auto">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -17,4 +17,4 @@ const TableFlowbite = ({ label, children }) => {
   );
 };
 
-export default TableFlowbite;
+export default Table;

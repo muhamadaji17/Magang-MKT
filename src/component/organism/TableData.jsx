@@ -10,12 +10,12 @@ import {
   SearchTable,
   ModalDepartement,
   ModalDelete,
+  Table,
 } from "../index";
 
 import { TbEdit } from "react-icons/tb";
 import { FaTrashCan } from "react-icons/fa6";
 
-import TableFlowbite from "../atom/TableFlowbite";
 import { formatDateTime } from "../../utils/formatters";
 
 import { labelDepartement } from "../../utils/label";
@@ -101,7 +101,7 @@ const DepartementPage = () => {
         </Button>
       </div>
 
-      <TableFlowbite label={labelDepartement}>
+      <Table label={labelDepartement}>
         {filteredData.map((row, rowIndex) => (
           <tr className="bg-white border-b border-gray-200" key={rowIndex}>
             <td className="px-6 py-4">{rowIndex + 1}</td>
@@ -127,7 +127,7 @@ const DepartementPage = () => {
             </td>
           </tr>
         ))}
-      </TableFlowbite>
+      </Table>
 
       <ModalDelete
         closeModal={closeDeleteModal}
