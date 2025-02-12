@@ -1,11 +1,14 @@
-import { Modal, Form, FormTitle, Input, Button, TextError } from "../index";
-import { inputUnit } from "../../utils/dataInput.js";
-import Select from "../atom/Select.jsx";
-import useAuthStore from "../../store/useAuthStore.js";
-import { useEffect, useState } from "react";
-import { apiGet } from "../../api/apiCall.js";
+import {
+  Modal,
+  Form,
+  FormTitle,
+  Input,
+  Button,
+  TextError,
+  Select,
+} from "../index";
 
-const AddModal = ({
+const ModalDepartement = ({
   isModalOpen,
   onSubmit,
   closeModal,
@@ -13,39 +16,51 @@ const AddModal = ({
   handleSubmit,
   errors,
   isSubmitting,
+  addInput,
+  titleForm,
+  descForm,
+  option,
 }) => {
-  const [data, setData] = useState([]);
-  const { token } = useAuthStore();
-  const fetchData = async () => {
-    const departements = await apiGet(`/crud/departement`, token);
-    setData(departements.payload);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <>
       <Modal isOpen={isModalOpen} closeModal={closeModal}>
         <Form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-          <FormTitle title="Form Departement" />
-          <p className="text-gray-600 text-sm">
-            Enter the unit name and unit code here
-          </p>
-          <Select option={data} register={register} />
-          {inputUnit.map((input, index) => (
+          <FormTitle title={titleForm} />
+          <p className="text-gray-600 text-sm">{descForm}</p>
+          {addInput.map((input, index) => (
             <div key={index}>
-              <Input
-                type={input.type}
-                placeholder={input.placeholder}
-                className="w-full p-1"
-                labelName={input.labelName}
-                label={input.labelName}
-                {...register(input.id, input.validation)}
-              />
-              {errors[input.id] && (
-                <TextError>{errors[input.id].message}</TextError>
+              {input.isSelect ? (
+                <form className="max-w-sm mx-auto">
+                  <select
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    {...register(input.id, input.validation)}
+                  >
+                    <option selected>Choose One</option>
+                    {option.length > 0 ? (
+                      option.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.nama_departement}
+                        </option>
+                      ))
+                    ) : (
+                      <option>No data available</option>
+                    )}
+                  </select>
+                </form>
+              ) : (
+                <>
+                  <Input
+                    type={input.type}
+                    placeholder={input.placeholder}
+                    className="w-full p-1"
+                    labelName={input.labelName}
+                    label={input.labelName}
+                    {...register(input.id, input.validation)}
+                  />
+                  {errors[input.id] && (
+                    <TextError>{errors[input.id].message}</TextError>
+                  )}
+                </>
               )}
             </div>
           ))}
@@ -59,7 +74,6 @@ const AddModal = ({
             <Button
               className="px-4 py-2 w-fit text-white bg-success hover:bg-green-800"
               type="submit"
-              onClick={onSubmit}
             >
               {isSubmitting ? "Loading..." : "Submit"}
             </Button>
@@ -70,4 +84,4 @@ const AddModal = ({
   );
 };
 
-export default AddModal;
+export default ModalDepartement;

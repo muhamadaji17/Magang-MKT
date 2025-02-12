@@ -10,12 +10,13 @@ export { default as Side } from "./atom/Side";
 export { default as SearchTable } from "./atom/SearchTable";
 export { default as BreadCrumbs } from "./atom/BreadCrumbs";
 export { default as Table } from "./atom/Table";
+export { default as Select } from "./atom/Select";
 
 export { default as FormTitle } from "./moleculs/FormTitle";
 export { default as ShowPassword } from "./moleculs/ShowPassword";
 
 export { default as FormLogin } from "./organism/FormLogin";
 export { default as FormRegister } from "./organism/FormRegister";
-export { default as ModalDepartement } from "./moleculs/ModalDepartement";
+export { default as AddModal } from "./moleculs/AddModal";
 export { default as ModalEdit } from "./moleculs/ModalEdit";
 export { default as ModalDelete } from "./moleculs/ModalDelete";

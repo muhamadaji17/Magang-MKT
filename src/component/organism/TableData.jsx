@@ -3,24 +3,21 @@ import { useForm } from "react-hook-form";
 import useAuthStore from "../../store/useAuthStore";
 import {
   Button,
-  Modal,
-  Input,
-  Form,
-  FormTitle,
   SearchTable,
-  ModalDepartement,
+  AddModal,
   ModalDelete,
   Table,
+  ModalEdit,
 } from "../index";
 
-import { TbEdit } from "react-icons/tb";
-import { FaTrashCan } from "react-icons/fa6";
-
+import { labelDepartement } from "../../utils/label";
 import { formatDateTime } from "../../utils/formatters";
 
-import { labelDepartement } from "../../utils/label";
+import { FaTrashCan } from "react-icons/fa6";
+import { TbEdit } from "react-icons/tb";
 
 import { useDepartementModal } from "../../hook/useDepartementModal";
+import { editDepartement, inputDepartement } from "../../utils/dataInput";
 
 const DepartementPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -129,13 +126,15 @@ const DepartementPage = () => {
         ))}
       </Table>
 
+      {/* Modal Delete Departement */}
       <ModalDelete
         closeModal={closeDeleteModal}
         isModalOpen={isDeleteModalOpen}
         onSubmit={confirmDeleteDepartement}
       />
 
-      <ModalDepartement
+      {/* Modal Tambah Departement */}
+      <AddModal
         closeModal={closeModal}
         isModalOpen={isModalOpen}
         register={registerDepartement}
@@ -143,52 +142,22 @@ const DepartementPage = () => {
         handleSubmit={handleSubmitDepartement}
         onSubmit={handleAddDepartement}
         isSubmitting={isSubmittingDepartement}
+        addInput={inputDepartement}
+        titleForm="Form Departement"
+        descForm="Enter departement details to submit"
       />
 
       {/* Modal Edit Departement */}
-      {isEditModalOpen && (
-        <Modal
-          isOpen={isEditModalOpen}
-          closeModal={() => setEditModalOpen(false)}
-        >
-          <FormTitle title="Edit Departement" />
-          <p className="text-sm text-gray-600">Change departmental data here</p>
-          <Form
-            onSubmit={handleSubmit(handleEditDepartement)}
-            className="space-y-4"
-          >
-            <div>
-              <Input
-                type="text"
-                placeholder="Nama Departemen"
-                className="w-full"
-                {...register("nama_departement", {
-                  required: "Nama departemen tidak boleh kosong",
-                })}
-              />
-              {errors.nama_departement && (
-                <p className="text-red-500 text-sm">
-                  {errors.nama_departement.message}
-                </p>
-              )}
-            </div>
-            <div className="w-full flex justify-center items-center space-x-4">
-              <Button
-                className="text-gray-700 bg-gray-200 hover:bg-gray-300 text-sm px-4 py-2"
-                onClick={() => setEditModalOpen(false)}
-              >
-                Close
-              </Button>
-              <Button
-                type="submit"
-                className="text-white hover:bg-green-800 bg-success text-sm px-4 py-2"
-              >
-                {isSubmitting ? "Updating ..." : "Update Changes"}
-              </Button>
-            </div>
-          </Form>
-        </Modal>
-      )}
+      <ModalEdit
+        closeModal={() => setEditModalOpen(false)}
+        editDepartement={editDepartement}
+        errors={errors}
+        handleSubmit={handleSubmit}
+        onSubmit={handleEditDepartement}
+        isSubmitting={isSubmitting}
+        isModalOpen={isEditModalOpen}
+        register={register}
+      />
     </div>
   );
 };

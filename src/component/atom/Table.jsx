@@ -11,7 +11,7 @@ const Table = ({ label, children }) => {
             ))}
           </tr>
         </thead>
-        <tbody>{children}</tbody>
+        {children}
       </table>
     </div>
   );

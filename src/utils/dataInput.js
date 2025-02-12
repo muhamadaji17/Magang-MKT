@@ -76,6 +76,11 @@ export const inputLogin = [
 
 export const inputUnit = [
   {
+    id: "id_departement",
+    isSelect: true,
+    validation: { required: "Departement Name is required" },
+  },
+  {
     id: "nama_unit",
     type: "text",
     placeholder: "Unit Name",
@@ -98,5 +103,12 @@ export const inputEditUnit = [
     placeholder: "Unit Name",
     labelName: "Unit Name",
     validation: { required: "Unit Name is required" },
+  },
+  {
+    id: "unit_code",
+    type: "text",
+    placeholder: "Unit Code",
+    labelName: "Unit Code",
+    validation: { required: "Unit Code is required" },
   },
 ];

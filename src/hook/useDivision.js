@@ -58,11 +58,12 @@ export const useDivision = (token, fetchData) => {
       const updatedData = {
         ...selectedData,
         nama_unit: formData.nama_unit,
+        unit_code: formData.unit_code,
       };
       const response = await updateUnit(selectedData.id, updatedData, token);
       showAlert("Success", response.message, "success", 5000);
-      await fetchData();
-      closeModal();
+      fetchData();
+      closeEditModal();
     } catch (error) {
       console.log(error);
     }
@@ -80,8 +81,10 @@ export const useDivision = (token, fetchData) => {
     handleDeleteUnit: openDeleteModal,
     handleEditUnit,
     isEditModalOpen,
+    setIsEditModalOpen,
     openEditModal,
     closeEditModal,
     selectedData,
+    setSelectedData,
   };
 };

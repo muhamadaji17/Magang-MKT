@@ -1,10 +1,10 @@
-import { Modal, FormTitle, Form, Button, Input } from "../index";
+import { Modal, FormTitle, Form, Button, Input, TextError } from "../index";
 
 const ModalEdit = ({
-  showEditModal,
-  closeEditModal,
+  closeModal,
   editDepartement,
   onSubmit,
+  isModalOpen,
   errors,
   isSubmitting,
   handleSubmit,
@@ -12,7 +12,7 @@ const ModalEdit = ({
 }) => {
   return (
     <>
-      <Modal isOpen={showEditModal} closeModal={closeEditModal}>
+      <Modal isOpen={isModalOpen} closeModal={closeModal}>
         <FormTitle title="Edit Departement" />
         <p className="text-sm text-gray-600">Change departmental data here</p>
         <Form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -20,28 +20,24 @@ const ModalEdit = ({
             <div key={index}>
               <Input
                 type={input.type}
-                name={input.id}
                 placeholder={input.placeholder}
                 className="w-full"
                 {...register(input.id, input.validation)}
               />
-
-              {errors.nama_departement && (
-                <p className="text-red-500 text-sm">
-                  {errors.nama_departement.message}
-                </p>
+              {errors[input.id] && (
+                <TextError>{errors[input.id].message}</TextError>
               )}
             </div>
           ))}
           <div className="w-full flex justify-center items-center space-x-4">
             <Button
               className="text-gray-700 bg-gray-200 hover:bg-gray-300 text-sm px-4 py-2"
-              onClick={closeEditModal}
+              onClick={closeModal}
             >
               Close
             </Button>
             <Button
-              onClick={onSubmit}
+              type="submit"
               className="text-white hover:bg-green-800 bg-success text-sm px-4 py-2"
             >
               {isSubmitting ? "Updating ..." : "Update Changes"}

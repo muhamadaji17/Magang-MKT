@@ -1,29 +1,40 @@
 import { useEffect, useState } from "react";
 import { apiGet } from "../api/apiCall";
 import useAuthStore from "../store/useAuthStore";
-import TableFlowbite from "../component/atom/Table";
-import { SearchTable, Button, ModalDelete, ModalEdit } from "../component";
+import {
+  SearchTable,
+  Button,
+  ModalDelete,
+  AddModal,
+  Table,
+  ModalEdit,
+} from "../component";
 import { formatDateTime } from "../utils/formatters";
-import AddModal from "../component/moleculs/AddModal";
 import { useForm } from "react-hook-form";
 import { useDivision } from "../hook/useDivision";
-import { inputEditUnit } from "../utils/dataInput";
+import { inputEditUnit, inputUnit } from "../utils/dataInput";
 
 import { TbEdit } from "react-icons/tb";
 import { FaTrashCan } from "react-icons/fa6";
+import { labelUnit } from "../utils/label";
 
 const Division = () => {
   const { token } = useAuthStore();
   const [divisionData, setDivisionData] = useState([]);
+  const [dataDepartement, setDataDepartement] = useState([]);
 
   const fetchData = async () => {
     try {
       const response = await apiGet(`/crud/unit`, token);
-      console.log(response);
       setDivisionData(response.payload);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  };
+
+  const fetchDepartement = async () => {
+    const response = await apiGet(`/crud/departement`, token);
+    setDataDepartement(response.payload);
   };
 
   const {
@@ -41,40 +52,55 @@ const Division = () => {
     isEditModalOpen,
     openEditModal,
     selectedData,
+    setSelectedData,
+    setIsEditModalOpen,
   } = useDivision(token, fetchData);
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const label = [
-    { name: "No", key: "no" },
-    { name: "Departement Name", key: "created" },
-    { name: "Unit Name", key: "nama_unit" },
-    { name: "Unit Code", key: "unit_code" },
-    { name: "Created At", key: "createdAt" },
-    { name: "Action", key: "action" },
-  ];
+  useEffect(() => {
+    fetchDepartement();
+  }, []);
 
   const [searchQuery, setSearchQuery] = useState("");
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleEditClick = (data) => {
-    openEditModal();
+  const handleEditClick = (unit) => {
+    setSelectedData(unit);
+    setValue("nama_unit", unit.nama_unit);
+    setValue("unit_code", unit.unit_code);
+
+    console.log("Unit", unit.unit_code);
+    setIsEditModalOpen(true);
   };
 
   const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
+    register: registerUnit,
+    handleSubmit: handleSubmitUnit,
+    formState: { errors: errorsUnit, isSubmitting: isSubmittingUnit },
   } = useForm({
     mode: "onSubmit",
     defaultValues: {
       id_departement: "",
       unit_code: "",
       nama_unit: "",
+    },
+  });
+
+  const {
+    register: registerEditUnit,
+    handleSubmit: handleSubmitEditUnit,
+    formState: { errors: errorsEditUnit, isSubmitting: isSubmittingEditUnit },
+    setValue,
+  } = useForm({
+    mode: "onSubmit",
+    defaultValues: {
+      nama_unit: "",
+      unit_code: "",
     },
   });
 
@@ -89,7 +115,7 @@ const Division = () => {
           Add Unit
         </Button>
       </div>
-      <TableFlowbite label={label}>
+      <Table label={labelUnit}>
         {divisionData.map((row, rowIndex) => (
           <tr className="bg-white border-b border-gray-200" key={rowIndex}>
             <td className="px-6 py-4">{rowIndex + 1}</td>
@@ -117,21 +143,38 @@ const Division = () => {
             </td>
           </tr>
         ))}
-        <AddModal
-          onSubmit={handleAddUnit}
-          closeModal={closeModal}
-          handleSubmit={handleSubmit}
-          register={register}
-          errors={errors}
-          isSubmitting={isSubmitting}
-          isModalOpen={isModalOpen}
-        />
-        <ModalDelete
-          isModalOpen={isDeleteModal}
-          closeModal={closeDeleteModal}
-          onSubmit={confirmDeleteUnit}
-        />
-      </TableFlowbite>
+      </Table>
+
+      <AddModal
+        option={dataDepartement}
+        titleForm="Form Unit"
+        descForm="Enter unit details to submit"
+        addInput={inputUnit}
+        onSubmit={handleAddUnit}
+        closeModal={closeModal}
+        handleSubmit={handleSubmitUnit}
+        register={registerUnit}
+        errors={errorsUnit}
+        isSubmitting={isSubmittingUnit}
+        isModalOpen={isModalOpen}
+      />
+
+      <ModalEdit
+        closeModal={closeEditModal}
+        errors={errorsEditUnit}
+        handleSubmit={handleSubmitEditUnit}
+        isSubmitting={isSubmittingEditUnit}
+        isModalOpen={isEditModalOpen}
+        register={registerEditUnit}
+        onSubmit={handleEditUnit}
+        editDepartement={inputEditUnit}
+      />
+
+      <ModalDelete
+        isModalOpen={isDeleteModal}
+        closeModal={closeDeleteModal}
+        onSubmit={confirmDeleteUnit}
+      />
     </>
   );
 };
