@@ -4,13 +4,16 @@ import {
   addDepartement,
   deleteDepartement,
   fetchDepartements,
+  updateDepartement,
 } from "../service/departementService";
 
-export const useDepartementModal = (token, fetchData) => {
-  const [data, setData] = useState([]);
+export const useDepartementModal = (token) => {
+  const [dataDepartement, setDataDepartement] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [dataToDelete, setDataToDelete] = useState(null);
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -25,6 +28,16 @@ export const useDepartementModal = (token, fetchData) => {
     setDataToDelete(null); // Reset data to delete when closing
   };
 
+  const fetchData = async () => {
+    try {
+      const departements = await fetchDepartements(token);
+      setDataDepartement(departements);
+    } catch (error) {
+      console.error("Error fetching data", error);
+      showAlert("Error", "Gagal mengambil data", "error", 5000);
+    }
+  };
+
   const handleAddDepartement = async (dataPost) => {
     try {
       const response = await addDepartement(dataPost, token);
@@ -37,19 +50,43 @@ export const useDepartementModal = (token, fetchData) => {
     }
   };
 
-  const confirmDeleteDepartement = async () => {
-    if (dataToDelete) {
-      try {
-        const response = await deleteDepartement(dataToDelete, token);
+  const handleEditDepartement = async (formData) => {
+    try {
+      if (!formData.nama_departement) {
+        showAlert("Error", "Nama departemen tidak boleh kosong", "error", 5000);
+        return;
+      }
+
+      const updatedData = {
+        ...selectedData,
+        nama_departement: formData.nama_departement,
+      };
+
+      console.log("Updated data for submission:", updatedData);
+
+      const response = await updateDepartement(
+        selectedData.id,
+        updatedData,
+        token
+      );
+
+      if (response) {
         showAlert("Success", response.message, "success", 5000);
         await fetchData();
-        closeDeleteModal();
-      } catch (error) {
-        console.error("Gagal menghapus departemen:", error);
-        showAlert("Error", "Gagal menghapus departemen", "error", 5000);
-      } finally {
-        closeDeleteModal();
+        setEditModalOpen(false);
       }
+    } catch (error) {
+      console.error("Gagal update data departemen", error);
+      showAlert("Error", "Gagal mengupdate departemen", "error", 5000);
+    }
+  };
+
+  const confirmDeleteDepartement = async () => {
+    if (dataToDelete) {
+      const response = await deleteDepartement(dataToDelete, token);
+      showAlert("Success", response.message, "success", 5000);
+      await fetchData();
+      closeDeleteModal();
     }
   };
 
@@ -62,6 +99,13 @@ export const useDepartementModal = (token, fetchData) => {
     closeDeleteModal,
     confirmDeleteDepartement,
     handleAddDepartement,
-    handleDeleteDepartement: openDeleteModal,
+    openDeleteModal,
+    handleEditDepartement,
+    isEditModalOpen,
+    setEditModalOpen,
+    selectedData,
+    setSelectedData,
+    fetchData,
+    dataDepartement,
   };
 };

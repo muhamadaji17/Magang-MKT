@@ -9,23 +9,21 @@ import {
   FormTitle,
   SearchTable,
   ModalDepartement,
+  ModalDelete,
 } from "../index";
-import {
-  fetchDepartements,
-  updateDepartement,
-} from "../../service/departementService";
+
+import { TbEdit } from "react-icons/tb";
+import { FaTrashCan } from "react-icons/fa6";
+
 import TableFlowbite from "../atom/TableFlowbite";
 import { formatDateTime } from "../../utils/formatters";
-import { showAlert } from "../../utils";
+
 import { labelDepartement } from "../../utils/label";
 
 import { useDepartementModal } from "../../hook/useDepartementModal";
 
 const DepartementPage = () => {
-  const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedData, setSelectedData] = useState(null);
-  const [isEditModalOpen, setEditModalOpen] = useState(false);
   const { token } = useAuthStore();
   const {
     register,
@@ -39,18 +37,36 @@ const DepartementPage = () => {
     },
   });
 
-  // Fetch data dari server
-  const fetchData = async () => {
-    try {
-      const departements = await fetchDepartements(token);
-      setData(departements);
-    } catch (error) {
-      console.error("Error fetching data", error);
-      showAlert("Error", "Gagal mengambil data", "error", 5000);
-    }
-  };
+  const {
+    register: registerDepartement,
+    handleSubmit: handleSubmitDepartement,
+    formState: {
+      errors: errorsDepartement,
+      isSubmitting: isSubmittingDepartement,
+    },
+  } = useForm({
+    mode: "onSubmit",
+    defaultValues: {
+      nama_departement: "",
+    },
+  });
 
-  const {} = useDepartementModal();
+  const {
+    handleAddDepartement,
+    isModalOpen,
+    openModal,
+    closeModal,
+    confirmDeleteDepartement,
+    closeDeleteModal,
+    openDeleteModal,
+    isDeleteModalOpen,
+    isEditModalOpen,
+    setEditModalOpen,
+    handleEditDepartement,
+    setSelectedData,
+    fetchData,
+    dataDepartement,
+  } = useDepartementModal(token);
 
   // Load data awal ketika komponen pertama kali di-mount
   useEffect(() => {
@@ -64,44 +80,12 @@ const DepartementPage = () => {
     setEditModalOpen(true);
   };
 
-  // Function untuk submit form edit
-  const handleEditDepartement = async (formData) => {
-    try {
-      if (!formData.nama_departement) {
-        showAlert("Error", "Nama departemen tidak boleh kosong", "error", 5000);
-        return;
-      }
-
-      const updatedData = {
-        ...selectedData,
-        nama_departement: formData.nama_departement,
-      };
-
-      console.log("Updated data for submission:", updatedData);
-
-      const response = await updateDepartement(
-        selectedData.id,
-        updatedData,
-        token
-      );
-
-      if (response) {
-        showAlert("Success", response.message, "success", 5000);
-        await fetchData();
-        setEditModalOpen(false);
-      }
-    } catch (error) {
-      console.error("Gagal update data departemen", error);
-      showAlert("Error", "Gagal mengupdate departemen", "error", 5000);
-    }
-  };
-
   // Pencarian berdasarkan nama departemen
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredData = data.filter((item) =>
+  const filteredData = dataDepartement.filter((item) =>
     item.nama_departement.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -109,6 +93,12 @@ const DepartementPage = () => {
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center w-full pb-4">
         <SearchTable value={searchQuery} onChange={handleSearch} />
+        <Button
+          className="bg-primary px-4 py-2 text-xs lg:text-sm text-white hover:bg-blue-700"
+          onClick={openModal}
+        >
+          Add Departement
+        </Button>
       </div>
 
       <TableFlowbite label={labelDepartement}>
@@ -121,17 +111,39 @@ const DepartementPage = () => {
             <td className="px-6 py-4">
               {formatDateTime(row.created_admin.createdAt)}
             </td>
-            <td className="px-6 py-4 space-x-4">
+            <td className="px-6 py-4 space-x-4 flex items-center">
               <button
                 className="text-green-500 hover:text-green-700"
                 onClick={() => handleEditClick(row)}
               >
-                Edit
+                <TbEdit size={20} />
+              </button>
+              <button
+                className="text-red-500 hover:text-red-700"
+                onClick={() => openDeleteModal(row.id)}
+              >
+                <FaTrashCan size={20} />
               </button>
             </td>
           </tr>
         ))}
       </TableFlowbite>
+
+      <ModalDelete
+        closeModal={closeDeleteModal}
+        isModalOpen={isDeleteModalOpen}
+        onSubmit={confirmDeleteDepartement}
+      />
+
+      <ModalDepartement
+        closeModal={closeModal}
+        isModalOpen={isModalOpen}
+        register={registerDepartement}
+        errors={errorsDepartement}
+        handleSubmit={handleSubmitDepartement}
+        onSubmit={handleAddDepartement}
+        isSubmitting={isSubmittingDepartement}
+      />
 
       {/* Modal Edit Departement */}
       {isEditModalOpen && (
