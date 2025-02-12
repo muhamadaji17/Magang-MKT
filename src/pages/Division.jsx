@@ -46,12 +46,9 @@ const Division = () => {
     confirmDeleteUnit,
     handleDeleteUnit,
     isDeleteModal,
-    openDeleteModal,
     closeEditModal,
     handleEditUnit,
     isEditModalOpen,
-    openEditModal,
-    selectedData,
     setSelectedData,
     setIsEditModalOpen,
   } = useDivision(token, fetchData);
@@ -68,6 +65,10 @@ const Division = () => {
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
+
+  const filteredData = divisionData.filter((item) =>
+    item.nama_unit.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const handleEditClick = (unit) => {
     setSelectedData(unit);
@@ -116,7 +117,7 @@ const Division = () => {
         </Button>
       </div>
       <Table label={labelUnit}>
-        {divisionData.map((row, rowIndex) => (
+        {filteredData.map((row, rowIndex) => (
           <tr className="bg-white border-b border-gray-200" key={rowIndex}>
             <td className="px-6 py-4">{rowIndex + 1}</td>
             <td className="px-6 py-4">

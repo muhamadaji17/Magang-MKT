@@ -105,9 +105,7 @@ const DepartementPage = () => {
             <td className="px-6 py-4">{row.created_admin.username}</td>
             <td className="px-6 py-4">{row.departement_code}</td>
             <td className="px-6 py-4">{row.nama_departement}</td>
-            <td className="px-6 py-4">
-              {formatDateTime(row.created_admin.createdAt)}
-            </td>
+            <td className="px-6 py-4">{formatDateTime(row.createdAt)}</td>
             <td className="px-6 py-4 space-x-4 flex items-center">
               <button
                 className="text-green-500 hover:text-green-700"

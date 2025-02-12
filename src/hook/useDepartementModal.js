@@ -32,6 +32,7 @@ export const useDepartementModal = (token) => {
     try {
       const departements = await fetchDepartements(token);
       setDataDepartement(departements);
+      console.log(departements);
     } catch (error) {
       console.error("Error fetching data", error);
       showAlert("Error", "Gagal mengambil data", "error", 5000);
@@ -61,8 +62,6 @@ export const useDepartementModal = (token) => {
         ...selectedData,
         nama_departement: formData.nama_departement,
       };
-
-      console.log("Updated data for submission:", updatedData);
 
       const response = await updateDepartement(
         selectedData.id,
