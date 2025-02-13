@@ -1,7 +1,7 @@
 import { FaTrashAlt, FaRegEdit } from 'react-icons/fa';
 import dayjs from 'dayjs';
 import { ModalLayout } from '../organisms';
-import { Button } from '../atoms';
+import { Button, Input } from '../atoms';
 
 const Table = ({
     datas,
@@ -24,6 +24,8 @@ const Table = ({
     paginationIconNext: PaginationIconNext,
     paginationIconPrev: PaginationIconPrev,
     columns,
+    query,
+    handleChange,
 }) => {
     return (
         <div>
@@ -44,10 +46,23 @@ const Table = ({
                                     .map((column, i) => (
                                         <th
                                             scope='col'
-                                            className='px-6 py-3 '
+                                            className='px-6 py-3'
                                             key={i}
                                         >
-                                            {column?.title}
+                                            <div className='flex flex-col gap-2'>
+                                                <Input
+                                                    variant='h-6 text-center text-sm text-black'
+                                                    placeholder='Search...'
+                                                    value={query[column.key]}
+                                                    onChange={(e) =>
+                                                        handleChange(
+                                                            e,
+                                                            column.key
+                                                        )
+                                                    }
+                                                />
+                                                {column?.title}
+                                            </div>
                                         </th>
                                     ))}
                             <th scope='col' className='px-6 py-3'>

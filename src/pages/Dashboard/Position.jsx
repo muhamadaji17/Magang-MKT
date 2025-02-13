@@ -8,6 +8,7 @@ import {
     handleShowModalId,
     handleCancelModal,
     PositionTableData,
+    handleChange,
 } from '../../pattern';
 import { getUrlDashboard, Loading } from '../../utils';
 import { Table } from '../../components/organisms';
@@ -84,8 +85,6 @@ const Position = () => {
                 setDatas={setDatas}
                 type={modalType}
                 setReGetDatas={setReGetDatas}
-                query={query}
-                setQuery={setQuery}
             />
             {loadingDatas ? (
                 <div className='w-full flex items-center justify-center'>
@@ -124,6 +123,8 @@ const Position = () => {
                     paginationIconNext={MdNavigateNext}
                     paginationIconPrev={MdNavigateBefore}
                     columns={PositionTableData}
+                    query={query}
+                    handleChange={(e, key) => handleChange(e, key, setQuery)}
                 />
             )}
         </>

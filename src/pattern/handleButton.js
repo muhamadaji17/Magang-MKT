@@ -49,3 +49,10 @@ export const handleModal = (e, trigger, setShowModal) => {
         setShowModal(false);
     }
 };
+
+export const handleChange = (e, key, setDatas) => {
+    setDatas((prev) => ({
+        ...prev,
+        [key]: e.target.value,
+    }));
+};

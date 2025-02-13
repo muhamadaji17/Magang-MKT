@@ -1,5 +1,4 @@
-import { CiSearch } from 'react-icons/ci';
-import { Button, Input } from '../../components/atoms';
+import { Button } from '../../components/atoms';
 import { ModalLayout } from '../organisms';
 
 const DashboardHeader = ({
@@ -21,8 +20,6 @@ const DashboardHeader = ({
     setDatas,
     type,
     setReGetDatas,
-    query,
-    setQuery,
 }) => {
     return (
         <>
@@ -39,16 +36,6 @@ const DashboardHeader = ({
                     <div className='flex flex-col lg:flex-row justify-center lg:justify-between lg:items-center gap-4'>
                         <h1 className='text-2xl font-semibold'>{title}</h1>
                         <div className='flex gap-2 items-center'>
-                            <div className='relative'>
-                                <Input
-                                    value={query}
-                                    onChange={(e) => setQuery(e.target.value)}
-                                    placeholder='Search'
-                                    type='search'
-                                    variant='no-clear'
-                                />
-                                <CiSearch className='absolute top-2 right-2 w-6 h-6' />
-                            </div>
                             <Button
                                 type='button'
                                 className='w-48 text-white bg-blue-600 hover:bg-blue-800 text-sm lg:text-base'

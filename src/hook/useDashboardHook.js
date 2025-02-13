@@ -11,7 +11,7 @@ export const useDashboardHook = () => {
     const [getDetailsData, setGetDetailsData] = useState(null);
     const [reGetDatas, setReGetDatas] = useState(false);
     const [hamburger, setHamburger] = useState(false);
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useState({});
     const [subData, setSubData] = useState([]);
     const trigger = useRef(null);
     const store = useStore();

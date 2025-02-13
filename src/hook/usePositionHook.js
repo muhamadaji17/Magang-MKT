@@ -11,7 +11,10 @@ export const usePositionHook = (
 ) => {
     useEffect(() => {
         if (accessToken) {
-            if (query.trim() === '') {
+            if (
+                Object.keys(query).length === 0 ||
+                Object.values(query).every((value) => value === '')
+            ) {
                 GetPositionServices(
                     accessToken,
                     setDatas,

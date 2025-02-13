@@ -8,6 +8,7 @@ import {
     handleShowModalId,
     handleCancelModal,
     unitTableData,
+    handleChange,
 } from '../../pattern';
 import { getUrlDashboard, Loading } from '../../utils';
 import { Table } from '../../components/organisms';
@@ -98,8 +99,6 @@ const Unit = () => {
                 setDatas={setDatas}
                 type={modalType}
                 setReGetDatas={setReGetDatas}
-                query={query}
-                setQuery={setQuery}
             />
             {loadingDatas ? (
                 <div className='w-full flex items-center justify-center'>
@@ -138,6 +137,8 @@ const Unit = () => {
                     paginationIconNext={MdNavigateNext}
                     paginationIconPrev={MdNavigateBefore}
                     columns={unitTableData}
+                    query={query}
+                    handleChange={(e, key) => handleChange(e, key, setQuery)}
                 />
             )}
         </>

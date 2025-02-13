@@ -17,6 +17,7 @@ import {
     handleCancelModal,
     handleDeleteData,
     handleSubmitDataId,
+    handleChange,
 } from './handleButton';
 import { errorOptions } from './patternError';
 import { sidebarLink } from './sidebarPattern';
@@ -53,4 +54,5 @@ export {
     PositionTableData,
     inputAddPosition,
     inputEditPosition,
+    handleChange,
 };
