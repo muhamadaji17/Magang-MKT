@@ -18,9 +18,15 @@ import { TbEdit } from "react-icons/tb";
 
 import { useDepartementModal } from "../../hook/useDepartementModal";
 import { editDepartement, inputDepartement } from "../../utils/dataInput";
+import { apiGet } from "../../api/apiCall";
+import {
+  handleAddDepartement,
+  handleEditDepartement,
+} from "../../service/departementService";
 
-const DepartementPage = () => {
+const TableData = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchDepartementCode, setSearchDepartementCode] = useState("");
   const { token } = useAuthStore();
   const {
     register,
@@ -49,7 +55,7 @@ const DepartementPage = () => {
   });
 
   const {
-    handleAddDepartement,
+    selectedData,
     isModalOpen,
     openModal,
     closeModal,
@@ -57,11 +63,12 @@ const DepartementPage = () => {
     closeDeleteModal,
     openDeleteModal,
     isDeleteModalOpen,
+    closeEditModal,
     isEditModalOpen,
     setEditModalOpen,
-    handleEditDepartement,
     setSelectedData,
     fetchData,
+    setDataDepartement,
     dataDepartement,
   } = useDepartementModal(token);
 
@@ -70,6 +77,10 @@ const DepartementPage = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    fetchDepartement(searchQuery, searchDepartementCode);
+  }, [searchQuery, searchDepartementCode]);
+
   // Mengisi form saat mengedit
   const handleEditClick = (departement) => {
     setSelectedData(departement);
@@ -77,19 +88,46 @@ const DepartementPage = () => {
     setEditModalOpen(true);
   };
 
+  const fetchDepartement = async (nama_departement, departement_code) => {
+    let query = "/crud/departement/by?";
+    if (nama_departement) {
+      query += `nama_departement=${nama_departement}&`;
+    }
+    if (departement_code) {
+      query += `departement_code=${departement_code}`;
+    }
+
+    const response = await apiGet(query, token);
+
+    if (response?.payload && Array.isArray(response.payload)) {
+      setDataDepartement(response.payload);
+    } else {
+      setDataDepartement([]); // Set sebagai array kosong jika respons tidak sesuai
+    }
+  };
+
   // Pencarian berdasarkan nama departemen
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredData = dataDepartement.filter((item) =>
-    item.nama_departement.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleSearchDepartementCode = (e) => {
+    setSearchDepartementCode(e.target.value);
+  };
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex justify-between items-center w-full pb-4">
-        <SearchTable value={searchQuery} onChange={handleSearch} />
+      <div className="flex justify-between items-center w-full pb-4 flex-wrap lg:flex-row gap-2">
+        <SearchTable
+          value={searchQuery}
+          onChange={handleSearch}
+          placeHolder="Search Departement"
+        />
+        <SearchTable
+          value={searchDepartementCode}
+          onChange={handleSearchDepartementCode}
+          placeHolder="Search Departement ID"
+        />
         <Button
           className="bg-primary px-4 py-2 text-xs lg:text-sm text-white hover:bg-blue-700"
           onClick={openModal}
@@ -99,29 +137,37 @@ const DepartementPage = () => {
       </div>
 
       <Table label={labelDepartement}>
-        {filteredData.map((row, rowIndex) => (
-          <tr className="bg-white border-b border-gray-200" key={rowIndex}>
-            <td className="px-6 py-4">{rowIndex + 1}</td>
-            <td className="px-6 py-4">{row.created_admin.username}</td>
-            <td className="px-6 py-4">{row.departement_code}</td>
-            <td className="px-6 py-4">{row.nama_departement}</td>
-            <td className="px-6 py-4">{formatDateTime(row.createdAt)}</td>
-            <td className="px-6 py-4 space-x-4 flex items-center">
-              <button
-                className="text-green-500 hover:text-green-700"
-                onClick={() => handleEditClick(row)}
-              >
-                <TbEdit size={20} />
-              </button>
-              <button
-                className="text-red-500 hover:text-red-700"
-                onClick={() => openDeleteModal(row.id)}
-              >
-                <FaTrashCan size={20} />
-              </button>
+        {dataDepartement.length > 0 ? (
+          dataDepartement.map((row, rowIndex) => (
+            <tr className="bg-white border-b border-gray-200" key={rowIndex}>
+              <td className="px-6 py-4">{rowIndex + 1}</td>
+              <td className="px-6 py-4">{row.created_admin.username}</td>
+              <td className="px-6 py-4">{row.departement_code}</td>
+              <td className="px-6 py-4">{row.nama_departement}</td>
+              <td className="px-6 py-4">{formatDateTime(row.createdAt)}</td>
+              <td className="px-6 py-4 space-x-4 flex items-center">
+                <button
+                  className="text-green-500 hover:text-green-700"
+                  onClick={() => handleEditClick(row)}
+                >
+                  <TbEdit size={20} />
+                </button>
+                <button
+                  className="text-red-500 hover:text-red-700"
+                  onClick={() => openDeleteModal(row.id)}
+                >
+                  <FaTrashCan size={20} />
+                </button>
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan={6} className="text-center py-4">
+              No data available
             </td>
           </tr>
-        ))}
+        )}
       </Table>
 
       {/* Modal Delete Departement */}
@@ -133,6 +179,7 @@ const DepartementPage = () => {
 
       {/* Modal Tambah Departement */}
       <AddModal
+        token={token}
         closeModal={closeModal}
         isModalOpen={isModalOpen}
         register={registerDepartement}
@@ -147,11 +194,13 @@ const DepartementPage = () => {
 
       {/* Modal Edit Departement */}
       <ModalEdit
-        closeModal={() => setEditModalOpen(false)}
+        token={token}
+        closeModal={closeEditModal}
         editDepartement={editDepartement}
         errors={errors}
         handleSubmit={handleSubmit}
         onSubmit={handleEditDepartement}
+        id={selectedData?.id}
         isSubmitting={isSubmitting}
         isModalOpen={isEditModalOpen}
         register={register}
@@ -160,4 +209,4 @@ const DepartementPage = () => {
   );
 };
 
-export default DepartementPage;
+export default TableData;

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { showAlert } from "../utils";
 import TableData from "../component/organism/TableData";
 
-const Home = () => {
+const Departement = () => {
   const { token } = useAuthStore();
   const navigate = useNavigate();
 
@@ -22,4 +22,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Departement;

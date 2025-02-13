@@ -1,10 +1,8 @@
 import { useState } from "react";
 import showAlert from "../utils/ShowAlert";
 import {
-  addDepartement,
   deleteDepartement,
   fetchDepartements,
-  updateDepartement,
 } from "../service/departementService";
 
 export const useDepartementModal = (token) => {
@@ -17,6 +15,9 @@ export const useDepartementModal = (token) => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const closeEditModal = () => setEditModalOpen(false);
+  const openEditModal = () => setEditModalOpen(true);
 
   const openDeleteModal = (id) => {
     setDataToDelete(id);
@@ -32,51 +33,9 @@ export const useDepartementModal = (token) => {
     try {
       const departements = await fetchDepartements(token);
       setDataDepartement(departements);
-      console.log(departements);
     } catch (error) {
       console.error("Error fetching data", error);
       showAlert("Error", "Gagal mengambil data", "error", 5000);
-    }
-  };
-
-  const handleAddDepartement = async (dataPost) => {
-    try {
-      const response = await addDepartement(dataPost, token);
-      showAlert("Success", response.message, "success", 5000);
-      closeModal();
-      fetchData();
-    } catch (error) {
-      console.error("Gagal menambah departemen:", error);
-      showAlert("Error", "Gagal menambah departemen", "error", 5000);
-    }
-  };
-
-  const handleEditDepartement = async (formData) => {
-    try {
-      if (!formData.nama_departement) {
-        showAlert("Error", "Nama departemen tidak boleh kosong", "error", 5000);
-        return;
-      }
-
-      const updatedData = {
-        ...selectedData,
-        nama_departement: formData.nama_departement,
-      };
-
-      const response = await updateDepartement(
-        selectedData.id,
-        updatedData,
-        token
-      );
-
-      if (response) {
-        showAlert("Success", response.message, "success", 5000);
-        await fetchData();
-        setEditModalOpen(false);
-      }
-    } catch (error) {
-      console.error("Gagal update data departemen", error);
-      showAlert("Error", "Gagal mengupdate departemen", "error", 5000);
     }
   };
 
@@ -97,14 +56,15 @@ export const useDepartementModal = (token) => {
     openDeleteModal,
     closeDeleteModal,
     confirmDeleteDepartement,
-    handleAddDepartement,
     openDeleteModal,
-    handleEditDepartement,
     isEditModalOpen,
+    openEditModal,
+    closeEditModal,
     setEditModalOpen,
     selectedData,
     setSelectedData,
     fetchData,
     dataDepartement,
+    setDataDepartement,
   };
 };

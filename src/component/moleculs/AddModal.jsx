@@ -20,11 +20,15 @@ const ModalDepartement = ({
   titleForm,
   descForm,
   option,
+  token,
 }) => {
   return (
     <>
       <Modal isOpen={isModalOpen} closeModal={closeModal}>
-        <Form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+        <Form
+          onSubmit={handleSubmit((data) => onSubmit(data, token, closeModal))}
+          className="space-y-3"
+        >
           <FormTitle title={titleForm} />
           <p className="text-gray-600 text-sm">{descForm}</p>
           {addInput.map((input, index) => (

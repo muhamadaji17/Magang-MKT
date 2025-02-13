@@ -9,13 +9,20 @@ const ModalEdit = ({
   isSubmitting,
   handleSubmit,
   register,
+  token,
+  id,
 }) => {
   return (
     <>
       <Modal isOpen={isModalOpen} closeModal={closeModal}>
         <FormTitle title="Edit Departement" />
         <p className="text-sm text-gray-600">Change departmental data here</p>
-        <Form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <Form
+          onSubmit={handleSubmit((data) =>
+            onSubmit(id, data, token, closeModal)
+          )}
+          className="space-y-4"
+        >
           {editDepartement.map((input, index) => (
             <div key={index}>
               <Input
