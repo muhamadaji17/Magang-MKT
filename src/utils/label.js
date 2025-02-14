@@ -6,12 +6,10 @@ export const labelDepartement = [
 ];
 
 export const labelUnit = [
-  { name: "No", key: "no" },
   { name: "Departement Name", key: "created" },
   { name: "Unit Name", key: "nama_unit" },
   { name: "Unit Code", key: "unit_code" },
   { name: "Created At", key: "createdAt" },
-  { name: "Action", key: "action" },
 ];
 
 export const labelJabatan = [

@@ -13,22 +13,9 @@ import {
   AddModal,
 } from "../component";
 
-import { useDepartementHook } from "../hook/useDepartementModal";
-import {
-  inputDepartement,
-  editDepartement,
-  inputPosition,
-  editPosition,
-} from "../utils/dataInput";
-import {
-  fetchDepartements,
-  handleAddDepartement,
-  handleEditDepartement,
-  confirmDeleteDepartement,
-} from "../service/departementService";
+import { inputPosition, editPosition } from "../utils/dataInput";
 
 import { apiGet } from "../api/apiCall";
-import TableJabatan from "../component/organism/TableJabatan";
 import {
   confirmDeletePosition,
   fetchJabatan,
@@ -75,6 +62,7 @@ const Position = () => {
 
   const getAllPosition = async () => {
     const response = await fetchJabatan(token, setRefresh);
+    console.log("getAll:", response);
     setDataPosition(response);
   };
 
@@ -112,6 +100,7 @@ const Position = () => {
 
     if (response?.payload && Array.isArray(response.payload)) {
       setDataPosition(response.payload);
+      console.log(response?.payload);
     } else {
       setDataPosition([]);
     }
