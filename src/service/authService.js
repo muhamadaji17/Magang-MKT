@@ -8,6 +8,7 @@ export const LoginService = async ({
   navigate,
   setLoading,
 }) => {
+  setLoading(true);
   try {
     const response = await POST_AUTH("login", data);
     console.log(response);
@@ -19,10 +20,11 @@ export const LoginService = async ({
         text: response.data.message,
       });
       cookie.set("authToken", response.data.data.accessToken, {
-        expires: 7,
+        expires: 1,
         secure: true,
         sameSite: "Strict",
       });
+      cookie.set("username", response.data.data.username);
       resetField();
       navigate("/");
     }
@@ -44,6 +46,7 @@ export const RegisterService = async ({
   navigate,
   setLoading,
 }) => {
+  setLoading(true);
   try {
     const response = await POST_AUTH("register", data);
 
@@ -82,6 +85,7 @@ export const OtpService = async ({
   navigate,
   setLoading,
 }) => {
+  setLoading(true);
   try {
     const response = await POST_AUTH("forgot-password", data);
     console.log(response);
@@ -120,9 +124,8 @@ export const ResetPasswordService = async ({
   setLoading,
 }) => {
   const { codeOtp: otp, phone_number, password } = data;
-  console.log(data);
-
   const body = { otp, phone_number, password };
+  setLoading(true);
   try {
     const response = await POST_AUTH("set-pass", body);
     console.log(response);
@@ -156,4 +159,5 @@ export const ResetPasswordService = async ({
 
 export const signOut = () => {
   cookie.remove("authToken");
+  cookie.remove("username");
 };

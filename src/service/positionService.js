@@ -1,5 +1,6 @@
 import { DELETE, GET, POST_DATA, PUT_DATA } from "../api";
 import { TriggerAlert } from "../utils";
+import { generateEndpointWithQuery } from "./generateEndpointWithQuery";
 
 const getDataPositionService = async ({
   accessToken,
@@ -33,10 +34,11 @@ const addDataPositionService = async ({
   accessToken,
   data,
   setLoading,
-  setShowModal,
+  handleShowModal,
   setUpdateData,
   resetField,
 }) => {
+  setLoading(true);
   try {
     const response = await POST_DATA("jabatan", accessToken, data);
     if (response.data.status) {
@@ -47,7 +49,7 @@ const addDataPositionService = async ({
       });
       console.log(response);
       resetField();
-      setShowModal(false);
+      handleShowModal();
       setUpdateData((prev) => !prev);
     }
   } catch (error) {
@@ -65,8 +67,7 @@ const addDataPositionService = async ({
 
 const deleteDataPositionService = async ({
   accessToken,
-  setLoading,
-  setShowModal,
+  handleShowModal,
   setUpdateData,
   dataId,
 }) => {
@@ -91,8 +92,7 @@ const deleteDataPositionService = async ({
       text: error.data.message,
     });
   } finally {
-    setLoading(false);
-    setShowModal(false);
+    handleShowModal();
   }
 };
 const editDataPositionService = async ({
@@ -100,10 +100,11 @@ const editDataPositionService = async ({
   data,
   dataId,
   setLoading,
-  setShowModal,
+  handleShowModal,
   setUpdateData,
   resetField,
 }) => {
+  setLoading(true);
   try {
     const response = await PUT_DATA(`jabatan/${dataId}`, accessToken, data);
     if (response.data.status) {
@@ -114,7 +115,7 @@ const editDataPositionService = async ({
       });
       console.log(response);
       resetField();
-      setShowModal(false);
+      handleShowModal();
       setUpdateData(false);
     }
   } catch (error) {
@@ -136,9 +137,11 @@ const searchDataPositionService = async ({
   searchQuery,
   setUpdateData,
 }) => {
+  const endpointBySearchQuery = generateEndpointWithQuery(searchQuery);
+
   try {
     const response = await GET(
-      `jabatan/by?nama_jabatan=${searchQuery}`,
+      `jabatan/by?${endpointBySearchQuery}`,
       accessToken
     );
     const parsing = response.data.payload.map((data) => ({

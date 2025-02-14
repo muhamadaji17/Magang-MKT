@@ -1,3 +1,3 @@
-export const handleSearch = (value, setSearchQuery) => {
-  setSearchQuery(value);
+export const handleSearch = (value, key, setSearchQuery) => {
+  setSearchQuery((prev) => ({ ...prev, [key]: value }));
 };

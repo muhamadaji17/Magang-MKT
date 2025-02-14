@@ -1,24 +1,22 @@
 import { Link } from "react-router-dom";
-import { Button, Select } from "../atoms";
+import { Button } from "../atoms";
 import { useForm } from "react-hook-form";
-import { InputForm } from "../molecules/index";
+import { InputForm } from "../molecules";
 import { disabledButtonIfNoChange, handleShowPassword } from "../../pattern";
-import { useAuthToken, useGlobalHook } from "../../hook/index";
-import { useEffect, useState } from "react";
+import { useDefaultValue, useGlobalHook } from "../../hook/index";
+import { useEffect } from "react";
 
 const Form = ({
   dataForm,
   authFor,
-  subDataService,
   buttonName,
   handleSubmitData,
   buttonBg,
 }) => {
-  const { loading, setLoading } = useGlobalHook();
-  const { showPassword, setShowPassword } = useGlobalHook();
-  const [dataSub, setDataSub] = useState([]);
-  const { disabledButton, setDisabledButton } = useGlobalHook();
-  const accessToken = useAuthToken();
+  const { loading, setLoading } = useGlobalHook(false);
+  const { showPassword, setShowPassword } = useGlobalHook(false);
+  const { disabledButton, setDisabledButton } = useGlobalHook(false);
+
   const {
     showPassword: showConfirmPassword,
     setShowPassword: setShowConfirmPassword,
@@ -30,27 +28,17 @@ const Form = ({
     reset,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: useDefaultValue(dataForm),
+  });
 
   const inputValues = watch();
-
-  useEffect(() => {
-    if (subDataService) {
-      subDataService({
-        accessToken,
-        setDatas: setDataSub,
-        setLoading,
-        isSubData: true,
-      });
-    }
-  }, [subDataService]);
 
   useEffect(() => {
     disabledButtonIfNoChange(dataForm, inputValues, setDisabledButton);
   }, [inputValues]);
 
   const onSubmit = (data) => {
-    setLoading(true);
     handleSubmitData(data, reset, setLoading);
   };
 
@@ -63,11 +51,10 @@ const Form = ({
             return (
               <div key={index}>
                 <InputForm
-                  dataSelect={isSelect ? dataSub : null}
+                  dataSelect={isSelect ? input.option : null}
                   inputConfig={input}
                   error={errors[input.name]}
                   register={register}
-                  defaultValue={input.defaultValue}
                   showPassword={
                     input.name !== "confirmPassword"
                       ? showPassword

@@ -7,7 +7,7 @@ export const handleSubmitData = ({
   setState,
   navigate,
   accessToken,
-  setShowModal,
+  handleShowModal,
   setUpdateData,
   setLoading,
 }) => {
@@ -19,7 +19,7 @@ export const handleSubmitData = ({
     setState,
     navigate,
     setLoading,
-    setShowModal,
+    handleShowModal,
     accessToken,
     setUpdateData,
   });

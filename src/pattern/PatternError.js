@@ -45,7 +45,7 @@ export const errorOptions = {
     required: "Code is Required",
     minLength: {
       value: 4,
-      message: "Code must be at least 5 characters",
+      message: "Code min 4 characters",
     },
     maxLength: {
       value: 5,

@@ -1,5 +1,6 @@
 import { DELETE, GET, POST_DATA, PUT_DATA } from "../api";
 import { TriggerAlert } from "../utils";
+import { generateEndpointWithQuery } from "./generateEndpointWithQuery";
 
 const getDataUnitService = async ({
   accessToken,
@@ -20,6 +21,7 @@ const getDataUnitService = async ({
       id_departement: data.id_departement,
       id: data.id,
     }));
+
     setDatas(parsing);
     setUpdateData(true);
     setSearchQuery("");
@@ -35,10 +37,11 @@ const addDataUnitService = async ({
   accessToken,
   data,
   setLoading,
-  setShowModal,
+  handleShowModal,
   setUpdateData,
   resetField,
 }) => {
+  setLoading(true);
   try {
     const response = await POST_DATA("unit", accessToken, data);
     if (response.data.status) {
@@ -49,7 +52,7 @@ const addDataUnitService = async ({
       });
       console.log(response);
       resetField();
-      setShowModal(false);
+      handleShowModal();
       setUpdateData((prev) => !prev);
     }
   } catch (error) {
@@ -67,8 +70,7 @@ const addDataUnitService = async ({
 
 const deleteDataUnitService = async ({
   accessToken,
-  setLoading,
-  setShowModal,
+  handleShowModal,
   setUpdateData,
   dataId,
 }) => {
@@ -93,8 +95,7 @@ const deleteDataUnitService = async ({
       text: error.data.message,
     });
   } finally {
-    setLoading(false);
-    setShowModal(false);
+    handleShowModal();
   }
 };
 const editDataUnitService = async ({
@@ -102,10 +103,11 @@ const editDataUnitService = async ({
   data,
   dataId,
   setLoading,
-  setShowModal,
+  handleShowModal,
   setUpdateData,
   resetField,
 }) => {
+  setLoading(true);
   try {
     const response = await PUT_DATA(`unit/${dataId}`, accessToken, data);
     if (response.data.status) {
@@ -116,8 +118,8 @@ const editDataUnitService = async ({
       });
       console.log(response);
       resetField();
-      setShowModal(false);
       setUpdateData(false);
+      handleShowModal();
     }
   } catch (error) {
     console.error(error);
@@ -138,8 +140,10 @@ const searchDataUnitService = async ({
   searchQuery,
   setUpdateData,
 }) => {
+  const endpointBySearchQuery = generateEndpointWithQuery(searchQuery);
+
   try {
-    const response = await GET(`unit/by?nama_unit=${searchQuery}`, accessToken);
+    const response = await GET(`unit/by?${endpointBySearchQuery}`, accessToken);
     const parsing = response.data.payload.map((data) => ({
       nama_unit: data.nama_unit,
       unit_code: data.unit_code,

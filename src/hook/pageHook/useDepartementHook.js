@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useGlobalHook } from "../useGlobalHook";
 import { departementService } from "../../service";
-import { useAuthToken } from "../useAuthToken";
+import { useAuthToken } from "../useAuth";
 
 export const useDepartementHook = () => {
   const { datas, setDatas } = useGlobalHook();
@@ -12,10 +12,11 @@ export const useDepartementHook = () => {
   const { getDataColumn, setGetDataColumn } = useGlobalHook();
   const { searchQuery, setSearchQuery } = useGlobalHook();
   const { typeModal, setTypeModal } = useGlobalHook();
+
   const accessToken = useAuthToken();
 
   useEffect(() => {
-    if (searchQuery === "") {
+    if (Object.keys(searchQuery).length === 0) {
       departementService.get({
         accessToken,
         setDatas,
@@ -39,6 +40,7 @@ export const useDepartementHook = () => {
   return {
     datas,
     showModal,
+    accessToken,
     setShowModal,
     showModalWithId,
     setShowModalWithId,

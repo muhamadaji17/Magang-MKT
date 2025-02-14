@@ -4,6 +4,7 @@ import { usePositionHook } from "../../hook";
 import {
   handleSearch,
   handleShowModal,
+  handleSubmitData,
   inputAddPosition,
   inputEditPosition,
   tableColumnPosition,
@@ -13,6 +14,7 @@ import { Spinner } from "../../utils";
 
 const PositionPage = () => {
   const {
+    accessToken,
     datas,
     loading,
     searchQuery,
@@ -32,12 +34,22 @@ const PositionPage = () => {
     <div>
       <HeaderContent
         showModal={showModal}
-        setShowModal={setShowModal}
-        setUpdateData={setUpdateData}
-        service={positionService.add}
         inputDataForm={inputAddPosition}
-        handleSearch={(e) => handleSearch(e.target.value, setSearchQuery)}
-        inputValue={searchQuery}
+        handleSubmitData={(data, resetField, setLoading) =>
+          handleSubmitData({
+            data,
+            postData: positionService.add,
+            resetField,
+            handleShowModal: () => handleShowModal(setShowModal),
+            setLoading,
+            setUpdateData,
+            accessToken,
+          })
+        }
+        handleShowModal={(typeModal) => {
+          handleShowModal(setShowModal);
+          setTypeModal(typeModal);
+        }}
       />
 
       {!loading ? (
@@ -45,17 +57,19 @@ const PositionPage = () => {
           dataTable={datas}
           searchQuery={searchQuery}
           tableConfig={tableColumnPosition}
-          service={positionService}
           dataColumn={getDataColumn}
           typeModal={typeModal}
           dataForm={inputEditPosition(getDataColumn)}
+          service={positionService}
           showModal={showModalWithId}
-          setShowModal={setShowModalWithId}
           setUpdateData={setUpdateData}
+          handleSearch={(value, key) =>
+            handleSearch(value, key, setSearchQuery)
+          }
           handleShowModal={(data, typeModal) => {
             handleShowModal(setShowModalWithId);
             setTypeModal(typeModal);
-            setGetDataColumn({ ...data, name: data.nama_jabatan });
+            setGetDataColumn({ ...data, name: data?.nama_jabatan });
           }}
         />
       ) : (

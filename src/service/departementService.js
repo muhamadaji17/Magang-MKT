@@ -1,14 +1,16 @@
 import { TriggerAlert } from "../utils/TriggerAlert";
 import { POST_DATA, PUT_DATA, GET, DELETE } from "../api";
+import { generateEndpointWithQuery } from "./generateEndpointWithQuery";
 
 const addDataDepartementService = async ({
   accessToken,
   data,
   setLoading,
-  setShowModal,
+  handleShowModal,
   setUpdateData,
   resetField,
 }) => {
+  setLoading(true);
   try {
     const response = await POST_DATA("departement", accessToken, data);
     if (response.data.status) {
@@ -19,8 +21,8 @@ const addDataDepartementService = async ({
       });
       console.log(response);
       resetField();
-      setShowModal(false);
-      setUpdateData((prev) => !prev);
+      handleShowModal();
+      setUpdateData(false);
     }
   } catch (error) {
     console.error(error);
@@ -40,10 +42,11 @@ const editDataDepartementService = async ({
   data,
   dataId,
   setLoading,
-  setShowModal,
+  handleShowModal,
   setUpdateData,
   resetField,
 }) => {
+  setLoading(true);
   try {
     const response = await PUT_DATA(`departement/${dataId}`, accessToken, data);
     if (response.data.status) {
@@ -54,7 +57,7 @@ const editDataDepartementService = async ({
       });
       console.log(response);
       resetField();
-      setShowModal(false);
+      handleShowModal();
       setUpdateData(false);
     }
   } catch (error) {
@@ -75,36 +78,27 @@ const getDataDepartementService = async ({
   setDatas,
   setLoading,
   setUpdateData,
-  isSubData,
 }) => {
   setLoading(true);
   try {
     const response = await GET("departement", accessToken);
-    const parsing = response.data.payload.map((data) => {
-      if (!isSubData) {
-        return {
-          nama_departement: data.nama_departement,
-          departement_code: data.departement_code,
-          username: data.created_admin.username,
-          createdAt: data.createdAt,
-          id: data.id,
-        };
-      } else {
-        return {
-          name: data.nama_departement,
-          value: data.id,
-          id_departement: data.id,
-        };
-      }
-    });
+    const parsing = response.data.payload.map((data) => ({
+      nama_departement: data.nama_departement,
+      departement_code: data.departement_code,
+      username: data.created_admin.username,
+      createdAt: data.createdAt,
+      id: data.id,
+    }));
     setDatas(parsing);
-    if (setUpdateData) {
-      setUpdateData(true);
-    }
+    setUpdateData(true);
     console.log(response);
   } catch (error) {
     console.log(error);
-    TriggerAlert({ text: error.data.message, icon: "error", title: "Error!" });
+    TriggerAlert({
+      text: error.data?.message,
+      icon: "error",
+      title: "Error!",
+    });
   } finally {
     setLoading(false);
   }
@@ -112,8 +106,7 @@ const getDataDepartementService = async ({
 
 const deleteDataDepartementService = async ({
   accessToken,
-  setLoading,
-  setShowModal,
+  handleShowModal,
   setUpdateData,
   dataId,
 }) => {
@@ -138,8 +131,7 @@ const deleteDataDepartementService = async ({
       text: error.data.message,
     });
   } finally {
-    setLoading(false);
-    setShowModal(false);
+    handleShowModal();
   }
 };
 
@@ -150,8 +142,10 @@ const searchDataDepartementService = async ({
   setUpdateData,
 }) => {
   try {
+    const endpointBySearchQuery = generateEndpointWithQuery(searchQuery);
+
     const response = await GET(
-      `departement/by?nama_departement=${searchQuery}`,
+      `departement/by?${endpointBySearchQuery}`,
       accessToken
     );
     const parsing = response.data.payload.map((data) => ({

@@ -7,7 +7,6 @@ const InputForm = ({
   dataSelect,
   showPassword,
   setShowPassword,
-  defaultValue,
   handleClickIcon,
   error,
 }) => {
@@ -31,7 +30,6 @@ const InputForm = ({
           id={inputConfig.name}
           type={!showPassword ? inputConfig.type : "text"}
           register={register}
-          defaultValue={defaultValue}
           placeholder={inputConfig.placeholder}
           name={inputConfig.name}
           addOptionError={inputConfig.addOptionError}
@@ -40,7 +38,6 @@ const InputForm = ({
       ) : inputConfig.type === "select" ? (
         <Select
           dataSelect={dataSelect}
-          defaultValue={defaultValue}
           placeholder={inputConfig.placeholder}
           id={inputConfig.id}
           name={inputConfig.name}

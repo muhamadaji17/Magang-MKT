@@ -10,6 +10,7 @@ import Sidebar from "./Sidebar";
 import Searchbar from "./Searchbar";
 import Dropdown from "./Dropdown";
 import Navbar from "./Navbar";
+import Skeleton from "./Skeleton";
 
 export {
   InputForm,
@@ -23,5 +24,6 @@ export {
   HeaderContent,
   Searchbar,
   Navbar,
+  Skeleton,
   Dropdown,
 };

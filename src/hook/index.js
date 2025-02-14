@@ -3,8 +3,9 @@ import { useCustomContext } from "./useCustomContext";
 import { usePhoneNumber } from "./useGlobalContext";
 import { useDepartementHook } from "./pageHook/useDepartementHook";
 import { useDefaultValue } from "./useDefaultValue";
-import { useAuthToken } from "./useAuthToken";
+import { useAuthToken, useAuthUsername } from "./useAuth";
 import { useUnitHook } from "./pageHook/useUnitHook";
+import { useDataDepartement } from "./useDataDepartement";
 import { usePositionHook } from "./pageHook/usePositionHook";
 
 export {
@@ -15,5 +16,7 @@ export {
   useUnitHook,
   usePositionHook,
   useDefaultValue,
+  useDataDepartement,
   useAuthToken,
+  useAuthUsername,
 };

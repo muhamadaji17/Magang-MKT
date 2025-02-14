@@ -1,8 +1,6 @@
-import React from "react";
-
-const TableHead = ({ className, dataHead }) => {
+const TableHead = ({ dataHead }) => {
   return (
-    <thead className={className || ""}>
+    <thead className={"text-xs text-white text-center bg-blue-700 "}>
       <tr>
         <th scope="col" className="px-6 py-3">
           No

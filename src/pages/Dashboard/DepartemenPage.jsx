@@ -8,12 +8,14 @@ import {
   handleShowModal,
   inputAddDepartement,
   inputEditDepartement,
+  handleSubmitData,
 } from "../../pattern";
 import { departementService } from "../../service";
 
 const DepartemenPage = () => {
   const {
     datas,
+    accessToken,
     showModal,
     setShowModal,
     showModalWithId,
@@ -32,12 +34,22 @@ const DepartemenPage = () => {
     <div className="">
       <HeaderContent
         showModal={showModal}
-        setShowModal={setShowModal}
-        service={departementService.add}
-        setUpdateData={setUpdateData}
         inputDataForm={inputAddDepartement}
-        handleSearch={(e) => handleSearch(e.target.value, setSearchQuery)}
-        inputValue={searchQuery}
+        handleShowModal={(typeModal) => {
+          handleShowModal(setShowModal);
+          setTypeModal(typeModal);
+        }}
+        handleSubmitData={(data, resetField, setLoading) =>
+          handleSubmitData({
+            data,
+            postData: departementService.add,
+            resetField,
+            handleShowModal: () => handleShowModal(setShowModal),
+            setLoading,
+            setUpdateData,
+            accessToken,
+          })
+        }
       />
       {!loading ? (
         <Table
@@ -46,15 +58,18 @@ const DepartemenPage = () => {
           tableConfig={tableColumnDepartement}
           dataColumn={getDataColumn}
           typeModal={typeModal}
+          setSearchQuery={setSearchQuery}
           service={departementService}
           dataForm={inputEditDepartement(getDataColumn)}
           showModal={showModalWithId}
-          setShowModal={setShowModalWithId}
+          handleSearch={(value, key) =>
+            handleSearch(value, key, setSearchQuery)
+          }
           setUpdateData={setUpdateData}
           handleShowModal={(data, typeModal) => {
             handleShowModal(setShowModalWithId);
             setTypeModal(typeModal);
-            setGetDataColumn({ ...data, name: data.nama_departement });
+            setGetDataColumn({ ...data, name: data?.nama_departement });
           }}
         />
       ) : (

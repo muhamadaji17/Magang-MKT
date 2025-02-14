@@ -2,7 +2,8 @@ import { TableHead, TableBody, ConfirmDelete } from "../molecules";
 import { LayoutModal } from "../layouts";
 import { handleSubmitData } from "../../pattern";
 import { Form } from "../organism/";
-import { useAuthToken, useGlobalHook } from "../../hook";
+import { useAuthToken } from "../../hook";
+import { Input } from "../atoms";
 
 const Table = ({
   dataTable,
@@ -13,52 +14,55 @@ const Table = ({
   dataForm,
   service,
   showModal,
-  setShowModal,
   handleShowModal,
-  subDataService,
+  handleSearch,
   setUpdateData,
 }) => {
   const accessToken = useAuthToken();
-  const { loading } = useGlobalHook();
 
   return (
     <>
-      <div className="">
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-            <TableHead
-              className={"text-xs text-white text-center bg-blue-700"}
-              dataHead={tableConfig}
+      <div className="relative overflow-x-auto border rounded-tr-md rounded-tl-md border-gray-300 shadow-md sm:rounded-lg">
+        <div className="p-3 flex justify-evenly">
+          {tableConfig.map((data) => (
+            <Input
+              key={data.key}
+              type="text"
+              placeholder={data.title}
+              onChange={(e) => handleSearch(e.target.value, data.key)}
+              className="border border-gray-400 rounded-md py-1 px-3 outline-none w-28 md:w-fit text-xs"
             />
-            <TableBody
-              dataTable={dataTable}
-              tableConfig={tableConfig}
-              handleShowModal={handleShowModal}
-            />
-          </table>
-
-          {searchQuery !== "" && dataTable?.length === 0 ? (
-            <div className="text-center p-40">
-              <span className="font-bold">{`"${searchQuery}" `}</span>
-              <span>Data tidak ditemukan.</span>
-            </div>
-          ) : searchQuery === "" && dataTable?.length === 0 && !loading ? (
-            <div className="text-center p-40">
-              <span>Tidak ada data.</span>
-            </div>
-          ) : null}
+          ))}
         </div>
+
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+          <TableHead dataHead={tableConfig} />
+          <TableBody
+            dataTable={dataTable}
+            tableConfig={tableConfig}
+            handleShowModal={handleShowModal}
+          />
+        </table>
+
+        {Object.keys(searchQuery).length > 0 && dataTable?.length === 0 ? (
+          <div className="text-center p-40">
+            <span>Data tidak ditemukan.</span>
+          </div>
+        ) : Object.keys(searchQuery).length === 0 && dataTable?.length === 0 ? (
+          <div className="text-center p-40">
+            <span>Tidak ada data.</span>
+          </div>
+        ) : null}
       </div>
 
       <LayoutModal
         title={typeModal === "edit" && "Ubah Data"}
         show={showModal}
-        setShowModal={setShowModal}
+        handleShowModal={handleShowModal}
       >
         {typeModal === "edit" ? (
           <Form
             dataForm={dataForm}
-            subDataService={subDataService}
             buttonName={"Submit"}
             buttonBg={"bg-blue-600"}
             handleSubmitData={(data, resetField, setLoading) =>
@@ -68,7 +72,7 @@ const Table = ({
                 postData: service.edit,
                 resetField,
                 setLoading,
-                setShowModal: setShowModal,
+                handleShowModal,
                 setUpdateData,
                 accessToken,
               })
@@ -76,13 +80,12 @@ const Table = ({
           />
         ) : typeModal === "delete" ? (
           <ConfirmDelete
-            setShowModal={setShowModal}
+            handleShowModal={handleShowModal}
             dataName={dataColumn?.name}
-            handleSubmitData={(setLoading) =>
+            handleSubmitData={() =>
               handleSubmitData({
                 postData: service.delete,
-                setLoading,
-                setShowModal: setShowModal,
+                handleShowModal,
                 setUpdateData,
                 dataId: dataColumn.id,
                 accessToken,

@@ -1,12 +1,12 @@
 import { navLinkSidebar } from "../../pattern";
-import { NavLink } from ".";
+import NavLink from "./NavLink";
 
 const Sidebar = ({ show }) => {
   return (
     <div
       className={`${
         show ? "" : "-translate-x-full"
-      } absolute w-1/2  transition-all z-20 md:static md:translate-x-0 md:w-1/6 min-h-screen border-r-2  py-4 px-2 bg-white`}
+      } absolute bg-white w-1/2 md:w-full p-2 pt-4 z-10 transition-all right-0 left-0  md:static md:translate-x-0  min-h-screen border-r-2`}
     >
       <nav className="pt-20">
         <NavLink linkPatten={navLinkSidebar} />

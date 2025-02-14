@@ -5,8 +5,9 @@ import {
   tableColumnUnit,
   inputAddUnit,
   inputEditUnit,
+  handleSubmitData,
 } from "../../pattern";
-import { departementService, unitService } from "../../service";
+import { unitService } from "../../service";
 import { Spinner } from "../../utils";
 import { HeaderContent } from "../../component/molecules";
 import { useUnitHook } from "../../hook";
@@ -14,10 +15,12 @@ import { useUnitHook } from "../../hook";
 const UnitPage = () => {
   const {
     datas,
+    accessToken,
     loading,
     showModal,
     setShowModal,
     showModalWithId,
+    dataDepartement,
     setShowModalWithId,
     searchQuery,
     setSearchQuery,
@@ -32,32 +35,41 @@ const UnitPage = () => {
     <div>
       <HeaderContent
         showModal={showModal}
-        subDataService={departementService.get}
-        setShowModal={setShowModal}
-        setUpdateData={setUpdateData}
-        service={unitService.add}
-        inputDataForm={inputAddUnit}
-        handleSearch={(e) => handleSearch(e.target.value, setSearchQuery)}
-        inputValue={searchQuery}
+        handleShowModal={(typeModal) => {
+          handleShowModal(setShowModal);
+          setTypeModal(typeModal);
+        }}
+        inputDataForm={inputAddUnit(dataDepartement)}
+        handleSubmitData={(data, resetField, setLoading) =>
+          handleSubmitData({
+            data,
+            postData: unitService.add,
+            resetField,
+            handleShowModal: () => handleShowModal(setShowModal),
+            setLoading,
+            setUpdateData,
+            accessToken,
+          })
+        }
       />
       {!loading ? (
         <Table
           dataTable={datas}
-          subDataService={departementService.get}
           searchQuery={searchQuery}
           tableConfig={tableColumnUnit}
           service={unitService}
+          dataForm={inputEditUnit(getDataColumn, dataDepartement)}
           dataColumn={getDataColumn}
           typeModal={typeModal}
-          dataForm={inputEditUnit(getDataColumn)}
           showModal={showModalWithId}
-          setShowModal={setShowModalWithId}
           setUpdateData={setUpdateData}
+          handleSearch={(value, key) =>
+            handleSearch(value, key, setSearchQuery)
+          }
           handleShowModal={(data, typeModal) => {
             handleShowModal(setShowModalWithId);
             setTypeModal(typeModal);
-
-            setGetDataColumn({ ...data, name: data.nama_unit });
+            setGetDataColumn({ ...data, name: data?.nama_unit });
           }}
         />
       ) : (

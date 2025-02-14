@@ -1,6 +1,6 @@
 import { errorOptions } from "../PatternError";
 
-export const inputAddUnit = [
+export const inputAddUnit = (dataDepartement) => [
   {
     placeholder: "Pilih Departemen",
     type: "select",
@@ -8,6 +8,10 @@ export const inputAddUnit = [
     name: "id_departement",
     id: "id_departement",
     addOptionError: errorOptions.selectInput,
+    option: dataDepartement.map((data) => ({
+      name: data.nama_departement,
+      value: data.id,
+    })),
   },
   {
     placeholder: "Teknologi Informasi",
@@ -25,7 +29,7 @@ export const inputAddUnit = [
   },
 ];
 
-export const inputEditUnit = (defaultValue) => [
+export const inputEditUnit = (data, dataDepartement) => [
   {
     placeholder: "Pilih Departemen",
     type: "select",
@@ -33,7 +37,11 @@ export const inputEditUnit = (defaultValue) => [
     name: "id_departement",
     id: "id_departement",
     addOptionError: errorOptions.selectInput,
-    defaultValue: defaultValue?.id_departement,
+    defaultValue: data,
+    option: dataDepartement.map((data) => ({
+      name: data.nama_departement,
+      value: data.id,
+    })),
   },
   {
     placeholder: "Teknologi Informasi",
@@ -41,7 +49,7 @@ export const inputEditUnit = (defaultValue) => [
     title: "Nama Unit: ",
     name: "nama_unit",
     addOptionError: errorOptions.nameInModal,
-    defaultValue: defaultValue?.nama_unit,
+    defaultValue: data,
   },
   {
     placeholder: "Teknologi Informasi",
@@ -49,6 +57,6 @@ export const inputEditUnit = (defaultValue) => [
     title: "Code Unit: ",
     name: "unit_code",
     addOptionError: errorOptions.codeInModal,
-    defaultValue: defaultValue?.unit_code,
+    defaultValue: data,
   },
 ];

@@ -1,21 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { unitService } from "../../service";
-import { useAuthToken } from "../useAuthToken";
+import { useAuthToken } from "../useAuth";
 import { useGlobalHook } from "../useGlobalHook";
+import { useDataDepartement } from "../useDataDepartement";
 
 export const useUnitHook = () => {
-  const { datas, setDatas } = useGlobalHook([]);
-  const { loading, setLoading } = useGlobalHook(false);
-  const { updateData, setUpdateData } = useGlobalHook(false);
-  const { showModal, setShowModal } = useGlobalHook(false);
-  const { showModalWithId, setShowModalWithId } = useGlobalHook(false);
-  const { searchQuery, setSearchQuery } = useGlobalHook("");
-  const { getDataColumn, setGetDataColumn } = useGlobalHook({});
-  const { typeModal, setTypeModal } = useGlobalHook("");
+  const { datas, setDatas } = useGlobalHook();
+  const { loading, setLoading } = useGlobalHook();
+  const { updateData, setUpdateData } = useGlobalHook();
+  const { showModal, setShowModal } = useGlobalHook();
+  const { showModalWithId, setShowModalWithId } = useGlobalHook();
+  const { searchQuery, setSearchQuery } = useGlobalHook();
+  const { getDataColumn, setGetDataColumn } = useGlobalHook();
+  const { typeModal, setTypeModal } = useGlobalHook();
   const accessToken = useAuthToken();
+  const [dataDepartement, setDataDepartement] = useState([]);
 
   useEffect(() => {
-    if (searchQuery === "") {
+    if (Object.keys(searchQuery).length === 0) {
       unitService.get({
         accessToken,
         setDatas,
@@ -36,10 +38,21 @@ export const useUnitHook = () => {
     }
   }, [updateData, searchQuery]);
 
+  useDataDepartement(
+    accessToken,
+    typeModal,
+    setDataDepartement,
+    setUpdateData,
+    setLoading
+  );
+
   return {
     datas,
+    accessToken,
     loading,
+    setLoading,
     showModal,
+    dataDepartement,
     setShowModal,
     showModalWithId,
     setShowModalWithId,

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAuthToken } from "../useAuthToken";
+import { useAuthToken } from "../useAuth";
 import { useGlobalHook } from "../useGlobalHook";
 import { positionService } from "../../service";
 
@@ -15,7 +15,7 @@ export const usePositionHook = () => {
   const accessToken = useAuthToken();
 
   useEffect(() => {
-    if (searchQuery === "") {
+    if (Object.keys(searchQuery).length === 0) {
       positionService.get({
         accessToken,
         setDatas,
@@ -37,6 +37,7 @@ export const usePositionHook = () => {
   }, [updateData, searchQuery]);
 
   return {
+    accessToken,
     datas,
     loading,
     showModal,

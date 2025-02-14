@@ -31,7 +31,7 @@ export const inputEditPosition = (data) => [
     title: "Nama Jabatan: ",
     name: "nama_jabatan",
     addOptionError: errorOptions.nameInModal,
-    defaultValue: data?.nama_jabatan,
+    defaultValue: data,
   },
   {
     placeholder: "0X12B",
@@ -39,14 +39,14 @@ export const inputEditPosition = (data) => [
     title: "Kode Jabatan: ",
     name: "jabatan_code",
     addOptionError: errorOptions.codeInModal,
-    defaultValue: data?.jabatan_code,
+    defaultValue: data,
   },
   {
-    placeholder: "0X12B",
+    placeholder: "1",
     type: "number",
     title: "Priority: ",
     name: "priority",
     addOptionError: errorOptions.priority,
-    defaultValue: data?.priority,
+    defaultValue: data,
   },
 ];

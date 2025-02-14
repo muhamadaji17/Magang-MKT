@@ -3,7 +3,7 @@ import { useAuthToken } from "../hook";
 
 const ProtectRoute = ({ children }) => {
   const accessToken = useAuthToken();
-  if (!accessToken) return <Navigate to={"/login"} />;
+  if (!accessToken) return <Navigate to="/login" />;
 
   return children;
 };

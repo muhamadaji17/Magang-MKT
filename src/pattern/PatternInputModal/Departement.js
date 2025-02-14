@@ -24,7 +24,7 @@ export const inputEditDepartement = (data) => [
     title: "Nama Departemen: ",
     name: "nama_departement",
     addOptionError: errorOptions.nameInModal,
-    defaultValue: data?.nama_departement,
+    defaultValue: data,
   },
   {
     placeholder: "0X12B",
@@ -32,6 +32,6 @@ export const inputEditDepartement = (data) => [
     title: "Code Departemen: ",
     name: "departement_code",
     addOptionError: errorOptions.codeInModal,
-    defaultValue: data?.departement_code,
+    defaultValue: data,
   },
 ];

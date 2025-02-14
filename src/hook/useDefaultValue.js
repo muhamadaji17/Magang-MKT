@@ -3,6 +3,5 @@ export const useDefaultValue = (dataForm) => {
     acc[data.name] = data.defaultValue?.[data.name] || "";
     return acc;
   }, {});
-
   return result;
 };
