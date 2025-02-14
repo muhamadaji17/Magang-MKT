@@ -62,15 +62,14 @@ const Position = () => {
 
   const getAllPosition = async () => {
     const response = await fetchJabatan(token, setRefresh);
-    console.log("getAll:", response);
     setDataPosition(response);
   };
 
   const {
     searchQuery,
     handleSearch,
-    searchDepartementCode,
-    handleSearchDepartementCode,
+    searchPositionCode,
+    handleSearchPositionCode,
     openModal,
     closeEditModal,
     isEditModalOpen,
@@ -84,10 +83,10 @@ const Position = () => {
   } = usePositionHook();
 
   useEffect(() => {
-    queryDepartement(searchQuery, searchDepartementCode);
-  }, [searchQuery, searchDepartementCode]);
+    queryPosition(searchQuery, searchPositionCode);
+  }, [searchQuery, searchPositionCode]);
 
-  const queryDepartement = async (nama_jabatan, jabatan_code) => {
+  const queryPosition = async (nama_jabatan, jabatan_code) => {
     let query = "/crud/jabatan/by?";
     if (nama_jabatan) {
       query += `nama_jabatan=${nama_jabatan}&`;
@@ -100,7 +99,6 @@ const Position = () => {
 
     if (response?.payload && Array.isArray(response.payload)) {
       setDataPosition(response.payload);
-      console.log(response?.payload);
     } else {
       setDataPosition([]);
     }
@@ -127,8 +125,8 @@ const Position = () => {
             placeHolder="Search Position"
           />
           <SearchTable
-            value={searchDepartementCode}
-            onChange={handleSearchDepartementCode}
+            value={searchPositionCode}
+            onChange={handleSearchPositionCode}
             placeHolder="Search Position ID"
           />
           <Button
@@ -142,7 +140,7 @@ const Position = () => {
           label={labelJabatan}
           handleDeleteClick={handleDeleteClick}
           handleEditClick={(row) => handleEditClick(row, setValue)}
-          queryDepartement={queryDepartement}
+          queryDepartement={queryPosition}
           dataTable={dataPosition}
         />
       </div>

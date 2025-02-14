@@ -7,7 +7,7 @@ export const usePositionHook = () => {
   const [selectedData, setSelectedData] = useState(null);
 
   const [searchQuery, setSearchQuery] = useState(""); // State untuk pencarian
-  const [searchDepartementCode, setSearchDepartementCode] = useState("");
+  const [searchPositionCode, setSearchPositionCode] = useState("");
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -22,8 +22,8 @@ export const usePositionHook = () => {
     setSearchQuery(e.target.value);
   };
 
-  const handleSearchDepartementCode = (e) => {
-    setSearchDepartementCode(e.target.value);
+  const handleSearchPositionCode = (e) => {
+    setSearchPositionCode(e.target.value);
   };
 
   const handleEditClick = (position, setValue) => {
@@ -52,10 +52,10 @@ export const usePositionHook = () => {
     setSelectedData,
     searchQuery,
     setSearchQuery,
-    searchDepartementCode,
-    setSearchDepartementCode,
+    searchPositionCode,
+    setSearchPositionCode,
     handleSearch,
-    handleSearchDepartementCode,
+    handleSearchPositionCode,
     handleDeleteClick,
     handleEditClick,
   };
