@@ -140,7 +140,6 @@ const Position = () => {
           label={labelJabatan}
           handleDeleteClick={handleDeleteClick}
           handleEditClick={(row) => handleEditClick(row, setValue)}
-          queryDepartement={queryPosition}
           dataTable={dataPosition}
         />
       </div>

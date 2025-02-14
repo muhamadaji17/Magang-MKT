@@ -138,7 +138,6 @@ const Departement = () => {
           label={labelDepartement}
           handleDeleteClick={handleDeleteClick}
           handleEditClick={(row) => handleEditClick(row, setValue)}
-          queryDepartement={queryDepartement}
           dataTable={dataDepartement}
         />
       </div>
