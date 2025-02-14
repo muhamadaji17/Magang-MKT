@@ -26,7 +26,7 @@ import { usePositionHook } from "../hook/usePositionHook";
 import { labelJabatan } from "../utils/label";
 
 const Position = () => {
-  const [dataJabatan, setDataPosition] = useState([]);
+  const [dataPosition, setDataPosition] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
   const { token } = useAuthStore();
@@ -143,7 +143,7 @@ const Position = () => {
           handleDeleteClick={handleDeleteClick}
           handleEditClick={(row) => handleEditClick(row, setValue)}
           queryDepartement={queryDepartement}
-          dataDepartement={dataJabatan}
+          dataTable={dataPosition}
         />
       </div>
 

@@ -139,7 +139,7 @@ const Departement = () => {
           handleDeleteClick={handleDeleteClick}
           handleEditClick={(row) => handleEditClick(row, setValue)}
           queryDepartement={queryDepartement}
-          dataDepartement={dataDepartement}
+          dataTable={dataDepartement}
         />
       </div>
 

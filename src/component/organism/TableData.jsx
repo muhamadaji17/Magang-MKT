@@ -7,13 +7,13 @@ import { TbEdit } from "react-icons/tb";
 const TableData = ({
   handleEditClick,
   handleDeleteClick,
-  dataDepartement,
+  dataTable,
   label,
 }) => {
   return (
     <Table label={label}>
-      {dataDepartement?.length > 0 ? (
-        dataDepartement.map((row, rowIndex) => (
+      {dataTable?.length > 0 ? (
+        dataTable.map((row, rowIndex) => (
           <tr className="bg-white border-b border-gray-200" key={rowIndex}>
             <td className="px-6 py-4">{rowIndex + 1}</td>
             {labelDepartement.map((col) => (
