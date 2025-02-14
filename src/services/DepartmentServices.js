@@ -147,30 +147,13 @@ export const SearchDepartmentServices = async (
 ) => {
     try {
         setLoading(true);
-        let response;
-        if (Object.entries(searchData).length == 1) {
-            response = await GET_DATAS(
-                `crud/departement/by?${Object.keys(searchData)[0]}=${
-                    Object.values(searchData)[0]
-                }`,
-                token
-            );
-        } else {
-            response = await GET_DATAS(
-                `crud/departement/by?${Object.keys(searchData)[0]}=${
-                    Object.values(searchData)[0]
-                }&${Object.keys(searchData)[1]}=${
-                    Object.values(searchData)[1]
-                }&${Object.keys(searchData)[2]}=${
-                    Object.values(searchData)[2]
-                }&${Object.keys(searchData)[3]}=${
-                    Object.values(searchData)[3]
-                }&${Object.keys(searchData)[4]}=${
-                    Object.values(searchData)[4]
-                }`,
-                token
-            );
-        }
+        console.log(searchData);
+
+        const queryParams = new URLSearchParams(searchData).toString();
+        const response = await GET_DATAS(
+            `crud/departement/by?${queryParams}`,
+            token
+        );
         const datas = response.data.payload.map((item) => ({
             id: item.id,
             nama_departement: item.nama_departement,

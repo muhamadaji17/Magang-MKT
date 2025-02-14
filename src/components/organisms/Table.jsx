@@ -53,7 +53,9 @@ const Table = ({
                                                 <Input
                                                     variant='h-6 text-center text-sm text-black'
                                                     placeholder='Search...'
-                                                    value={query[column.key]}
+                                                    value={
+                                                        query[column.key] || ''
+                                                    }
                                                     onChange={(e) =>
                                                         handleChange(
                                                             e,
