@@ -16,9 +16,9 @@ const TableData = ({
         dataTable.map((row, rowIndex) => (
           <tr className="bg-white border-b border-gray-200" key={rowIndex}>
             <td className="px-6 py-4">{rowIndex + 1}</td>
-            {labelDepartement.map((col) => (
-              <td className="px-6 py-4">{row[col.key]}</td>
-            ))}
+            {label.map((col) => {
+              return <td className="px-6 py-4">{row[col.key]}</td>;
+            })}
             <td className="px-6 py-4 space-x-4 flex items-center">
               <button
                 className="text-green-500 hover:text-green-700"

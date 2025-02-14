@@ -81,10 +81,18 @@ const Departement = () => {
   } = useDepartementHook();
 
   useEffect(() => {
-    queryDepartement(searchQuery, searchDepartementCode);
-  }, [searchQuery, searchDepartementCode]);
+    if (searchQuery === "" && searchDepartementCode === "") {
+      getAllDepartements(setRefresh);
+    } else {
+      queryDepartement(searchQuery, searchDepartementCode, setRefresh);
+    }
+  }, [searchQuery, searchDepartementCode, setRefresh]);
 
-  const queryDepartement = async (nama_departement, departement_code) => {
+  const queryDepartement = async (
+    nama_departement,
+    departement_code,
+    setRefresh
+  ) => {
     let query = "/crud/departement/by?";
     if (nama_departement) {
       query += `nama_departement=${nama_departement}&`;
@@ -94,12 +102,15 @@ const Departement = () => {
     }
 
     const response = await apiGet(query, token);
-
-    if (response?.payload && Array.isArray(response.payload)) {
-      setDataDepartement(response.payload);
-    } else {
-      setDataDepartement([]);
-    }
+    const parsing = response.payload.map((data) => ({
+      nama_departement: data.nama_departement,
+      departement_code: data.departement_code,
+      username: data.created_admin.username,
+      createdAt: data.createdAt,
+      id: data.id,
+    }));
+    setRefresh(true);
+    setDataDepartement(parsing);
   };
 
   useEffect(() => {
@@ -108,10 +119,6 @@ const Departement = () => {
       navigate("/auth/login");
     }
   }, [token, navigate]);
-
-  useEffect(() => {
-    getAllDepartements(setRefresh);
-  }, [refresh]);
 
   return (
     <>

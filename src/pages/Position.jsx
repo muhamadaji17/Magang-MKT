@@ -60,8 +60,8 @@ const Position = () => {
     },
   });
 
-  const getAllPosition = async () => {
-    const response = await fetchJabatan(token, setRefresh);
+  const getAllPosition = async (token, refresh) => {
+    const response = await fetchJabatan(token, refresh);
     setDataPosition(response);
   };
 
@@ -83,10 +83,14 @@ const Position = () => {
   } = usePositionHook();
 
   useEffect(() => {
-    queryPosition(searchQuery, searchPositionCode);
-  }, [searchQuery, searchPositionCode]);
+    if (searchQuery === "" && searchPositionCode === "") {
+      getAllPosition(token, setRefresh);
+    } else {
+      queryPosition(searchQuery, searchPositionCode, setRefresh);
+    }
+  }, [searchQuery, searchPositionCode, setRefresh]);
 
-  const queryPosition = async (nama_jabatan, jabatan_code) => {
+  const queryPosition = async (nama_jabatan, jabatan_code, setRefresh) => {
     let query = "/crud/jabatan/by?";
     if (nama_jabatan) {
       query += `nama_jabatan=${nama_jabatan}&`;
@@ -97,11 +101,15 @@ const Position = () => {
 
     const response = await apiGet(query, token);
 
-    if (response?.payload && Array.isArray(response.payload)) {
-      setDataPosition(response.payload);
-    } else {
-      setDataPosition([]);
-    }
+    const parsing = response.payload.map((data) => ({
+      nama_jabatan: data.nama_jabatan,
+      jabatan_code: data.jabatan_code,
+      username: data.created_admin.username,
+      createdAt: data.createdAt,
+      id: data.id,
+    }));
+    setRefresh(true);
+    setDataPosition(parsing);
   };
 
   useEffect(() => {
@@ -112,7 +120,7 @@ const Position = () => {
   }, [token, navigate]);
 
   useEffect(() => {
-    getAllPosition();
+    getAllPosition(token, setRefresh);
   }, [refresh]);
 
   return (

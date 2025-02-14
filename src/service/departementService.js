@@ -6,7 +6,6 @@ import { showAlert } from "../utils";
 export const fetchDepartements = async (token, refresh) => {
   try {
     const departements = await apiGet(`/crud/departement/`, token);
-    // console.log("fetch", departements);
     const parsing = departements.payload.map((data) => ({
       nama_departement: data.nama_departement,
       departement_code: data.departement_code,
