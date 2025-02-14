@@ -11,6 +11,7 @@ const ModalEdit = ({
   register,
   token,
   id,
+  setRefresh,
 }) => {
   return (
     <>
@@ -19,7 +20,7 @@ const ModalEdit = ({
         <p className="text-sm text-gray-600">Change departmental data here</p>
         <Form
           onSubmit={handleSubmit((data) =>
-            onSubmit(id, data, token, closeModal)
+            onSubmit(id, data, token, closeModal, setRefresh)
           )}
           className="space-y-4"
         >

@@ -21,12 +21,15 @@ const ModalDepartement = ({
   descForm,
   option,
   token,
+  setRefresh,
 }) => {
   return (
     <>
       <Modal isOpen={isModalOpen} closeModal={closeModal}>
         <Form
-          onSubmit={handleSubmit((data) => onSubmit(data, token, closeModal))}
+          onSubmit={handleSubmit((data) =>
+            onSubmit(data, token, closeModal, setRefresh)
+          )}
           className="space-y-3"
         >
           <FormTitle title={titleForm} />

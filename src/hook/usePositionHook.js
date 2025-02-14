@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useDepartementHook = () => {
+export const usePositionHook = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
@@ -26,9 +26,9 @@ export const useDepartementHook = () => {
     setSearchDepartementCode(e.target.value);
   };
 
-  const handleEditClick = (departement, setValue) => {
-    setSelectedData(departement);
-    setValue("nama_departement", departement.nama_departement);
+  const handleEditClick = (position, setValue) => {
+    setSelectedData(position);
+    setValue("nama_jabatan", position.nama_jabatan);
     openEditModal();
   };
 

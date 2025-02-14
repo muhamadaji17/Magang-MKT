@@ -3,17 +3,17 @@ import { showAlert } from "../utils";
 
 // New
 
-export const fetchDepartements = async (token, refresh) => {
+export const fetchJabatan = async (token, refresh) => {
   try {
-    const departements = await apiGet(`/crud/departement/`, token);
-    // console.log("fetch", departements);
-    const parsing = departements.payload.map((data) => ({
-      nama_departement: data.nama_departement,
-      departement_code: data.departement_code,
+    const jabatan = await apiGet(`/crud/jabatan`, token);
+    const parsing = jabatan.payload.map((data) => ({
+      nama_jabatan: data.nama_jabatan,
+      jabatan_code: data.jabatan_code,
       username: data.created_admin.username,
       createdAt: data.createdAt,
       id: data.id,
     }));
+    console.log("Ini Parsing:", parsing);
     refresh(true);
     return parsing;
   } catch (error) {
@@ -22,14 +22,14 @@ export const fetchDepartements = async (token, refresh) => {
   }
 };
 
-export const handleAddDepartement = async (
+export const handleAddPosition = async (
   dataPost,
   token,
   closeModal,
   refresh
 ) => {
   try {
-    const response = await apiPost(`/crud/departement`, dataPost, token);
+    const response = await apiPost(`/crud/jabatan`, dataPost, token);
     showAlert("Success", response.message, "success", 5000);
     refresh(false);
     closeModal();
@@ -39,7 +39,7 @@ export const handleAddDepartement = async (
   }
 };
 
-export const handleEditDepartement = async (
+export const handleEditPosition = async (
   id,
   formData,
   token,
@@ -48,14 +48,10 @@ export const handleEditDepartement = async (
 ) => {
   try {
     const updatedData = {
-      nama_departement: formData?.nama_departement, // update nama
+      nama_jabatan: formData?.nama_jabatan, // update nama
     };
 
-    const response = await apiPut(
-      `/crud/departement/${id}`,
-      updatedData,
-      token
-    );
+    const response = await apiPut(`/crud/jabatan/${id}`, updatedData, token);
 
     if (response) {
       showAlert("Success", response.message, "success", 5000);
@@ -68,14 +64,14 @@ export const handleEditDepartement = async (
   }
 };
 
-export const confirmDeleteDepartement = async (
+export const confirmDeletePosition = async (
   id,
   token,
   closeDeleteModal,
   refresh
 ) => {
   try {
-    const response = await apiDelete(`/crud/departement/${id}`, token);
+    const response = await apiDelete(`/crud/jabatan/${id}`, token);
     showAlert("Success", response.message, "success", 5000);
     refresh(false);
     closeDeleteModal();

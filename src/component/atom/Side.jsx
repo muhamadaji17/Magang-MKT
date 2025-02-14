@@ -2,6 +2,7 @@ import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { Link, useLocation } from "react-router-dom";
 import { MdDiversity3 } from "react-icons/md";
+import { PiOfficeChairFill } from "react-icons/pi";
 
 const Side = ({ children }) => {
   const sideName = [
@@ -19,6 +20,11 @@ const Side = ({ children }) => {
       name: "Division",
       path: "/division",
       icon: MdDiversity3,
+    },
+    {
+      name: "Position",
+      path: "/position",
+      icon: PiOfficeChairFill,
     },
   ];
 

@@ -11,6 +11,7 @@ import {
   Login,
 } from "../pages/index";
 import Division from "../pages/Division";
+import Position from "../pages/Position";
 import ContentLayout from "../component/layout/ContentLayout";
 
 const Routers = () => {
@@ -22,6 +23,7 @@ const Routers = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="/departement" element={<Departement />} />
           <Route path="/division" element={<Division />} />
+          <Route path="/position" element={<Position />} />
         </Route>
 
         {/* Auth routes */}

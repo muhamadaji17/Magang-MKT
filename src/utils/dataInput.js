@@ -25,6 +25,40 @@ export const editDepartement = [
   },
 ];
 
+export const inputPosition = [
+  {
+    id: "nama_jabatan",
+    type: "text",
+    placeholder: "Nama Jabatan",
+    labelName: "Nama Jabatan",
+    validation: { required: "Nama Jabatan is required" },
+  },
+  {
+    id: "jabatan_code",
+    type: "text",
+    placeholder: "Kode Jabatan",
+    labelName: "Kode Jabatan",
+    validation: { required: "Kode Jabatan is required" },
+  },
+  {
+    id: "priority",
+    type: "text",
+    placeholder: "Priority",
+    labelName: "Priority",
+    validation: { required: "Priority is required" },
+  },
+];
+
+export const editPosition = [
+  {
+    id: "nama_jabatan",
+    type: "text",
+    placeholder: "Nama Jabatan",
+    labelName: "Nama Jabatan",
+    validation: { required: "Nama Jabatan is required" },
+  },
+];
+
 export const inputRegister = [
   {
     id: "username",

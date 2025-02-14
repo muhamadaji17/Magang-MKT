@@ -1,10 +1,8 @@
 export const labelDepartement = [
-  { name: "No", key: "no" },
-  { name: "Created By", key: "created_by" },
-  { name: "Departement ID", key: "departement_id" },
+  { name: "Created By", key: "username" },
+  { name: "Departement ID", key: "departement_code" },
   { name: "Departement", key: "nama_departement" },
   { name: "Created At", key: "createdAt" },
-  { name: "Action", key: "action" },
 ];
 
 export const labelUnit = [
@@ -14,4 +12,11 @@ export const labelUnit = [
   { name: "Unit Code", key: "unit_code" },
   { name: "Created At", key: "createdAt" },
   { name: "Action", key: "action" },
+];
+
+export const labelJabatan = [
+  { name: "Created By", key: "username" },
+  { name: "Position", key: "nama_jabatan" },
+  { name: "Position Code", key: "jabatan_code" },
+  { name: "Created At", key: "createdAt" },
 ];
