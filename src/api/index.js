@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const POST_AUTH = async (endpoint, data) => {
     const response = await axios.post(
@@ -6,7 +6,7 @@ export const POST_AUTH = async (endpoint, data) => {
         data,
         {
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
         }
     );
@@ -18,7 +18,7 @@ export const GET_DATAS = async (endpoint, token) => {
         `${import.meta.env.VITE_BASE_URL_DEV}/${endpoint}`,
         {
             headers: {
-                'x-access-token': `mktech ${token}`,
+                "x-access-token": `mktech ${token}`,
             },
         }
     );
@@ -31,8 +31,36 @@ export const POST_DATAS = async (endpoint, data, accessToken) => {
         data,
         {
             headers: {
-                'Content-Type': 'application/json',
-                'x-access-token': `mktech ${accessToken}`,
+                "Content-Type": "application/json",
+                "x-access-token": `mktech ${accessToken}`,
+            },
+        }
+    );
+    return response;
+};
+
+export const POST_DATAS_FILE = async (endpoint, data, accessToken) => {
+    const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL_DEV}/${endpoint}`,
+        data,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "x-access-token": `mktech ${accessToken}`,
+            },
+        }
+    );
+    return response;
+};
+
+export const PUT_DATAS = async (endpoint, data, accessToken) => {
+    const response = await axios.put(
+        `${import.meta.env.VITE_BASE_URL_DEV}/${endpoint}`,
+        data,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                "x-token": `mktech ${accessToken}`,
             },
         }
     );

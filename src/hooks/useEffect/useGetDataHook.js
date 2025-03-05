@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-export const useGetAboutHook = (
+const useGetDataHook = (
     service,
     accessToken,
     setDatas,
@@ -14,3 +14,5 @@ export const useGetAboutHook = (
         }
     }, [reGetDatas]);
 };
+
+export default useGetDataHook;

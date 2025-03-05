@@ -1,5 +1,5 @@
-import inputLogin from './patternAuth/login';
-import errorOptions from './errorOptions';
+import inputLogin from "./patternAuth/login";
+import errorOptions from "./errorOptions";
 import {
     handleSubmitData,
     handleShowPassword,
@@ -7,9 +7,10 @@ import {
     handleShowModalId,
     handleCancelModal,
     handleCloseBgModal,
-} from './handleButton';
-import { sidebarPattern } from './sidebarPattern';
-import { inputAbout } from './dashboard/about';
+} from "./handleButton";
+import { sidebarPattern } from "./sidebarPattern";
+import { inputAbout } from "./dashboard/about";
+import { inputBanner, inputEditBanner } from "./dashboard/banner";
 
 export {
     inputLogin,
@@ -22,4 +23,6 @@ export {
     handleCancelModal,
     handleCloseBgModal,
     inputAbout,
+    inputBanner,
+    inputEditBanner,
 };

@@ -1,10 +1,9 @@
-import { Button } from '../../components/atoms';
-import { Breadcrumb } from '../molecules';
-import { getUrlDashboard } from '../../utils';
-import { useGlobalHook } from '../../hook';
-import ModalLayout from '../organisms/ModalLayout';
-import { AddAboutService } from '../../services/AboutServices';
-import { handleShowModal } from '../../pattern';
+import { Button } from "../../components/atoms";
+import { Breadcrumb } from "../molecules";
+import { getUrlDashboard } from "../../utils";
+import { useGlobalHooks } from "../../hooks";
+import ModalLayout from "../organisms/ModalLayout";
+import { handleShowModal } from "../../pattern";
 
 const DashboardHeader = ({
     pageText,
@@ -12,25 +11,26 @@ const DashboardHeader = ({
     dataForm,
     titleModal,
     setReGetDatas,
+    service,
 }) => {
     const { location, modalType, setModalType, showModal, setShowModal } =
-        useGlobalHook();
+        useGlobalHooks();
     const url = getUrlDashboard(location);
 
     return (
         <>
-            <div className='flex items-center justify-between'>
-                <div className='flex items-center gap-2'>
-                    <h1 className='text-2xl font-semibold'>{pageText}</h1>
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                    <h1 className="text-2xl font-semibold">{pageText}</h1>
                     <Breadcrumb items={url} />
                 </div>
                 <div>
                     <Button
-                        type='button'
-                        className='w-48 text-white bg-blue-600 hover:bg-blue-800 text-sm lg:text-base'
+                        type="button"
+                        className="w-48 text-white bg-blue-600 hover:bg-blue-800 text-sm lg:text-base"
                         disable={false}
                         onClick={() =>
-                            handleShowModal(setShowModal, setModalType, 'add')
+                            handleShowModal(setShowModal, setModalType, "add")
                         }
                     >
                         {buttonText}
@@ -40,7 +40,7 @@ const DashboardHeader = ({
             {showModal && (
                 <ModalLayout
                     setShowModal={setShowModal}
-                    addService={AddAboutService}
+                    addService={service}
                     dataForm={dataForm}
                     titleModal={titleModal}
                     type={modalType}

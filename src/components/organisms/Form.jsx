@@ -1,8 +1,8 @@
-import { useForm } from 'react-hook-form';
-import { InputForm } from '../molecules';
-import { Button } from '../atoms';
-import { useDefaultForm, useGlobalHook } from '../../hook';
-import { getDefaultValue } from '../../utils';
+import { useForm } from "react-hook-form";
+import { InputForm } from "../molecules";
+import { Button } from "../atoms";
+import { useDefaultForm, useGlobalHooks } from "../../hooks";
+import { getDefaultValue } from "../../utils";
 
 const Form = ({
     dataForm,
@@ -25,7 +25,7 @@ const Form = ({
         defaultValues: getDefaultValue(dataForm),
     });
 
-    const { disableDefaultValue, setDisableDefaultValue } = useGlobalHook();
+    const { disableDefaultValue, setDisableDefaultValue } = useGlobalHooks();
     const inputValue = watch();
 
     useDefaultForm(dataForm, inputValue, setDisableDefaultValue);
@@ -33,24 +33,23 @@ const Form = ({
     return (
         <form
             onSubmit={handleSubmit((data) => handleSubmitData(data, reset))}
-            className='flex flex-col gap-4 w-[90%] lg:w-[570px]'
+            className="flex flex-col justify-center gap-4 w-full h-full"
         >
             {dataForm?.map((data, index) => (
-                <div key={index} className='relative'>
-                    {data.jenisInputan === 'input' ? (
+                <div key={index} className="relative">
+                    {data.jenisInputan === "input" ? (
                         <InputForm
-                            jenisInputan={data.jenisInputan}
                             labelText={data.title}
                             id={data.name}
                             type={
-                                data.type === 'password'
-                                    ? data.name === 'password'
+                                data.type === "password"
+                                    ? data.name === "password"
                                         ? showPassword
-                                            ? 'text'
-                                            : 'password'
+                                            ? "text"
+                                            : "password"
                                         : showConfirmPassword
-                                        ? 'text'
-                                        : 'password'
+                                        ? "text"
+                                        : "password"
                                     : data.type
                             }
                             placeholder={data.placeholder}
@@ -58,50 +57,30 @@ const Form = ({
                             addOptionError={data.addOptionError}
                             errors={errors[data.name]}
                         />
-                    ) : data.jenisInputan === 'textarea' ? (
-                        <InputForm
-                            jenisInputan={data.jenisInputan}
-                            labelText={data.title}
-                            id={data.name}
-                            placeholder={data.placeholder}
-                            register={register}
-                            addOptionError={data.addOptionError}
-                            errors={errors[data.name]}
-                        />
-                    ) : data.jenisInputan === 'checkbox' ? (
-                        <InputForm
-                            jenisInputan={data.jenisInputan}
-                            type={data.type}
-                            labelText={data.title}
-                            id={data.name}
-                            register={register}
-                            addOptionError={data.addOptionError}
-                            errors={errors[data.name]}
-                        />
                     ) : null}
                     {data.showPasswordIcon && (
                         <div
-                            className='absolute top-10 right-2 cursor-pointer'
+                            className="absolute top-10 right-2 cursor-pointer"
                             onClick={() => {
-                                if (data.name === 'password') {
+                                if (data.name === "password") {
                                     handleClick();
-                                } else if (data.name === 'confirmPassword') {
+                                } else if (data.name === "confirmPassword") {
                                     handleConfirmPassword();
                                 }
                             }}
                         >
-                            {(data.name === 'password' && showPassword) ||
-                            (data.name === 'confirmPassword' &&
+                            {(data.name === "password" && showPassword) ||
+                            (data.name === "confirmPassword" &&
                                 showConfirmPassword) ? (
-                                <data.showPasswordIcon className='w-5 h-5 text-blue-600' />
+                                <data.showPasswordIcon className="w-5 h-5 text-blue-600" />
                             ) : (
-                                <data.hiddenPasswordIcon className='w-5 h-5 text-blue-600' />
+                                <data.hiddenPasswordIcon className="w-5 h-5 text-blue-600" />
                             )}
                         </div>
                     )}
                 </div>
             ))}
-            <div className='flex justify-center lg:justify-end'>
+            <div className="flex justify-center lg:justify-end">
                 <Button
                     className={buttonStyle}
                     disable={loading || disableDefaultValue}

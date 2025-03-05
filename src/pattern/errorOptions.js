@@ -1,66 +1,86 @@
 const errorOptions = {
     username: {
-        required: 'Username must be more than 1 characters',
+        required: "Username must be more than 1 characters",
         minLength: {
             value: 1,
-            message: 'Username must be more than 1 characters',
+            message: "Username must be more than 1 characters",
         },
         maxLength: {
             value: 32,
-            message: 'Username must be less than 32 characters',
+            message: "Username must be less than 32 characters",
         },
         pattern: {
             value: /^[\w]/,
-            message: 'Username must start with a letter, number, or underscore',
+            message: "Username must start with a letter, number, or underscore",
         },
     },
     email: {
-        required: 'Email is required',
+        required: "Email is required",
         pattern: {
             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            message: 'Invalid email',
+            message: "Invalid email",
         },
     },
     password: {
-        required: 'Password is required',
+        required: "Password is required",
         minLength: {
             value: 8,
-            message: 'Password must be more than 8 characters',
+            message: "Password must be more than 8 characters",
         },
         maxLength: {
             value: 32,
-            message: 'Password must be less than 32 characters',
+            message: "Password must be less than 32 characters",
         },
     },
     confirmPassword: {
-        required: 'Confirm Password is required',
+        required: "Confirm Password is required",
         validate: (value, { password }) =>
-            value === password || 'Passwords do not match',
+            value === password || "Passwords do not match",
     },
     about_meta: {
-        required: 'About Meta is required',
+        required: "About Meta is required",
         minLength: {
             value: 1,
-            message: 'About Meta must be more than 1 characters',
+            message: "About Meta must be more than 1 characters",
         },
         maxLength: {
             value: 32,
-            message: 'About Meta must be less than 32 characters',
+            message: "About Meta must be less than 32 characters",
         },
     },
     about_body_en: {
-        required: 'About (EN Language) is required',
+        required: "About (EN Language) is required",
         minLength: {
             value: 1,
-            message: 'About (EN Language) must be more than 1 characters',
+            message: "About (EN Language) must be more than 1 characters",
         },
     },
     about_body_id: {
-        required: 'About (ID Language) is required',
+        required: "About (ID Language) is required",
         minLength: {
             value: 1,
-            message: 'About (ID Language) must be more than 1 characters',
+            message: "About (ID Language) must be more than 1 characters",
         },
+    },
+    banner_name: {
+        required: "Banner Name is required",
+        minLength: {
+            value: 1,
+            message: "Banner Name must be more than 1 characters",
+        },
+        maxLength: {
+            value: 32,
+            message: "Banner Name must be less than 32 characters",
+        },
+    },
+    banner_img: {
+        required: "Banner Image is required",
+    },
+    start_date_banner: {
+        required: "Start Date is required",
+    },
+    end_date_banner: {
+        required: "End Date is required",
     },
 };
 

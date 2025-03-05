@@ -1,8 +1,8 @@
-import { useState, useRef } from 'react';
-import { useStore } from '../store/store';
-import { useLocation } from 'react-router-dom';
+import { useState, useRef } from "react";
+import { useStore } from "../store/store";
+import { useLocation } from "react-router-dom";
 
-const useGlobalHook = () => {
+const useGlobalHooks = () => {
     const store = useStore();
     const accessToken = store.account.accessToken;
     const username = store.account.username;
@@ -20,6 +20,7 @@ const useGlobalHook = () => {
     const [loadingData, setLoadingData] = useState(false);
 
     const [datas, setDatas] = useState([]);
+    const [getDetailsData, setGetDetailsData] = useState([]);
     const [reGetDatas, setReGetDatas] = useState(false);
 
     const [disableDefaultValue, setDisableDefaultValue] = useState(false);
@@ -27,7 +28,11 @@ const useGlobalHook = () => {
     const [hamburger, setHamburger] = useState(false);
     const [accordion, setAccordion] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const [modalType, setModalType] = useState('');
+    const [modalType, setModalType] = useState("");
+
+    const [currentDate, setCurrentDate] = useState(new Date());
+    const [jumpMonth, setJumpMonth] = useState(currentDate.getMonth() + 1);
+    const [jumpYear, setJumpYear] = useState(currentDate.getFullYear());
 
     return {
         showPassword,
@@ -58,7 +63,15 @@ const useGlobalHook = () => {
         modalType,
         setModalType,
         trigger,
+        getDetailsData,
+        setGetDetailsData,
+        currentDate,
+        setCurrentDate,
+        jumpMonth,
+        setJumpMonth,
+        jumpYear,
+        setJumpYear,
     };
 };
 
-export default useGlobalHook;
+export default useGlobalHooks;

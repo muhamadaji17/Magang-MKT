@@ -1,12 +1,12 @@
-import { IoMdClose } from 'react-icons/io';
-import Form from './Form';
+import { IoMdClose } from "react-icons/io";
+import Form from "./Form";
 import {
     handleSubmitData,
     handleCloseBgModal,
     handleCancelModal,
-} from '../../pattern';
-import { CiWarning } from 'react-icons/ci';
-import { useGlobalHook } from '../../hook';
+} from "../../pattern";
+import { CiWarning } from "react-icons/ci";
+import { useGlobalHooks } from "../../hooks";
 
 const ModalLayout = ({
     titleModal,
@@ -18,34 +18,33 @@ const ModalLayout = ({
     setReGetDatas,
 }) => {
     const { loadingButton, setLoadingButton, trigger, accessToken } =
-        useGlobalHook();
-
+        useGlobalHooks();
     return (
         <div
             ref={trigger}
-            className='fixed inset-0 drop-shadow-md bg-black/40 flex items-center justify-center z-50'
+            className="fixed inset-0 drop-shadow-md bg-black/40 flex items-center justify-center z-50"
             onClick={(e) => handleCloseBgModal(e, trigger, setShowModal)}
         >
-            {type === 'delete' ? (
-                <div className='bg-white w-[400px] lg:h-[250px] justify-center gap-9 flex flex-col p-6'>
-                    <div className='space-y-3'>
-                        <div className='flex flex-col items-center justify-center'>
-                            <CiWarning className='text-6xl text-[#FF4D4D]' />
-                            <h1 className='font-bold text-2xl'>Warning!</h1>
-                            <p className='text-sm'>
+            {type === "delete" ? (
+                <div className="bg-white w-[400px] lg:h-[250px] justify-center gap-9 flex flex-col p-6">
+                    <div className="space-y-3">
+                        <div className="flex flex-col items-center justify-center">
+                            <CiWarning className="text-6xl text-[#FF4D4D]" />
+                            <h1 className="font-bold text-2xl">Warning!</h1>
+                            <p className="text-sm">
                                 Are you sure? this action cannot be undone.
                             </p>
                         </div>
                     </div>
-                    <div className='flex gap-4 justify-center items-center'>
+                    <div className="flex gap-4 justify-center items-center">
                         <button
-                            className='bg-[#ECECEC] w-[144px] h-[44px] rounded'
+                            className="bg-[#ECECEC] w-[144px] h-[44px] rounded"
                             onClick={() => handleCancelModal(setShowModal)}
                         >
                             Cancel
                         </button>
                         <button
-                            className='bg-[#FF4D4D] w-[144px] h-[44px] rounded text-white'
+                            className="bg-[#FF4D4D] w-[144px] h-[44px] rounded text-white"
                             onClick={() =>
                                 handleSubmitData(
                                     getDetailsData,
@@ -62,49 +61,38 @@ const ModalLayout = ({
                     </div>
                 </div>
             ) : (
-                <div className='bg-white rounded-lg p-2 w-[1000px] h-[600px] relative flex flex-col'>
+                <div className="bg-white rounded-lg p-2 w-[1000px] h-[600px] relative flex flex-col">
                     <div>
-                        <h1 className='text-2xl font-semibold text-center p-2'>
+                        <h1 className="text-2xl font-semibold text-center p-2">
                             {titleModal}
                         </h1>
-                        <div className='absolute top-3 right-2 w-[24px] h-[24px] rounded-full cursor-pointer'>
+                        <div className="absolute top-3 right-2 w-[24px] h-[24px] rounded-full cursor-pointer">
                             <IoMdClose
-                                className='w-full h-full rounded-full'
+                                className="w-full h-full rounded-full"
                                 onClick={() => handleCancelModal(setShowModal)}
                             />
                         </div>
                     </div>
-                    <div className='flex items-center justify-center flex-1 flex-col overflow-y-auto'>
-                        <Form
-                            dataForm={dataForm}
-                            handleSubmitData={
-                                !getDetailsData
-                                    ? (data, reset) =>
-                                          handleSubmitData(
-                                              data,
-                                              addService,
-                                              accessToken,
-                                              setShowModal,
-                                              reset,
-                                              setLoadingButton,
-                                              setReGetDatas
-                                          )
-                                    : (data, reset) =>
-                                          handleSubmitData(
-                                              data,
-                                              addService,
-                                              getDetailsData.id,
-                                              accessToken,
-                                              setShowModal,
-                                              reset,
-                                              setLoadingButton,
-                                              setReGetDatas
-                                          )
-                            }
-                            loading={loadingButton}
-                            buttonName='Send'
-                            buttonStyle='w-24 text-white bg-blue-600 hover:bg-blue-800'
-                        />
+                    <div className="flex justify-center flex-1 overflow-y-auto">
+                        <div className="w-4/5 h-full flex items-center justify-center flex-col">
+                            <Form
+                                dataForm={dataForm}
+                                handleSubmitData={(data, reset) =>
+                                    handleSubmitData(
+                                        data,
+                                        addService,
+                                        accessToken,
+                                        setShowModal,
+                                        reset,
+                                        setLoadingButton,
+                                        setReGetDatas
+                                    )
+                                }
+                                loading={loadingButton}
+                                buttonName="Send"
+                                buttonStyle="w-24 text-white bg-blue-600 hover:bg-blue-800"
+                            />
+                        </div>
                     </div>
                 </div>
             )}

@@ -1,5 +1,5 @@
-import { GET_DATAS, POST_DATAS } from '../api';
-import { AlertForm } from '../components/atoms';
+import { GET_DATAS, POST_DATAS } from "../api";
+import { AlertForm } from "../components/atoms";
 
 export const GetAboutService = async (
     token,
@@ -22,11 +22,10 @@ export const GetAboutService = async (
         setState(datas);
         setReGetDatas(true);
     } catch (error) {
-        console.log(error.response.data.message);
         AlertForm({
-            icon: 'error',
+            icon: "error",
             text: error.response.data.message,
-            title: 'failed',
+            title: "failed",
         });
     } finally {
         setLoading(false);
@@ -43,21 +42,21 @@ export const AddAboutService = async (
 ) => {
     try {
         setLoading(true);
-        const response = await POST_DATAS('crud/about', data, token);
+        const response = await POST_DATAS("crud/about", data, token);
         reset();
         AlertForm({
-            icon: 'success',
+            icon: "success",
             text: response.data.message,
-            title: 'success',
+            title: "success",
         });
         setReGetDatas(false);
         setShowModal(false);
     } catch (error) {
         console.log(error);
         AlertForm({
-            icon: 'error',
+            icon: "error",
             text: error.response.data.message,
-            title: 'failed',
+            title: "failed",
         });
         console.log(error);
     } finally {

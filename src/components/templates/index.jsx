@@ -1,4 +1,4 @@
-import AuthTemplate from './AuthTemplate';
-import DashboardTemplate from './DashboardTemplate';
+import AuthTemplate from "./AuthTemplate";
+import Layout from "./Layout";
 
-export { AuthTemplate, DashboardTemplate };
+export { AuthTemplate, Layout };
