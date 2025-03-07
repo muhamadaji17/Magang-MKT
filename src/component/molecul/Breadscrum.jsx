@@ -23,7 +23,7 @@ const Breadscrum = ({ pathObjects }) => {
           {/* {console.log(pathArray[1])} */}
           <Link color="inherit" href={`/${mn.path}`} className="">
             <p className="hover:underline capitalize">
-              {mn.route.replace("-", " ")}
+              {mn.route.replace(/_/g, "-").replace(/-/g, " ")}
             </p>
             {/* <p className="hover:underline capitalize">{mn.route}</p> */}
           </Link>

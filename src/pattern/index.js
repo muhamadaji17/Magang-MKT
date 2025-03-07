@@ -7,6 +7,8 @@ import {
 import { inputLogin } from "./PatternAuth/Login";
 import { inputRegister } from "./PatternAuth/Register";
 import { MenuItems } from "./PatternSidebar";
+import { columnsTableMasterUSer } from "./PatternUser";
+import { dataSetRows } from "./PatternSelect";
 
 export {
   errorOptions,
@@ -16,4 +18,6 @@ export {
   inputRegister,
   MenuItems,
   handleLogout,
+  columnsTableMasterUSer,
+  dataSetRows,
 };

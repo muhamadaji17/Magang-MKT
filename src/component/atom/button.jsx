@@ -5,7 +5,7 @@ const Button = ({ children, className, type, disabled, ...props }) => {
       {...props}
       type={type}
       disabled={disabled}
-      className={`py-2   font-semibold  dark:text-white rounded-md  ${className}`}
+      className={`py-2   font-semibold   rounded-md  ${className}`}
     >
       {children}
     </button>

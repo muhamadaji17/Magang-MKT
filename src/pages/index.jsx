@@ -1,5 +1,5 @@
 import LoginPage from "./Auth/Login";
-import RegisterPage from "./Auth/Register";
-import DashboardPage from "./Dashboard";
+import DashboardPage from "./Main/Dashboard";
+import { MasterUserPage } from "./User";
 
-export { LoginPage, RegisterPage, DashboardPage };
+export { LoginPage, DashboardPage, MasterUserPage };

@@ -7,7 +7,7 @@ const LayoutAdmin = ({ children }) => {
 
   return (
     <>
-      <div className="flex h-screen overflow-hidden bg-gray-300">
+      <div className="flex h-screen overflow-hidden bg-gray-200">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         {/* <!-- ===== Sidebar Start ===== --> */}

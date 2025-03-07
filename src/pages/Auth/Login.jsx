@@ -19,13 +19,10 @@ const LoginPage = () => {
         <FormInputan
           dataForm={inputLogin}
           handleSubmitData={(data) => handleSubmitData(data, LoginService)}
-          namaButton1={"Login"}
+          namaButton1={"Sign In"}
           handleClick={() => handleShowPassword(setShowPassword, showPassword)}
           setShowPassword={setShowPassword}
           showPassword={showPassword}
-          questAccount={"Belum Punya Akun ? "}
-          actionAccountName={"Klik disini"}
-          linkQuestAccount={"/register"}
         />
       </LayoutAuth>
     </>
