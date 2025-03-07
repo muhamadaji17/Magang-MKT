@@ -7,6 +7,7 @@ import {
     handleShowModalId,
     handleCancelModal,
     handleCloseBgModal,
+    saveEvents,
 } from "./handleButton";
 import { sidebarPattern } from "./sidebarPattern";
 import { inputAbout } from "./dashboard/about";
@@ -25,4 +26,5 @@ export {
     inputAbout,
     inputBanner,
     inputEditBanner,
+    saveEvents,
 };

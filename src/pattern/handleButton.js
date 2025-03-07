@@ -34,3 +34,23 @@ export const handleCloseBgModal = (e, trigger, setShowModal) => {
         setShowModal(false);
     }
 };
+
+export const saveEvents = (
+    datas,
+    EditBannerDateService,
+    accessToken,
+    setShowModal,
+    setLoadingData,
+    setReGetDatas
+) => {
+    const changedEvents = datas.filter((event) => event.hasChanged);
+    changedEvents.forEach((data) => {
+        EditBannerDateService(
+            data,
+            accessToken,
+            setShowModal,
+            setLoadingData,
+            setReGetDatas
+        );
+    });
+};

@@ -4,6 +4,7 @@ import {
     AddBannerService,
     EditBannerDateService,
     EditBannerService,
+    DeleteBannerService,
 } from "./BannerServices";
 import { GetAboutService, AddAboutService } from "./AboutServices";
 
@@ -15,4 +16,5 @@ export {
     AddAboutService,
     EditBannerDateService,
     EditBannerService,
+    DeleteBannerService,
 };

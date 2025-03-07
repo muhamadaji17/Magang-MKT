@@ -22,7 +22,7 @@ const ModalLayout = ({
     return (
         <div
             ref={trigger}
-            className="fixed inset-0 drop-shadow-md bg-black/40 flex items-center justify-center z-50"
+            className="fixed inset-0 w-full h-full drop-shadow-md bg-black/40 flex items-center justify-center z-50"
             onClick={(e) => handleCloseBgModal(e, trigger, setShowModal)}
         >
             {type === "delete" ? (
@@ -38,13 +38,13 @@ const ModalLayout = ({
                     </div>
                     <div className="flex gap-4 justify-center items-center">
                         <button
-                            className="bg-[#ECECEC] w-[144px] h-[44px] rounded"
+                            className="bg-[#ECECEC] w-[144px] h-[44px] rounded cursor-pointer"
                             onClick={() => handleCancelModal(setShowModal)}
                         >
                             Cancel
                         </button>
                         <button
-                            className="bg-[#FF4D4D] w-[144px] h-[44px] rounded text-white"
+                            className="bg-[#FF4D4D] w-[144px] h-[44px] rounded text-white cursor-pointer"
                             onClick={() =>
                                 handleSubmitData(
                                     getDetailsData,
@@ -73,20 +73,33 @@ const ModalLayout = ({
                             />
                         </div>
                     </div>
-                    <div className="flex justify-center flex-1 overflow-y-auto">
-                        <div className="w-4/5 h-full flex items-center justify-center flex-col">
+                    <div className="flex flex-col justify-center items-center flex-1 min-h-0 overflow-y-auto">
+                        <div className="w-4/5 max-h-full">
                             <Form
                                 dataForm={dataForm}
-                                handleSubmitData={(data, reset) =>
-                                    handleSubmitData(
-                                        data,
-                                        addService,
-                                        accessToken,
-                                        setShowModal,
-                                        reset,
-                                        setLoadingButton,
-                                        setReGetDatas
-                                    )
+                                handleSubmitData={
+                                    !getDetailsData
+                                        ? (data, reset) =>
+                                              handleSubmitData(
+                                                  data,
+                                                  addService,
+                                                  accessToken,
+                                                  setShowModal,
+                                                  reset,
+                                                  setLoadingButton,
+                                                  setReGetDatas
+                                              )
+                                        : (data, reset) =>
+                                              handleSubmitData(
+                                                  data,
+                                                  addService,
+                                                  getDetailsData.id,
+                                                  accessToken,
+                                                  setShowModal,
+                                                  reset,
+                                                  setLoadingButton,
+                                                  setReGetDatas
+                                              )
                                 }
                                 loading={loadingButton}
                                 buttonName="Send"

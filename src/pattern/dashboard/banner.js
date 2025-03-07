@@ -16,7 +16,7 @@ export const inputBanner = [
         title: "Banner Image",
         name: "banner_img",
         error: "banner_img",
-        addOptionError: errorOptions.banner_img,
+        // addOptionError: errorOptions.banner_img,
     },
     {
         jenisInputan: "input",
@@ -52,7 +52,7 @@ export const inputEditBanner = (data) => {
             placeholder: "your banner name",
             error: "banner_name",
             addOptionError: errorOptions.banner_name,
-            defaultValue: data,
+            defaultValue: data.banner_name,
         },
         {
             jenisInputan: "input",
@@ -60,8 +60,8 @@ export const inputEditBanner = (data) => {
             title: "Banner Image",
             name: "banner_img",
             error: "banner_img",
-            addOptionError: errorOptions.banner_img,
-            defaultValue: data,
+            // addOptionError: errorOptions.banner_img,
+            defaultValue: data.banner_img,
         },
         {
             jenisInputan: "input",
@@ -70,7 +70,7 @@ export const inputEditBanner = (data) => {
             name: "start_date_banner",
             error: "start_date_banner",
             addOptionError: errorOptions.start_date_banner,
-            defaultValue: data,
+            defaultValue: data.start_date_banner,
         },
         {
             jenisInputan: "input",
@@ -79,14 +79,14 @@ export const inputEditBanner = (data) => {
             name: "end_date_banner",
             error: "end_date_banner",
             addOptionError: errorOptions.end_date_banner,
-            defaultValue: data,
+            defaultValue: data.end_date_banner,
         },
         {
             jenisInputan: "input",
             type: "checkbox",
             title: "Click to Activate",
             name: "status",
-            defaultValue: data,
+            defaultValue: data.status,
         },
     ];
 };

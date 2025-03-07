@@ -2,7 +2,8 @@ export const calendarUtils = (
     currentDate,
     setCurrentDate,
     events,
-    setEvents
+    setEvents,
+    saveEvents
 ) => {
     const prevMonth = () =>
         setCurrentDate(
@@ -43,7 +44,12 @@ export const calendarUtils = (
     const getEventsForDay = (date) => {
         return events.filter(
             (event) =>
-                date >= event.start_date_banner && date <= event.end_date_banner
+                (date >= event.start_date_banner &&
+                    date <= event.end_date_banner) ||
+                (date.toDateString() ===
+                    event.start_date_banner.toDateString() &&
+                    date.toDateString() ===
+                        event.end_date_banner.toDateString())
         );
     };
 
@@ -57,14 +63,16 @@ export const calendarUtils = (
             prevEvents.map((evt) => {
                 if (evt.id.toString() === eventId) {
                     const duration =
-                        (evt.endDate - evt.startDate) / (1000 * 60 * 60 * 24);
+                        (evt.end_date_banner - evt.start_date_banner) /
+                        (1000 * 60 * 60 * 24);
                     const newStartDate = new Date(newDate);
                     const newEndDate = new Date(newStartDate);
                     newEndDate.setDate(newStartDate.getDate() + duration);
                     return {
                         ...evt,
-                        startDate: newStartDate,
-                        endDate: newEndDate,
+                        start_date_banner: newStartDate,
+                        end_date_banner: newEndDate,
+                        hasChanged: true,
                     };
                 }
                 return evt;
@@ -81,5 +89,6 @@ export const calendarUtils = (
         goToToday,
         onDragStart,
         onDrop,
+        saveEvents,
     };
 };

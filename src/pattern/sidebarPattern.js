@@ -1,55 +1,55 @@
-import { IoDocumentTextOutline, IoImageOutline, IoHome } from 'react-icons/io5';
-import { FaAddressCard, FaFlag } from 'react-icons/fa6';
-import { GiFilmStrip } from 'react-icons/gi';
-import { LuLayoutDashboard } from 'react-icons/lu';
-import { PiBuildingOfficeDuotone, PiCity } from 'react-icons/pi';
+import { IoDocumentTextOutline, IoImageOutline, IoHome } from "react-icons/io5";
+import { FaAddressCard, FaFlag } from "react-icons/fa6";
+import { GiFilmStrip } from "react-icons/gi";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { PiBuildingOfficeDuotone, PiCity } from "react-icons/pi";
 
 export const sidebarPattern = [
     {
-        href: '/dashboard',
+        href: "/dashboard",
         icon: LuLayoutDashboard,
-        text: 'Dashboard',
+        text: "Dashboard",
     },
     {
-        href: 'about',
+        href: "about",
         icon: IoDocumentTextOutline,
-        text: 'About',
+        text: "About",
     },
     {
-        href: 'films',
+        href: "films",
         icon: GiFilmStrip,
-        text: 'Films',
+        text: "Films",
     },
     {
-        href: '#',
+        href: "#",
         icon: FaAddressCard,
-        text: 'Address',
+        text: "Address",
         subLink: [
             {
                 icon: PiBuildingOfficeDuotone,
-                href: 'office',
-                text: 'Office',
-            },
-            {
-                icon: FaFlag,
-                href: 'country',
-                text: 'Country',
+                href: "office",
+                text: "Office",
             },
             {
                 icon: PiCity,
-                href: 'city',
-                text: 'City',
+                href: "city",
+                text: "City",
             },
             {
                 icon: IoHome,
-                href: 'province',
-                text: 'Province',
+                href: "province",
+                text: "Province",
+            },
+            {
+                icon: FaFlag,
+                href: "country",
+                text: "Country",
             },
         ],
     },
     {
-        href: 'banner',
+        href: "banner",
         icon: IoImageOutline,
-        text: 'Banners',
+        text: "Banners",
     },
 ];

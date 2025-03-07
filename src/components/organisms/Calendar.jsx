@@ -1,7 +1,8 @@
 import { calendarUtils, getEventStyle } from "../../utils";
 import { useGlobalHooks } from "../../hooks";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
-const Calendar = ({ datas, setDatas, handleShowModalId }) => {
+const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
     const {
         currentDate,
         setCurrentDate,
@@ -20,7 +21,7 @@ const Calendar = ({ datas, setDatas, handleShowModalId }) => {
         goToToday,
         onDragStart,
         onDrop,
-    } = calendarUtils(currentDate, setCurrentDate, datas, setDatas);
+    } = calendarUtils(currentDate, setCurrentDate, datas, setDatas, saveEvents);
 
     const months = Array.from({ length: 12 }, (_, i) =>
         new Date(0, i).toLocaleString("default", { month: "long" })
@@ -38,49 +39,55 @@ const Calendar = ({ datas, setDatas, handleShowModalId }) => {
     };
 
     return (
-        <div className="w-full h-full p-6 bg-white shadow-lg rounded-lg">
-            <div className="flex justify-between items-center mb-6">
+        <div className="w-full h-full overflow-x-auto lg:p-6 bg-white shadow-lg rounded-lg">
+            <div className="flex flex-col lg:flex-row lg:justify-between items-center lg:mb-6 gap-4 p-4 lg:p-0">
                 <button
                     onClick={prevMonth}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
                 >
                     Previous
                 </button>
-                <div className="flex items-center">
-                    <h2 className="text-2xl font-bold text-gray-800 mr-4">
+                <div className="flex flex-col lg:flex-row items-center gap-4">
+                    <h2 className="text-2xl font-bold text-gray-800">
                         {currentDate.toLocaleString("default", {
                             month: "long",
                             year: "numeric",
                         })}
                     </h2>
-                    <select
-                        value={jumpMonth}
-                        onChange={(e) => setJumpMonth(Number(e.target.value))}
-                        className="w-28 p-2 border border-gray-300 rounded-lg mr-2"
-                    >
-                        {months.map((month, index) => (
-                            <option key={index} value={index + 1}>
-                                {month}
-                            </option>
-                        ))}
-                    </select>
-                    <select
-                        value={jumpYear}
-                        onChange={(e) => setJumpYear(Number(e.target.value))}
-                        className="w-28 p-2 border border-gray-300 rounded-lg mr-2"
-                    >
-                        {years.map((year) => (
-                            <option key={year} value={year}>
-                                {year}
-                            </option>
-                        ))}
-                    </select>
-                    <button
-                        onClick={jumpToDate}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
-                    >
-                        Jump
-                    </button>
+                    <div className="flex items-center gap-2">
+                        <select
+                            value={jumpMonth}
+                            onChange={(e) =>
+                                setJumpMonth(Number(e.target.value))
+                            }
+                            className="w-28 p-2 border border-gray-300 rounded-lg"
+                        >
+                            {months.map((month, index) => (
+                                <option key={index} value={index + 1}>
+                                    {month}
+                                </option>
+                            ))}
+                        </select>
+                        <select
+                            value={jumpYear}
+                            onChange={(e) =>
+                                setJumpYear(Number(e.target.value))
+                            }
+                            className="w-28 p-2 border border-gray-300 rounded-lg"
+                        >
+                            {years.map((year) => (
+                                <option key={year} value={year}>
+                                    {year}
+                                </option>
+                            ))}
+                        </select>
+                        <button
+                            onClick={jumpToDate}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+                        >
+                            Jump
+                        </button>
+                    </div>
                 </div>
                 <button
                     onClick={nextMonth}
@@ -139,7 +146,7 @@ const Calendar = ({ datas, setDatas, handleShowModalId }) => {
                                                                     event,
                                                                     day
                                                                 ).borderRadius
-                                                            }`}
+                                                            } group`}
                                                             draggable
                                                             onDragStart={(e) =>
                                                                 onDragStart(
@@ -155,14 +162,34 @@ const Calendar = ({ datas, setDatas, handleShowModalId }) => {
                                                                     )
                                                                         .gridColumn,
                                                             }}
-                                                            onClick={() =>
-                                                                handleShowModalId(
-                                                                    event,
-                                                                    "edit"
-                                                                )
-                                                            }
                                                         >
                                                             {event.banner_name}
+                                                            <div className="absolute top-4 mb-1 right-0 hidden group-hover:flex space-x-1 bg-white p-4 z-50 rounded shadow-lg pointer-events-auto">
+                                                                <button
+                                                                    onClick={() =>
+                                                                        handleShowModalId(
+                                                                            event,
+                                                                            "edit"
+                                                                        )
+                                                                    }
+                                                                    className="bg-yellow-300 text-white p-1 rounded flex items-center cursor-pointer"
+                                                                >
+                                                                    <FaEdit className="mr-1" />{" "}
+                                                                    Edit
+                                                                </button>
+                                                                <button
+                                                                    onClick={() =>
+                                                                        handleShowModalId(
+                                                                            event.id,
+                                                                            "delete"
+                                                                        )
+                                                                    }
+                                                                    className="bg-red-500 text-white p-1 rounded flex items-center cursor-pointer"
+                                                                >
+                                                                    <FaTrash className="mr-1" />{" "}
+                                                                    Delete
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     )
                                                 )}
@@ -174,12 +201,18 @@ const Calendar = ({ datas, setDatas, handleShowModalId }) => {
                     ))}
                 </tbody>
             </table>
-            <div className="flex justify-center mt-6">
+            <div className="flex flex-col lg:flex-row justify-center mt-6 gap-4">
                 <button
                     onClick={goToToday}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
                 >
                     Today
+                </button>
+                <button
+                    onClick={saveEvents}
+                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
+                >
+                    Save
                 </button>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 const AlertForm = ({ title, text, icon }) => {
     Swal.fire({

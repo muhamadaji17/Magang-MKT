@@ -33,7 +33,7 @@ const Form = ({
     return (
         <form
             onSubmit={handleSubmit((data) => handleSubmitData(data, reset))}
-            className="flex flex-col justify-center gap-4 w-full h-full"
+            className="flex flex-col justify-center gap-4 w-full"
         >
             {dataForm?.map((data, index) => (
                 <div key={index} className="relative">
@@ -55,6 +55,7 @@ const Form = ({
                             placeholder={data.placeholder}
                             register={register}
                             addOptionError={data.addOptionError}
+                            defaultValue={data?.defaultValue}
                             errors={errors[data.name]}
                         />
                     ) : null}

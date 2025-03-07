@@ -1,4 +1,10 @@
-import { GET_DATAS, POST_DATAS_FILE, PUT_DATAS } from "../api";
+import {
+    DELETE_DATAS,
+    GET_DATAS,
+    POST_DATAS_FILE,
+    PUT_DATAS,
+    PUT_DATAS_FILE,
+} from "../api";
 import { AlertForm } from "../components/atoms";
 
 export const GetBannerService = async (
@@ -69,25 +75,16 @@ export const EditBannerDateService = async (
     data,
     accessToken,
     setShowModal,
-    reset,
     setLoading,
     setReGetDatas
 ) => {
     try {
-        const bodyres = {
-            banner_name: data.banner_name,
-            banner_img: data.banner_img,
-            status: data.status,
-            start_date_banner: data.start_date_banner,
-            end_date_banner: data.end_date_banner,
-        };
         setLoading(true);
         const response = await PUT_DATAS(
             `crud/banner/${data.id}`,
-            bodyres,
+            data,
             accessToken
         );
-        reset();
         AlertForm({
             icon: "success",
             text: response.data.message,
@@ -117,14 +114,58 @@ export const EditBannerService = async (
     setLoading,
     setReGetDatas
 ) => {
+    console.log(data);
+
     try {
+        const manipulateData = {
+            banner_name: data.banner_name,
+            banner_img: data.banner_img,
+            status: data.status,
+            start_date_banner: data.start_date_banner,
+            end_date_banner: data.end_date_banner,
+        };
+
+        let { banner_img } = manipulateData;
+
+        const manipulatedBannerImg =
+            typeof banner_img === "string" ? banner_img : banner_img[0];
+
+        const bodyres = { ...manipulateData, banner_img: manipulatedBannerImg };
+
         setLoading(true);
-        const response = await PUT_DATAS(
+        const response = await PUT_DATAS_FILE(
             `crud/banner/${id}`,
-            data,
+            bodyres,
             accessToken
         );
         reset();
+        AlertForm({
+            icon: "success",
+            text: response.data.message,
+            title: "success",
+        });
+        setReGetDatas(false);
+        setShowModal(false);
+    } catch (error) {
+        AlertForm({
+            icon: "error",
+            text: error.response.data.message,
+            title: "failed",
+        });
+    } finally {
+        setLoading(false);
+    }
+};
+
+export const DeleteBannerService = async (
+    id,
+    accessToken,
+    setShowModal,
+    setLoading,
+    setReGetDatas
+) => {
+    try {
+        const response = await DELETE_DATAS(`crud/banner/${id}`, accessToken);
         AlertForm({
             icon: "success",
             text: response.data.message,
@@ -139,6 +180,7 @@ export const EditBannerService = async (
             text: error.response.data.message,
             title: "failed",
         });
+        console.log(error);
     } finally {
         setLoading(false);
     }

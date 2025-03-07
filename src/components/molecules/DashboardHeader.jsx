@@ -20,14 +20,16 @@ const DashboardHeader = ({
     return (
         <>
             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                    <h1 className="text-2xl font-semibold">{pageText}</h1>
+                <div className="flex lg:items-center flex-col lg:flex-row lg:gap-2 mt-4 lg:mt-0">
+                    <h1 className="text-xl lg:text-2xl font-semibold">
+                        {pageText}
+                    </h1>
                     <Breadcrumb items={url} />
                 </div>
                 <div>
                     <Button
                         type="button"
-                        className="w-48 text-white bg-blue-600 hover:bg-blue-800 text-sm lg:text-base"
+                        className="w-24 lg:w-48 text-white bg-blue-600 hover:bg-blue-800 text-sm lg:text-base"
                         disable={false}
                         onClick={() =>
                             handleShowModal(setShowModal, setModalType, "add")
