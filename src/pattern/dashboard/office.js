@@ -1,0 +1,91 @@
+import errorOptions from "../errorOptions";
+
+export const inputOffice = (datas) => [
+    {
+        jenisInputan: "input",
+        type: "select",
+        title: "City",
+        options: datas.map((data) => ({
+            value: data.id,
+            label: data.city_name,
+        })),
+        name: "id_city",
+        error: "id_city",
+        addOptionError: errorOptions.id_city,
+        grid: 12,
+    },
+    {
+        jenisInputan: "input",
+        type: "text",
+        title: "Office Code",
+        name: "office_code",
+        placeholder: "your office code",
+        error: "office_code",
+        addOptionError: errorOptions.office_code,
+        grid: 12,
+    },
+    {
+        jenisInputan: "input",
+        type: "text",
+        title: "Office Name",
+        name: "office_name",
+        placeholder: "your office name",
+        error: "office_name",
+        addOptionError: errorOptions.office_name,
+        grid: 12,
+    },
+    {
+        jenisInputan: "input",
+        type: "checkbox",
+        title: "Click to Activate",
+        name: "status",
+        grid: 12,
+    },
+];
+
+export const inputEditOffice = (selectData, defaultValue) => [
+    {
+        jenisInputan: "input",
+        type: "select",
+        title: "City",
+        options: selectData.map((data) => ({
+            value: data.id,
+            label: data.city_name,
+        })),
+        name: "id_city",
+        error: "id_city",
+        addOptionError: errorOptions.id_city,
+        defaultValue: defaultValue.id_city,
+        grid: 12,
+    },
+    {
+        jenisInputan: "input",
+        type: "text",
+        title: "Office Code",
+        name: "office_code",
+        placeholder: "your office code",
+        error: "office_code",
+        addOptionError: errorOptions.office_code,
+        defaultValue: defaultValue.office_code,
+        grid: 12,
+    },
+    {
+        jenisInputan: "input",
+        type: "text",
+        title: "Office Name",
+        name: "office_name",
+        placeholder: "your office name",
+        error: "office_name",
+        addOptionError: errorOptions.office_name,
+        defaultValue: defaultValue.office_name,
+        grid: 12,
+    },
+    {
+        jenisInputan: "input",
+        type: "checkbox",
+        title: "Click to Activate",
+        name: "status",
+        defaultValue: defaultValue.status,
+        grid: 12,
+    },
+];

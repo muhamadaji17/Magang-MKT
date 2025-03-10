@@ -43,13 +43,13 @@ export const AddAboutService = async (
     try {
         setLoading(true);
         const response = await POST_DATAS("crud/about", data, token);
+        setReGetDatas(false);
         reset();
         AlertForm({
             icon: "success",
             text: response.data.message,
             title: "success",
         });
-        setReGetDatas(false);
         setShowModal(false);
     } catch (error) {
         AlertForm({

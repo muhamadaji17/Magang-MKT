@@ -43,13 +43,13 @@ export const AddProvinceService = async (
     try {
         setLoading(true);
         const response = await POST_DATAS("crud/province", data, token);
+        setReGetDatas(false);
         reset();
         AlertForm({
             icon: "success",
             text: response.data.message,
             title: "success",
         });
-        setReGetDatas(false);
         setShowModal(false);
     } catch (error) {
         AlertForm({
@@ -78,21 +78,19 @@ export const EditProvinceService = async (
             token
         );
         setReGetDatas(false);
-        setShowModal(false);
         reset();
         AlertForm({
             icon: "success",
             text: response.data.message,
             title: "success",
         });
+        setShowModal(false);
     } catch (error) {
-        console.log(error);
         AlertForm({
             icon: "error",
             text: error.response.data.message,
             title: "failed",
         });
-        console.log(error);
     } finally {
         setLoading(false);
     }
@@ -115,13 +113,11 @@ export const DeleteProvinceService = async (
         setReGetDatas(false);
         setShowModal(false);
     } catch (error) {
-        console.log(error);
         AlertForm({
             icon: "error",
             text: error.response.data.message,
             title: "failed",
         });
-        console.log(error);
     } finally {
         setLoading(false);
     }

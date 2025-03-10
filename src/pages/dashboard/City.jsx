@@ -1,11 +1,11 @@
 import { DashboardHeader, Loading } from "../../components/molecules";
 import { Table } from "../../components/organisms";
 import {
-    provinceTablePattern,
+    cityTablePattern,
     handleCancelModal,
     handleShowModalId,
-    inputProvince,
-    inputEditProvince,
+    inputCity,
+    inputEditCity,
 } from "../../pattern";
 import {
     useGetDataHook,
@@ -13,11 +13,11 @@ import {
     useSupportGetDataHook,
 } from "../../hooks";
 import {
-    AddProvinceService,
-    DeleteProvinceService,
-    EditProvinceService,
+    GetCityService,
+    AddCityService,
+    EditCityService,
+    DeleteCityService,
     GetProvinceService,
-    GetCountryService,
 } from "../../services";
 
 const CityPage = () => {
@@ -42,7 +42,7 @@ const CityPage = () => {
     } = useGlobalHooks();
 
     useGetDataHook(
-        GetProvinceService,
+        GetCityService,
         accessToken,
         setDatas,
         setLoadingData,
@@ -52,7 +52,7 @@ const CityPage = () => {
 
     useSupportGetDataHook(
         accessToken,
-        GetCountryService,
+        GetProvinceService,
         setSubDatas,
         setLoadingSubData,
         setReGetDatas,
@@ -64,12 +64,12 @@ const CityPage = () => {
     return (
         <div className="w-full space-y-4">
             <DashboardHeader
-                pageText="Province Page"
-                buttonText="Add Province"
-                dataForm={inputProvince(subDatas)}
-                titleModal="Add Province"
+                pageText="City Page"
+                buttonText="Add City"
+                dataForm={inputCity(subDatas)}
+                titleModal="Add City"
                 setReGetDatas={setReGetDatas}
-                service={AddProvinceService}
+                service={AddCityService}
                 setModalType={setModalType}
                 loadingSubData={loadingSubData}
             />
@@ -88,15 +88,15 @@ const CityPage = () => {
                 getDetailsData={getDetailsData}
                 handleCancelModal={handleCancelModal}
                 setReGetDatas={setReGetDatas}
-                columns={provinceTablePattern}
+                columns={cityTablePattern}
                 modalType={modalType}
                 setShowModal={setShowModal}
                 showModal={showModal}
-                editService={EditProvinceService}
-                inputEditPattern={inputEditProvince}
-                deleteService={DeleteProvinceService}
+                editService={EditCityService}
+                inputEditPattern={inputEditCity}
+                deleteService={DeleteCityService}
                 subDatas={subDatas}
-                titleModal={"Edit Province"}
+                titleModal={"Edit City"}
                 loadingSubData={loadingSubData}
             />
         </div>

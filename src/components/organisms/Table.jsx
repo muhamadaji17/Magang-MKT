@@ -22,9 +22,6 @@ const Table = ({
     subDatas,
     loadingSubData,
 }) => {
-    console.log(getDetailsData);
-    console.log(subDatas);
-
     return (
         <div>
             <div className="relative overflow-x-auto">

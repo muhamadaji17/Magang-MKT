@@ -7,6 +7,8 @@ import {
     BannerPage,
     CountryPage,
     ProvincePage,
+    CityPage,
+    OfficePage,
 } from "../pages";
 import { Layout } from "../components/templates";
 import Middleware from "./Middleware";
@@ -37,6 +39,8 @@ const Routers = () => {
                     <Route path="banner" element={<BannerPage />} />
                     <Route path="country" element={<CountryPage />} />
                     <Route path="province" element={<ProvincePage />} />
+                    <Route path="city" element={<CityPage />} />
+                    <Route path="office" element={<OfficePage />} />
                 </Route>
             </Routes>
         </BrowserRouter>

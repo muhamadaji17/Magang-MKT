@@ -46,7 +46,7 @@ const DashboardHeader = ({
                     titleModal={titleModal}
                 >
                     <FormModal
-                        titleModal="Add Banner"
+                        titleModal={titleModal}
                         setShowModal={setShowModal}
                         dataForm={dataForm}
                         service={service}

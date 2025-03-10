@@ -5,6 +5,8 @@ import FilmPage from "./dashboard/Film";
 import BannerPage from "./dashboard/Banner";
 import CountryPage from "./dashboard/Country";
 import ProvincePage from "./dashboard/Province";
+import CityPage from "./dashboard/City";
+import OfficePage from "./dashboard/Office";
 
 export {
     LoginPage,
@@ -14,4 +16,6 @@ export {
     BannerPage,
     CountryPage,
     ProvincePage,
+    CityPage,
+    OfficePage,
 };

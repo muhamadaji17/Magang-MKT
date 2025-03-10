@@ -19,6 +19,18 @@ import {
     EditProvinceService,
     DeleteProvinceService,
 } from "./ProvinceServices";
+import {
+    AddCityService,
+    GetCityService,
+    EditCityService,
+    DeleteCityService,
+} from "./CityServices";
+import {
+    GetOfficeService,
+    AddOfficeService,
+    EditOfficeService,
+    DeleteOfficeService,
+} from "./OfficeServices";
 
 export {
     LoginService,
@@ -37,4 +49,12 @@ export {
     GetProvinceService,
     EditProvinceService,
     DeleteProvinceService,
+    AddCityService,
+    GetCityService,
+    EditCityService,
+    DeleteCityService,
+    GetOfficeService,
+    AddOfficeService,
+    EditOfficeService,
+    DeleteOfficeService,
 };

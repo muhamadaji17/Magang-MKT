@@ -1,27 +1,34 @@
 import { DashboardHeader, Loading } from "../../components/molecules";
 import { Table } from "../../components/organisms";
 import {
-    countryTablePattern,
+    officeTablePattern,
     handleCancelModal,
     handleShowModalId,
-    inputCountry,
-    inputEditCountry,
+    inputOffice,
+    inputEditOffice,
 } from "../../pattern";
-import { useGetDataHook, useGlobalHooks } from "../../hooks";
 import {
-    AddCountryService,
-    DeleteCountryService,
-    EditCountryService,
-    GetCountryService,
+    useGetDataHook,
+    useGlobalHooks,
+    useSupportGetDataHook,
+} from "../../hooks";
+import {
+    GetOfficeService,
+    AddOfficeService,
+    EditOfficeService,
+    DeleteOfficeService,
+    GetCityService,
 } from "../../services";
 
-const CountryPage = () => {
+const OfficePage = () => {
     const {
         accessToken,
         datas,
         setDatas,
         loadingData,
         setLoadingData,
+        loadingSubData,
+        setLoadingSubData,
         reGetDatas,
         setReGetDatas,
         showModal,
@@ -30,10 +37,12 @@ const CountryPage = () => {
         setModalType,
         getDetailsData,
         setGetDetailsData,
+        subDatas,
+        setSubDatas,
     } = useGlobalHooks();
 
     useGetDataHook(
-        GetCountryService,
+        GetOfficeService,
         accessToken,
         setDatas,
         setLoadingData,
@@ -41,18 +50,28 @@ const CountryPage = () => {
         setReGetDatas
     );
 
+    useSupportGetDataHook(
+        accessToken,
+        GetCityService,
+        setSubDatas,
+        setLoadingSubData,
+        setReGetDatas,
+        modalType
+    );
+
     if (loadingData) return <Loading />;
 
     return (
         <div className="w-full space-y-4">
             <DashboardHeader
-                pageText="Country Page"
-                buttonText="Add Country"
-                dataForm={inputCountry}
-                titleModal="Add Country"
+                pageText="Office Page"
+                buttonText="Add Office"
+                dataForm={inputOffice(subDatas)}
+                titleModal="Add Office"
                 setReGetDatas={setReGetDatas}
-                service={AddCountryService}
+                service={AddOfficeService}
                 setModalType={setModalType}
+                loadingSubData={loadingSubData}
             />
             <Table
                 datas={datas}
@@ -69,17 +88,19 @@ const CountryPage = () => {
                 getDetailsData={getDetailsData}
                 handleCancelModal={handleCancelModal}
                 setReGetDatas={setReGetDatas}
-                columns={countryTablePattern}
+                columns={officeTablePattern}
                 modalType={modalType}
                 setShowModal={setShowModal}
                 showModal={showModal}
-                editService={EditCountryService}
-                inputEditPattern={inputEditCountry}
-                deleteService={DeleteCountryService}
-                titleModal="Edit Country"
+                editService={EditOfficeService}
+                inputEditPattern={inputEditOffice}
+                deleteService={DeleteOfficeService}
+                subDatas={subDatas}
+                titleModal={"Edit Office"}
+                loadingSubData={loadingSubData}
             />
         </div>
     );
 };
 
-export default CountryPage;
+export default OfficePage;

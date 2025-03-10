@@ -53,13 +53,13 @@ export const AddBannerService = async (
         setLoading(true);
         const response = await POST_DATAS_FILE("crud/banner", data, token);
         setReGetDatas(false);
-        setShowModal(false);
         reset();
         AlertForm({
             icon: "success",
             text: response.data.message,
             title: "success",
         });
+        setShowModal(false);
     } catch (error) {
         AlertForm({
             icon: "error",
@@ -83,21 +83,19 @@ export const EditBannerDateService = async (
         setLoading(true);
         const response = await PUT_DATAS(`crud/banner/${data.id}`, data, token);
         setReGetDatas(false);
-        setShowModal(false);
         reset();
         AlertForm({
             icon: "success",
             text: response.data.message,
             title: "success",
         });
+        setShowModal(false);
     } catch (error) {
-        console.log(error);
         AlertForm({
             icon: "error",
             text: error.response.data.message,
             title: "failed",
         });
-        console.log(error);
     } finally {
         setLoading(false);
     }
@@ -133,13 +131,13 @@ export const EditBannerService = async (
             bodyres,
             accessToken
         );
+        setReGetDatas(false);
         reset();
         AlertForm({
             icon: "success",
             text: response.data.message,
             title: "success",
         });
-        setReGetDatas(false);
         setShowModal(false);
     } catch (error) {
         AlertForm({
@@ -161,21 +159,19 @@ export const DeleteBannerService = async (
 ) => {
     try {
         const response = await DELETE_DATAS(`crud/banner/${id}`, accessToken);
+        setReGetDatas(false);
         AlertForm({
             icon: "success",
             text: response.data.message,
             title: "success",
         });
-        setReGetDatas(false);
         setShowModal(false);
     } catch (error) {
-        console.log(error);
         AlertForm({
             icon: "error",
             text: error.response.data.message,
             title: "failed",
         });
-        console.log(error);
     } finally {
         setLoading(false);
     }
