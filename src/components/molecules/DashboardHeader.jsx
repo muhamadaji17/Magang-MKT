@@ -13,6 +13,7 @@ const DashboardHeader = ({
     setReGetDatas,
     service,
     setModalType,
+    loadingSubData,
 }) => {
     const { location, showModal, setShowModal } = useGlobalHooks();
     const url = getUrlDashboard(location);
@@ -50,6 +51,7 @@ const DashboardHeader = ({
                         dataForm={dataForm}
                         service={service}
                         setReGetDatas={setReGetDatas}
+                        loadingSubData={loadingSubData}
                     />
                 </ModalLayout>
             )}

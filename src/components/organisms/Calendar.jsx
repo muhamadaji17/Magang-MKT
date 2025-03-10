@@ -1,5 +1,5 @@
 import { calendarUtils, getEventStyle } from "../../utils";
-import { useGlobalHooks } from "../../hooks";
+import { useGlobalCalendarHooks } from "../../hooks";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const Calendar = ({ datas, setDatas, handleShowModalWithData, saveEvents }) => {
@@ -10,7 +10,7 @@ const Calendar = ({ datas, setDatas, handleShowModalWithData, saveEvents }) => {
         setJumpYear,
         jumpMonth,
         setJumpMonth,
-    } = useGlobalHooks();
+    } = useGlobalCalendarHooks();
 
     const {
         days,

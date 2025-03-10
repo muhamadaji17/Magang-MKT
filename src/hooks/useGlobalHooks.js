@@ -32,10 +32,6 @@ const useGlobalHooks = () => {
     const [showModal, setShowModal] = useState(false);
     const [modalType, setModalType] = useState("");
 
-    const [currentDate, setCurrentDate] = useState(new Date());
-    const [jumpMonth, setJumpMonth] = useState(currentDate.getMonth() + 1);
-    const [jumpYear, setJumpYear] = useState(currentDate.getFullYear());
-
     return {
         showPassword,
         setShowPassword,
@@ -67,12 +63,6 @@ const useGlobalHooks = () => {
         trigger,
         getDetailsData,
         setGetDetailsData,
-        currentDate,
-        setCurrentDate,
-        jumpMonth,
-        setJumpMonth,
-        jumpYear,
-        setJumpYear,
         subDatas,
         setSubDatas,
         loadingSubData,

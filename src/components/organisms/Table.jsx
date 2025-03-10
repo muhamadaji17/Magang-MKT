@@ -20,7 +20,11 @@ const Table = ({
     deleteService,
     titleModal,
     subDatas,
+    loadingSubData,
 }) => {
+    console.log(getDetailsData);
+    console.log(subDatas);
+
     return (
         <div>
             <div className="relative overflow-x-auto">
@@ -156,6 +160,7 @@ const Table = ({
                             }
                             service={editService}
                             setReGetDatas={setReGetDatas}
+                            loadingSubData={loadingSubData}
                         />
                     ) : null}
                 </ModalLayout>

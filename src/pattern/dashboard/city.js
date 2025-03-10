@@ -1,17 +1,17 @@
 import errorOptions from "../errorOptions";
 
-export const inputProvince = (datas) => [
+export const inputCity = (datas) => [
     {
         jenisInputan: "input",
         type: "select",
         title: "Country",
         options: datas.map((data) => ({
             value: data.id,
-            label: data.country_name,
+            label: data.province_name,
         })),
-        name: "id_country",
-        error: "id_country",
-        addOptionError: errorOptions.id_country,
+        name: "id_province",
+        error: "id_province",
+        addOptionError: errorOptions.id_province,
         grid: 12,
     },
     {

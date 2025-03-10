@@ -20,7 +20,7 @@ import {
     GetCountryService,
 } from "../../services";
 
-const ProvincePage = () => {
+const CityPage = () => {
     const {
         accessToken,
         datas,
@@ -103,4 +103,4 @@ const ProvincePage = () => {
     );
 };
 
-export default ProvincePage;
+export default CityPage;

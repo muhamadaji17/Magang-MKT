@@ -9,8 +9,16 @@ const FormModal = ({
     dataForm,
     service,
     setReGetDatas,
+    loadingSubData,
 }) => {
     const { loadingButton, setLoadingButton, accessToken } = useGlobalHooks();
+
+    if (loadingSubData)
+        return (
+            <div className="w-full h-full flex items-center justify-center">
+                Loading...
+            </div>
+        );
 
     return (
         <div className="bg-white rounded-lg p-2 w-[1000px] h-[600px] relative flex flex-col">
