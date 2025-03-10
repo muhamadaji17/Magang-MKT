@@ -33,11 +33,12 @@ const Form = ({
     return (
         <form
             onSubmit={handleSubmit((data) => handleSubmitData(data, reset))}
-            className="flex flex-col justify-center gap-4 w-full"
+            className="space-y-3 w-full"
         >
-            {dataForm?.map((data, index) => (
-                <div key={index} className="grid grid-cols-12 gap-4">
+            <div className="grid grid-cols-12 gap-4">
+                {dataForm?.map((data, index) => (
                     <div
+                        key={index}
                         className={`relative ${(() => {
                             switch (data.grid) {
                                 case 12:
@@ -76,6 +77,8 @@ const Form = ({
                                 register={register}
                                 addOptionError={data.addOptionError}
                                 errors={errors[data.name]}
+                                optionsSelect={data.options}
+                                defaultSelect={data.title}
                             />
                         ) : data.jenisInputan === "hidden" ? (
                             <InputForm
@@ -108,8 +111,8 @@ const Form = ({
                             </div>
                         )}
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
             <div className="flex justify-center lg:justify-end">
                 <Button
                     className={buttonStyle}

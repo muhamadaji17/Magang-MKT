@@ -7,6 +7,18 @@ import {
     DeleteBannerService,
 } from "./BannerServices";
 import { GetAboutService, AddAboutService } from "./AboutServices";
+import {
+    AddCountryService,
+    GetCountryService,
+    EditCountryService,
+    DeleteCountryService,
+} from "./CountryServices";
+import {
+    AddProvinceService,
+    GetProvinceService,
+    EditProvinceService,
+    DeleteProvinceService,
+} from "./ProvinceServices";
 
 export {
     LoginService,
@@ -17,4 +29,12 @@ export {
     EditBannerDateService,
     EditBannerService,
     DeleteBannerService,
+    AddCountryService,
+    GetCountryService,
+    EditCountryService,
+    DeleteCountryService,
+    AddProvinceService,
+    GetProvinceService,
+    EditProvinceService,
+    DeleteProvinceService,
 };

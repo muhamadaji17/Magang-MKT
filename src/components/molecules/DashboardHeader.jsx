@@ -12,15 +12,15 @@ const DashboardHeader = ({
     titleModal,
     setReGetDatas,
     service,
+    setModalType,
 }) => {
-    const { location, setModalType, showModal, setShowModal } =
-        useGlobalHooks();
+    const { location, showModal, setShowModal } = useGlobalHooks();
     const url = getUrlDashboard(location);
 
     return (
         <>
             <div className="flex items-center justify-between">
-                <div className="flex lg:items-center flex-col lg:flex-row lg:gap-2 mt-4 lg:mt-0">
+                <div className="flex lg:items-center flex-col lg:flex-row lg:gap-4 mt-4 lg:mt-0">
                     <h1 className="text-xl lg:text-2xl font-semibold">
                         {pageText}
                     </h1>

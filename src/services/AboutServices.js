@@ -52,13 +52,11 @@ export const AddAboutService = async (
         setReGetDatas(false);
         setShowModal(false);
     } catch (error) {
-        console.log(error);
         AlertForm({
             icon: "error",
             text: error.response.data.message,
             title: "failed",
         });
-        console.log(error);
     } finally {
         setLoading(false);
     }

@@ -82,6 +82,21 @@ const errorOptions = {
     end_date_banner: {
         required: "End Date is required",
     },
+    country_code: {
+        required: "Country Code is required",
+    },
+    country_name: {
+        required: "Country Name is required",
+    },
+    province_code: {
+        required: "Province Code is required",
+    },
+    province_name: {
+        required: "Province Name is required",
+    },
+    id_country: {
+        required: "Country is required",
+    },
 };
 
 export default errorOptions;

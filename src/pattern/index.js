@@ -3,8 +3,8 @@ import errorOptions from "./errorOptions";
 import {
     handleSubmitData,
     handleShowPassword,
-    handleShowModal,
     handleShowModalId,
+    handleShowModal,
     handleCancelModal,
     handleCloseBgModal,
     saveEvents,
@@ -12,6 +12,10 @@ import {
 import { sidebarPattern } from "./sidebarPattern";
 import { inputAbout } from "./dashboard/about";
 import { inputBanner, inputEditBanner } from "./dashboard/banner";
+import { inputCountry, inputEditCountry } from "./dashboard/country";
+import { countryTablePattern } from "./table/countryTablePattern";
+import { inputProvince, inputEditProvince } from "./dashboard/province";
+import { provinceTablePattern } from "./table/provinceTablePattern";
 
 export {
     inputLogin,
@@ -27,4 +31,10 @@ export {
     inputBanner,
     inputEditBanner,
     saveEvents,
+    inputCountry,
+    inputEditCountry,
+    countryTablePattern,
+    inputProvince,
+    inputEditProvince,
+    provinceTablePattern,
 };

@@ -18,8 +18,10 @@ const useGlobalHooks = () => {
 
     const [loadingButton, setLoadingButton] = useState(false);
     const [loadingData, setLoadingData] = useState(false);
+    const [loadingSubData, setLoadingSubData] = useState(false);
 
     const [datas, setDatas] = useState([]);
+    const [subDatas, setSubDatas] = useState([]);
     const [getDetailsData, setGetDetailsData] = useState([]);
     const [reGetDatas, setReGetDatas] = useState(false);
 
@@ -71,6 +73,10 @@ const useGlobalHooks = () => {
         setJumpMonth,
         jumpYear,
         setJumpYear,
+        subDatas,
+        setSubDatas,
+        loadingSubData,
+        setLoadingSubData,
     };
 };
 

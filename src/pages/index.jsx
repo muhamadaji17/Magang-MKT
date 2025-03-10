@@ -3,5 +3,15 @@ import DashboardPage from "./dashboard/Dashboard";
 import AboutPage from "./dashboard/About";
 import FilmPage from "./dashboard/Film";
 import BannerPage from "./dashboard/Banner";
+import CountryPage from "./dashboard/Country";
+import ProvincePage from "./dashboard/Province";
 
-export { LoginPage, DashboardPage, AboutPage, FilmPage, BannerPage };
+export {
+    LoginPage,
+    DashboardPage,
+    AboutPage,
+    FilmPage,
+    BannerPage,
+    CountryPage,
+    ProvincePage,
+};

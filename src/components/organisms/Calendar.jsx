@@ -2,7 +2,7 @@ import { calendarUtils, getEventStyle } from "../../utils";
 import { useGlobalHooks } from "../../hooks";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
+const Calendar = ({ datas, setDatas, handleShowModalWithData, saveEvents }) => {
     const {
         currentDate,
         setCurrentDate,
@@ -167,7 +167,7 @@ const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
                                                             <div className="absolute top-4 mb-1 right-0 hidden group-hover:flex space-x-1 bg-white p-4 z-50 rounded shadow-lg pointer-events-auto">
                                                                 <button
                                                                     onClick={() =>
-                                                                        handleShowModalId(
+                                                                        handleShowModalWithData(
                                                                             event,
                                                                             "edit"
                                                                         )
@@ -179,7 +179,7 @@ const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
                                                                 </button>
                                                                 <button
                                                                     onClick={() =>
-                                                                        handleShowModalId(
+                                                                        handleShowModalWithData(
                                                                             event.id,
                                                                             "delete"
                                                                         )

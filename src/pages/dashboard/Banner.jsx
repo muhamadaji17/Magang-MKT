@@ -18,6 +18,7 @@ import {
     DashboardHeader,
     DeleteModal,
     FormModal,
+    Loading,
 } from "../../components/molecules";
 
 const BannerPage = () => {
@@ -25,6 +26,7 @@ const BannerPage = () => {
         accessToken,
         datas,
         setDatas,
+        loadingData,
         setLoadingData,
         reGetDatas,
         setReGetDatas,
@@ -45,8 +47,10 @@ const BannerPage = () => {
         setReGetDatas
     );
 
+    if (loadingData) return <Loading />;
+
     return (
-        <div className="w-full space-y-2">
+        <div className="w-full space-y-4">
             <DashboardHeader
                 pageText="Banner Page"
                 buttonText="Add Banner"
@@ -54,6 +58,7 @@ const BannerPage = () => {
                 titleModal="Add Banner"
                 setReGetDatas={setReGetDatas}
                 service={AddBannerService}
+                setModalType={setModalType}
             />
             <Calendar
                 datas={datas}
@@ -80,21 +85,7 @@ const BannerPage = () => {
                 }
             />
             {showModal && (
-                <ModalLayout
-                    setShowModal={setShowModal}
-                    addService={
-                        modalType === "edit"
-                            ? EditBannerService
-                            : modalType === "delete"
-                            ? DeleteBannerService
-                            : null
-                    }
-                    dataForm={inputEditBanner(getDetailsData)}
-                    titleModal={"Edit Banner"}
-                    type={modalType}
-                    getDetailsData={getDetailsData}
-                    setReGetDatas={setReGetDatas}
-                >
+                <ModalLayout setShowModal={setShowModal}>
                     {modalType === "delete" ? (
                         <DeleteModal
                             setShowModal={setShowModal}

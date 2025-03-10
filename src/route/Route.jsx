@@ -5,9 +5,11 @@ import {
     AboutPage,
     FilmPage,
     BannerPage,
+    CountryPage,
+    ProvincePage,
 } from "../pages";
 import { Layout } from "../components/templates";
-import ProtectedRoute from "./ProtectedRoute";
+import Middleware from "./Middleware";
 
 const Routers = () => {
     return (
@@ -16,23 +18,25 @@ const Routers = () => {
                 <Route
                     path="/"
                     element={
-                        <ProtectedRoute type="not-required">
+                        <Middleware type="not-required">
                             <LoginPage />
-                        </ProtectedRoute>
+                        </Middleware>
                     }
                 />
                 <Route
                     path="/dashboard"
                     element={
-                        <ProtectedRoute type="required">
+                        <Middleware type="required">
                             <Layout />
-                        </ProtectedRoute>
+                        </Middleware>
                     }
                 >
                     <Route index element={<DashboardPage />} />
                     <Route path="about" element={<AboutPage />} />
                     <Route path="films" element={<FilmPage />} />
                     <Route path="banner" element={<BannerPage />} />
+                    <Route path="country" element={<CountryPage />} />
+                    <Route path="province" element={<ProvincePage />} />
                 </Route>
             </Routes>
         </BrowserRouter>

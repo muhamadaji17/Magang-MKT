@@ -10,6 +10,8 @@ const InputForm = ({
     variant,
     type,
     defaultValue,
+    defaultSelect,
+    optionsSelect,
     ...props
 }) => {
     return (
@@ -48,8 +50,22 @@ const InputForm = ({
                     defaultValue={defaultValue}
                     {...props}
                 />
+            ) : type === "select" ? (
+                <select
+                    id={id}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    {...(register ? register(id, addOptionError) : {})}
+                >
+                    <option value="" disabled>
+                        Choose a {defaultSelect}
+                    </option>
+                    {optionsSelect.map((option, i) => (
+                        <option value={option.value} key={i}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
             ) : null}
-
             {errors && (
                 <Error className="text-sm text-red-500">{errors.message}</Error>
             )}

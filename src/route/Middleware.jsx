@@ -2,7 +2,7 @@ import { useCheckingToken } from "../hooks";
 import { Navigate } from "react-router-dom";
 import { useStore } from "../store/store";
 
-const ProtectedRoute = ({ children, type }) => {
+const Middleware = ({ children, type }) => {
     const { account, logout } = useStore();
 
     useCheckingToken(account, type, logout);
@@ -18,4 +18,4 @@ const ProtectedRoute = ({ children, type }) => {
     return null;
 };
 
-export default ProtectedRoute;
+export default Middleware;

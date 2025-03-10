@@ -5,6 +5,7 @@ import DashboardHeader from "./DashboardHeader";
 import ModalLayoutHeader from "./ModalLayoutHeader";
 import DeleteModal from "./DeleteModal";
 import FormModal from "./FormModal";
+import Loading from "./Loading";
 
 export {
     InputForm,
@@ -14,4 +15,5 @@ export {
     ModalLayoutHeader,
     FormModal,
     DeleteModal,
+    Loading,
 };

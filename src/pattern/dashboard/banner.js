@@ -27,7 +27,7 @@ export const inputBanner = [
         name: "start_date_banner",
         error: "start_date_banner",
         addOptionError: errorOptions.start_date_banner,
-        grid: 12,
+        grid: 6,
     },
     {
         jenisInputan: "input",
@@ -36,7 +36,7 @@ export const inputBanner = [
         name: "end_date_banner",
         error: "end_date_banner",
         addOptionError: errorOptions.end_date_banner,
-        grid: 12,
+        grid: 6,
     },
     {
         jenisInputan: "input",
@@ -85,7 +85,7 @@ export const inputEditBanner = (data) => {
             error: "start_date_banner",
             addOptionError: errorOptions.start_date_banner,
             defaultValue: data.start_date_banner,
-            grid: 12,
+            grid: 6,
         },
         {
             jenisInputan: "input",
@@ -95,7 +95,7 @@ export const inputEditBanner = (data) => {
             error: "end_date_banner",
             addOptionError: errorOptions.end_date_banner,
             defaultValue: data.end_date_banner,
-            grid: 12,
+            grid: 6,
         },
         {
             jenisInputan: "input",
