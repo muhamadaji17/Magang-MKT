@@ -52,14 +52,14 @@ export const AddBannerService = async (
     try {
         setLoading(true);
         const response = await POST_DATAS_FILE("crud/banner", data, token);
+        setReGetDatas(false);
+        setShowModal(false);
         reset();
         AlertForm({
             icon: "success",
             text: response.data.message,
             title: "success",
         });
-        setReGetDatas(false);
-        setShowModal(false);
     } catch (error) {
         AlertForm({
             icon: "error",
@@ -73,25 +73,23 @@ export const AddBannerService = async (
 
 export const EditBannerDateService = async (
     data,
-    accessToken,
+    token,
     setShowModal,
+    reset,
     setLoading,
     setReGetDatas
 ) => {
     try {
         setLoading(true);
-        const response = await PUT_DATAS(
-            `crud/banner/${data.id}`,
-            data,
-            accessToken
-        );
+        const response = await PUT_DATAS(`crud/banner/${data.id}`, data, token);
+        setReGetDatas(false);
+        setShowModal(false);
+        reset();
         AlertForm({
             icon: "success",
             text: response.data.message,
             title: "success",
         });
-        setReGetDatas(false);
-        setShowModal(false);
     } catch (error) {
         console.log(error);
         AlertForm({
@@ -107,15 +105,12 @@ export const EditBannerDateService = async (
 
 export const EditBannerService = async (
     data,
-    id,
     accessToken,
     setShowModal,
     reset,
     setLoading,
     setReGetDatas
 ) => {
-    console.log(data);
-
     try {
         const manipulateData = {
             banner_name: data.banner_name,
@@ -134,7 +129,7 @@ export const EditBannerService = async (
 
         setLoading(true);
         const response = await PUT_DATAS_FILE(
-            `crud/banner/${id}`,
+            `crud/banner/${data.id}`,
             bodyres,
             accessToken
         );

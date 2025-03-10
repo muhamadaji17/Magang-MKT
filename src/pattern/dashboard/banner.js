@@ -9,6 +9,7 @@ export const inputBanner = [
         placeholder: "your banner name",
         error: "banner_name",
         addOptionError: errorOptions.banner_name,
+        grid: 12,
     },
     {
         jenisInputan: "input",
@@ -17,6 +18,7 @@ export const inputBanner = [
         name: "banner_img",
         error: "banner_img",
         // addOptionError: errorOptions.banner_img,
+        grid: 12,
     },
     {
         jenisInputan: "input",
@@ -25,6 +27,7 @@ export const inputBanner = [
         name: "start_date_banner",
         error: "start_date_banner",
         addOptionError: errorOptions.start_date_banner,
+        grid: 12,
     },
     {
         jenisInputan: "input",
@@ -33,17 +36,26 @@ export const inputBanner = [
         name: "end_date_banner",
         error: "end_date_banner",
         addOptionError: errorOptions.end_date_banner,
+        grid: 12,
     },
     {
         jenisInputan: "input",
         type: "checkbox",
         title: "Click to Activate",
         name: "status",
+        grid: 12,
     },
 ];
 
 export const inputEditBanner = (data) => {
     return [
+        {
+            jenisInputan: "hidden",
+            type: "text",
+            name: "id",
+            defaultValue: data.id,
+            grid: 12,
+        },
         {
             jenisInputan: "input",
             type: "text",
@@ -53,6 +65,7 @@ export const inputEditBanner = (data) => {
             error: "banner_name",
             addOptionError: errorOptions.banner_name,
             defaultValue: data.banner_name,
+            grid: 12,
         },
         {
             jenisInputan: "input",
@@ -62,6 +75,7 @@ export const inputEditBanner = (data) => {
             error: "banner_img",
             // addOptionError: errorOptions.banner_img,
             defaultValue: data.banner_img,
+            grid: 12,
         },
         {
             jenisInputan: "input",
@@ -71,6 +85,7 @@ export const inputEditBanner = (data) => {
             error: "start_date_banner",
             addOptionError: errorOptions.start_date_banner,
             defaultValue: data.start_date_banner,
+            grid: 12,
         },
         {
             jenisInputan: "input",
@@ -80,6 +95,7 @@ export const inputEditBanner = (data) => {
             error: "end_date_banner",
             addOptionError: errorOptions.end_date_banner,
             defaultValue: data.end_date_banner,
+            grid: 12,
         },
         {
             jenisInputan: "input",
@@ -87,6 +103,7 @@ export const inputEditBanner = (data) => {
             title: "Click to Activate",
             name: "status",
             defaultValue: data.status,
+            grid: 12,
         },
     ];
 };

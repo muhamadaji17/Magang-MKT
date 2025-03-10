@@ -1,5 +1,5 @@
 import { Button } from "../../components/atoms";
-import { Breadcrumb } from "../molecules";
+import { Breadcrumb, FormModal } from "../molecules";
 import { getUrlDashboard } from "../../utils";
 import { useGlobalHooks } from "../../hooks";
 import ModalLayout from "../organisms/ModalLayout";
@@ -13,7 +13,7 @@ const DashboardHeader = ({
     setReGetDatas,
     service,
 }) => {
-    const { location, modalType, setModalType, showModal, setShowModal } =
+    const { location, setModalType, showModal, setShowModal } =
         useGlobalHooks();
     const url = getUrlDashboard(location);
 
@@ -42,12 +42,16 @@ const DashboardHeader = ({
             {showModal && (
                 <ModalLayout
                     setShowModal={setShowModal}
-                    addService={service}
-                    dataForm={dataForm}
                     titleModal={titleModal}
-                    type={modalType}
-                    setReGetDatas={setReGetDatas}
-                />
+                >
+                    <FormModal
+                        titleModal="Add Banner"
+                        setShowModal={setShowModal}
+                        dataForm={dataForm}
+                        service={service}
+                        setReGetDatas={setReGetDatas}
+                    />
+                </ModalLayout>
             )}
         </>
     );

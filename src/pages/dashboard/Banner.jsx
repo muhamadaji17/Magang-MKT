@@ -3,6 +3,7 @@ import {
     inputEditBanner,
     handleShowModalId,
     saveEvents,
+    handleCancelModal,
 } from "../../pattern";
 import { useGlobalHooks, useGetDataHook } from "../../hooks";
 import {
@@ -12,8 +13,12 @@ import {
     DeleteBannerService,
     EditBannerDateService,
 } from "../../services";
-import { Calendar } from "../../components/organisms";
-import { DashboardTemplate } from "../../components/templates";
+import { Calendar, ModalLayout } from "../../components/organisms";
+import {
+    DashboardHeader,
+    DeleteModal,
+    FormModal,
+} from "../../components/molecules";
 
 const BannerPage = () => {
     const {
@@ -41,21 +46,15 @@ const BannerPage = () => {
     );
 
     return (
-        <DashboardTemplate
-            addPattern={inputBanner}
-            editPattern={inputEditBanner}
-            getDetailsData={getDetailsData}
-            pageText="Banner Page"
-            buttonText="Add Banner"
-            titleModal="Add Banner"
-            setReGetDatas={setReGetDatas}
-            addService={AddBannerService}
-            showModal={showModal}
-            setShowModal={setShowModal}
-            modalType={modalType}
-            EditService={EditBannerService}
-            DeleteService={DeleteBannerService}
-        >
+        <div className="w-full space-y-2">
+            <DashboardHeader
+                pageText="Banner Page"
+                buttonText="Add Banner"
+                dataForm={inputBanner}
+                titleModal="Add Banner"
+                setReGetDatas={setReGetDatas}
+                service={AddBannerService}
+            />
             <Calendar
                 datas={datas}
                 setDatas={setDatas}
@@ -80,7 +79,44 @@ const BannerPage = () => {
                     )
                 }
             />
-        </DashboardTemplate>
+            {showModal && (
+                <ModalLayout
+                    setShowModal={setShowModal}
+                    addService={
+                        modalType === "edit"
+                            ? EditBannerService
+                            : modalType === "delete"
+                            ? DeleteBannerService
+                            : null
+                    }
+                    dataForm={inputEditBanner(getDetailsData)}
+                    titleModal={"Edit Banner"}
+                    type={modalType}
+                    getDetailsData={getDetailsData}
+                    setReGetDatas={setReGetDatas}
+                >
+                    {modalType === "delete" ? (
+                        <DeleteModal
+                            setShowModal={setShowModal}
+                            deleteService={DeleteBannerService}
+                            id={getDetailsData}
+                            handleCancelModal={() =>
+                                handleCancelModal(setShowModal)
+                            }
+                            setReGetDatas={setReGetDatas}
+                        />
+                    ) : modalType === "edit" ? (
+                        <FormModal
+                            titleModal="Edit Banner"
+                            setShowModal={setShowModal}
+                            dataForm={inputEditBanner(getDetailsData)}
+                            service={EditBannerService}
+                            setReGetDatas={setReGetDatas}
+                        />
+                    ) : null}
+                </ModalLayout>
+            )}
+        </div>
     );
 };
 

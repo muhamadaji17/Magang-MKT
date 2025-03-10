@@ -124,8 +124,8 @@ const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
                                                 : "text-gray-800"
                                         } ${
                                             isToday(day)
-                                                ? "bg-blue-500 text-white font-bold"
-                                                : "hover:bg-gray-100"
+                                                ? "text-sky-600 font-bold"
+                                                : ""
                                         }`}
                                         onDragOver={(e) => e.preventDefault()}
                                         onDrop={(e) => onDrop(e, day)}
