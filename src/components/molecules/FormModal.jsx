@@ -10,6 +10,9 @@ const FormModal = ({
     service,
     setReGetDatas,
     loadingSubData,
+    variant,
+    modalType,
+    handleDelete,
 }) => {
     const { loadingButton, setLoadingButton, accessToken } = useGlobalHooks();
 
@@ -21,7 +24,11 @@ const FormModal = ({
         );
 
     return (
-        <div className="bg-white rounded-lg p-2 w-[1000px] h-[600px] relative flex flex-col">
+        <div
+            className={`bg-white rounded-lg p-2 ${
+                variant ? variant : "w-[1000px] h-[600px]"
+            } relative flex flex-col`}
+        >
             <ModalLayoutHeader title={titleModal} setShowModal={setShowModal} />
             <div className="flex flex-col justify-center items-center flex-1 min-h-0 overflow-y-auto">
                 <div className="w-4/5 max-h-full">
@@ -41,6 +48,10 @@ const FormModal = ({
                         loading={loadingButton}
                         buttonName="Send"
                         buttonStyle="w-24 text-white bg-blue-600 hover:bg-blue-800"
+                        modalType={modalType}
+                        handleDelete={(data) =>
+                            handleDelete(data, accessToken, setLoadingButton)
+                        }
                     />
                 </div>
             </div>

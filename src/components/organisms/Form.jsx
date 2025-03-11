@@ -14,6 +14,8 @@ const Form = ({
     buttonStyle,
     handleConfirmPassword,
     loading,
+    modalType,
+    handleDelete,
 }) => {
     const {
         register,
@@ -24,6 +26,8 @@ const Form = ({
     } = useForm({
         defaultValues: getDefaultValue(dataForm),
     });
+
+    console.log("dataForm", dataForm);
 
     const { disableDefaultValue, setDisableDefaultValue } = useGlobalHooks();
     const inputValue = watch();
@@ -113,14 +117,32 @@ const Form = ({
                     </div>
                 ))}
             </div>
-            <div className="flex justify-center lg:justify-end">
-                <Button
-                    className={buttonStyle}
-                    disable={loading || disableDefaultValue}
-                >
-                    {buttonName}
-                </Button>
-            </div>
+            {modalType === "special" ? (
+                <div className="flex justify-center gap-4">
+                    <Button
+                        type="button"
+                        className="w-24 text-white bg-red-600"
+                        onClick={() => handleDelete(dataForm[0].defaultValue)}
+                    >
+                        Delete
+                    </Button>
+                    <Button
+                        className={buttonStyle}
+                        disable={loading || disableDefaultValue}
+                    >
+                        {buttonName}
+                    </Button>
+                </div>
+            ) : (
+                <div className="flex justify-center lg:justify-end">
+                    <Button
+                        className={buttonStyle}
+                        disable={loading || disableDefaultValue}
+                    >
+                        {buttonName}
+                    </Button>
+                </div>
+            )}
         </form>
     );
 };

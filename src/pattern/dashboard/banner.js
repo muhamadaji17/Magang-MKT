@@ -17,7 +17,7 @@ export const inputBanner = [
         title: "Banner Image",
         name: "banner_img",
         error: "banner_img",
-        // addOptionError: errorOptions.banner_img,
+        addOptionError: errorOptions.banner_img,
         grid: 12,
     },
     {

@@ -97,6 +97,36 @@ const errorOptions = {
     id_country: {
         required: "Country is required",
     },
+    id_province: {
+        required: "Province is required",
+    },
+    id_city: {
+        required: "City is required",
+    },
+    office_name: {
+        required: "Office Name is required",
+    },
+    address: {
+        required: "Address is required",
+    },
+    ig: {
+        required: "Instagram is required",
+    },
+    fb: {
+        required: "Facebook is required",
+    },
+    city_code: {
+        required: "City Code is required",
+    },
+    city_name: {
+        required: "City Name is required",
+    },
+    x: {
+        required: "X is required",
+    },
+    yt: {
+        required: "Youtube is required",
+    },
 };
 
 export default errorOptions;

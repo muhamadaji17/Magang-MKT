@@ -1,9 +1,9 @@
-const Button = ({ className, children, disable, onClick }) => {
+const Button = ({ className, children, disable, onClick, type }) => {
     return (
         <button
-            type='submit'
+            type={type ? type : "submit"}
             className={`rounded flex items-center justify-center ${
-                className ? className : ''
+                className ? className : ""
             } h-10 disabled:bg-blue-950 disabled:cursor-not-allowed cursor-pointer`}
             disabled={disable}
             onClick={onClick}

@@ -38,7 +38,7 @@ const InputForm = ({
             ) : type === "textarea" ? (
                 <textarea
                     id={id}
-                    className="border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-sky-600"
+                    className="ring-blue-600 ring-1 rounded p-2 focus:ring-blue-800 outline-none resize-none"
                     {...register(id, addOptionError)}
                     {...props}
                 />
@@ -53,7 +53,7 @@ const InputForm = ({
             ) : type === "select" ? (
                 <select
                     id={id}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-800 block w-full p-2.5"
                     {...(register ? register(id, addOptionError) : {})}
                 >
                     <option value="" disabled>

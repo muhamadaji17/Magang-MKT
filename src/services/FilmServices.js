@@ -1,7 +1,12 @@
-import { DELETE_DATAS, GET_DATAS, PUT_DATAS, POST_DATAS } from "../api";
+import {
+    DELETE_DATAS,
+    GET_DATAS,
+    POST_DATAS_FILE,
+    PUT_DATAS_FILE,
+} from "../api";
 import { AlertForm } from "../components/atoms";
 
-export const GetOfficeService = async (
+export const GetFilmService = async (
     token,
     setState,
     setLoading,
@@ -9,18 +14,16 @@ export const GetOfficeService = async (
 ) => {
     try {
         setLoading(true);
-        const response = await GET_DATAS(`crud/office`, token);
+        const response = await GET_DATAS(`crud/films`, token);
         const datas = response.data.payload.map((item) => ({
-            id: item.id_office,
-            id_city: item.id_city,
-            office_name: item.office_name,
-            address: item.address,
-            ig: item.ig,
-            fb: item.fb,
-            x: item.x,
-            yt: item.yt,
-            createdAt: item.createdAt,
-            updatedAt: item.updatedAt,
+            id: item.id_film,
+            nama_film: item.nama_film,
+            poster_film: item.poster_film,
+            url_film: `${import.meta.env.VITE_VASE_URL_IMAGE}/films/${
+                item.poster_film
+            }`,
+            trailer_film: item.trailer_film,
+            sinopsis_film_id: item.sinopsis_film_id,
             status: item.status,
         }));
         setState(datas);
@@ -36,7 +39,7 @@ export const GetOfficeService = async (
     }
 };
 
-export const AddOfficeService = async (
+export const AddFilmService = async (
     data,
     token,
     setShowModal,
@@ -44,9 +47,13 @@ export const AddOfficeService = async (
     setLoading,
     setReGetDatas
 ) => {
+    const { poster_film, ...res } = data;
+    const manipulatedImg = poster_film[0];
+    data = { ...res, poster_film: manipulatedImg };
+
     try {
         setLoading(true);
-        const response = await POST_DATAS("crud/office", data, token);
+        const response = await POST_DATAS_FILE("crud/films", data, token);
         setReGetDatas(false);
         reset();
         AlertForm({
@@ -66,17 +73,39 @@ export const AddOfficeService = async (
     }
 };
 
-export const EditOfficeService = async (
+export const EditFilmService = async (
     data,
-    token,
+    accessToken,
     setShowModal,
     reset,
     setLoading,
     setReGetDatas
 ) => {
     try {
+        const manipulateData = {
+            nama_film: data.nama_film,
+            poster_film: data.poster_film,
+            trailer_film: data.trailer_film,
+            sinopsis_film_id: data.sinopsis_film_id,
+            status: data.status,
+        };
+
+        let { poster_film } = manipulateData;
+
+        const manipulatedImg =
+            typeof poster_film === "string" ? poster_film : poster_film[0];
+
+        const bodyres = {
+            ...manipulateData,
+            poster_film: manipulatedImg,
+        };
+
         setLoading(true);
-        const response = await PUT_DATAS(`crud/office/${data.id}`, data, token);
+        const response = await PUT_DATAS_FILE(
+            `crud/films/${data.id}`,
+            bodyres,
+            accessToken
+        );
         setReGetDatas(false);
         reset();
         AlertForm({
@@ -96,7 +125,7 @@ export const EditOfficeService = async (
     }
 };
 
-export const DeleteOfficeService = async (
+export const DeleteFilmService = async (
     id,
     accessToken,
     setShowModal,
@@ -104,7 +133,7 @@ export const DeleteOfficeService = async (
     setReGetDatas
 ) => {
     try {
-        const response = await DELETE_DATAS(`crud/office/${id}`, accessToken);
+        const response = await DELETE_DATAS(`crud/films/${id}`, accessToken);
         setReGetDatas(false);
         AlertForm({
             icon: "success",

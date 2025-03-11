@@ -18,8 +18,8 @@ import {
     DashboardHeader,
     DeleteModal,
     FormModal,
-    Loading,
 } from "../../components/molecules";
+import { Loading } from "../../components/atoms";
 
 const BannerPage = () => {
     const {

@@ -4,8 +4,24 @@ export const officeTablePattern = [
         key: "office_name",
     },
     {
-        title: "Office Code",
-        key: "office_code",
+        title: "Address",
+        key: "address",
+    },
+    {
+        title: "Instagram",
+        key: "ig",
+    },
+    {
+        title: "Facebook",
+        key: "fb",
+    },
+    {
+        title: "X",
+        key: "x",
+    },
+    {
+        title: "Youtube",
+        key: "yt",
     },
     {
         title: "Created At",

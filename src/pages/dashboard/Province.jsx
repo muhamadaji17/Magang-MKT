@@ -1,4 +1,5 @@
-import { DashboardHeader, Loading } from "../../components/molecules";
+import { Loading } from "../../components/atoms";
+import { DashboardHeader } from "../../components/molecules";
 import { Table } from "../../components/organisms";
 import {
     provinceTablePattern,

@@ -20,7 +20,7 @@ import { provinceTablePattern } from "./table/provinceTablePattern";
 import { cityTablePattern } from "./table/cityTablePattern";
 import { officeTablePattern } from "./table/officeTablePattern";
 import { inputOffice, inputEditOffice } from "./dashboard/office";
-
+import { inputFilms, inputEditFilms } from "./dashboard/films";
 export {
     inputLogin,
     errorOptions,
@@ -47,4 +47,6 @@ export {
     officeTablePattern,
     inputOffice,
     inputEditOffice,
+    inputFilms,
+    inputEditFilms,
 };

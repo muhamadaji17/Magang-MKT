@@ -31,6 +31,12 @@ import {
     EditOfficeService,
     DeleteOfficeService,
 } from "./OfficeServices";
+import {
+    GetFilmService,
+    AddFilmService,
+    EditFilmService,
+    DeleteFilmService,
+} from "./FilmServices";
 
 export {
     LoginService,
@@ -57,4 +63,8 @@ export {
     AddOfficeService,
     EditOfficeService,
     DeleteOfficeService,
+    GetFilmService,
+    AddFilmService,
+    EditFilmService,
+    DeleteFilmService,
 };

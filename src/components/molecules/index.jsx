@@ -5,7 +5,9 @@ import DashboardHeader from "./DashboardHeader";
 import ModalLayoutHeader from "./ModalLayoutHeader";
 import DeleteModal from "./DeleteModal";
 import FormModal from "./FormModal";
-import Loading from "./Loading";
+import Loading from "../atoms/Loading";
+import Card from "./Card";
+import Tooltip from "./Tooltip";
 
 export {
     InputForm,
@@ -16,4 +18,6 @@ export {
     FormModal,
     DeleteModal,
     Loading,
+    Card,
+    Tooltip,
 };
