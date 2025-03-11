@@ -12,7 +12,6 @@ const useGlobalHook = () => {
   const handleShowPassword = () => setShowPassword(!showPassword);
   const handleOpenModal = (type) => {
     setModalType(type);
-
     setModalIsOpen(true);
   };
 

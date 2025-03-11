@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Button, FormTitle, InputForm, ShowPassword } from "..";
 import useGlobalHook from "@/hooks/useGlobalHook";
 import { IoCloseCircle } from "react-icons/io5";
+import { useEffect } from "react";
 
 const FormTemplate = ({
   onSubmit,
@@ -15,6 +16,7 @@ const FormTemplate = ({
   overrideOptions,
   provinceOptions,
   officeOptions,
+  modalType,
 }) => {
   const {
     register,
@@ -37,7 +39,7 @@ const FormTemplate = ({
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`space-y-4 border-2 p-4 w-96 bg-white shadow-lg rounded-md ${
+        className={`space-y-4 border-2 p-4 w-[400px] bg-white shadow-lg rounded-md ${
           className ? className : "w-2/3"
         }`}
       >

@@ -18,7 +18,7 @@ const Routers = () => {
       <Routes>
         <Route element={<Login />} path="/login" />
         <Route element={<MainLayout />}>
-          <Route index element={<Dashboard />} path="/" />
+          <Route element={<Dashboard />} path="/" />
           <Route element={<Country />} path="/country" />
           <Route element={<Banners />} path="/banner" />
           <Route element={<Province />} path="/province" />
