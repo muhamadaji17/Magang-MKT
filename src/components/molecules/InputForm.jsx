@@ -39,7 +39,6 @@ const InputForm = ({ field, register, errors, type, defaultValue }) => {
           placeholder={field.placeholder}
           {...register(field.name, field.validation)}
           error={errors[field.name]}
-          className={field.type === "file" ? "file:hidden" : ""}
           defaultValue={field.type === "file" ? null : defaultValue}
         />
       )}

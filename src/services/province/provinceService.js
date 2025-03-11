@@ -14,8 +14,8 @@ export const fetchProvince = async (token, extraOptions) => {
     const parse = response.payload.map((data) => ({
       province_name: data.province_name,
       province_code: data.province_code,
-      country_name: data.created_province_country?.country_name,
-      id_country: data.created_province_country?.id_country,
+      country_name: data.created_province_country?.country_name || "-",
+      id_country: data.created_province_country?.id_country || "-",
       status: data.status,
       id_province: data.id_province,
       created_by: data.created_province.user_name,

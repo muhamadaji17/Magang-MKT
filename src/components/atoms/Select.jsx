@@ -4,7 +4,7 @@ const Select = ({ name, error, label, children, ...props }) => {
       <label htmlFor={name}>{label}</label>
       <select
         name={name}
-        className="px-4 rounded-sm text-black border-b-2 py-2"
+        className="px-4 py-2 text-black border-b-2 rounded-sm focus:outline-none"
         {...props}
       >
         {children}

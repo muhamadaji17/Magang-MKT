@@ -16,7 +16,6 @@ const FormTemplate = ({
   overrideOptions,
   provinceOptions,
   officeOptions,
-  modalType,
 }) => {
   const {
     register,
@@ -39,7 +38,7 @@ const FormTemplate = ({
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`space-y-4 border-2 p-4 w-[400px] bg-white shadow-lg rounded-md ${
+        className={`space-y-4 p-4 w-[400px] bg-white shadow-lg rounded-md ${
           className ? className : "w-2/3"
         }`}
       >
@@ -95,7 +94,7 @@ const FormTemplate = ({
             ))}
           </div>
         </div>
-        <div className="flex gap-4 w-full">
+        <div className="flex w-full gap-4">
           <Button
             type="submit"
             className={`hover:bg-blue-600 transition-all duration-500 w-full text-white`}
