@@ -27,6 +27,53 @@ export const tableHeadOfficePattern = [
   { name: "Address", key: "address" },
   { name: "Status", key: "status" },
 ];
+export const tableHeadFilmPattern = [
+  { name: "Film name", key: "nama_film" },
+  { name: "Sinopsis", key: "sinopsis_film_id" },
+  { name: "Status", key: "status" },
+  { name: "Poster Film", key: "poster_film" },
+  { name: "Created By", key: "created_by" },
+];
+
+export const inputFilmPattern = [
+  {
+    label: "Film name",
+    type: "text",
+    placeholder: "Film name",
+    name: "nama_film",
+    validation: { required: "Film name is required" },
+  },
+  {
+    type: "file",
+    placeholder: "Insert image",
+    name: "poster_film",
+  },
+  {
+    label: "Synopsis Id",
+    type: "text",
+    placeholder: "Detail synopsis",
+    name: "sinopsis_film_id",
+    validation: { required: "Synopsis Id is required" },
+  },
+  {
+    label: "Trailer Film",
+    type: "text",
+    placeholder: "Detail trailer film",
+    name: "trailer_film",
+    validation: { required: "Trailer film is required" },
+  },
+  {
+    label: "Status Active",
+    type: "select",
+    placeholder: "Status",
+    name: "status",
+    option: [
+      { value: true, label: "Active" },
+      { value: false, label: "Not Active" },
+    ],
+    validation: { required: "Status is required" },
+  },
+];
 
 export const inputOfficePattern = [
   {

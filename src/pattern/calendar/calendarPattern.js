@@ -81,7 +81,6 @@ export const inputPostBanner = [
     validation: { required: "Title is required" },
   },
   {
-    label: "Banner Image",
     type: "file",
     placeholder: "Insert image",
     name: "banner_img",

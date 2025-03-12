@@ -3,90 +3,91 @@ import {
   FormTemplate,
   HeaderContent,
   ModalLayout,
+  Table,
 } from "@/components";
 import { useFilm } from "@/hooks/film/useFilm";
-import { inputPostFilm } from "@/pattern/table/tablePattern";
-import { useState } from "react";
-import { FaCircle } from "react-icons/fa6";
+import { handleSubmit } from "@/pattern/handleSubmit";
+import {
+  inputFilmPattern,
+  tableHeadFilmPattern,
+} from "@/pattern/table/tablePattern";
+import { deleteFilm, postFilm, updateFilm } from "@/services/film/filmService";
 
 const Film = () => {
   const {
     film,
+    refresh,
     modalIsOpen,
     modalType,
-    handleOpenModal,
+    setRefresh,
     handleCloseModal,
+    handleOpenModal,
     handleOpenEditModal,
-    postSubmit,
     selectedFilm,
+    token,
   } = useFilm();
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const postSubmit = async (data) => {
+    const formData = { ...data, poster_film: data.poster_film[0] };
+    handleSubmit(formData, postFilm, {
+      token,
+      refresh,
+      setRefresh,
+      handleCloseModal,
+    });
+  };
+
+  const editSubmit = async (data) => {
+    const filmId = selectedFilm.id_film;
+    const formData = {
+      ...data,
+      poster_film:
+        typeof data.poster_film === "string"
+          ? data.poster_film
+          : data.poster_film[0],
+    };
+
+    updateFilm(filmId, formData, {
+      token,
+      refresh,
+      setRefresh,
+      handleCloseModal,
+    });
+  };
+
+  const deleteSubmit = async (filmId) => {
+    deleteFilm(filmId.id_film, {
+      token,
+      setRefresh,
+      refresh,
+    });
+  };
+
   return (
     <>
       <Container>
         <HeaderContent
-          handleOpenModal={() => handleOpenModal("add")}
           titleButton={"Add Film"}
+          handleOpenModal={() => handleOpenModal("add")}
         />
-        <div className="grid w-full grid-cols-5 gap-3">
-          {film.map((film, index) => (
-            <div
-              className="relative "
-              key={index}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <div
-                className="absolute -top-2 -right-2"
-                title={film.status === true ? "Active" : "Inactive"}
-              >
-                <FaCircle
-                  size={25}
-                  className={`${
-                    film.status === true ? "text-green-600" : "text-red-600"
-                  }`}
-                />
-              </div>
-              <img
-                src={`${import.meta.env.VITE_IMAGE_URL}/image/films/${
-                  film.poster_film
-                }`}
-                alt="test"
-                className="object-cover w-full"
-              />
-              {hoveredIndex === index && (
-                <div className="absolute z-10 w-full bg-white border border-gray-200 rounded-md shadow-xl top-15">
-                  <ul className="flex flex-col gap-2">
-                    <li
-                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                      onClick={() => handleOpenEditModal(film)}
-                    >
-                      edit
-                    </li>
-                    <li className="px-4 py-2 cursor-pointer hover:bg-gray-100">
-                      delete
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+        <Table
+          handleOpenEditModal={handleOpenEditModal}
+          dataTable={film}
+          label={tableHeadFilmPattern}
+          deleteSubmit={deleteSubmit}
+          className="w-full overflow-x-auto relative"
+        />
       </Container>
-      <ModalLayout isModalOpen={modalIsOpen}>
+      <ModalLayout isModalOpen={modalIsOpen} onClick={handleCloseModal}>
         <FormTemplate
           showCloseButton={true}
+          className="bg-white"
+          title={modalType === "add" ? "Add Office" : "Edit Office"}
+          onSubmit={modalType === "add" ? postSubmit : editSubmit}
+          description={"Enter Country Details"}
+          pattern={inputFilmPattern}
           onClose={handleCloseModal}
-          onSubmit={modalType === "add" ? postSubmit : null}
-          title={modalType === "add" ? "Add Film" : "Edit Film"}
-          description={
-            modalType === "add?"
-              ? "Insert film detail to add data"
-              : "Enter film detail to edit data"
-          }
-          className="w-1/2 bg-white"
-          pattern={inputPostFilm}
-          defaultValues={modalType === "edit" && selectedFilm}
+          defaultValues={selectedFilm}
         />
       </ModalLayout>
     </>

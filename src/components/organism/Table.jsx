@@ -41,7 +41,12 @@ const Table = ({
                       <p>X: {row.x}</p>
                     </div>
                   ) : col.key === "status" ? (
-                    String(row[col.key])
+                    // String(row[col.key])
+                    row[col.key] === true ? (
+                      "Active"
+                    ) : (
+                      "Not Active"
+                    )
                   ) : (
                     row[col.key]
                   )}

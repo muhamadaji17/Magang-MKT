@@ -1,4 +1,5 @@
 import { DELETE, GET, POST, PUT } from "@/api/auth";
+import showAlert from "@/utils/showAlert";
 
 export const fetchBanner = async (token) => {
   try {
@@ -20,7 +21,7 @@ export const updateBanner = async (bannerId, updatedData, token) => {
     );
     return response;
   } catch (error) {
-    console.error("Error updating banner: ", error);
+    showAlert("error", "Error", error.response.data.message);
     throw error;
   }
 };
@@ -30,7 +31,8 @@ export const postBanner = async (data, token) => {
     const response = await POST(`crud/banner`, data, token, true);
     return response;
   } catch (error) {
-    console.error("error post :", error);
+    showAlert("error", "Error", error.response.data.message);
+    throw error;
   }
 };
 

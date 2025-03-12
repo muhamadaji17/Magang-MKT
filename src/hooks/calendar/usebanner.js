@@ -31,7 +31,6 @@ export const useBanner = () => {
       setLoading(true);
       const response = await fetchBanner(token);
       setBanner(response);
-      console.log("Fetch Banner", response);
     } catch (error) {
       console.error("Error fetching banner: ", error);
     } finally {

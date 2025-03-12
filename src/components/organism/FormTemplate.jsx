@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import { Button, FormTitle, InputForm, ShowPassword } from "..";
 import useGlobalHook from "@/hooks/useGlobalHook";
 import { IoCloseCircle } from "react-icons/io5";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { IoCloudUpload } from "react-icons/io5";
 
 const FormTemplate = ({
   onSubmit,
@@ -22,8 +23,19 @@ const FormTemplate = ({
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({ defaultValues });
+  const [imagePreview, setImagePreview] = useState(null);
   const { showPassword, handleShowPassword } = useGlobalHook();
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const imageURL = URL.createObjectURL(file);
+      setImagePreview(imageURL);
+    }
+  };
 
+  const defaultImage = `${import.meta.env.VITE_IMAGE_URL}/image/films/${
+    defaultValues?.poster_film
+  }`;
   const updatedPattern = pattern?.map((field) => {
     return field.name === "id_country"
       ? { ...field, option: overrideOptions } // Jika field name adalah "id_country", gunakan overrideOptions
@@ -52,25 +64,43 @@ const FormTemplate = ({
             />
           )}
         </div>
-        <div className="flex w-full gap-2">
-          {defaultValues?.banner_img && (
-            <div className="flex items-center justify-center w-full">
-              <img
-                src={`${import.meta.env.VITE_IMAGE_URL}/image/banner/${
-                  defaultValues.banner_img
-                }`}
-                alt="Uploaded Image"
-                className="object-cover min-h-full"
-              />
-            </div>
-          )}
-          <div
-            className={`gap-4 w-full ${
-              updatedPattern?.length > 5 ? "grid grid-cols-2" : "flex flex-col"
-            }`}
-          >
-            {updatedPattern?.map((field, index) => (
-              <div key={index}>
+        <div
+          className={`gap-4 w-full ${
+            updatedPattern?.length > 5 ? "grid grid-cols-2" : "flex flex-col"
+          }`}
+        >
+          {updatedPattern?.map((field, index) => (
+            <div key={index}>
+              {field.type === "file" ? (
+                <>
+                  <h1 className="font-semibold mb-2">Banner Image</h1>
+                  <div className="w-1/2 flex justify-center items-center cursor-pointer h-40 bg-slate-300 rounded-md relative mb-4">
+                    {imagePreview ? (
+                      <img
+                        src={imagePreview}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                    ) : defaultValues?.poster_film ? (
+                      <img
+                        src={defaultImage}
+                        className="w-full h-full object-cover rounded-md"
+                      />
+                    ) : (
+                      <IoCloudUpload size={35} className="text-slate-700" />
+                    )}
+                    <InputForm
+                      field={field}
+                      register={register}
+                      errors={errors}
+                      onChange={handleImageUpload}
+                      className={
+                        "h-full w-full z-40 opacity-0 left-0 top-0 absolute cursor-pointer"
+                      }
+                    />
+                  </div>
+                  <p className="text-slate-600 text-sm">Max image size 1 mb</p>
+                </>
+              ) : (
                 <InputForm
                   field={field}
                   type={
@@ -81,18 +111,18 @@ const FormTemplate = ({
                   register={register}
                   errors={errors}
                 />
+              )}
 
-                {field.type === "password" && (
-                  <ShowPassword
-                    label={"Show Password"}
-                    onChange={handleShowPassword}
-                    id={"show-password"}
-                    checked={showPassword}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
+              {field.type === "password" && (
+                <ShowPassword
+                  label={"Show Password"}
+                  onChange={handleShowPassword}
+                  id={"show-password"}
+                  checked={showPassword}
+                />
+              )}
+            </div>
+          ))}
         </div>
         <div className="flex w-full gap-4">
           <Button

@@ -15,7 +15,6 @@ import {
 } from "@/pattern/calendar/calendarPattern";
 import { useCalendar, useBanner, useBannerDragDrop } from "@/hooks/index";
 import Drawer from "@/components/atoms/Drawer";
-import { deleteBanner } from "@/services/banner/bannerService";
 
 const Banners = () => {
   const {

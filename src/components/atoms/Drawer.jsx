@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Button, InputForm } from "..";
+import { useState } from "react";
 
 const Drawer = ({
   handleCloseModal,
@@ -9,13 +10,23 @@ const Drawer = ({
   isOpen,
   deleteSubmit,
 }) => {
+  const [imagePreview, setImagePreview] = useState(null);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({ defaultValues });
 
-  console.log("defaultValues", defaultValues);
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const imageURL = URL.createObjectURL(file);
+      setImagePreview(imageURL);
+    }
+  };
+  const defaultImageURL = `${import.meta.env.VITE_IMAGE_URL}/image/banner/${
+    defaultValues.banner_img
+  }`;
 
   return (
     <>
@@ -40,12 +51,36 @@ const Drawer = ({
             <div className="w-full flex flex-col gap-6">
               {pattern.map((field, index) => (
                 <div key={index}>
-                  <InputForm
-                    field={field}
-                    defaultValue={defaultValues[field.name]}
-                    register={register}
-                    errors={errors}
-                  />
+                  {field.type === "file" ? (
+                    <>
+                      <h1 className="font-semibold mb-2">Banner Image</h1>
+                      <div className="w-1/2 flex justify-center items-center h-40 bg-slate-300 rounded-md relative mb-4">
+                        <img
+                          src={imagePreview ? imagePreview : defaultImageURL}
+                          className="w-full h-full object-cover rounded-md"
+                        />
+                        <InputForm
+                          field={field}
+                          register={register}
+                          errors={errors}
+                          onChange={handleImageUpload}
+                          className={
+                            "h-full w-full z-40 opacity-0 left-0 top-0 absolute cursor-pointer"
+                          }
+                        />
+                      </div>
+                      <p className="text-slate-600 text-sm">
+                        Max image size 1 mb
+                      </p>
+                    </>
+                  ) : (
+                    <InputForm
+                      field={field}
+                      defaultValue={defaultValues[field.name]}
+                      register={register}
+                      errors={errors}
+                    />
+                  )}
                 </div>
               ))}
             </div>

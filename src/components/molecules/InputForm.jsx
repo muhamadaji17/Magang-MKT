@@ -1,8 +1,17 @@
+import { MdOutlineDriveFolderUpload } from "react-icons/md";
 import Input from "../atoms/Input";
 import Select from "../atoms/Select";
 import Textarea from "../atoms/Textarea";
 
-const InputForm = ({ field, register, errors, type, defaultValue }) => {
+const InputForm = ({
+  field,
+  register,
+  errors,
+  type,
+  defaultValue,
+  onChange,
+  className,
+}) => {
   return (
     <>
       {field.type === "textarea" ? (
@@ -39,7 +48,9 @@ const InputForm = ({ field, register, errors, type, defaultValue }) => {
           placeholder={field.placeholder}
           {...register(field.name, field.validation)}
           error={errors[field.name]}
+          className={className}
           defaultValue={field.type === "file" ? null : defaultValue}
+          onChange={onChange}
         />
       )}
     </>
