@@ -75,7 +75,6 @@ export const EditBannerDateService = async (
     data,
     token,
     setShowModal,
-    reset,
     setLoading,
     setReGetDatas
 ) => {
@@ -83,7 +82,6 @@ export const EditBannerDateService = async (
         setLoading(true);
         const response = await PUT_DATAS(`crud/banner/${data.id}`, data, token);
         setReGetDatas(false);
-        reset();
         AlertForm({
             icon: "success",
             text: response.data.message,
@@ -121,7 +119,7 @@ export const EditBannerService = async (
         let { banner_img } = manipulateData;
 
         const manipulatedBannerImg =
-            typeof banner_img === "string" ? banner_img : banner_img[0];
+            typeof banner_img === "string" ? null : banner_img[0];
 
         const bodyres = { ...manipulateData, banner_img: manipulatedBannerImg };
 

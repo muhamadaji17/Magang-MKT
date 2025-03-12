@@ -80,6 +80,8 @@ export const calendarUtils = (
         );
     };
 
+    const hasChanges = events.some((event) => event.hasChanged);
+
     return {
         days,
         isToday,
@@ -89,6 +91,7 @@ export const calendarUtils = (
         goToToday,
         onDragStart,
         onDrop,
+        hasChanges,
         saveEvents,
     };
 };

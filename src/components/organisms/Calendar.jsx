@@ -1,8 +1,7 @@
 import { calendarUtils, getEventStyle } from "../../utils";
 import { useGlobalCalendarHooks } from "../../hooks";
-import { FaEdit, FaTrash } from "react-icons/fa";
 
-const Calendar = ({ datas, setDatas, handleShowModalWithData, saveEvents }) => {
+const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
     const {
         currentDate,
         setCurrentDate,
@@ -21,6 +20,7 @@ const Calendar = ({ datas, setDatas, handleShowModalWithData, saveEvents }) => {
         goToToday,
         onDragStart,
         onDrop,
+        hasChanges, // Add this line
     } = calendarUtils(currentDate, setCurrentDate, datas, setDatas, saveEvents);
 
     const months = Array.from({ length: 12 }, (_, i) =>
@@ -41,12 +41,6 @@ const Calendar = ({ datas, setDatas, handleShowModalWithData, saveEvents }) => {
     return (
         <div className="w-full h-full overflow-x-auto lg:p-6 bg-white shadow-lg rounded-lg">
             <div className="flex flex-col lg:flex-row lg:justify-between items-center lg:mb-6 gap-4 p-4 lg:p-0">
-                <button
-                    onClick={prevMonth}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
-                >
-                    Previous
-                </button>
                 <div className="flex flex-col lg:flex-row items-center gap-4">
                     <h2 className="text-2xl font-bold text-gray-800">
                         {currentDate.toLocaleString("default", {
@@ -89,12 +83,28 @@ const Calendar = ({ datas, setDatas, handleShowModalWithData, saveEvents }) => {
                         </button>
                     </div>
                 </div>
-                <button
-                    onClick={nextMonth}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
-                >
-                    Next
-                </button>
+                <div className="space-x-3">
+                    {hasChanges && (
+                        <button
+                            onClick={saveEvents}
+                            className="w-24 h-12 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
+                        >
+                            Save
+                        </button>
+                    )}
+                    <button
+                        onClick={prevMonth}
+                        className="w-24 h-12 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+                    >
+                        Previous
+                    </button>
+                    <button
+                        onClick={nextMonth}
+                        className="w-24 h-12 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
             <table className="w-full text-center border-collapse border border-gray-300">
                 <thead>
@@ -162,34 +172,14 @@ const Calendar = ({ datas, setDatas, handleShowModalWithData, saveEvents }) => {
                                                                     )
                                                                         .gridColumn,
                                                             }}
+                                                            onClick={() =>
+                                                                handleShowModalId(
+                                                                    event,
+                                                                    "special"
+                                                                )
+                                                            }
                                                         >
                                                             {event.banner_name}
-                                                            <div className="absolute top-4 mb-1 right-0 hidden group-hover:flex space-x-1 bg-white p-4 z-50 rounded shadow-lg pointer-events-auto">
-                                                                <button
-                                                                    onClick={() =>
-                                                                        handleShowModalWithData(
-                                                                            event,
-                                                                            "edit"
-                                                                        )
-                                                                    }
-                                                                    className="bg-yellow-300 text-white p-1 rounded flex items-center cursor-pointer"
-                                                                >
-                                                                    <FaEdit className="mr-1" />{" "}
-                                                                    Edit
-                                                                </button>
-                                                                <button
-                                                                    onClick={() =>
-                                                                        handleShowModalWithData(
-                                                                            event.id,
-                                                                            "delete"
-                                                                        )
-                                                                    }
-                                                                    className="bg-red-500 text-white p-1 rounded flex items-center cursor-pointer"
-                                                                >
-                                                                    <FaTrash className="mr-1" />{" "}
-                                                                    Delete
-                                                                </button>
-                                                            </div>
                                                         </div>
                                                     )
                                                 )}
@@ -201,18 +191,12 @@ const Calendar = ({ datas, setDatas, handleShowModalWithData, saveEvents }) => {
                     ))}
                 </tbody>
             </table>
-            <div className="flex flex-col lg:flex-row justify-center mt-6 gap-4">
+            <div className="flex justify-center mt-6">
                 <button
                     onClick={goToToday}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
                 >
                     Today
-                </button>
-                <button
-                    onClick={saveEvents}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
-                >
-                    Save
                 </button>
             </div>
         </div>

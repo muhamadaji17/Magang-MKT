@@ -13,6 +13,7 @@ const FormModal = ({
     variant,
     modalType,
     handleDelete,
+    imageFor,
 }) => {
     const { loadingButton, setLoadingButton, accessToken } = useGlobalHooks();
 
@@ -52,6 +53,7 @@ const FormModal = ({
                         handleDelete={(data) =>
                             handleDelete(data, accessToken, setLoadingButton)
                         }
+                        imageFor={imageFor}
                     />
                 </div>
             </div>

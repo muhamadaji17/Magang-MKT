@@ -1,24 +1,51 @@
-const File = ({ defaultValue, id, register, addOptionError, ...props }) => {
-    const handleClick = () => {
-        document.getElementById(id).click();
-    };
+import { handleFileChange } from "../../pattern";
+import { useGlobalHooks, useGetInstantState } from "../../hooks";
+
+const File = ({
+    defaultValue,
+    id,
+    register,
+    addOptionError,
+    imageFor,
+    ...props
+}) => {
+    const {
+        previewImage,
+        setPreviewImage,
+        previewImageName,
+        setPreviewImageName,
+    } = useGlobalHooks();
+
+    useGetInstantState(
+        setPreviewImage,
+        defaultValue
+            ? `${
+                  import.meta.env.VITE_VASE_URL_IMAGE
+              }/${imageFor}/${defaultValue}`
+            : ""
+    );
+
+    useGetInstantState(setPreviewImageName, defaultValue || null);
 
     return (
         <>
             <div>
                 {defaultValue ? (
-                    <img
-                        src={`${
-                            import.meta.env.VITE_VASE_URL_IMAGE
-                        }/banner/${defaultValue}`}
-                        alt=""
-                        className="w-32 h-32 rounded cursor-pointer border-2 border-gray-300"
-                        onClick={handleClick}
-                    />
+                    <>
+                        <img
+                            src={previewImage}
+                            alt={previewImageName}
+                            className="w-32 h-32 rounded cursor-pointer border-2 border-gray-300"
+                            onClick={() => document.getElementById(id).click()}
+                        />
+                        <div>
+                            <span>{previewImageName}</span>
+                        </div>
+                    </>
                 ) : (
                     <div
                         className="w-32 h-32 rounded cursor-pointer bg-slate-300  flex items-center justify-center"
-                        onClick={handleClick}
+                        onClick={() => document.getElementById(id).click()}
                     >
                         <span>Upload Image</span>
                     </div>
@@ -27,7 +54,20 @@ const File = ({ defaultValue, id, register, addOptionError, ...props }) => {
                     id={id}
                     type="file"
                     accept="image/*"
-                    {...(register ? register(id, addOptionError) : {})}
+                    className="hidden"
+                    {...(register
+                        ? register(id, {
+                              validate: () => addOptionError?.required,
+                              setValueAs: () => previewImageName || "",
+                              onChange: (e) => {
+                                  handleFileChange(
+                                      e,
+                                      setPreviewImage,
+                                      setPreviewImageName
+                                  );
+                              },
+                          })
+                        : {})}
                     {...props}
                 />
             </div>

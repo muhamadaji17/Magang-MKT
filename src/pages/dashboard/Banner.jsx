@@ -3,7 +3,6 @@ import {
     inputEditBanner,
     handleShowModalId,
     saveEvents,
-    handleCancelModal,
 } from "../../pattern";
 import { useGlobalHooks, useGetDataHook } from "../../hooks";
 import {
@@ -14,11 +13,7 @@ import {
     EditBannerDateService,
 } from "../../services";
 import { Calendar, ModalLayout } from "../../components/organisms";
-import {
-    DashboardHeader,
-    DeleteModal,
-    FormModal,
-} from "../../components/molecules";
+import { DashboardHeader, FormModal } from "../../components/molecules";
 import { Loading } from "../../components/atoms";
 
 const BannerPage = () => {
@@ -85,26 +80,26 @@ const BannerPage = () => {
                 }
             />
             {showModal && (
-                <ModalLayout setShowModal={setShowModal}>
-                    {modalType === "delete" ? (
-                        <DeleteModal
-                            setShowModal={setShowModal}
-                            deleteService={DeleteBannerService}
-                            id={getDetailsData}
-                            handleCancelModal={() =>
-                                handleCancelModal(setShowModal)
-                            }
-                            setReGetDatas={setReGetDatas}
-                        />
-                    ) : modalType === "edit" ? (
-                        <FormModal
-                            titleModal="Edit Banner"
-                            setShowModal={setShowModal}
-                            dataForm={inputEditBanner(getDetailsData)}
-                            service={EditBannerService}
-                            setReGetDatas={setReGetDatas}
-                        />
-                    ) : null}
+                <ModalLayout setShowModal={setShowModal} variant="justify-end">
+                    <FormModal
+                        titleModal="Edit Film"
+                        setShowModal={setShowModal}
+                        dataForm={inputEditBanner(getDetailsData)}
+                        service={EditBannerService}
+                        setReGetDatas={setReGetDatas}
+                        variant="w-[800px] h-full rounded-none"
+                        modalType={modalType}
+                        handleDelete={(data, accessToken, setLoadingButton) =>
+                            DeleteBannerService(
+                                data,
+                                accessToken,
+                                setShowModal,
+                                setLoadingButton,
+                                setReGetDatas
+                            )
+                        }
+                        imageFor="banner"
+                    />
                 </ModalLayout>
             )}
         </div>

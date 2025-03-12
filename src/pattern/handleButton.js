@@ -54,3 +54,14 @@ export const saveEvents = (
         );
     });
 };
+
+export const handleFileChange = (e, setPreviewImage, setPreviewImageName) => {
+    const file = e.target.files[0];
+    if (file) {
+        setPreviewImage(URL.createObjectURL(file));
+        setPreviewImageName(file.name);
+    } else {
+        setPreviewImage("");
+        setPreviewImageName("");
+    }
+};

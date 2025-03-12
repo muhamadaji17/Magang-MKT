@@ -127,6 +127,18 @@ const errorOptions = {
     yt: {
         required: "Youtube is required",
     },
+    nama_film: {
+        required: "Film Name is required",
+    },
+    poster_film: {
+        required: "Film Poster is required",
+    },
+    trailer_film: {
+        required: "Film Trailer is required",
+    },
+    sinopsis_film_id: {
+        required: "Film Sinopsis is required",
+    },
 };
 
 export default errorOptions;

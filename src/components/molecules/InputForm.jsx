@@ -12,6 +12,7 @@ const InputForm = ({
     defaultValue,
     defaultSelect,
     optionsSelect,
+    imageFor,
     ...props
 }) => {
     return (
@@ -48,6 +49,7 @@ const InputForm = ({
                     register={register}
                     addOptionError={addOptionError}
                     defaultValue={defaultValue}
+                    imageFor={imageFor}
                     {...props}
                 />
             ) : type === "select" ? (

@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { ModalLayout } from "../organisms";
 import { Button } from "../atoms";
 import { DeleteModal, FormModal } from "../molecules";
+import { Link } from "react-router-dom";
 
 const Table = ({
     datas,
@@ -21,6 +22,7 @@ const Table = ({
     titleModal,
     subDatas,
     loadingSubData,
+    imageFor,
 }) => {
     return (
         <div>
@@ -86,12 +88,26 @@ const Table = ({
                                                             : "Inactive"}
                                                     </span>
                                                 </div>
+                                            ) : column.key === "url_film" ? (
+                                                <img
+                                                    src={row[column.key]}
+                                                    alt="name"
+                                                    className="w-12 h-12 m-auto"
+                                                />
+                                            ) : column.key ===
+                                              "trailer_film" ? (
+                                                <Link
+                                                    to={row[column.key]}
+                                                    target="_blank"
+                                                >
+                                                    {row[column.key]}
+                                                </Link>
                                             ) : (
                                                 row[column.key]
                                             )}
                                         </td>
                                     ))}
-                                    <td className="px-6 py-7 lg:py-4 w-full h-full flex gap-3 justify-center items-center">
+                                    <td className="px-6 py-7 w-full h-full flex gap-3 justify-center items-center">
                                         <FaRegEdit
                                             className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer text-blue-500"
                                             onClick={() =>
@@ -158,6 +174,7 @@ const Table = ({
                             service={editService}
                             setReGetDatas={setReGetDatas}
                             loadingSubData={loadingSubData}
+                            imageFor={imageFor}
                         />
                     ) : null}
                 </ModalLayout>

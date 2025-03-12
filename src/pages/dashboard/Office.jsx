@@ -74,32 +74,40 @@ const OfficePage = () => {
                 setModalType={setModalType}
                 loadingSubData={loadingSubData}
             />
-            <Table
-                datas={datas}
-                handleShowModalId={(data, type) =>
-                    handleShowModalId(
-                        showModal,
-                        setShowModal,
-                        setGetDetailsData,
-                        data,
-                        setModalType,
-                        type
-                    )
-                }
-                getDetailsData={getDetailsData}
-                handleCancelModal={handleCancelModal}
-                setReGetDatas={setReGetDatas}
-                columns={officeTablePattern}
-                modalType={modalType}
-                setShowModal={setShowModal}
-                showModal={showModal}
-                editService={EditOfficeService}
-                inputEditPattern={inputEditOffice}
-                deleteService={DeleteOfficeService}
-                subDatas={subDatas}
-                titleModal={"Edit Office"}
-                loadingSubData={loadingSubData}
-            />
+            <div className="space-y-4">
+                <div>
+                    <input
+                        type="search"
+                        className="bg-white outline-none w-44"
+                    />
+                </div>
+                <Table
+                    datas={datas}
+                    handleShowModalId={(data, type) =>
+                        handleShowModalId(
+                            showModal,
+                            setShowModal,
+                            setGetDetailsData,
+                            data,
+                            setModalType,
+                            type
+                        )
+                    }
+                    getDetailsData={getDetailsData}
+                    handleCancelModal={handleCancelModal}
+                    setReGetDatas={setReGetDatas}
+                    columns={officeTablePattern}
+                    modalType={modalType}
+                    setShowModal={setShowModal}
+                    showModal={showModal}
+                    editService={EditOfficeService}
+                    inputEditPattern={inputEditOffice}
+                    deleteService={DeleteOfficeService}
+                    subDatas={subDatas}
+                    titleModal={"Edit Office"}
+                    loadingSubData={loadingSubData}
+                />
+            </div>
         </div>
     );
 };

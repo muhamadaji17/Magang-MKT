@@ -24,6 +24,8 @@ export const GetFilmService = async (
             }`,
             trailer_film: item.trailer_film,
             sinopsis_film_id: item.sinopsis_film_id,
+            createdAt: item.createdAt,
+            updatedAt: item.updatedAt,
             status: item.status,
         }));
         setState(datas);
@@ -81,6 +83,8 @@ export const EditFilmService = async (
     setLoading,
     setReGetDatas
 ) => {
+    console.log(data);
+
     try {
         const manipulateData = {
             nama_film: data.nama_film,
@@ -93,7 +97,7 @@ export const EditFilmService = async (
         let { poster_film } = manipulateData;
 
         const manipulatedImg =
-            typeof poster_film === "string" ? poster_film : poster_film[0];
+            typeof poster_film === "string" ? null : poster_film[0];
 
         const bodyres = {
             ...manipulateData,

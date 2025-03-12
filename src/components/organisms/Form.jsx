@@ -16,6 +16,7 @@ const Form = ({
     loading,
     modalType,
     handleDelete,
+    imageFor,
 }) => {
     const {
         register,
@@ -26,8 +27,6 @@ const Form = ({
     } = useForm({
         defaultValues: getDefaultValue(dataForm),
     });
-
-    console.log("dataForm", dataForm);
 
     const { disableDefaultValue, setDisableDefaultValue } = useGlobalHooks();
     const inputValue = watch();
@@ -83,6 +82,8 @@ const Form = ({
                                 errors={errors[data.name]}
                                 optionsSelect={data.options}
                                 defaultSelect={data.title}
+                                defaultValue={data.defaultValue}
+                                imageFor={imageFor}
                             />
                         ) : data.jenisInputan === "hidden" ? (
                             <InputForm

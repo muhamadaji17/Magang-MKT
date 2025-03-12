@@ -1,19 +1,20 @@
 import { Loading } from "../../components/atoms";
+import { DashboardHeader } from "../../components/molecules";
+import { Table } from "../../components/organisms";
 import {
-    Card,
-    Tooltip,
-    DashboardHeader,
-    FormModal,
-} from "../../components/molecules";
-import {
-    GetFilmService,
-    AddFilmService,
-    EditFilmService,
-    DeleteFilmService,
-} from "../../services";
+    filmTablePattern,
+    handleCancelModal,
+    handleShowModalId,
+    inputFilm,
+    inputEditFilm,
+} from "../../pattern";
 import { useGetDataHook, useGlobalHooks } from "../../hooks";
-import { handleShowModalId, inputEditFilms, inputFilms } from "../../pattern";
-import { ModalLayout } from "../../components/organisms";
+import {
+    AddFilmService,
+    DeleteFilmService,
+    EditFilmService,
+    GetFilmService,
+} from "../../services";
 
 const FilmPage = () => {
     const {
@@ -46,61 +47,39 @@ const FilmPage = () => {
     return (
         <div className="w-full space-y-4">
             <DashboardHeader
-                pageText="Films Page"
+                pageText="Film Page"
                 buttonText="Add Film"
-                dataForm={inputFilms}
+                dataForm={inputFilm}
                 titleModal="Add Film"
                 setReGetDatas={setReGetDatas}
                 service={AddFilmService}
                 setModalType={setModalType}
             />
-            <div className="grid grid-cols-5 justify-center gap-4 ">
-                {datas.map((item) => (
-                    <div
-                        className="relative w-80"
-                        key={item.id}
-                        onClick={() =>
-                            handleShowModalId(
-                                showModal,
-                                setShowModal,
-                                setGetDetailsData,
-                                item,
-                                setModalType,
-                                "special"
-                            )
-                        }
-                    >
-                        <Card
-                            image={item.url_film}
-                            name={item.nama_film}
-                            synopsis={item.sinopsis_film_id}
-                        />
-                        <Tooltip logical={item.status} />
-                    </div>
-                ))}
-            </div>
-            {showModal && (
-                <ModalLayout setShowModal={setShowModal} variant="justify-end">
-                    <FormModal
-                        titleModal="Edit Film"
-                        setShowModal={setShowModal}
-                        dataForm={inputEditFilms(getDetailsData)}
-                        service={EditFilmService}
-                        setReGetDatas={setReGetDatas}
-                        variant="w-[800px] h-full rounded-none"
-                        modalType={modalType}
-                        handleDelete={(data, accessToken, setLoadingButton) =>
-                            DeleteFilmService(
-                                data,
-                                accessToken,
-                                setShowModal,
-                                setLoadingButton,
-                                setReGetDatas
-                            )
-                        }
-                    />
-                </ModalLayout>
-            )}
+            <Table
+                datas={datas}
+                handleShowModalId={(data, type) =>
+                    handleShowModalId(
+                        showModal,
+                        setShowModal,
+                        setGetDetailsData,
+                        data,
+                        setModalType,
+                        type
+                    )
+                }
+                getDetailsData={getDetailsData}
+                handleCancelModal={handleCancelModal}
+                setReGetDatas={setReGetDatas}
+                columns={filmTablePattern}
+                modalType={modalType}
+                setShowModal={setShowModal}
+                showModal={showModal}
+                editService={EditFilmService}
+                inputEditPattern={inputEditFilm}
+                deleteService={DeleteFilmService}
+                titleModal="Edit Film"
+                imageFor="films"
+            />
         </div>
     );
 };

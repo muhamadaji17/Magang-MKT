@@ -1,6 +1,6 @@
 import errorOptions from "../errorOptions";
 
-export const inputFilms = [
+export const inputFilm = [
     {
         jenisInputan: "input",
         type: "text",
@@ -49,7 +49,7 @@ export const inputFilms = [
     },
 ];
 
-export const inputEditFilms = (data) => [
+export const inputEditFilm = (data) => [
     {
         jenisInputan: "hidden",
         type: "text",
@@ -85,7 +85,6 @@ export const inputEditFilms = (data) => [
         title: "Poster Film",
         name: "poster_film",
         error: "poster_film",
-        addOptionError: errorOptions.poster_film,
         defaultValue: data.poster_film,
         grid: 12,
     },

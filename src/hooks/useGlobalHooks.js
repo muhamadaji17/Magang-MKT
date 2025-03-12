@@ -25,6 +25,9 @@ const useGlobalHooks = () => {
     const [getDetailsData, setGetDetailsData] = useState([]);
     const [reGetDatas, setReGetDatas] = useState(false);
 
+    const [previewImage, setPreviewImage] = useState("");
+    const [previewImageName, setPreviewImageName] = useState("");
+
     const [disableDefaultValue, setDisableDefaultValue] = useState(false);
 
     const [hamburger, setHamburger] = useState(false);
@@ -67,6 +70,10 @@ const useGlobalHooks = () => {
         setSubDatas,
         loadingSubData,
         setLoadingSubData,
+        previewImage,
+        setPreviewImage,
+        previewImageName,
+        setPreviewImageName,
     };
 };
 
