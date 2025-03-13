@@ -9,7 +9,7 @@ const Layout = () => {
         <div className="flex flex-col min-h-svh relative">
             <Navbar setHamburger={setHamburger} username={username} />
             <Sidebar hamburger={hamburger} />
-            <div className="bg-slate-100 flex-1 h-full relative px-2 lg:p-5 w-full lg:pl-28 space-y-3">
+            <div className="bg-slate-100 flex-1 h-full relative px-2 w-full lg:pl-28 lg:pt-20 space-y-3">
                 <Outlet />
             </div>
         </div>

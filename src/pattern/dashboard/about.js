@@ -11,8 +11,7 @@ export const inputAbout = [
         addOptionError: errorOptions.about_meta,
     },
     {
-        jenisInputan: "input",
-        type: "textarea",
+        jenisInputan: "rich_editor",
         title: "about (EN Language)",
         name: "about_body_en",
         placeholder: "your about en",
@@ -20,8 +19,7 @@ export const inputAbout = [
         addOptionError: errorOptions.about_body_en,
     },
     {
-        jenisInputan: "input",
-        type: "textarea",
+        jenisInputan: "rich_editor",
         title: "about (ID Language)",
         name: "about_body_id",
         placeholder: "your about id",

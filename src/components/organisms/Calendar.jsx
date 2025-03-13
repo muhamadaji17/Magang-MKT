@@ -1,5 +1,5 @@
 import { calendarUtils, getEventStyle } from "../../utils";
-import { useGlobalCalendarHooks } from "../../hooks";
+import { useCalendarHooks } from "../../hooks";
 
 const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
     const {
@@ -9,7 +9,7 @@ const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
         setJumpYear,
         jumpMonth,
         setJumpMonth,
-    } = useGlobalCalendarHooks();
+    } = useCalendarHooks();
 
     const {
         days,

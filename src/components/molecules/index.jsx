@@ -8,6 +8,7 @@ import FormModal from "./FormModal";
 import Loading from "../atoms/Loading";
 import Card from "./Card";
 import Tooltip from "./Tooltip";
+import QuilTextEditor from "./QuillTextEditor";
 
 export {
     InputForm,
@@ -20,4 +21,5 @@ export {
     Loading,
     Card,
     Tooltip,
+    QuilTextEditor,
 };

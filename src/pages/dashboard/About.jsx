@@ -8,7 +8,6 @@ import { BsPencilSquare } from "react-icons/bs";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { inputAbout } from "../../pattern";
 import { AddAboutService } from "../../services";
-import AdvancedQuillEditor from "../../components/atoms/QuillTextEditor";
 
 const AboutPage = () => {
     const {
@@ -18,6 +17,7 @@ const AboutPage = () => {
         reGetDatas,
         setReGetDatas,
         setLoadingData,
+        setModalType,
     } = useGlobalHooks();
 
     useGetDataHook(
@@ -35,9 +35,10 @@ const AboutPage = () => {
                 pageText="About Page"
                 buttonText="Add About"
                 dataForm={inputAbout}
-                titleModal={"Add About"}
+                titleModal="Add About"
                 setReGetDatas={setReGetDatas}
                 service={AddAboutService}
+                setModalType={setModalType}
             />
             {datas.map((data, i) => (
                 <div
@@ -62,7 +63,6 @@ const AboutPage = () => {
                             status={data.status}
                             text={data.about_body_en}
                         />
-                        <AdvancedQuillEditor />
                     </div>
                 </div>
             ))}

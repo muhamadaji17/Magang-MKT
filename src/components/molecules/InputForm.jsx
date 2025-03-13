@@ -12,6 +12,7 @@ const InputForm = ({
     defaultSelect,
     optionsSelect,
     imageFor,
+    checked,
     ...props
 }) => {
     return (
@@ -32,6 +33,7 @@ const InputForm = ({
                     field={field}
                     variant={variant}
                     type={type}
+                    checked={checked}
                     {...props}
                 />
             ) : type === "textarea" ? (

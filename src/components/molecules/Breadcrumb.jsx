@@ -6,7 +6,7 @@ const Breadcrumb = ({ items }) => {
             className="flex items-end h-6 text-gray-700"
             aria-label="Breadcrumb"
         >
-            <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+            <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse list-none">
                 <li className="inline-flex items-center">
                     <Link
                         to="/dashboard"

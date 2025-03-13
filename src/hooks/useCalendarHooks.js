@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useGlobalCalendarHooks = () => {
+const useCalendarHooks = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [jumpMonth, setJumpMonth] = useState(currentDate.getMonth() + 1);
     const [jumpYear, setJumpYear] = useState(currentDate.getFullYear());
@@ -15,4 +15,4 @@ const useGlobalCalendarHooks = () => {
     };
 };
 
-export default useGlobalCalendarHooks;
+export default useCalendarHooks;

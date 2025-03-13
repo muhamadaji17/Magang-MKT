@@ -1,4 +1,4 @@
-const Input = ({ id, field, variant, type, ...props }) => {
+const Input = ({ id, field, checked, variant, type, ...props }) => {
     return (
         <input
             id={id}
@@ -9,6 +9,7 @@ const Input = ({ id, field, variant, type, ...props }) => {
             } `}
             autoComplete="off"
             type={type}
+            checked={checked}
             {...props}
             {...(field ? field : {})}
         />

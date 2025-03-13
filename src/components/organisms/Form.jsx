@@ -1,5 +1,5 @@
 import { useForm, Controller } from "react-hook-form";
-import { InputForm } from "../molecules";
+import { InputForm, QuilTextEditor } from "../molecules";
 import { Button } from "../atoms";
 import { useDefaultForm, useGlobalHooks } from "../../hooks";
 import { getDefaultValue } from "../../utils";
@@ -88,6 +88,7 @@ const Form = ({
                                         defaultSelect={data.title}
                                         defaultValue={data.defaultValue}
                                         imageFor={imageFor}
+                                        checked={field.value}
                                     />
                                 )}
                             />
@@ -102,6 +103,19 @@ const Form = ({
                                         id={data.name}
                                         type={data.type}
                                         variant={"hidden"}
+                                    />
+                                )}
+                            />
+                        ) : data.jenisInputan === "rich_editor" ? (
+                            <Controller
+                                name={data.name}
+                                control={control}
+                                rules={data.addOptionError}
+                                render={({ field }) => (
+                                    <QuilTextEditor
+                                        field={field}
+                                        labelText={data.title}
+                                        errors={errors[data.name]}
                                     />
                                 )}
                             />

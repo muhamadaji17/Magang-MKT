@@ -1,9 +1,8 @@
 import { FaCircle } from "react-icons/fa";
-import { sliceMoreCharacters } from "../../utils";
 
 const DescriptionContent = ({ title, status, text }) => {
     return (
-        <div className="bg-slate-100 w-full h-80 flex-1 rounded py-2 px-4 space-y-2 flex flex-col">
+        <div className="bg-slate-100 w-full min-h-80 flex-1 rounded py-2 px-4 space-y-2 flex flex-col">
             <div className="flex items-center gap-2">
                 <h3 className="text-lg font-semibold">{title}</h3>
                 <div className="relative group cursor-pointer">
@@ -18,7 +17,7 @@ const DescriptionContent = ({ title, status, text }) => {
             <div className="w-full flex-1 overflow-hidden">
                 <div
                     dangerouslySetInnerHTML={{
-                        __html: sliceMoreCharacters(text, 1300),
+                        __html: text,
                     }}
                 />
             </div>
