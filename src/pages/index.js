@@ -7,8 +7,10 @@ import Province from "./Province";
 import City from "./City";
 import Office from "./Office";
 import Film from "./Film";
+import About from "./About";
 
 export {
+  About,
   Login,
   Dashboard,
   Notfound,

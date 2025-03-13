@@ -9,3 +9,7 @@ html {
 textarea::-webkit-scrollbar {
   display: none;
 }
+
+.ProseMirror:focus {
+  outline: none;
+}

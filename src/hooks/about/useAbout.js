@@ -1,50 +1,30 @@
-import { fetchAbout, postAbout } from "@/services/about/aboutService";
-import showAlert from "@/utils/showAlert";
+import { fetchAbout } from "@/services/about/aboutService";
 import { useEffect, useState } from "react";
 import useGlobalHook from "../useGlobalHook";
 
-const useAbout = (token) => {
-  const [aboutData, setAboutData] = useState([]);
+export const useAbout = () => {
+  const [about, setAbout] = useState([]);
   const {
     refresh,
+    token,
+    handleOpenModal,
     setRefresh,
     handleCloseModal,
     modalIsOpen,
     modalType,
-    handleOpenModal,
   } = useGlobalHook();
 
-  const getAbout = async () => {
-    const response = await fetchAbout(token);
-    console.log(response);
-    setAboutData(response);
-  };
-
-  const onSubmit = async (data) => {
-    try {
-      const response = await postAbout(data, token);
-      showAlert("success", "Success", response.message);
-      setRefresh(!refresh);
-      handleCloseModal();
-      return response;
-    } catch (error) {
-      console.error("error post :", error);
-    }
-  };
-
   useEffect(() => {
-    getAbout();
-  }, [refresh]);
+    fetchAbout(token, { setAbout });
+  }, []);
 
   return {
-    aboutData,
-    getAbout,
-    onSubmit,
-    modalIsOpen,
-    handleCloseModal,
+    refresh,
     handleOpenModal,
+    setRefresh,
+    about,
+    handleCloseModal,
+    modalIsOpen,
     modalType,
   };
 };
-
-export default useAbout;

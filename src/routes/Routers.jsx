@@ -9,6 +9,7 @@ import {
   City,
   Office,
   Film,
+  About,
 } from "@/pages";
 import MainLayout from "@/components/layout/MainLayout";
 
@@ -18,6 +19,7 @@ const Routers = () => {
       <Routes>
         <Route element={<Login />} path="/login" />
         <Route element={<MainLayout />}>
+          <Route element={<About />} path="/about" />
           <Route element={<Dashboard />} path="/" />
           <Route element={<Country />} path="/country" />
           <Route element={<Banners />} path="/banner" />
