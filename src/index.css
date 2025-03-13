@@ -13,3 +13,50 @@ textarea::-webkit-scrollbar {
 .ProseMirror:focus {
   outline: none;
 }
+
+.ProseMirror ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem !important;
+}
+
+.ProseMirror ol li {
+  display: list-item !important;
+}
+
+.ProseMirror ul {
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+}
+
+.ProseMirror ul li {
+  display: list-item !important;
+}
+
+.ProseMirror pre {
+  background-color: #f5f5f5 !important;
+  padding: 1rem !important;
+  border-radius: 0.5rem !important;
+  overflow-x: auto !important; /* Menambahkan scroll horizontal jika konten terlalu panjang */
+  font-family: monospace !important; /* Menetapkan font monospasi untuk tampilan kode */
+  white-space: pre-wrap !important; /* Agar kode tetap terbungkus secara rapi */
+}
+
+.ProseMirror code {
+  background-color: #f0f0f0 !important;
+  padding: 0.25rem 0.5rem !important;
+  border-radius: 0.25rem !important;
+  font-family: monospace !important;
+  color: #d63384 !important; /* Warna kode */
+}
+
+.ProseMirror blockquote {
+  border-left: 4px solid #ccc !important; /* Garis di sebelah kiri untuk menandakan kutipan */
+  padding-left: 1rem !important; /* Menambahkan jarak antara teks dan garis */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  font-style: italic !important; /* Menjadikan teks di dalam blockquote miring */
+  color: #555 !important; /* Warna teks yang lebih lembut */
+  background-color: #f9f9f9 !important; /* Latar belakang yang lebih terang */
+  border-radius: 0.5rem !important; /* Memberikan sudut yang sedikit melengkung */
+  padding: 1rem !important;
+}

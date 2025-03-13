@@ -19,27 +19,49 @@ const InputEditor = ({ name, setValue }) => {
       Underline,
       TextStyle.configure({ mergeNestedSpanStyles: true }),
     ],
-    content: "<p>test</p>",
+    content: "",
     onUpdate: ({ editor }) => {
       setValue(name, editor.getHTML());
     },
   });
 
-  const handleCommandClick = (event, command) => {
-    event.preventDefault();
-    console.log(command);
-    editor.chain().focus()[command]().run();
+  // const handleCommandClick = (event, command, params = "") => {
+  //   event.preventDefault();
+  //   console.log(`Executing command: ${command}`);
+  //   editor.chain().focus()[command](params).run();
+  // };
+
+  const handleCommandClick = (event, command, params = "") => {
+    // event.preventDefault();
+
+    // Dynamic command execution based on type of command
+    if (command === "toggleHighlight") {
+      // event.preventDefault();
+      editor.chain().focus().toggleHighlight({ color: params }).run(); // Perintah tanpa parameter
+    } else {
+      editor.chain().focus()[command]().run(); // Perintah lainnya tanpa parameter
+    }
   };
 
   const handleCommandColor = (event) => {
     event.preventDefault();
-    setOpenSketch(!openSketch);
+    setOpenSketch(!openSketch); // Toggle SketchPicker visibility
   };
 
   const handleChangeColor = (color) => {
     setCurrentColor(color.hex);
-    editor.chain().focus().toggleHighlight({ color: color.hex }).run();
+    handleCommandClick(null, "toggleHighlight", color.hex); // Use handleCommandClick for dynamic color
   };
+
+  // const handleCommandColor = (event) => {
+  //   event.preventDefault();
+  //   setOpenSketch(!openSketch);
+  // };
+
+  // const handleChangeColor = (color) => {
+  //   setCurrentColor(color.hex);
+  //   editor.chain().focus().toggleHighlight({ color: color.hex }).run();
+  // };
 
   // Close SketchPicker when clicking outside
   useEffect(() => {
@@ -79,7 +101,7 @@ const InputEditor = ({ name, setValue }) => {
   return (
     <>
       <div className="border-2">
-        <div className="border-b-2 flex justify-center items-center gap-2 p-2">
+        <div className="grid grid-cols-7 gap-2 p-2 border-b-2 justify-items-center">
           {buttonIcon.map((btn, index) =>
             btn.type === "color" ? (
               <div key={index}>
@@ -115,7 +137,7 @@ const InputEditor = ({ name, setValue }) => {
             )
           )}
         </div>
-        <EditorContent editor={editor} className="break-words w-96 p-2" />
+        <EditorContent editor={editor} className="p-2 break-words w-96" />
       </div>
     </>
   );

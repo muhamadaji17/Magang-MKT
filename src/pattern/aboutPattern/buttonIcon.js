@@ -1,11 +1,16 @@
 import {
   Baseline,
   Bold,
+  Code,
   Highlighter,
   Italic,
+  List,
   ListOrdered,
+  TextQuote,
   Underline,
+  WrapText,
 } from "lucide-react";
+import { MdHorizontalRule } from "react-icons/md";
 
 export const buttonIcon = [
   { command: "toggleBold", name: "bold", icon: Bold },
@@ -17,6 +22,24 @@ export const buttonIcon = [
     name: "highlight",
     icon: Highlighter,
   },
+  // {
+  //   type: "color",
+  //   command: "setColor",
+  //   name: "setColor",
+  //   icon: Highlighter,
+  // },
   { command: "toggleOrderedList", name: "orderedList", icon: ListOrdered },
-  { command: "setColor", name: "setColor", type: "color", icon: Baseline },
+  { command: "toggleBulletList", name: "bulletList", icon: List },
+  { command: "toggleCodeBlock", name: "codeBlock", icon: Code },
+  { command: "setHardBreak", name: "hardBreak", icon: WrapText },
+  {
+    command: "setHorizontalRule",
+    name: "horizontalRule",
+    icon: MdHorizontalRule,
+  },
+  {
+    command: "toggleBlockquote",
+    name: "blockquote",
+    icon: TextQuote,
+  },
 ];
