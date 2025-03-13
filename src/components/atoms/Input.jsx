@@ -1,4 +1,4 @@
-const Input = ({ id, register, addOptionError, variant, type, ...props }) => {
+const Input = ({ id, field, variant, type, ...props }) => {
     return (
         <input
             id={id}
@@ -10,7 +10,7 @@ const Input = ({ id, register, addOptionError, variant, type, ...props }) => {
             autoComplete="off"
             type={type}
             {...props}
-            {...(register ? register(id, addOptionError) : {})}
+            {...(field ? field : {})}
         />
     );
 };

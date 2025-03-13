@@ -71,7 +71,7 @@ const CityPage = () => {
 
     const manipulatedSubData = subDatas.map((data) => ({
         value: data.id,
-        label: data.city_name,
+        label: data.province_name,
     }));
 
     if (loadingData) return <Loading />;

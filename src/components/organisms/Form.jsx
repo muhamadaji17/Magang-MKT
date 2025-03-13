@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { InputForm } from "../molecules";
 import { Button } from "../atoms";
 import { useDefaultForm, useGlobalHooks } from "../../hooks";
@@ -19,7 +19,7 @@ const Form = ({
     imageFor,
 }) => {
     const {
-        register,
+        control,
         handleSubmit,
         reset,
         formState: { errors },
@@ -62,35 +62,48 @@ const Form = ({
                         })()}`}
                     >
                         {data.jenisInputan === "input" ? (
-                            <InputForm
-                                labelText={data.title}
-                                id={data.name}
-                                type={
-                                    data.type === "password"
-                                        ? data.name === "password"
-                                            ? showPassword
-                                                ? "text"
-                                                : "password"
-                                            : showConfirmPassword
-                                            ? "text"
-                                            : "password"
-                                        : data.type
-                                }
-                                placeholder={data.placeholder}
-                                register={register}
-                                addOptionError={data.addOptionError}
-                                errors={errors[data.name]}
-                                optionsSelect={data.options}
-                                defaultSelect={data.title}
-                                defaultValue={data.defaultValue}
-                                imageFor={imageFor}
+                            <Controller
+                                name={data.name}
+                                control={control}
+                                rules={data.addOptionError}
+                                render={({ field }) => (
+                                    <InputForm
+                                        field={field}
+                                        id={data.name}
+                                        labelText={data.title}
+                                        type={
+                                            data.type === "password"
+                                                ? data.name === "password"
+                                                    ? showPassword
+                                                        ? "text"
+                                                        : "password"
+                                                    : showConfirmPassword
+                                                    ? "text"
+                                                    : "password"
+                                                : data.type
+                                        }
+                                        placeholder={data.placeholder}
+                                        errors={errors[data.name]}
+                                        optionsSelect={data.options}
+                                        defaultSelect={data.title}
+                                        defaultValue={data.defaultValue}
+                                        imageFor={imageFor}
+                                    />
+                                )}
                             />
                         ) : data.jenisInputan === "hidden" ? (
-                            <InputForm
-                                id={data.name}
-                                type={data.type}
-                                register={register}
-                                variant={"hidden"}
+                            <Controller
+                                name={data.name}
+                                control={control}
+                                rules={data.addOptionError}
+                                render={({ field }) => (
+                                    <InputForm
+                                        field={field}
+                                        id={data.name}
+                                        type={data.type}
+                                        variant={"hidden"}
+                                    />
+                                )}
                             />
                         ) : null}
                         {data.showPasswordIcon && (

@@ -1,14 +1,7 @@
 import { handleFileChange } from "../../pattern";
 import { useGlobalHooks, useGetInstantState } from "../../hooks";
 
-const File = ({
-    defaultValue,
-    id,
-    register,
-    addOptionError,
-    imageFor,
-    ...props
-}) => {
+const File = ({ defaultValue, id, field, imageFor, ...props }) => {
     const {
         previewImage,
         setPreviewImage,
@@ -30,7 +23,7 @@ const File = ({
     return (
         <>
             <div>
-                {defaultValue ? (
+                {defaultValue || previewImage || previewImageName ? (
                     <>
                         <img
                             src={previewImage}
@@ -55,19 +48,14 @@ const File = ({
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    {...(register
-                        ? register(id, {
-                              validate: () => addOptionError?.required,
-                              setValueAs: () => previewImageName || "",
-                              onChange: (e) => {
-                                  handleFileChange(
-                                      e,
-                                      setPreviewImage,
-                                      setPreviewImageName
-                                  );
-                              },
-                          })
-                        : {})}
+                    onChange={(e) => {
+                        handleFileChange(
+                            e,
+                            setPreviewImage,
+                            setPreviewImageName,
+                            field
+                        );
+                    }}
                     {...props}
                 />
             </div>

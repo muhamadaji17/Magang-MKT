@@ -85,6 +85,13 @@ export const inputOffice = (datas) => [
 
 export const inputEditOffice = (selectData, defaultValue) => [
     {
+        jenisInputan: "hidden",
+        type: "text",
+        name: "id",
+        defaultValue: defaultValue.id,
+        grid: 12,
+    },
+    {
         jenisInputan: "input",
         type: "select",
         title: "City",

@@ -45,6 +45,13 @@ export const inputCity = (datas) => [
 
 export const inputEditCity = (selectData, defaultValue) => [
     {
+        jenisInputan: "hidden",
+        type: "text",
+        name: "id",
+        defaultValue: defaultValue.id,
+        grid: 12,
+    },
+    {
         jenisInputan: "input",
         type: "select",
         title: "Province",

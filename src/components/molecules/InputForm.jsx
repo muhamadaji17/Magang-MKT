@@ -5,8 +5,7 @@ const InputForm = ({
     labelStyle,
     id,
     errors,
-    register,
-    addOptionError,
+    field,
     variant,
     type,
     defaultValue,
@@ -30,8 +29,7 @@ const InputForm = ({
             type === "password" ? (
                 <Input
                     id={id}
-                    register={register}
-                    addOptionError={addOptionError}
+                    field={field}
                     variant={variant}
                     type={type}
                     {...props}
@@ -40,14 +38,13 @@ const InputForm = ({
                 <textarea
                     id={id}
                     className="ring-blue-600 ring-1 rounded p-2 focus:ring-blue-800 outline-none resize-none"
-                    {...register(id, addOptionError)}
+                    {...field}
                     {...props}
                 />
             ) : type === "file" ? (
                 <File
                     id={id}
-                    register={register}
-                    addOptionError={addOptionError}
+                    field={field}
                     defaultValue={defaultValue}
                     imageFor={imageFor}
                     {...props}
@@ -56,7 +53,7 @@ const InputForm = ({
                 <select
                     id={id}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-800 block w-full p-2.5"
-                    {...(register ? register(id, addOptionError) : {})}
+                    {...(field ? field : {})}
                 >
                     <option value="" disabled>
                         Choose a {defaultSelect}

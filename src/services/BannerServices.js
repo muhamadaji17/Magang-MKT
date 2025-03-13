@@ -45,10 +45,6 @@ export const AddBannerService = async (
     setLoading,
     setReGetDatas
 ) => {
-    const { banner_img, ...res } = data;
-    const manipulatedBannerImg = banner_img[0];
-    data = { ...res, banner_img: manipulatedBannerImg };
-
     try {
         setLoading(true);
         const response = await POST_DATAS_FILE("crud/banner", data, token);
@@ -119,7 +115,7 @@ export const EditBannerService = async (
         let { banner_img } = manipulateData;
 
         const manipulatedBannerImg =
-            typeof banner_img === "string" ? null : banner_img[0];
+            typeof banner_img === "string" ? null : banner_img;
 
         const bodyres = { ...manipulateData, banner_img: manipulatedBannerImg };
 

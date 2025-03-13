@@ -49,10 +49,6 @@ export const AddFilmService = async (
     setLoading,
     setReGetDatas
 ) => {
-    const { poster_film, ...res } = data;
-    const manipulatedImg = poster_film[0];
-    data = { ...res, poster_film: manipulatedImg };
-
     try {
         setLoading(true);
         const response = await POST_DATAS_FILE("crud/films", data, token);
@@ -84,6 +80,8 @@ export const EditFilmService = async (
     setReGetDatas
 ) => {
     try {
+        console.log(data);
+
         const manipulateData = {
             nama_film: data.nama_film,
             poster_film: data.poster_film,
@@ -95,7 +93,7 @@ export const EditFilmService = async (
         let { poster_film } = manipulateData;
 
         const manipulatedImg =
-            typeof poster_film === "string" ? null : poster_film[0];
+            typeof poster_film === "string" ? null : poster_film;
 
         const bodyres = {
             ...manipulateData,

@@ -8,6 +8,7 @@ import { BsPencilSquare } from "react-icons/bs";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { inputAbout } from "../../pattern";
 import { AddAboutService } from "../../services";
+import AdvancedQuillEditor from "../../components/atoms/QuillTextEditor";
 
 const AboutPage = () => {
     const {
@@ -61,6 +62,7 @@ const AboutPage = () => {
                             status={data.status}
                             text={data.about_body_en}
                         />
+                        <AdvancedQuillEditor />
                     </div>
                 </div>
             ))}

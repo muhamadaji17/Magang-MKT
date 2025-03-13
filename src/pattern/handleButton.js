@@ -55,14 +55,21 @@ export const saveEvents = (
     });
 };
 
-export const handleFileChange = (e, setPreviewImage, setPreviewImageName) => {
+export const handleFileChange = (
+    e,
+    setPreviewImage,
+    setPreviewImageName,
+    field
+) => {
     const file = e.target.files[0];
     if (file) {
         setPreviewImage(URL.createObjectURL(file));
         setPreviewImageName(file.name);
+        field.onChange(file);
     } else {
         setPreviewImage("");
         setPreviewImageName("");
+        field.onChange(null);
     }
 };
 

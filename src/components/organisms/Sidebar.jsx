@@ -14,7 +14,7 @@ const Sidebar = ({ hamburger }) => {
             lg:hover:w-60 lg:flex flex-col lg:transition-all 
             items-center bg-white shadow-md group`}
         >
-            <ul className="space-y-4 mt-5 w-full">
+            <ul className="space-y-4 mt-5 w-full list-none">
                 {sidebarPattern.map((data, i) =>
                     data.subLink ? (
                         <Accordion
