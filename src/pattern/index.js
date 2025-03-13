@@ -9,6 +9,7 @@ import {
     handleCloseBgModal,
     saveEvents,
     handleFileChange,
+    handleChange,
 } from "./handleButton";
 import { sidebarPattern } from "./sidebarPattern";
 import { inputAbout } from "./dashboard/about";
@@ -54,4 +55,5 @@ export {
     inputEditFilm,
     filmTablePattern,
     handleFileChange,
+    handleChange,
 };

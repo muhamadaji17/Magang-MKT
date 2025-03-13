@@ -22,6 +22,7 @@ const Table = ({
     titleModal,
     subDatas,
     loadingSubData,
+    loadingSearch,
     imageFor,
 }) => {
     return (
@@ -51,7 +52,21 @@ const Table = ({
                         </tr>
                     </thead>
                     <tbody>
-                        {datas?.length > 0 &&
+                        {loadingSearch ? (
+                            <tr>
+                                <td
+                                    colSpan={columns.length + 2}
+                                    className="px-6 py-4"
+                                >
+                                    <div className="flex justify-center items-center">
+                                        <span className="text-gray-600">
+                                            Loading...
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        ) : (
+                            datas?.length > 0 &&
                             datas.map((row, i) => (
                                 <tr
                                     className="bg-white border-b border-gray-200"
@@ -125,7 +140,8 @@ const Table = ({
                                         />
                                     </td>
                                 </tr>
-                            ))}
+                            ))
+                        )}
                     </tbody>
                 </table>
             </div>

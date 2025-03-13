@@ -122,3 +122,39 @@ export const DeleteProvinceService = async (
         setLoading(false);
     }
 };
+
+export const SearchProvinceServices = async (
+    searchData,
+    token,
+    setState,
+    setLoading,
+    setReGetDatas
+) => {
+    try {
+        setLoading(true);
+        const queryParams = new URLSearchParams(searchData).toString();
+        const response = await GET_DATAS(
+            `crud/province/by?${queryParams}`,
+            token
+        );
+        const datas = response.data.payload.map((item) => ({
+            id: item.id_province,
+            id_country: item.id_country,
+            province_name: item.province_name,
+            province_code: item.province_code,
+            createdAt: item.createdAt,
+            updatedAt: item.updatedAt,
+            status: item.status,
+        }));
+        setState(datas);
+        setReGetDatas(true);
+    } catch (error) {
+        AlertForm({
+            icon: "error",
+            text: error.response.data.message,
+            title: "failed",
+        });
+    } finally {
+        setLoading(false);
+    }
+};

@@ -12,30 +12,35 @@ import {
     GetCountryService,
     EditCountryService,
     DeleteCountryService,
+    SearchCountryServices,
 } from "./CountryServices";
 import {
     AddProvinceService,
     GetProvinceService,
     EditProvinceService,
     DeleteProvinceService,
+    SearchProvinceServices,
 } from "./ProvinceServices";
 import {
     AddCityService,
     GetCityService,
     EditCityService,
     DeleteCityService,
+    SearchCityServices,
 } from "./CityServices";
 import {
     GetOfficeService,
     AddOfficeService,
     EditOfficeService,
     DeleteOfficeService,
+    SearchOfficeServices,
 } from "./OfficeServices";
 import {
     GetFilmService,
     AddFilmService,
     EditFilmService,
     DeleteFilmService,
+    SearchFilmServices,
 } from "./FilmServices";
 
 export {
@@ -67,4 +72,9 @@ export {
     AddFilmService,
     EditFilmService,
     DeleteFilmService,
+    SearchOfficeServices,
+    SearchProvinceServices,
+    SearchFilmServices,
+    SearchCountryServices,
+    SearchCityServices,
 };

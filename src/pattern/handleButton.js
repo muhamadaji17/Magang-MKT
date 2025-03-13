@@ -65,3 +65,11 @@ export const handleFileChange = (e, setPreviewImage, setPreviewImageName) => {
         setPreviewImageName("");
     }
 };
+
+export const handleChange = (e, key, setDatas, setReGetDatas) => {
+    setReGetDatas(false);
+    setDatas((prev) => ({
+        ...prev,
+        [key]: e.target.value,
+    }));
+};

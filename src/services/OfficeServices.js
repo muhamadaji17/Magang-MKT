@@ -122,3 +122,43 @@ export const DeleteOfficeService = async (
         setLoading(false);
     }
 };
+
+export const SearchOfficeServices = async (
+    searchData,
+    token,
+    setState,
+    setLoading,
+    setReGetDatas
+) => {
+    try {
+        setLoading(true);
+        const queryParams = new URLSearchParams(searchData).toString();
+        const response = await GET_DATAS(
+            `crud/office/by?${queryParams}`,
+            token
+        );
+        const datas = response.data.payload.map((item) => ({
+            id: item.id_office,
+            id_city: item.id_city,
+            office_name: item.office_name,
+            address: item.address,
+            ig: item.ig,
+            fb: item.fb,
+            x: item.x,
+            yt: item.yt,
+            createdAt: item.createdAt,
+            updatedAt: item.updatedAt,
+            status: item.status,
+        }));
+        setState(datas);
+        setReGetDatas(true);
+    } catch (error) {
+        AlertForm({
+            icon: "error",
+            text: error.response.data.message,
+            title: "failed",
+        });
+    } finally {
+        setLoading(false);
+    }
+};

@@ -19,11 +19,14 @@ const useGlobalHooks = () => {
     const [loadingButton, setLoadingButton] = useState(false);
     const [loadingData, setLoadingData] = useState(false);
     const [loadingSubData, setLoadingSubData] = useState(false);
+    const [loadingSearch, setLoadingSearch] = useState(false);
 
     const [datas, setDatas] = useState([]);
     const [subDatas, setSubDatas] = useState([]);
     const [getDetailsData, setGetDetailsData] = useState([]);
     const [reGetDatas, setReGetDatas] = useState(false);
+
+    const [query, setQuery] = useState({});
 
     const [previewImage, setPreviewImage] = useState("");
     const [previewImageName, setPreviewImageName] = useState("");
@@ -74,6 +77,10 @@ const useGlobalHooks = () => {
         setPreviewImage,
         previewImageName,
         setPreviewImageName,
+        query,
+        setQuery,
+        loadingSearch,
+        setLoadingSearch,
     };
 };
 

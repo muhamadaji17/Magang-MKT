@@ -121,3 +121,37 @@ export const DeleteCountryService = async (
         setLoading(false);
     }
 };
+
+export const SearchCountryServices = async (
+    searchData,
+    token,
+    setState,
+    setLoading,
+    setReGetDatas
+) => {
+    try {
+        setLoading(true);
+        const response = await GET_DATAS(
+            `crud/country?search=${searchData}`,
+            token
+        );
+        const datas = response.data.payload.map((item) => ({
+            id: item.id_country,
+            country_name: item.country_name,
+            country_code: item.country_code,
+            createdAt: item.createdAt,
+            updatedAt: item.updatedAt,
+            status: item.status,
+        }));
+        setState(datas);
+        setReGetDatas(true);
+    } catch (error) {
+        AlertForm({
+            icon: "error",
+            text: error.response.data.message,
+            title: "failed",
+        });
+    } finally {
+        setLoading(false);
+    }
+};

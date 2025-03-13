@@ -1,4 +1,4 @@
-import { Loading } from "../../components/atoms";
+import { Input, Loading } from "../../components/atoms";
 import { DashboardHeader } from "../../components/molecules";
 import { Table } from "../../components/organisms";
 import {
@@ -7,9 +7,10 @@ import {
     handleShowModalId,
     inputOffice,
     inputEditOffice,
+    handleChange,
 } from "../../pattern";
 import {
-    useGetDataHook,
+    useGetDataWithSearchHook,
     useGlobalHooks,
     useSupportGetDataHook,
 } from "../../hooks";
@@ -19,6 +20,7 @@ import {
     EditOfficeService,
     DeleteOfficeService,
     GetCityService,
+    SearchOfficeServices,
 } from "../../services";
 
 const OfficePage = () => {
@@ -40,15 +42,22 @@ const OfficePage = () => {
         setGetDetailsData,
         subDatas,
         setSubDatas,
+        query,
+        setQuery,
+        loadingSearch,
+        setLoadingSearch,
     } = useGlobalHooks();
 
-    useGetDataHook(
-        GetOfficeService,
+    useGetDataWithSearchHook(
         accessToken,
+        query,
         setDatas,
         setLoadingData,
+        setLoadingSearch,
+        setReGetDatas,
         reGetDatas,
-        setReGetDatas
+        GetOfficeService,
+        SearchOfficeServices
     );
 
     useSupportGetDataHook(
@@ -74,13 +83,18 @@ const OfficePage = () => {
                 setModalType={setModalType}
                 loadingSubData={loadingSubData}
             />
-            <div className="space-y-4">
-                <div>
-                    <input
-                        type="search"
-                        className="bg-white outline-none w-44"
+            <div className="space-x-2 space-y-1">
+                {officeTablePattern.map((column, index) => (
+                    <Input
+                        variant="h-6 text-center text-sm text-black bg-white"
+                        placeholder={column.title}
+                        value={query[column.key] || ""}
+                        onChange={(e) =>
+                            handleChange(e, column.key, setQuery, setReGetDatas)
+                        }
+                        key={index}
                     />
-                </div>
+                ))}
                 <Table
                     datas={datas}
                     handleShowModalId={(data, type) =>
@@ -106,6 +120,7 @@ const OfficePage = () => {
                     subDatas={subDatas}
                     titleModal={"Edit Office"}
                     loadingSubData={loadingSubData}
+                    loadingSearch={loadingSearch}
                 />
             </div>
         </div>

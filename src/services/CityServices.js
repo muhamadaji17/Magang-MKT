@@ -118,3 +118,38 @@ export const DeleteCityService = async (
         setLoading(false);
     }
 };
+
+export const SearchCityServices = async (
+    searchData,
+    token,
+    setState,
+    setLoading,
+    setReGetDatas
+) => {
+    try {
+        setLoading(true);
+        const response = await GET_DATAS(
+            `crud/city?search=${searchData}`,
+            token
+        );
+        const datas = response.data.payload.map((item) => ({
+            id: item.id_city,
+            id_province: item.id_province,
+            city_name: item.city_name,
+            city_code: item.city_code,
+            createdAt: item.createdAt,
+            updatedAt: item.updatedAt,
+            status: item.status,
+        }));
+        setState(datas);
+        setReGetDatas(true);
+    } catch (error) {
+        AlertForm({
+            icon: "error",
+            text: error.response.data.message,
+            title: "failed",
+        });
+    } finally {
+        setLoading(false);
+    }
+};
