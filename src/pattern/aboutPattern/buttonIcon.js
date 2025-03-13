@@ -22,12 +22,12 @@ export const buttonIcon = [
     name: "highlight",
     icon: Highlighter,
   },
-  // {
-  //   type: "color",
-  //   command: "setColor",
-  //   name: "setColor",
-  //   icon: Highlighter,
-  // },
+  {
+    type: "color",
+    command: "setColor",
+    name: "textStyle",
+    icon: Baseline,
+  },
   { command: "toggleOrderedList", name: "orderedList", icon: ListOrdered },
   { command: "toggleBulletList", name: "bulletList", icon: List },
   { command: "toggleCodeBlock", name: "codeBlock", icon: Code },

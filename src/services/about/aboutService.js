@@ -1,4 +1,5 @@
-import { GET } from "@/api/auth";
+import { GET, POST } from "@/api/auth";
+import showAlert from "@/utils/showAlert";
 
 export const fetchAbout = async (token, extraOptions) => {
   const { setAbout } = extraOptions;
@@ -15,5 +16,20 @@ export const fetchAbout = async (token, extraOptions) => {
     setAbout(parse);
   } catch (error) {
     console.error("Error :", error);
+  }
+};
+
+export const postAbout = async (data, extraOptions) => {
+  const { setRefresh, token, handleCloseModal, refresh } = extraOptions;
+  try {
+    const response = await POST(`crud/about`, data, token);
+    console.log(response);
+    if (response.success === true) {
+      showAlert("success", "Success", response.message);
+      setRefresh(!refresh);
+      handleCloseModal();
+    }
+  } catch (error) {
+    console.error(error);
   }
 };

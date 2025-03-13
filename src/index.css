@@ -60,3 +60,11 @@ textarea::-webkit-scrollbar {
   border-radius: 0.5rem !important; /* Memberikan sudut yang sedikit melengkung */
   padding: 1rem !important;
 }
+
+.tiptap p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}

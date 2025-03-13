@@ -35,6 +35,21 @@ export const tableHeadFilmPattern = [
   { name: "Created By", key: "created_by" },
 ];
 
+export const inputAboutPattern = [
+  {
+    type: "editor",
+    placeholder: "Description Id ...",
+    name: "about_body_id",
+    validation: { required: "Description Id is required" },
+  },
+  {
+    type: "editor",
+    placeholder: "Description En ...",
+    name: "about_body_en",
+    validation: { required: "Description En is required" },
+  },
+];
+
 export const inputFilmPattern = [
   {
     label: "Film name",

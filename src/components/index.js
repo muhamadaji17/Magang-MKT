@@ -18,7 +18,11 @@ export { default as Sidebar } from "./molecules/Sidebar";
 export { default as ShowPassword } from "./molecules/ShowPassword";
 export { default as EventCard } from "./molecules/EventCard";
 export { default as HeaderContent } from "./molecules/HeaderContent";
+export { default as IconActions } from "./molecules/IconActions";
+export { default as InputEditor } from "./molecules/InputEditor";
 
 export { default as HeaderBanner } from "./organism/HeaderBanner";
 export { default as FormTemplate } from "./organism/FormTemplate";
 export { default as Table } from "./organism/Table";
+export { default as FormEditor } from "./organism/FormEditor";
+export { default as AboutContent } from "./organism/AboutContent";

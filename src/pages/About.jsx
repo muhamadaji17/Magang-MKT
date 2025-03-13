@@ -1,16 +1,30 @@
-import { Container, HeaderContent, Input, ModalLayout } from "@/components";
+import { Container, HeaderContent, ModalLayout } from "@/components";
 import { useAbout } from "@/hooks/about/useAbout";
 import AboutContent from "@/components/organism/AboutContent";
-import InputEditor from "@/components/layout/InputEditor";
-import { useForm } from "react-hook-form";
+import { postAbout } from "@/services/about/aboutService";
+import FormEditor from "@/components/organism/FormEditor";
+import { inputAboutPattern } from "@/pattern/table/tablePattern";
+import { handleSubmit } from "@/pattern/handleSubmit";
 
 const About = () => {
-  const { about, modalIsOpen, modalType, handleCloseModal, handleOpenModal } =
-    useAbout();
-  const { register, handleSubmit, setValue } = useForm();
-  const onSubmit = (data) => {
-    console.log("Form data:", data);
-    handleCloseModal();
+  const {
+    about,
+    modalIsOpen,
+    modalType,
+    token,
+    refresh,
+    setRefresh,
+    handleCloseModal,
+    handleOpenModal,
+  } = useAbout();
+
+  const postSubmit = async (data) => {
+    handleSubmit(data, postAbout, {
+      token,
+      refresh,
+      setRefresh,
+      handleCloseModal,
+    });
   };
 
   return (
@@ -30,24 +44,7 @@ const About = () => {
         ))}
       </Container>
       <ModalLayout isModalOpen={modalIsOpen} onClick={handleCloseModal}>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="w-full bg-white flex flex-col gap-4 p-4 rounded-sm  overflow-x-auto md:max-w-4xl"
-        >
-          <Input
-            label="Meta"
-            placeholder="Insert meta"
-            className="rounded-none w-full"
-            {...register("about_meta")}
-          />
-          <div className="w-full flex flex-col md:flex-row gap-4">
-            <InputEditor {...register("about_body_id")} setValue={setValue} />
-            <InputEditor {...register("about_body_en")} setValue={setValue} />
-          </div>
-          <button className="w-full bg-blue-800 p-2 rounded-sm text-white">
-            Save
-          </button>
-        </form>
+        <FormEditor inputPattern={inputAboutPattern} onSubmit={postSubmit} />
       </ModalLayout>
     </>
   );
