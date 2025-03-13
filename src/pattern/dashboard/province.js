@@ -55,10 +55,7 @@ export const inputEditProvince = (selectData, defaultValue) => [
         jenisInputan: "input",
         type: "select",
         title: "Country",
-        options: selectData.map((data) => ({
-            value: data.id,
-            label: data.country_name,
-        })),
+        options: selectData,
         name: "id_country",
         error: "id_country",
         addOptionError: errorOptions.id_country,

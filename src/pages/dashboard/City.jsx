@@ -69,6 +69,11 @@ const CityPage = () => {
         modalType
     );
 
+    const manipulatedSubData = subDatas.map((data) => ({
+        value: data.id,
+        label: data.city_name,
+    }));
+
     if (loadingData) return <Loading />;
 
     return (
@@ -124,7 +129,7 @@ const CityPage = () => {
                     editService={EditCityService}
                     inputEditPattern={inputEditCity}
                     deleteService={DeleteCityService}
-                    subDatas={subDatas}
+                    subDatas={manipulatedSubData}
                     titleModal={"Edit City"}
                     loadingSubData={loadingSubData}
                     loadingSearch={loadingSearch}

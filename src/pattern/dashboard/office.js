@@ -88,10 +88,7 @@ export const inputEditOffice = (selectData, defaultValue) => [
         jenisInputan: "input",
         type: "select",
         title: "City",
-        options: selectData.map((data) => ({
-            value: data.id,
-            label: data.city_name,
-        })),
+        options: selectData,
         name: "id_city",
         error: "id_city",
         addOptionError: errorOptions.id_city,
