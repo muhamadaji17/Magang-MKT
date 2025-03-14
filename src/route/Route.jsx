@@ -9,6 +9,7 @@ import {
     ProvincePage,
     CityPage,
     OfficePage,
+    NotFoundPage,
 } from "../pages";
 import { Layout } from "../components/templates";
 import Middleware from "./Middleware";
@@ -42,6 +43,7 @@ const Routers = () => {
                     <Route path="city" element={<CityPage />} />
                     <Route path="office" element={<OfficePage />} />
                 </Route>
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </BrowserRouter>
     );

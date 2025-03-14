@@ -7,6 +7,7 @@ import CountryPage from "./dashboard/Country";
 import ProvincePage from "./dashboard/Province";
 import CityPage from "./dashboard/City";
 import OfficePage from "./dashboard/Office";
+import NotFoundPage from "./404";
 
 export {
     LoginPage,
@@ -18,4 +19,5 @@ export {
     ProvincePage,
     CityPage,
     OfficePage,
+    NotFoundPage,
 };
