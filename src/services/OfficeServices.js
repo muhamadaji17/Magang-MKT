@@ -16,6 +16,8 @@ export const GetOfficeService = async (
             id_city: item.id_city,
             office_name: item.office_name,
             address: item.address,
+            longitude: item.longitude,
+            latitude: item.latitude,
             ig: item.ig,
             fb: item.fb,
             x: item.x,

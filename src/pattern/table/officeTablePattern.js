@@ -8,6 +8,14 @@ export const officeTablePattern = [
         key: "address",
     },
     {
+        title: "Longitude",
+        key: "longitude",
+    },
+    {
+        title: "Latitude",
+        key: "latitude",
+    },
+    {
         title: "Instagram",
         key: "ig",
     },

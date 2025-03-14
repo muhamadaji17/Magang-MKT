@@ -139,6 +139,12 @@ const errorOptions = {
     sinopsis_film_id: {
         required: "Film Sinopsis is required",
     },
+    longitude: {
+        required: "longitude is required",
+    },
+    latitude: {
+        required: "latitude is required",
+    },
 };
 
 export default errorOptions;
