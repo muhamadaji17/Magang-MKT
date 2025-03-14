@@ -6,6 +6,7 @@ import {
     PUT_DATAS_FILE,
 } from "../api";
 import { AlertForm } from "../components/atoms";
+import Cookies from "js-cookie";
 
 export const GetBannerService = async (
     token,
@@ -27,6 +28,10 @@ export const GetBannerService = async (
         setState(datas);
         setReGetDatas(true);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -57,6 +62,10 @@ export const AddBannerService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -85,6 +94,10 @@ export const EditBannerDateService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -134,6 +147,10 @@ export const EditBannerService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -161,6 +178,10 @@ export const DeleteBannerService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,

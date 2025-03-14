@@ -1,5 +1,6 @@
 import { DELETE_DATAS, GET_DATAS, PUT_DATAS, POST_DATAS } from "../api";
 import { AlertForm } from "../components/atoms";
+import Cookies from "js-cookie";
 
 export const GetProvinceService = async (
     token,
@@ -22,6 +23,10 @@ export const GetProvinceService = async (
         setState(datas);
         setReGetDatas(true);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -52,6 +57,10 @@ export const AddProvinceService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -86,6 +95,10 @@ export const EditProvinceService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -113,6 +126,10 @@ export const DeleteProvinceService = async (
         setReGetDatas(false);
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -149,6 +166,10 @@ export const SearchProvinceServices = async (
         setState(datas);
         setReGetDatas(true);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,

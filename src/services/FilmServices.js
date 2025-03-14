@@ -5,6 +5,7 @@ import {
     PUT_DATAS_FILE,
 } from "../api";
 import { AlertForm } from "../components/atoms";
+import Cookies from "js-cookie";
 
 export const GetFilmService = async (
     token,
@@ -31,6 +32,10 @@ export const GetFilmService = async (
         setState(datas);
         setReGetDatas(true);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -61,6 +66,10 @@ export const AddFilmService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -115,6 +124,10 @@ export const EditFilmService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -142,6 +155,10 @@ export const DeleteFilmService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -179,6 +196,10 @@ export const SearchFilmServices = async (
         setState(datas);
         setReGetDatas(true);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,

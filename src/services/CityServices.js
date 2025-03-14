@@ -1,5 +1,6 @@
 import { DELETE_DATAS, GET_DATAS, PUT_DATAS, POST_DATAS } from "../api";
 import { AlertForm } from "../components/atoms";
+import Cookies from "js-cookie";
 
 export const GetCityService = async (
     token,
@@ -22,6 +23,10 @@ export const GetCityService = async (
         setState(datas);
         setReGetDatas(true);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -52,6 +57,10 @@ export const AddCityService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -82,6 +91,10 @@ export const EditCityService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -109,6 +122,10 @@ export const DeleteCityService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -144,6 +161,10 @@ export const SearchCityServices = async (
         setState(datas);
         setReGetDatas(true);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,

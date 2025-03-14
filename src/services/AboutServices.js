@@ -1,5 +1,6 @@
 import { DELETE_DATAS, GET_DATAS, POST_DATAS, PUT_DATAS } from "../api";
 import { AlertForm } from "../components/atoms";
+import Cookies from "js-cookie";
 
 export const GetAboutService = async (
     token,
@@ -22,6 +23,10 @@ export const GetAboutService = async (
         setState(datas);
         setReGetDatas(true);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -52,6 +57,10 @@ export const AddAboutService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -82,6 +91,10 @@ export const EditAboutService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
@@ -109,6 +122,10 @@ export const DeleteAboutService = async (
         });
         setShowModal(false);
     } catch (error) {
+        if (error.response.status === 401) {
+            Cookies.remove("accessToken");
+            window.location.reload();
+        }
         AlertForm({
             icon: "error",
             text: error.response.data.message,
