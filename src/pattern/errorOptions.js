@@ -140,10 +140,20 @@ const errorOptions = {
         required: "Film Sinopsis is required",
     },
     longitude: {
-        required: "longitude is required",
+        required: "Longitude is required",
+        pattern: {
+            value: /^-?\d+(\.\d+)?$/,
+            message:
+                "Longitude must be a valid number (e.g., -180.123, 45.678, 0.0)",
+        },
     },
     latitude: {
-        required: "latitude is required",
+        required: "Latitude is required",
+        pattern: {
+            value: /^-?\d+(\.\d+)?$/,
+            message:
+                "Latitude must be a valid number (e.g., -90.123, 12.345, 0.0)",
+        },
     },
 };
 

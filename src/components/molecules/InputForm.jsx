@@ -27,7 +27,8 @@ const InputForm = ({
             {type === "text" ||
             type === "checkbox" ||
             type === "date" ||
-            type === "password" ? (
+            type === "password" ||
+            type === "number" ? (
                 <Input
                     id={id}
                     field={field}
