@@ -29,13 +29,13 @@ export const inputAbout = [
         addOptionError: errorOptions.about_body_id,
         grid: 12,
     },
-    {
-        jenisInputan: "input",
-        type: "checkbox",
-        title: "Activate?",
-        name: "status",
-        grid: 12,
-    },
+    // {
+    //     jenisInputan: "input",
+    //     type: "checkbox",
+    //     title: "Activate?",
+    //     name: "status",
+    //     grid: 12,
+    // },
 ];
 
 export const inputEditAbout = (data) => [

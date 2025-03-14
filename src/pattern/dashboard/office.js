@@ -74,13 +74,13 @@ export const inputOffice = (datas) => [
         addOptionError: errorOptions.yt,
         grid: 6,
     },
-    {
-        jenisInputan: "input",
-        type: "checkbox",
-        title: "Click to Activate",
-        name: "status",
-        grid: 12,
-    },
+    // {
+    //     jenisInputan: "input",
+    //     type: "checkbox",
+    //     title: "Click to Activate",
+    //     name: "status",
+    //     grid: 12,
+    // },
 ];
 
 export const inputEditOffice = (selectData, defaultValue) => [

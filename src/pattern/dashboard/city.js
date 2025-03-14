@@ -34,13 +34,13 @@ export const inputCity = (datas) => [
         addOptionError: errorOptions.city_name,
         grid: 12,
     },
-    {
-        jenisInputan: "input",
-        type: "checkbox",
-        title: "Click to Activate",
-        name: "status",
-        grid: 12,
-    },
+    // {
+    //     jenisInputan: "input",
+    //     type: "checkbox",
+    //     title: "Click to Activate",
+    //     name: "status",
+    //     grid: 12,
+    // },
 ];
 
 export const inputEditCity = (selectData, defaultValue) => [

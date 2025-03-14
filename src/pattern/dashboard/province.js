@@ -34,13 +34,13 @@ export const inputProvince = (datas) => [
         addOptionError: errorOptions.province_name,
         grid: 12,
     },
-    {
-        jenisInputan: "input",
-        type: "checkbox",
-        title: "Click to Activate",
-        name: "status",
-        grid: 12,
-    },
+    // {
+    //     jenisInputan: "input",
+    //     type: "checkbox",
+    //     title: "Click to Activate",
+    //     name: "status",
+    //     grid: 12,
+    // },
 ];
 
 export const inputEditProvince = (selectData, defaultValue) => [

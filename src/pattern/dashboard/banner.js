@@ -38,13 +38,13 @@ export const inputBanner = [
         addOptionError: errorOptions.end_date_banner,
         grid: 6,
     },
-    {
-        jenisInputan: "input",
-        type: "checkbox",
-        title: "Click to Activate",
-        name: "status",
-        grid: 12,
-    },
+    // {
+    //     jenisInputan: "input",
+    //     type: "checkbox",
+    //     title: "Click to Activate",
+    //     name: "status",
+    //     grid: 12,
+    // },
 ];
 
 export const inputEditBanner = (data) => {

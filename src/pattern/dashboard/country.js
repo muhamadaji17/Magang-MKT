@@ -21,13 +21,13 @@ export const inputCountry = [
         addOptionError: errorOptions.country_name,
         grid: 12,
     },
-    {
-        jenisInputan: "input",
-        type: "checkbox",
-        title: "Click to Activate",
-        name: "status",
-        grid: 12,
-    },
+    // {
+    //     jenisInputan: "input",
+    //     type: "checkbox",
+    //     title: "Click to Activate",
+    //     name: "status",
+    //     grid: 12,
+    // },
 ];
 
 export const inputEditCountry = (data) => [

@@ -40,13 +40,13 @@ export const inputFilm = [
         addOptionError: errorOptions.sinopsis_film_id,
         grid: 12,
     },
-    {
-        jenisInputan: "input",
-        type: "checkbox",
-        title: "Click to Activate",
-        name: "status",
-        grid: 12,
-    },
+    // {
+    //     jenisInputan: "input",
+    //     type: "checkbox",
+    //     title: "Click to Activate",
+    //     name: "status",
+    //     grid: 12,
+    // },
 ];
 
 export const inputEditFilm = (data) => [

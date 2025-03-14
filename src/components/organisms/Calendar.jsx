@@ -20,7 +20,7 @@ const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
         goToToday,
         onDragStart,
         onDrop,
-        hasChanges, // Add this line
+        hasChanges,
     } = calendarUtils(currentDate, setCurrentDate, datas, setDatas, saveEvents);
 
     const months = Array.from({ length: 12 }, (_, i) =>
