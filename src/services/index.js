@@ -6,7 +6,12 @@ import {
     EditBannerService,
     DeleteBannerService,
 } from "./BannerServices";
-import { GetAboutService, AddAboutService } from "./AboutServices";
+import {
+    GetAboutService,
+    AddAboutService,
+    EditAboutService,
+    DeleteAboutService,
+} from "./AboutServices";
 import {
     AddCountryService,
     GetCountryService,
@@ -77,4 +82,6 @@ export {
     SearchFilmServices,
     SearchCountryServices,
     SearchCityServices,
+    EditAboutService,
+    DeleteAboutService,
 };

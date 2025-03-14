@@ -12,7 +12,7 @@ import {
     handleChange,
 } from "./handleButton";
 import { sidebarPattern } from "./sidebarPattern";
-import { inputAbout } from "./dashboard/about";
+import { inputAbout, inputEditAbout } from "./dashboard/about";
 import { inputBanner, inputEditBanner } from "./dashboard/banner";
 import { inputCountry, inputEditCountry } from "./dashboard/country";
 import { countryTablePattern } from "./table/countryTablePattern";
@@ -56,4 +56,5 @@ export {
     filmTablePattern,
     handleFileChange,
     handleChange,
+    inputEditAbout,
 };

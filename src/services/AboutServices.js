@@ -1,4 +1,4 @@
-import { GET_DATAS, POST_DATAS } from "../api";
+import { DELETE_DATAS, GET_DATAS, POST_DATAS, PUT_DATAS } from "../api";
 import { AlertForm } from "../components/atoms";
 
 export const GetAboutService = async (
@@ -45,6 +45,63 @@ export const AddAboutService = async (
         const response = await POST_DATAS("crud/about", data, token);
         setReGetDatas(false);
         reset();
+        AlertForm({
+            icon: "success",
+            text: response.data.message,
+            title: "success",
+        });
+        setShowModal(false);
+    } catch (error) {
+        AlertForm({
+            icon: "error",
+            text: error.response.data.message,
+            title: "failed",
+        });
+    } finally {
+        setLoading(false);
+    }
+};
+
+export const EditAboutService = async (
+    data,
+    token,
+    setShowModal,
+    reset,
+    setLoading,
+    setReGetDatas
+) => {
+    try {
+        setLoading(true);
+        const response = await PUT_DATAS(`crud/about/${data.id}`, data, token);
+        setReGetDatas(false);
+        reset();
+        AlertForm({
+            icon: "success",
+            text: response.data.message,
+            title: "success",
+        });
+        setShowModal(false);
+    } catch (error) {
+        AlertForm({
+            icon: "error",
+            text: error.response.data.message,
+            title: "failed",
+        });
+    } finally {
+        setLoading(false);
+    }
+};
+
+export const DeleteAboutService = async (
+    id,
+    accessToken,
+    setShowModal,
+    setLoading,
+    setReGetDatas
+) => {
+    try {
+        const response = await DELETE_DATAS(`crud/about/${id}`, accessToken);
+        setReGetDatas(false);
         AlertForm({
             icon: "success",
             text: response.data.message,

@@ -9,6 +9,7 @@ export const inputAbout = [
         placeholder: "your about meta",
         error: "about_meta",
         addOptionError: errorOptions.about_meta,
+        grid: 12,
     },
     {
         jenisInputan: "rich_editor",
@@ -17,6 +18,7 @@ export const inputAbout = [
         placeholder: "your about en",
         error: "about_body_en",
         addOptionError: errorOptions.about_body_en,
+        grid: 12,
     },
     {
         jenisInputan: "rich_editor",
@@ -25,11 +27,62 @@ export const inputAbout = [
         placeholder: "your about id",
         error: "about_body_id",
         addOptionError: errorOptions.about_body_id,
+        grid: 12,
     },
     {
         jenisInputan: "input",
         type: "checkbox",
         title: "Activate?",
         name: "status",
+        grid: 12,
+    },
+];
+
+export const inputEditAbout = (data) => [
+    {
+        jenisInputan: "hidden",
+        type: "text",
+        name: "id",
+        defaultValue: data.id,
+        grid: 12,
+    },
+    {
+        jenisInputan: "input",
+        type: "text",
+        title: "About Meta",
+        name: "about_meta",
+        placeholder: "your about meta",
+        error: "about_meta",
+        addOptionError: errorOptions.about_meta,
+        defaultValue: data.about_meta,
+        grid: 12,
+    },
+    {
+        jenisInputan: "rich_editor",
+        title: "about (EN Language)",
+        name: "about_body_en",
+        placeholder: "your about en",
+        error: "about_body_en",
+        addOptionError: errorOptions.about_body_en,
+        defaultValue: data.about_body_en,
+        grid: 12,
+    },
+    {
+        jenisInputan: "rich_editor",
+        title: "about (ID Language)",
+        name: "about_body_id",
+        placeholder: "your about id",
+        error: "about_body_id",
+        addOptionError: errorOptions.about_body_id,
+        defaultValue: data.about_body_id,
+        grid: 12,
+    },
+    {
+        jenisInputan: "input",
+        type: "checkbox",
+        title: "Activate?",
+        name: "status",
+        defaultValue: data.status,
+        grid: 12,
     },
 ];
