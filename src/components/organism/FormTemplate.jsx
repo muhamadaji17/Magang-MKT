@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Button, FormTitle, InputForm, ShowPassword } from "..";
 import useGlobalHook from "@/hooks/useGlobalHook";
 import { IoCloseCircle } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoCloudUpload } from "react-icons/io5";
 
 const FormTemplate = ({

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import useGlobalHook from "../useGlobalHook";
 import showAlert from "@/utils/showAlert";
 import Swal from "sweetalert2";
+import { getBannerForDate } from "@/services/calendarService";
 
 export const useBanner = () => {
   const [banner, setBanner] = useState([]);
@@ -26,61 +27,53 @@ export const useBanner = () => {
     token,
   } = useGlobalHook();
 
-  const getBanner = async () => {
-    try {
-      setLoading(true);
-      const response = await fetchBanner(token);
-      setBanner(response);
-    } catch (error) {
-      console.error("Error fetching banner: ", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const normalizeDate = (date) => {
+  //   return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  // };
 
-  const normalizeDate = (date) => {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-  };
+  // const getBannerForDate = (date, movedBanners = []) => {
+  //   const normalizedDate = normalizeDate(date);
 
-  const getBannerForDate = (date, movedBanners = []) => {
-    const normalizedDate = normalizeDate(date);
+  //   // Buat objek untuk melacak ID banner yang telah dipindahkan
+  //   const movedBannerIds = new Set(movedBanners.map((b) => b.id_banner));
 
-    // Buat objek untuk melacak ID banner yang telah dipindahkan
-    const movedBannerIds = new Set(movedBanners.map((b) => b.id_banner));
+  //   // Filter banner asli (jangan tampilkan yang sudah dipindahkan)
+  //   const originalBanners = banner
+  //     .filter((bannerItem) => !movedBannerIds.has(bannerItem.id_banner))
+  //     .map((bannerItem, index) => {
+  //       const startDate = normalizeDate(new Date(bannerItem.start_date_banner));
+  //       const endDate = normalizeDate(new Date(bannerItem.end_date_banner));
+  //       if (normalizedDate >= startDate && normalizedDate <= endDate) {
+  //         return {
+  //           ...bannerItem,
+  //           color: colorEvent[index % colorEvent.length],
+  //         };
+  //       }
+  //       return null;
+  //     })
+  //     .filter((item) => item !== null);
 
-    // Filter banner asli (jangan tampilkan yang sudah dipindahkan)
-    const originalBanners = banner
-      .filter((bannerItem) => !movedBannerIds.has(bannerItem.id_banner))
-      .map((bannerItem, index) => {
-        const startDate = normalizeDate(new Date(bannerItem.start_date_banner));
-        const endDate = normalizeDate(new Date(bannerItem.end_date_banner));
-        if (normalizedDate >= startDate && normalizedDate <= endDate) {
-          return {
-            ...bannerItem,
-            color: colorEvent[index % colorEvent.length],
-          };
-        }
-        return null;
-      })
-      .filter((item) => item !== null);
+  //   // Filter banner yang dipindahkan yang harus muncul di tanggal ini
+  //   const movedBannersForDate = movedBanners
+  //     .map((bannerItem, index) => {
+  //       const startDate = normalizeDate(new Date(bannerItem.start_date_banner));
+  //       const endDate = normalizeDate(new Date(bannerItem.end_date_banner));
+  //       if (normalizedDate >= startDate && normalizedDate <= endDate) {
+  //         return {
+  //           ...bannerItem,
+  //           color: colorEvent[index % colorEvent.length],
+  //         };
+  //       }
+  //       return null;
+  //     })
+  //     .filter((item) => item !== null);
 
-    // Filter banner yang dipindahkan yang harus muncul di tanggal ini
-    const movedBannersForDate = movedBanners
-      .map((bannerItem, index) => {
-        const startDate = normalizeDate(new Date(bannerItem.start_date_banner));
-        const endDate = normalizeDate(new Date(bannerItem.end_date_banner));
-        if (normalizedDate >= startDate && normalizedDate <= endDate) {
-          return {
-            ...bannerItem,
-            color: colorEvent[index % colorEvent.length],
-          };
-        }
-        return null;
-      })
-      .filter((item) => item !== null);
+  //   // Gabungkan kedua array
+  //   return [...originalBanners, ...movedBannersForDate];
+  // };
 
-    // Gabungkan kedua array
-    return [...originalBanners, ...movedBannersForDate];
+  const getBannerForDates = (date, movedBanners) => {
+    return getBannerForDate(date, banner, movedBanners);
   };
 
   const onSubmit = async (data) => {
@@ -169,16 +162,15 @@ export const useBanner = () => {
   };
 
   useEffect(() => {
-    getBanner();
+    fetchBanner(token, { setBanner, setRefresh });
   }, [refresh]);
 
   return {
     banner,
     draggedBanner,
-    getBanner,
     getBannerById,
     setDraggedBanner,
-    getBannerForDate,
+    getBannerForDates,
     onSubmit,
     modalIsOpen,
     modalType,
@@ -189,5 +181,7 @@ export const useBanner = () => {
     editSubmit,
     deleteSubmit,
     loading,
+    refresh,
+    setRefresh,
   };
 };

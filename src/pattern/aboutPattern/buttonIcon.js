@@ -2,6 +2,10 @@ import {
   Baseline,
   Bold,
   Code,
+  Heading,
+  Heading1,
+  Heading2,
+  Heading3,
   Highlighter,
   Italic,
   List,
@@ -32,6 +36,17 @@ export const buttonIcon = [
   { command: "toggleBulletList", name: "bulletList", icon: List },
   { command: "toggleCodeBlock", name: "codeBlock", icon: Code },
   { command: "setHardBreak", name: "hardBreak", icon: WrapText },
+  {
+    type: "dropdown",
+    command: "toggleHeading",
+    name: "heading",
+    icon: Heading,
+    options: [
+      { icon: Heading1, value: 1 },
+      { icon: Heading2, value: 2 },
+      { icon: Heading3, value: 3 },
+    ],
+  },
   {
     command: "setHorizontalRule",
     name: "horizontalRule",

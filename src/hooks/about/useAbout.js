@@ -1,38 +1,42 @@
 import { fetchAbout } from "@/services/about/aboutService";
 import { useEffect, useRef, useState } from "react";
 import useGlobalHook from "../useGlobalHook";
+import {
+  handleChangeColor,
+  handleCommandClick,
+  handleCommandColor,
+  handleOpenEditModal,
+} from "@/pattern/aboutPattern/editorHandler";
 
-export const useAbout = (editor) => {
+export const useAbout = (editor, defaultValues) => {
   const [about, setAbout] = useState([]);
+  const [selectedAbout, setSelectedAbout] = useState(null);
   const [currentColor, setCurrentColor] = useState("#fff");
   const [currentCommand, setCurrentCommand] = useState(null);
   const [openSketch, setOpenSketch] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(null);
   const sketchPickerRef = useRef(null);
+  const dropDownRef = useRef(null);
 
-  const handleCommandClick = (event, command, params = "") => {
-    if (command === "toggleHighlight") {
-      editor.chain().focus().toggleHighlight({ color: params }).run();
-    } else if (command === "setColor") {
-      editor.chain().focus().setColor(params).run();
-    } else {
-      event.preventDefault();
-      editor.chain().focus()[command]().run();
-    }
+  const onCommandClick = (event, command, params = "") => {
+    handleCommandClick(editor, command, params, setDropdownOpen);
   };
 
-  const handleCommandColor = (event, command) => {
-    event.preventDefault();
-    setCurrentCommand(command);
-    setOpenSketch(!openSketch);
+  const onCommandColor = (event, command) => {
+    handleCommandColor(event, command, setCurrentCommand, setOpenSketch);
   };
 
-  const handleChangeColor = (color) => {
-    setCurrentColor(color.hex);
-    if (currentCommand === "toggleHighlight") {
-      editor.chain().focus().toggleHighlight({ color: color.hex }).run();
-    } else if (currentCommand === "setColor") {
-      editor.chain().focus().setColor(color.hex).run();
-    }
+  const onChangeColor = (color) => {
+    handleChangeColor(editor, color, currentCommand, setCurrentColor);
+  };
+
+  const onOpenEditModal = (aboutId) => {
+    handleOpenEditModal(aboutId, setSelectedAbout, handleOpenModal);
+  };
+
+  const toggleDropdown = (e, index) => {
+    e.preventDefault();
+    setDropdownOpen(isDropdownOpen === index ? null : index);
   };
 
   const {
@@ -50,11 +54,24 @@ export const useAbout = (editor) => {
   }, [refresh]);
 
   useEffect(() => {
+    if (editor && defaultValues) {
+      editor.commands.setContent(defaultValues);
+    }
+  }, [editor, defaultValues]);
+
+  useEffect(() => {
     const handleClickOutside = (event) => {
       const isButtonClick =
         event.target.closest("button") &&
         event.target.closest("button").onclick === handleCommandColor;
 
+      if (
+        dropDownRef.current &&
+        !dropDownRef.current.contains(event.target) &&
+        isDropdownOpen !== null
+      ) {
+        setDropdownOpen(null);
+      }
       if (
         openSketch &&
         sketchPickerRef.current &&
@@ -69,7 +86,7 @@ export const useAbout = (editor) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [openSketch]);
+  }, [openSketch, isDropdownOpen]);
 
   return {
     refresh,
@@ -77,15 +94,20 @@ export const useAbout = (editor) => {
     setRefresh,
     about,
     handleCloseModal,
+    onChangeColor,
+    onCommandClick,
+    onCommandColor,
+    onOpenEditModal,
+    selectedAbout,
     modalIsOpen,
     modalType,
     token,
-    handleCommandClick,
-    handleCommandColor,
     openSketch,
     setOpenSketch,
     sketchPickerRef,
     currentColor,
-    handleChangeColor,
+    isDropdownOpen,
+    toggleDropdown,
+    dropDownRef,
   };
 };

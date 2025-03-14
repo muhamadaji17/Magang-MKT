@@ -1,7 +1,7 @@
 import { POST } from "@/api/auth";
 import showAlert from "@/utils/showAlert";
 
-export const serviceLogin = async (data, login, navigate) => {
+export const serviceLogin = async (data, login) => {
   try {
     const response = await POST("auth/login", {
       username: data.username,
@@ -15,9 +15,9 @@ export const serviceLogin = async (data, login, navigate) => {
         response.data.roles.roleName
       );
       showAlert("success", "Success", response.message);
-      navigate("/");
     }
   } catch (error) {
-    console.log(error);
+    showAlert("error", error.response.status, error.response.statusText);
+    throw error;
   }
 };

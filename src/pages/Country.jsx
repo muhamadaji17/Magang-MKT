@@ -7,10 +7,7 @@ import {
 } from "@/components";
 import { useCountry } from "@/hooks/country/useCountry";
 import { handleSubmit } from "@/pattern/handleSubmit";
-import {
-  inputCountryPattern,
-  tableHeadCountryPattern,
-} from "@/pattern/table/tablePattern";
+import { inputCountryPattern, tableHeadCountryPattern } from "@/pattern";
 import {
   deleteCountry,
   postCountry,

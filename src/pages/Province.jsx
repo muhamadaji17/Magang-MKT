@@ -7,10 +7,7 @@ import {
 } from "@/components";
 import { useProvince } from "@/hooks/province/useProvince";
 import { handleSubmit } from "@/pattern/handleSubmit";
-import {
-  inputProvincePattern,
-  tableHeadProvincePattern,
-} from "@/pattern/table/tablePattern";
+import { inputProvincePattern, tableHeadProvincePattern } from "@/pattern";
 import {
   deleteProvince,
   postProvince,

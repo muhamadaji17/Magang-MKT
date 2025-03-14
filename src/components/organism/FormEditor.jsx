@@ -2,13 +2,18 @@ import { useForm } from "react-hook-form";
 import { Input, InputEditor } from "@/components/index";
 import { IoCloseCircle } from "react-icons/io5";
 
-const FormEditor = ({ inputPattern, onSubmit }) => {
+const FormEditor = ({
+  inputPattern,
+  onSubmit,
+  handleCloseModal,
+  defaultValues,
+}) => {
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({ defaultValues });
 
   return (
     <form
@@ -16,8 +21,9 @@ const FormEditor = ({ inputPattern, onSubmit }) => {
       className="relative flex flex-col w-full gap-4 p-4 bg-white rounded-sm md:max-w-4xl"
     >
       <IoCloseCircle
-        className="absolute text-red-500 -top-4 -right-4"
+        className="absolute text-red-500 cursor-pointer hover:text-red-700 -top-4 -right-4"
         size={32}
+        onClick={handleCloseModal}
       />
       <Input
         label="Meta"
@@ -34,10 +40,11 @@ const FormEditor = ({ inputPattern, onSubmit }) => {
             setValue={setValue}
             placeholder={field.placeholder}
             error={errors[field.name]}
+            defaultValues={defaultValues[field.name]}
           />
         ))}
       </div>
-      <button className="w-full p-2 text-white bg-blue-800 rounded-sm">
+      <button className="w-full p-2 text-white bg-blue-800 rounded-sm hover:bg-blue-700">
         {isSubmitting ? "Saving..." : "Save"}
       </button>
     </form>

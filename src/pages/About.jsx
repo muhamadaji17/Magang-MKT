@@ -1,9 +1,13 @@
 import { Container, HeaderContent, ModalLayout } from "@/components";
 import { useAbout } from "@/hooks/about/useAbout";
 import AboutContent from "@/components/organism/AboutContent";
-import { postAbout } from "@/services/about/aboutService";
+import {
+  deleteAbout,
+  postAbout,
+  updateAbout,
+} from "@/services/about/aboutService";
 import FormEditor from "@/components/organism/FormEditor";
-import { inputAboutPattern } from "@/pattern/table/tablePattern";
+import { inputAboutPattern } from "@/pattern";
 import { handleSubmit } from "@/pattern/handleSubmit";
 
 const About = () => {
@@ -11,6 +15,8 @@ const About = () => {
     about,
     modalIsOpen,
     modalType,
+    selectedAbout,
+    onOpenEditModal,
     token,
     refresh,
     setRefresh,
@@ -27,6 +33,22 @@ const About = () => {
     });
   };
 
+  const editSubmit = async (data) => {
+    const aboutId = selectedAbout.id_about;
+    const updatedData = { ...data };
+
+    updateAbout(aboutId, updatedData, {
+      token,
+      refresh,
+      setRefresh,
+      handleCloseModal,
+    });
+  };
+
+  const deleteSubmit = async (aboutId) => {
+    deleteAbout(aboutId.id_about, { token, setRefresh, refresh });
+  };
+
   return (
     <>
       <Container>
@@ -40,11 +62,18 @@ const About = () => {
             meta={about.about_meta}
             bodyId={about.about_body_id}
             bodyEn={about.about_body_en}
+            deleteClick={() => deleteSubmit(about)}
+            editClick={() => onOpenEditModal(about)}
           />
         ))}
       </Container>
       <ModalLayout isModalOpen={modalIsOpen} onClick={handleCloseModal}>
-        <FormEditor inputPattern={inputAboutPattern} onSubmit={postSubmit} />
+        <FormEditor
+          inputPattern={inputAboutPattern}
+          onSubmit={modalType === "add" ? postSubmit : editSubmit}
+          handleCloseModal={handleCloseModal}
+          defaultValues={modalType === "add" ? {} : selectedAbout}
+        />
       </ModalLayout>
     </>
   );

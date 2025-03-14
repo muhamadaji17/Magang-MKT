@@ -15,6 +15,7 @@ import {
 } from "@/pattern/calendar/calendarPattern";
 import { useCalendar, useBanner, useBannerDragDrop } from "@/hooks/index";
 import Drawer from "@/components/atoms/Drawer";
+import { fetchBanner } from "@/services/banner/bannerService";
 
 const Banners = () => {
   const {
@@ -28,7 +29,9 @@ const Banners = () => {
   } = useCalendar();
 
   const {
-    getBannerForDate,
+    getBannerForDates,
+    refresh,
+    setRefresh,
     getBanner,
     onSubmit,
     modalIsOpen,
@@ -43,18 +46,8 @@ const Banners = () => {
     loading,
   } = useBanner();
 
-  const {
-    // handleDragEnd,
-    // handleDragLeave,
-    // handleDragOver,
-    // handleDragStart,
-    // handleDrop,
-    // handleSaveChanges,
-    saveChanges,
-    dropHandlers,
-    dragHandlers,
-    movedBanners,
-  } = useBannerDragDrop(getBanner);
+  const { saveChanges, dropHandlers, dragHandlers, movedBanners } =
+    useBannerDragDrop(refresh, setRefresh);
 
   const selectedBanner = selectedBannerId
     ? getBannerById(selectedBannerId)
@@ -105,7 +98,7 @@ const Banners = () => {
                 <tr key={weekIndex} className="divide-x-2">
                   {week.map((day, dayIndex) => {
                     const currentDay = new Date(day.date);
-                    const bannersOnThisDay = getBannerForDate(
+                    const bannersOnThisDay = getBannerForDates(
                       currentDay,
                       movedBanners
                     );
@@ -126,17 +119,9 @@ const Banners = () => {
                         onDrop={(e) => dropHandlers.onDrop(e, currentDay)}
                       >
                         <p className="flex justify-end p-2">{day.day}</p>
-
-                        {/* Tampilkan banner yang ada pada hari ini */}
                         {bannersOnThisDay.length >= 0 && (
                           <>
                             <EventCard
-                              // handleEditClick={(bannerItem) =>
-                              //   handleOpenEditModal(bannerItem.id_banner)
-                              // }
-                              // handleDeleteClick={(bannerItem) =>
-                              //   deleteSubmit(bannerItem.id_banner)
-                              // }
                               bannersOnThisDay={bannersOnThisDay}
                               handleDragEnd={dragHandlers.onDragEnd}
                               handleDragStart={(e, bannerItem) =>

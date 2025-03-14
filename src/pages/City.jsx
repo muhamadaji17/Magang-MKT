@@ -7,10 +7,7 @@ import {
 } from "@/components";
 import { useCity } from "@/hooks/city/useCity";
 import { handleSubmit } from "@/pattern/handleSubmit";
-import {
-  inputCityPattern,
-  tableHeadCityPattern,
-} from "@/pattern/table/tablePattern";
+import { tableHeadCityPattern, inputCityPattern } from "@/pattern";
 import { deleteCity, postCity, updateCity } from "@/services/city/cityService";
 
 const City = () => {

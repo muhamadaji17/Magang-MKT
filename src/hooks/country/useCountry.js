@@ -1,12 +1,6 @@
-import {
-  deleteCountry,
-  fetchCountry,
-  postCountry,
-  updateCountry,
-} from "@/services/country/countryService";
+import { fetchCountry } from "@/services/country/countryService";
 import { useEffect, useState } from "react";
 import useGlobalHook from "../useGlobalHook";
-import { handleSubmit } from "@/pattern/handleSubmit";
 
 export const useCountry = () => {
   const [country, setCountry] = useState([]);

@@ -1,3 +1,5 @@
+import { colorEvent } from "@/pattern/calendar/calendarPattern";
+
 export const calendarService = {
   generateCalendar(date) {
     const year = date.getFullYear();
@@ -87,4 +89,50 @@ export const calendarService = {
       date1.getFullYear() === date2.getFullYear()
     );
   },
+};
+
+// calendarService.js
+export const normalizeDate = (date) => {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+};
+
+export const getBannerForDate = (date, banners, movedBanners = []) => {
+  const normalizedDate = normalizeDate(date);
+
+  // Buat objek untuk melacak ID banner yang telah dipindahkan
+  const movedBannerIds = new Set(movedBanners.map((b) => b.id_banner));
+
+  // Filter banner asli (jangan tampilkan yang sudah dipindahkan)
+  const originalBanners = banners
+    .filter((bannerItem) => !movedBannerIds.has(bannerItem.id_banner))
+    .map((bannerItem, index) => {
+      const startDate = normalizeDate(new Date(bannerItem.start_date_banner));
+      const endDate = normalizeDate(new Date(bannerItem.end_date_banner));
+      if (normalizedDate >= startDate && normalizedDate <= endDate) {
+        return {
+          ...bannerItem,
+          color: colorEvent[index % colorEvent.length], // Assign color secara dinamis
+        };
+      }
+      return null;
+    })
+    .filter((item) => item !== null);
+
+  // Filter banner yang dipindahkan yang harus muncul di tanggal ini
+  const movedBannersForDate = movedBanners
+    .map((bannerItem, index) => {
+      const startDate = normalizeDate(new Date(bannerItem.start_date_banner));
+      const endDate = normalizeDate(new Date(bannerItem.end_date_banner));
+      if (normalizedDate >= startDate && normalizedDate <= endDate) {
+        return {
+          ...bannerItem,
+          color: colorEvent[index % colorEvent.length],
+        };
+      }
+      return null;
+    })
+    .filter((item) => item !== null);
+
+  // Gabungkan kedua array
+  return [...originalBanners, ...movedBannersForDate];
 };

@@ -23,7 +23,6 @@ export const dayNames = [
   "Saturday",
 ];
 
-// Warna event
 export const colorEvent = [
   "bg-blue-300",
   "bg-green-300",

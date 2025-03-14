@@ -7,10 +7,7 @@ import {
 } from "@/components";
 import { useFilm } from "@/hooks/film/useFilm";
 import { handleSubmit } from "@/pattern/handleSubmit";
-import {
-  inputFilmPattern,
-  tableHeadFilmPattern,
-} from "@/pattern/table/tablePattern";
+import { inputFilmPattern, tableHeadFilmPattern } from "@/pattern";
 import { deleteFilm, postFilm, updateFilm } from "@/services/film/filmService";
 
 const Film = () => {

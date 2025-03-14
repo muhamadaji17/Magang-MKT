@@ -5,9 +5,13 @@ const IconActions = ({ editClick, deleteClick }) => {
   return (
     <>
       <div className="flex gap-2 items-center justify-center">
-        <FaPenToSquare size={23} onClick={editClick} />
+        <FaPenToSquare
+          size={23}
+          onClick={editClick}
+          className="cursor-pointer hover:text-blue-700"
+        />
         <MdDeleteForever
-          className="text-red-500"
+          className="text-red-500 hover:text-red-700 cursor-pointer"
           size={32}
           onClick={deleteClick}
         />

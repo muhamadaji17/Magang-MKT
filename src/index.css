@@ -41,12 +41,15 @@ textarea::-webkit-scrollbar {
   white-space: pre-wrap !important; /* Agar kode tetap terbungkus secara rapi */
 }
 
-.ProseMirror code {
+.ProseMirror code,
+code {
   background-color: #f0f0f0 !important;
   padding: 0.25rem 0.5rem !important;
   border-radius: 0.25rem !important;
   font-family: monospace !important;
   color: #d63384 !important; /* Warna kode */
+  display: inline-block !important;
+  white-space: pre-wrap !important; /* Pastikan teks dalam tag <code> di-wrap */
 }
 
 .ProseMirror blockquote {
@@ -67,4 +70,15 @@ textarea::-webkit-scrollbar {
   float: left;
   height: 0;
   pointer-events: none;
+}
+
+.ProseMirror blockquote {
+  border: none !important; /* Menghilangkan garis di sisi kiri */
+  padding: 0 !important; /* Menghilangkan padding */
+  margin-left: 0 !important; /* Menghilangkan margin kiri */
+  margin-right: 0 !important; /* Menghilangkan margin kanan */
+  font-style: normal !important; /* Menonaktifkan italic */
+  color: inherit !important; /* Menggunakan warna teks default */
+  background-color: transparent !important; /* Menghilangkan latar belakang */
+  border-radius: 0 !important; /* Menghilangkan border-radius */
 }

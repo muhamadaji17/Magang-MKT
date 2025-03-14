@@ -8,10 +8,7 @@ import {
 } from "@/components";
 import { useOffice } from "@/hooks/office/useOffice";
 import { handleSubmit } from "@/pattern/handleSubmit";
-import {
-  inputOfficePattern,
-  tableHeadOfficePattern,
-} from "@/pattern/table/tablePattern";
+import { inputOfficePattern, tableHeadOfficePattern } from "@/pattern";
 import {
   deleteOffice,
   postOffice,
