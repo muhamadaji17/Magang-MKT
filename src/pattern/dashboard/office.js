@@ -25,7 +25,7 @@ export const inputOffice = (datas) => [
         grid: 12,
     },
     {
-        jeniInputan: "input",
+        jenisInputan: "input",
         type: "text",
         title: "Address",
         name: "address",
