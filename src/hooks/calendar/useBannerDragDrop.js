@@ -4,16 +4,11 @@ import Swal from "sweetalert2";
 import { createDragDropHandlers } from "@/pattern/calendar/handleDrag";
 import useLogin from "@/store/useLogin";
 
-const useBannerDragDrop = (setRefresh, refresh) => {
-  const [draggedBanner, setDraggedBanner] = useState(null);
+const useBannerDragDrop = (refresh, setRefresh) => {
   const [movedBanners, setMovedBanners] = useState([]);
   const { token } = useLogin();
 
   const { dragHandlers, dropHandlers } = createDragDropHandlers({
-    onDargStartCallback: (_, banner) => {
-      setDraggedBanner(_, banner);
-    },
-
     onDropCallback: (_, draggedItem, date) => {
       if (!draggedItem) return;
       const startDate = new Date(draggedItem.start_date_banner);
@@ -35,7 +30,6 @@ const useBannerDragDrop = (setRefresh, refresh) => {
         );
         return [...filtered, movedBanner];
       });
-      setDraggedBanner(null); // Reset dragged banner
     },
   });
 
@@ -56,17 +50,9 @@ const useBannerDragDrop = (setRefresh, refresh) => {
           const updatePromises = movedBanners.map((banner) =>
             updateBanner(banner.id_banner, banner, token)
           );
-
-          // Tunggu semua update selesai
           await Promise.all(updatePromises);
-
-          // Setelah update selesai, kosongkan movedBanners
           setMovedBanners([]);
-
-          // Refresh data banner
           setRefresh(!refresh);
-
-          // Menampilkan alert setelah refresh selesai
           Swal.fire({
             icon: "success",
             title: "Success",

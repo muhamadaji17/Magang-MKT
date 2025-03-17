@@ -5,9 +5,11 @@ const Input = ({
   register,
   error,
   placeholder,
-  type,
+  type = "text",
   label,
   className,
+  value,
+  onChange,
   ...props
 }) => {
   return (
@@ -20,7 +22,9 @@ const Input = ({
         id={name}
         type={type || "text"}
         placeholder={placeholder}
-        className={`p-2 border-2 rounded-md ${className}`}
+        className={`p-2 rounded-md ${className || "border-2"}`}
+        value={value}
+        onChange={onChange}
         {...props}
       />
       {error && <TextError>{error.message}</TextError>}

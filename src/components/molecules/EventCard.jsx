@@ -26,30 +26,6 @@ const EventCard = ({
           onClick={() => handleOnClick(bannerItem)}
         >
           {bannerItem.banner_name}
-
-          {/* <ModalLayout isModalOpen={isModalOpen}>
-            <h1>Hello</h1>
-          </ModalLayout> */}
-
-          {/* Dropdown */}
-          {/* {hoveredIndex === index && (
-            <div className="absolute top-5 -left-1 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-              <ul className="flex flex-col gap-2 ">
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleEditClick(bannerItem)}
-                >
-                  Edit
-                </li>
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleDeleteClick(bannerItem)}
-                >
-                  Delete
-                </li>
-              </ul>
-            </div>
-          )} */}
         </div>
       ))}
     </div>

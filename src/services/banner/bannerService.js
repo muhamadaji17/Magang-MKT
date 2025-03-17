@@ -1,5 +1,6 @@
 import { DELETE, GET, POST, PUT } from "@/api/auth";
 import showAlert from "@/utils/showAlert";
+import Swal from "sweetalert2";
 
 export const fetchBanner = async (token, extraOptions) => {
   const { setBanner } = extraOptions;
@@ -8,11 +9,11 @@ export const fetchBanner = async (token, extraOptions) => {
     const parse = response.payload.map((data) => ({
       id_banner: data.id_banner,
       banner_name: data.banner_name,
+      banner_img: data.banner_img,
       start_date_banner: data.start_date_banner,
       end_date_banner: data.end_date_banner,
       status: data.status,
     }));
-    console.log(response);
     setBanner(parse);
   } catch (error) {
     console.error("Error fetching banner: ", error);
@@ -20,7 +21,8 @@ export const fetchBanner = async (token, extraOptions) => {
   }
 };
 
-export const updateBanner = async (bannerId, updatedData, token) => {
+export const updateBanner = async (bannerId, updatedData, extraOptions) => {
+  const { token, refresh, setRefresh, handleCloseModal } = extraOptions;
   try {
     const response = await PUT(
       `crud/banner/${bannerId}`,
@@ -28,36 +30,57 @@ export const updateBanner = async (bannerId, updatedData, token) => {
       token,
       true
     );
-    return response;
+    if (response.status === true) {
+      showAlert("success", "Success", response.message);
+      setRefresh(!refresh);
+      handleCloseModal();
+    }
   } catch (error) {
     showAlert("error", "Error", error.response.data.message);
     throw error;
   }
 };
 
-export const postBanner = async (data, token) => {
+export const postBanner = async (data, extraOptions) => {
+  const { token, setRefresh, refresh, handleCloseModal } = extraOptions;
   try {
     const response = await POST(`crud/banner`, data, token, true);
-    return response;
+    if (response.success === true) {
+      showAlert("success", "Success", response.message);
+      setRefresh(!refresh);
+      handleCloseModal();
+    }
   } catch (error) {
     showAlert("error", "Error", error.response.data.message);
     throw error;
   }
 };
 
-export const deleteBanner = async (bannerId, token) => {
-  console.log("Ini token: ", token);
+export const deleteBanner = async (bannerId, extraOptions) => {
+  const { token, setRefresh, refresh, handleCloseModal } = extraOptions;
   try {
-    const response = await DELETE(`crud/banner/${bannerId}`, token);
-    return response;
+    Swal.fire({
+      title: "Confirmation",
+      text: "Are you sure want to delete?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "yes",
+      cancelButtonText: "no",
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await DELETE(`crud/banner/${bannerId}`, token);
+        showAlert("success", "Deleted", response.message);
+        setRefresh(!refresh);
+        handleCloseModal();
+      }
+    });
   } catch (error) {
     console.error("error delete :", error);
   }
 };
 
-// bannerService.js
 const normalizeDate = (date) => {
-  // Fungsi normalisasi tanggal
   return new Date(date).toISOString().split("T")[0];
 };
 
@@ -101,4 +124,23 @@ export const getBannerForDate = (
   );
 
   return [...originalBanners, ...movedBannersForDate];
+};
+
+export const getBannerById = (bannerId, banner) => {
+  const getData = banner.find(
+    (bannerItem) => bannerItem.id_banner === bannerId
+  );
+
+  const pharseStartDate = getData?.start_date_banner
+    ? new Date(getData?.start_date_banner).toISOString().split("T")[0]
+    : null;
+  const pharseEndDate = getData?.end_date_banner
+    ? new Date(getData?.end_date_banner).toISOString().split("T")[0]
+    : null;
+
+  return {
+    ...getData,
+    start_date_banner: pharseStartDate,
+    end_date_banner: pharseEndDate,
+  };
 };

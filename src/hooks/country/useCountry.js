@@ -1,9 +1,13 @@
-import { fetchCountry } from "@/services/country/countryService";
+import {
+  fetchCountry,
+  getCountryById,
+} from "@/services/country/countryService";
 import { useEffect, useState } from "react";
 import useGlobalHook from "../useGlobalHook";
 
 export const useCountry = () => {
   const [country, setCountry] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(null);
   const {
     handleCloseModal,
@@ -21,11 +25,20 @@ export const useCountry = () => {
   };
 
   useEffect(() => {
-    fetchCountry(token, { setCountry, setRefresh });
-  }, [refresh]);
+    const fetchData = () => {
+      if (searchQuery) {
+        getCountryById(searchQuery, { token, setCountry });
+      } else {
+        fetchCountry(token, { setCountry, setRefresh });
+      }
+    };
+
+    fetchData();
+  }, [refresh, searchQuery, token]);
 
   return {
     country,
+    setCountry,
     handleCloseModal,
     handleOpenModal,
     modalIsOpen,
@@ -35,5 +48,7 @@ export const useCountry = () => {
     refresh,
     setRefresh,
     selectedCountry,
+    searchQuery,
+    setSearchQuery,
   };
 };

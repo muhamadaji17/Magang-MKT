@@ -19,6 +19,7 @@ export const useAbout = (editor, defaultValues) => {
   const dropDownRef = useRef(null);
 
   const onCommandClick = (event, command, params = "") => {
+    event.preventDefault();
     handleCommandClick(editor, command, params, setDropdownOpen);
   };
 

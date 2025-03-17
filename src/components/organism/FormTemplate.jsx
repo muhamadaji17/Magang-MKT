@@ -23,8 +23,10 @@ const FormTemplate = ({
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({ defaultValues });
+
   const [imagePreview, setImagePreview] = useState(null);
   const { showPassword, handleShowPassword } = useGlobalHook();
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -77,6 +79,7 @@ const FormTemplate = ({
                   <div className="w-1/2 flex justify-center items-center cursor-pointer h-40 bg-slate-300 rounded-md relative mb-4">
                     {imagePreview ? (
                       <img
+                        alt="preview"
                         src={imagePreview}
                         className="w-full h-full object-cover rounded-md"
                       />

@@ -15,7 +15,6 @@ import {
 } from "@/pattern/calendar/calendarPattern";
 import { useCalendar, useBanner, useBannerDragDrop } from "@/hooks/index";
 import Drawer from "@/components/atoms/Drawer";
-import { fetchBanner } from "@/services/banner/bannerService";
 
 const Banners = () => {
   const {
@@ -30,34 +29,30 @@ const Banners = () => {
 
   const {
     getBannerForDates,
-    refresh,
-    setRefresh,
-    getBanner,
-    onSubmit,
+    postSubmit,
     modalIsOpen,
     handleCloseModal,
     handleOpenModal,
     modalType,
-    selectedBannerId,
-    getBannerById,
+    selectedBanner,
     handleOpenEditModal,
     editSubmit,
     deleteSubmit,
     loading,
+    refresh,
+    setRefresh,
   } = useBanner();
 
   const { saveChanges, dropHandlers, dragHandlers, movedBanners } =
     useBannerDragDrop(refresh, setRefresh);
 
-  const selectedBanner = selectedBannerId
-    ? getBannerById(selectedBannerId)
-    : null;
   if (loading)
     return (
       <Container>
         <Spinner />
       </Container>
     );
+
   return (
     <>
       <Container>
@@ -160,7 +155,7 @@ const Banners = () => {
           <FormTemplate
             showCloseButton={true}
             onClose={handleCloseModal}
-            onSubmit={onSubmit}
+            onSubmit={postSubmit}
             title={"Add Banner"}
             description={"Insert banner detail to add data"}
             className={`bg-white`}

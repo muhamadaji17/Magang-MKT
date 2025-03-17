@@ -8,6 +8,8 @@ const Table = ({
   deleteSubmit,
   className,
 }) => {
+  const imageURL = `${import.meta.env.VITE_IMAGE_URL}/image/films/`;
+
   return (
     <>
       <table className={`w-full text-sm bg-white shadow-md ${className}`}>
@@ -27,7 +29,7 @@ const Table = ({
             <tr className="text-center" key={index}>
               <td className="p-2 border-b-2">{index + 1}</td>
               {label.map((col) => (
-                <td className="p-2 border-b-2" key={col.key}>
+                <td className="p-2 border-b-2 max-w-40" key={col.key}>
                   {col.key === "latitude" && row.latitude && row.longitude ? (
                     <div className="grid grid-cols-1 gap-2">
                       <p>{row.latitude}</p>
@@ -47,6 +49,14 @@ const Table = ({
                     ) : (
                       "Not Active"
                     )
+                  ) : col.key === "poster_film" ? (
+                    <div className="w-full flex justify-center items-center">
+                      <img
+                        className="w-20 h-32 object-cover"
+                        src={imageURL + row.poster_film}
+                        alt="preview"
+                      />
+                    </div>
                   ) : (
                     row[col.key]
                   )}

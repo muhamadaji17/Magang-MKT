@@ -72,3 +72,14 @@ export const deleteCountry = async (countryId, extraOptions) => {
     showAlert("error", "Error", error.message);
   }
 };
+
+export const getCountryById = async (id, extraOptions) => {
+  const { token, setCountry } = extraOptions;
+  try {
+    const response = await GET(`crud/country/by?country_name=${id}`, token);
+    console.log("Search: ", response.payload);
+    setCountry(response.payload);
+  } catch (error) {
+    console.error("Error fetching country: ", error);
+  }
+};
