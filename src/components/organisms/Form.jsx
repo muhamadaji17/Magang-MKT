@@ -2,7 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 import { InputForm, QuilTextEditor } from "../molecules";
 import { Button } from "../atoms";
 import { useDefaultForm, useGlobalHooks } from "../../hooks";
-import { getDefaultValue } from "../../utils";
+import { getDefaultValue, gridClass } from "../../utils";
 
 const Form = ({
     dataForm,
@@ -42,24 +42,7 @@ const Form = ({
                 {dataForm?.map((data, index) => (
                     <div
                         key={index}
-                        className={`relative ${(() => {
-                            switch (data.grid) {
-                                case 12:
-                                    return "col-span-12";
-                                case 6:
-                                    return "col-span-6";
-                                case 4:
-                                    return "col-span-4";
-                                case 3:
-                                    return "col-span-3";
-                                case 2:
-                                    return "col-span-2";
-                                case 1:
-                                    return "col-span-1";
-                                default:
-                                    return "col-span-12";
-                            }
-                        })()}`}
+                        className={`relative ${gridClass(data.grid)}`}
                     >
                         {data.jenisInputan === "input" ? (
                             <Controller

@@ -32,7 +32,10 @@ const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
 
     const getStatusColor = (status) => (status ? "bg-green-300" : "bg-red-300");
 
-    const weeks = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const week = Array.from({ length: days.length / 7 }, (_, weekIndex) =>
+        days.slice(weekIndex * 7, (weekIndex + 1) * 7)
+    );
 
     const jumpToDate = () => {
         setCurrentDate(new Date(jumpYear, jumpMonth - 1, 1));
@@ -109,7 +112,7 @@ const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
             <table className="w-full text-center border-collapse border border-gray-300">
                 <thead>
                     <tr>
-                        {weeks.map((day) => (
+                        {day.map((day) => (
                             <th
                                 key={day}
                                 className="border border-gray-300 p-3 bg-gray-200 font-semibold text-gray-700"
@@ -120,73 +123,70 @@ const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {Array.from({ length: days.length / 7 }, (_, weekIndex) => (
+                    {week.map((w, weekIndex) => (
                         <tr key={weekIndex}>
-                            {days
-                                .slice(weekIndex * 7, (weekIndex + 1) * 7)
-                                .map((day, index) => (
-                                    <td
-                                        key={index}
-                                        className={`relative border border-gray-300 py-4 ${
-                                            day.getMonth() !==
-                                            currentDate.getMonth()
-                                                ? "text-gray-400"
-                                                : "text-gray-800"
-                                        } ${
-                                            isToday(day)
-                                                ? "text-sky-600 font-bold"
-                                                : ""
-                                        }`}
-                                        onDragOver={(e) => e.preventDefault()}
-                                        onDrop={(e) => onDrop(e, day)}
-                                    >
-                                        <div className="flex flex-col h-full">
-                                            <div className="flex justify-between">
-                                                <span>{day.getDate()}</span>
-                                            </div>
-                                            <div className="flex-grow mt-2">
-                                                {getEventsForDay(day).map(
-                                                    (event, idx) => (
-                                                        <div
-                                                            key={idx}
-                                                            className={`relative ${getStatusColor(
-                                                                event.status
-                                                            )} text-gray-800 p-1 cursor-pointer ${
+                            {w.map((day, index) => (
+                                <td
+                                    key={index}
+                                    className={`relative border border-gray-300 py-4 ${
+                                        day.getMonth() !==
+                                        currentDate.getMonth()
+                                            ? "text-gray-400"
+                                            : "text-gray-800"
+                                    } ${
+                                        isToday(day)
+                                            ? "text-sky-600 font-bold"
+                                            : ""
+                                    }`}
+                                    onDragOver={(e) => e.preventDefault()}
+                                    onDrop={(e) => onDrop(e, day)}
+                                >
+                                    <div className="flex flex-col h-full">
+                                        <div className="flex justify-between">
+                                            <span>{day.getDate()}</span>
+                                        </div>
+                                        <div className="flex-grow mt-2">
+                                            {getEventsForDay(day).map(
+                                                (event, idx) => (
+                                                    <div
+                                                        key={idx}
+                                                        className={`relative ${getStatusColor(
+                                                            event.status
+                                                        )} text-gray-800 p-1 cursor-pointer ${
+                                                            getEventStyle(
+                                                                event,
+                                                                day
+                                                            ).borderRadius
+                                                        } group`}
+                                                        draggable
+                                                        onDragStart={(e) =>
+                                                            onDragStart(
+                                                                e,
+                                                                event.id
+                                                            )
+                                                        }
+                                                        style={{
+                                                            gridColumn:
                                                                 getEventStyle(
                                                                     event,
                                                                     day
-                                                                ).borderRadius
-                                                            } group`}
-                                                            draggable
-                                                            onDragStart={(e) =>
-                                                                onDragStart(
-                                                                    e,
-                                                                    event.id
-                                                                )
-                                                            }
-                                                            style={{
-                                                                gridColumn:
-                                                                    getEventStyle(
-                                                                        event,
-                                                                        day
-                                                                    )
-                                                                        .gridColumn,
-                                                            }}
-                                                            onClick={() =>
-                                                                handleShowModalId(
-                                                                    event,
-                                                                    "special"
-                                                                )
-                                                            }
-                                                        >
-                                                            {event.banner_name}
-                                                        </div>
-                                                    )
-                                                )}
-                                            </div>
+                                                                ).gridColumn,
+                                                        }}
+                                                        onClick={() =>
+                                                            handleShowModalId(
+                                                                event,
+                                                                "special"
+                                                            )
+                                                        }
+                                                    >
+                                                        {event.banner_name}
+                                                    </div>
+                                                )
+                                            )}
                                         </div>
-                                    </td>
-                                ))}
+                                    </div>
+                                </td>
+                            ))}
                         </tr>
                     ))}
                 </tbody>

@@ -36,6 +36,7 @@ export const calendarUtils = (
         currentDate.getFullYear(),
         currentDate.getMonth()
     );
+
     const isToday = (date) => {
         const today = new Date();
         return date.toDateString() === today.toDateString();
