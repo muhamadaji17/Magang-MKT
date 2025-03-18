@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import { AvatarDropdown } from "..";
 
 const Navbar = () => {
   const location = useLocation();
@@ -12,7 +13,7 @@ const Navbar = () => {
               : location.pathname.slice(1, 2).toUpperCase() +
                 location.pathname.slice(2)}
           </h1>
-          <h1>Profile</h1>
+          <AvatarDropdown />
         </div>
       </nav>
     </>

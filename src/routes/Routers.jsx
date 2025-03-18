@@ -12,13 +12,20 @@ import {
   About,
 } from "@/pages";
 import MainLayout from "@/components/layout/MainLayout";
+import ProtectedRoute from "./ProtectedRoute";
 
 const Routers = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Login />} path="/login" />
-        <Route element={<MainLayout />}>
+        <Route
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route element={<About />} path="/about" />
           <Route element={<Dashboard />} path="/" />
           <Route element={<Country />} path="/country" />

@@ -12,7 +12,8 @@ export const serviceLogin = async (data, login) => {
       login(
         response.data.AccessToken.accessToken,
         response.data.user.username,
-        response.data.roles.roleName
+        response.data.roles.roleName,
+        response.data.user.userId
       );
       showAlert("success", "Success", response.message);
     }

@@ -5,7 +5,8 @@ const useLogin = create((set) => ({
   token: Cookies.get("authToken") || null,
   username: Cookies.get("username") || null,
   roles: Cookies.get("roles") || null,
-  login: (accessToken, username, roles) => {
+  userId: Cookies.get("userId") || null,
+  login: (accessToken, username, roles, userId) => {
     Cookies.set("authToken", accessToken, {
       expires: 1,
       secure: true,
@@ -21,13 +22,19 @@ const useLogin = create((set) => ({
       secure: true,
       sameSite: "strict",
     });
-    set({ token: accessToken, username, roles });
+    Cookies.set("userId", userId, {
+      expires: 1,
+      secure: true,
+      sameSite: "strict",
+    });
+    set({ token: accessToken, username, roles, userId });
   },
   logout: () => {
     Cookies.remove("authToken");
     Cookies.remove("username");
     Cookies.remove("roles");
-    set({ token: null, username: null, role: null });
+    Cookies.remove("userId");
+    set({ token: null, username: null, role: null, userId: null });
   },
 }));
 

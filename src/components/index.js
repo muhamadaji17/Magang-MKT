@@ -20,6 +20,7 @@ export { default as EventCard } from "./molecules/EventCard";
 export { default as HeaderContent } from "./molecules/HeaderContent";
 export { default as IconActions } from "./molecules/IconActions";
 export { default as InputEditor } from "./molecules/InputEditor";
+export { default as AvatarDropdown } from "./molecules/AvatarDropdown";
 
 export { default as HeaderBanner } from "./organism/HeaderBanner";
 export { default as FormTemplate } from "./organism/FormTemplate";
