@@ -1,8 +1,8 @@
 import { FaTrashAlt, FaRegEdit, FaCircle } from "react-icons/fa";
-import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
+// import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import dayjs from "dayjs";
 import { ModalLayout } from "../organisms";
-import { Button } from "../atoms";
+// import { Button } from "../atoms";
 import { DeleteModal, FormModal } from "../molecules";
 import { Link } from "react-router-dom";
 
@@ -151,7 +151,7 @@ const Table = ({
                     <span className="text-gray-600">No data available</span>
                 </div>
             )}
-            {datas?.length > 0 && (
+            {/* {datas?.length > 0 && (
                 <div className="flex justify-center items-center gap-3 p-4">
                     <Button
                         className="w-16 text-black border hover:bg-slate-200"
@@ -166,7 +166,7 @@ const Table = ({
                         <MdNavigateNext className="w-6 h-6" />
                     </Button>
                 </div>
-            )}
+            )} */}
             {showModal && (
                 <ModalLayout setShowModal={setShowModal}>
                     {modalType === "delete" ? (
