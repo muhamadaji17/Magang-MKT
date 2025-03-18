@@ -1,4 +1,7 @@
-import { fetchProvince } from "@/services/province/provinceService";
+import {
+  fetchProvince,
+  getProvinceById,
+} from "@/services/province/provinceService";
 import { useEffect, useState } from "react";
 import useGlobalHook from "../useGlobalHook";
 
@@ -6,6 +9,7 @@ export const useProvince = () => {
   const [countryOptions, setCountryOptions] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [province, setProvince] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const {
     refresh,
     setRefresh,
@@ -23,11 +27,15 @@ export const useProvince = () => {
   };
 
   useEffect(() => {
-    fetchProvince(token, {
-      setProvince,
-      setCountryOptions,
-    });
-  }, [refresh]);
+    if (searchQuery) {
+      getProvinceById(searchQuery, { token, setProvince });
+    } else {
+      fetchProvince(token, {
+        setProvince,
+        setCountryOptions,
+      });
+    }
+  }, [refresh, searchQuery, token]);
 
   return {
     province,
@@ -41,5 +49,7 @@ export const useProvince = () => {
     refresh,
     setRefresh,
     selectedProvince,
+    searchQuery,
+    setSearchQuery,
   };
 };

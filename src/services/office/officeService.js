@@ -82,3 +82,14 @@ export const deleteOffice = async (officeId, extraOptions) => {
     console.error("error delete office :", error);
   }
 };
+
+export const getOfficeById = async (id, extraOptions) => {
+  const { token, setOffice } = extraOptions;
+  try {
+    const response = await GET(`crud/office/by?office_name=${id}`, token);
+    setOffice(response.payload);
+    console.log("Search: ", response.payload);
+  } catch (error) {
+    console.error("Error fetching office by id: ", error);
+  }
+};

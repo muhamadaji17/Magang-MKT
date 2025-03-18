@@ -82,3 +82,17 @@ export const deleteProvince = async (provinceId, extraOptions) => {
     console.error("error delete country :", error);
   }
 };
+
+export const getProvinceById = async (provinceId, extraOptions) => {
+  const { token, setProvince } = extraOptions;
+  try {
+    const response = await GET(
+      `crud/province/by?province_name=${provinceId}`,
+      token
+    );
+    console.log("Search: ", response.payload);
+    setProvince(response.payload);
+  } catch (error) {
+    console.error("Error during search:", error);
+  }
+};

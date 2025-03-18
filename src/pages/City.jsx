@@ -23,6 +23,8 @@ const City = () => {
     setRefresh,
     modalType,
     selectedCity,
+    searchQuery,
+    setSearchQuery,
   } = useCity();
 
   const postSubmit = async (data) => {
@@ -59,6 +61,8 @@ const City = () => {
         <HeaderContent
           handleOpenModal={() => handleOpenModal("add")}
           titleButton={"Add City"}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <Table
           handleOpenEditModal={handleOpenEditModal}

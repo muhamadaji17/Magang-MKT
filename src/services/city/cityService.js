@@ -77,3 +77,13 @@ export const deleteCity = async (cityId, extraOptions) => {
     console.error("error delete city :", error);
   }
 };
+
+export const getCityById = async (cityId, extraOptions) => {
+  const { setCity, token } = extraOptions;
+  try {
+    const response = await GET(`crud/city/by?city_name=${cityId}`, token);
+    setCity(response.payload);
+  } catch (error) {
+    console.error("Error during search:", error);
+  }
+};

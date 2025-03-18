@@ -29,6 +29,8 @@ const Office = () => {
     token,
     refresh,
     setRefresh,
+    searchQuery,
+    setSearchQuery,
   } = useOffice();
 
   const postSubmit = async (data) => {
@@ -71,6 +73,8 @@ const Office = () => {
         <HeaderContent
           handleOpenModal={() => handleOpenModal("add")}
           titleButton={"Add Office"}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <Table
           handleOpenEditModal={handleOpenEditModal}

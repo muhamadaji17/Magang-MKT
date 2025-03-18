@@ -3,6 +3,7 @@ import { updateBanner } from "@/services/banner/bannerService";
 import Swal from "sweetalert2";
 import { createDragDropHandlers } from "@/pattern/calendar/handleDrag";
 import useLogin from "@/store/useLogin";
+import showAlert from "@/utils/showAlert";
 
 const useBannerDragDrop = (refresh, setRefresh) => {
   const [movedBanners, setMovedBanners] = useState([]);
@@ -46,26 +47,18 @@ const useBannerDragDrop = (refresh, setRefresh) => {
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
-        try {
-          const updatePromises = movedBanners.map((banner) =>
-            updateBanner(banner.id_banner, banner, token)
-          );
-          await Promise.all(updatePromises);
-          setMovedBanners([]);
-          setRefresh(!refresh);
-          Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: "All banners have been successfully updated.",
-          });
-        } catch (error) {
-          console.error("Error during banner update: ", error);
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "Failed to update banners. Please try again.",
-          });
-        }
+        const updatePromises = movedBanners.map((banner) =>
+          updateBanner(banner.id_banner, banner, {
+            token,
+            refresh,
+            setRefresh,
+            handleCloseModal: () => {},
+          })
+        );
+        await Promise.all(updatePromises);
+        setMovedBanners([]);
+        setRefresh(!refresh);
+        showAlert("success", "Success", "All changes saved");
       }
     });
   };

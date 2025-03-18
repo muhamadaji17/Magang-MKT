@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import useGlobalHook from "../useGlobalHook";
-import { fetchOffice } from "@/services/office/officeService";
+import { fetchOffice, getOfficeById } from "@/services/office/officeService";
 
 export const useOffice = () => {
   const [office, setOffice] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
   const [selectedOffice, setSelectedOffice] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const {
     modalIsOpen,
@@ -24,8 +25,12 @@ export const useOffice = () => {
   };
 
   useEffect(() => {
-    fetchOffice(token, { setOffice, setCityOptions });
-  }, [refresh]);
+    if (searchQuery) {
+      getOfficeById(searchQuery, { token, setOffice });
+    } else {
+      fetchOffice(token, { setOffice, setCityOptions });
+    }
+  }, [refresh, searchQuery, token]);
 
   return {
     office,
@@ -40,5 +45,7 @@ export const useOffice = () => {
     setRefresh,
     selectedOffice,
     loading,
+    setSearchQuery,
+    searchQuery,
   };
 };

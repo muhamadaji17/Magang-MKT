@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import useGlobalHook from "@/hooks/useGlobalHook";
-import { fetchCity } from "@/services/city/cityService";
+import { fetchCity, getCityById } from "@/services/city/cityService";
 
 export const useCity = () => {
   const [city, setCity] = useState([]);
   const [provinceOptions, setProvinceOptions] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const {
     refresh,
@@ -23,11 +24,15 @@ export const useCity = () => {
   };
 
   useEffect(() => {
-    fetchCity(token, {
-      setCity,
-      setProvinceOptions,
-    });
-  }, [refresh]);
+    if (searchQuery) {
+      getCityById(searchQuery, { token, setCity });
+    } else {
+      fetchCity(token, {
+        setCity,
+        setProvinceOptions,
+      });
+    }
+  }, [refresh, searchQuery, token]);
 
   return {
     city,
@@ -41,5 +46,7 @@ export const useCity = () => {
     refresh,
     setRefresh,
     token,
+    searchQuery,
+    setSearchQuery,
   };
 };

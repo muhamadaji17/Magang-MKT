@@ -27,6 +27,8 @@ const Province = () => {
     setRefresh,
     countryOptions,
     selectedProvince,
+    searchQuery,
+    setSearchQuery,
   } = useProvince();
 
   const postSubmit = async (data) => {
@@ -63,6 +65,8 @@ const Province = () => {
         <HeaderContent
           handleOpenModal={() => handleOpenModal("add")}
           titleButton={"Add Province"}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <Table
           handleOpenEditModal={handleOpenEditModal}
