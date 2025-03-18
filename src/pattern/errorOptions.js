@@ -78,6 +78,9 @@ const errorOptions = {
     },
     start_date_banner: {
         required: "Start Date is required",
+        validate: (value, { end_date_banner }) =>
+            new Date(value) <= new Date(end_date_banner) ||
+            "Start Date must be before End Date",
     },
     end_date_banner: {
         required: "End Date is required",
