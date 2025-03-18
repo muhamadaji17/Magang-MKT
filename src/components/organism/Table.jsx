@@ -1,6 +1,8 @@
 import { FaRegEdit } from "react-icons/fa";
+import { FaRegEye } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Input } from "..";
+import { useLocation } from "react-router-dom";
 
 const Table = ({
   dataTable,
@@ -10,19 +12,21 @@ const Table = ({
   className,
   inputValues,
   onChangeValues,
+  handleEyeModal,
 }) => {
+  const location = useLocation();
   const imageURL = `${import.meta.env.VITE_IMAGE_URL}/image/films/`;
 
   return (
     <>
-      <div className="flex w-full justify-center gap-2">
+      <div className="flex w-full justify-center gap-2 flex-wrap">
         {label.map((col, index) =>
           col.key === "status" ? null : col.key === "created_by" ? null : (
             <Input
               key={index}
               placeholder={col.name}
-              className="bg-slate-300 border-2 border-slate-400 focus:outline-none"
-              value={inputValues[col.key]}
+              className="bg-slate-100 border-2 border-slate-400 focus:outline-none"
+              value={inputValues[col.key] || ""}
               onChange={(e) => onChangeValues(col.key, e.target.value)}
             />
           )
@@ -45,21 +49,13 @@ const Table = ({
             <tr className="text-center" key={index}>
               <td className="p-2 border-b-2">{index + 1}</td>
               {label.map((col) => (
-                <td className="p-2 border-b-2 max-w-40" key={col.key}>
+                <td className="p-2 border-b-2 max-w-40 truncate" key={col.key}>
                   {col.key === "latitude" && row.latitude && row.longitude ? (
                     <div className="grid grid-cols-1 gap-2">
                       <p>{row.latitude}</p>
                       <p>{row.longitude}</p>
                     </div>
-                  ) : col.key === "social_media" ? (
-                    <div className="grid grid-cols-2 gap-2">
-                      <p>YouTube: {row.yt}</p>
-                      <p>Facebook: {row.fb}</p>
-                      <p>Instagram: {row.ig}</p>
-                      <p>X: {row.x}</p>
-                    </div>
                   ) : col.key === "status" ? (
-                    // String(row[col.key])
                     row[col.key] === true ? (
                       "Active"
                     ) : (
@@ -80,6 +76,13 @@ const Table = ({
               ))}
               <td className="p-2 border-b-2">
                 <div className="flex items-center justify-center gap-4">
+                  {location.pathname === "/office" && (
+                    <FaRegEye
+                      onClick={() => handleEyeModal(row)}
+                      size={25}
+                      className="text-blue-900 cursor-pointer"
+                    />
+                  )}
                   <div onClick={() => handleOpenEditModal(row)}>
                     <FaRegEdit
                       size={25}

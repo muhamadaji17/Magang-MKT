@@ -17,6 +17,7 @@ const FormTemplate = ({
   overrideOptions,
   provinceOptions,
   officeOptions,
+  ...props
 }) => {
   const {
     register,
@@ -55,6 +56,7 @@ const FormTemplate = ({
         className={`space-y-4 p-4 w-[400px] bg-white shadow-lg rounded-md ${
           className ? className : "w-2/3"
         }`}
+        {...props}
       >
         <div className="relative flex items-center justify-between w-full">
           <FormTitle title={title} description={description} />

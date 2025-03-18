@@ -3,10 +3,13 @@ const ModalLayout = ({ isModalOpen, className, onClick, children }) => {
     <>
       {isModalOpen && (
         <div
-          className={`fixed w-full inset-0 justify-center items-center bg-black/70 flex z-10 ${className}`}
-          onClick={onClick}
+          className={`fixed w-full inset-0 justify-center items-center  flex z-10 ${className} bg-black/70`}
         >
-          <div onClick={(e) => e.stopPropagation()}>{children}</div>
+          <div
+            onClick={onClick}
+            className="fixed w-full h-full opacity-50 z-0"
+          ></div>
+          {children}
         </div>
       )}
     </>

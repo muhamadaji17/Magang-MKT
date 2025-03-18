@@ -23,7 +23,10 @@ export const tableHeadCityPattern = [
 export const tableHeadOfficePattern = [
   { name: "Office name", key: "office_name" },
   { name: "Data Koordinat", key: "latitude" },
-  { name: "Social Media", key: "social_media" },
+  { name: "Youtube", key: "yt" },
+  { name: "Facebook", key: "fb" },
+  { name: "Twitter/X", key: "x" },
+  { name: "Instagram", key: "ig" },
   { name: "Address", key: "address" },
   { name: "Status", key: "status" },
 ];

@@ -6,6 +6,8 @@ import {
   Spinner,
   Table,
 } from "@/components";
+import "leaflet/dist/leaflet.css";
+
 import { useOffice } from "@/hooks/office/useOffice";
 import { handleSubmit } from "@/pattern/handleSubmit";
 import { inputOfficePattern, tableHeadOfficePattern } from "@/pattern";
@@ -14,6 +16,7 @@ import {
   postOffice,
   updateOffice,
 } from "@/services/office/officeService";
+import Leaflet from "@/components/organism/Leaflet";
 
 const Office = () => {
   const {
@@ -31,6 +34,8 @@ const Office = () => {
     setRefresh,
     searchQuery,
     setSearchQuery,
+    selectedCoords,
+    handleEyeClick,
   } = useOffice();
 
   const postSubmit = async (data) => {
@@ -88,21 +93,29 @@ const Office = () => {
           onChangeValues={handleInputChange}
           label={tableHeadOfficePattern}
           deleteSubmit={deleteSubmit}
+          handleEyeModal={(row) => handleEyeClick(row)}
           className="w-full overflow-x-auto relative"
         />
       </Container>
       <ModalLayout isModalOpen={modalIsOpen} onClick={handleCloseModal}>
-        <FormTemplate
-          showCloseButton={true}
-          className="bg-white"
-          title={modalType === "add" ? "Add Office" : "Edit Office"}
-          onSubmit={modalType === "add" ? postSubmit : editSubmit}
-          description={"Enter Country Details"}
-          pattern={inputOfficePattern}
-          onClose={handleCloseModal}
-          officeOptions={cityOptions}
-          defaultValues={selectedOffice}
-        />
+        {modalType === "add" || modalType === "edit" ? (
+          <FormTemplate
+            showCloseButton={true}
+            className="bg-white"
+            title={modalType === "add" ? "Add Office" : "Edit Office"}
+            onSubmit={modalType === "add" ? postSubmit : editSubmit}
+            description={"Enter Country Details"}
+            pattern={inputOfficePattern}
+            onClose={handleCloseModal}
+            officeOptions={cityOptions}
+            defaultValues={selectedOffice}
+          />
+        ) : modalType === "map" ? (
+          <div className="w-[900px] flex flex-col h-96 bg-white">
+            <h1 className="p-2">Address: {selectedCoords.address}</h1>
+            <Leaflet selectedCoords={selectedCoords} />
+          </div>
+        ) : null}
       </ModalLayout>
     </>
   );

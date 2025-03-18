@@ -7,6 +7,11 @@ export const useOffice = () => {
   const [cityOptions, setCityOptions] = useState([]);
   const [selectedOffice, setSelectedOffice] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCoords, setSelectedCoords] = useState({
+    address: "",
+    latitude: 0,
+    longitude: 0,
+  });
 
   const {
     modalIsOpen,
@@ -22,6 +27,15 @@ export const useOffice = () => {
   const handleOpenEditModal = (officeId) => {
     setSelectedOffice(officeId);
     handleOpenModal("edit");
+  };
+
+  const handleEyeClick = (row) => {
+    setSelectedCoords({
+      address: row.address,
+      latitude: row.latitude,
+      longitude: row.longitude,
+    });
+    handleOpenModal("map");
   };
 
   useEffect(() => {
@@ -50,5 +64,7 @@ export const useOffice = () => {
     loading,
     setSearchQuery,
     searchQuery,
+    handleEyeClick,
+    selectedCoords,
   };
 };
