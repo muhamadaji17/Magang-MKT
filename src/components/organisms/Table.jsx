@@ -24,6 +24,7 @@ const Table = ({
     loadingSubData,
     loadingSearch,
     imageFor,
+    buttonNameDua,
 }) => {
     return (
         <div>
@@ -191,6 +192,7 @@ const Table = ({
                             setReGetDatas={setReGetDatas}
                             loadingSubData={loadingSubData}
                             imageFor={imageFor}
+                            buttonNameDua={buttonNameDua}
                         />
                     ) : null}
                 </ModalLayout>

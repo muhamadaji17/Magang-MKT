@@ -10,11 +10,11 @@ const Form = ({
     handleClick,
     showPassword,
     showConfirmPassword,
-    buttonName,
+    buttonNameSatu,
+    buttonNameDua,
     buttonStyle,
     handleConfirmPassword,
     loading,
-    modalType,
     handleDelete,
     imageFor,
 }) => {
@@ -128,32 +128,27 @@ const Form = ({
                     </div>
                 ))}
             </div>
-            {modalType === "special" ? (
-                <div className="flex justify-center gap-4">
+            <div
+                className={`flex ${
+                    buttonNameDua ? "justify-center gap-4" : "justify-end"
+                }`}
+            >
+                {buttonNameDua && (
                     <Button
                         type="button"
                         className="w-24 text-white bg-red-600"
                         onClick={() => handleDelete(dataForm[0].defaultValue)}
                     >
-                        Delete
+                        {buttonNameDua}
                     </Button>
-                    <Button
-                        className={buttonStyle}
-                        disable={loading || disableDefaultValue}
-                    >
-                        {buttonName}
-                    </Button>
-                </div>
-            ) : (
-                <div className="flex justify-center lg:justify-end">
-                    <Button
-                        className={buttonStyle}
-                        disable={loading || disableDefaultValue}
-                    >
-                        {buttonName}
-                    </Button>
-                </div>
-            )}
+                )}
+                <Button
+                    className={buttonStyle}
+                    disable={loading || disableDefaultValue}
+                >
+                    {buttonNameSatu}
+                </Button>
+            </div>
         </form>
     );
 };

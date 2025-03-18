@@ -14,6 +14,7 @@ const FormModal = ({
     modalType,
     handleDelete,
     imageFor,
+    buttonNameDua,
 }) => {
     const { loadingButton, setLoadingButton, accessToken } = useGlobalHooks();
 
@@ -47,7 +48,8 @@ const FormModal = ({
                             )
                         }
                         loading={loadingButton}
-                        buttonName="Send"
+                        buttonNameSatu="Send"
+                        buttonNameDua={buttonNameDua}
                         buttonStyle="w-24 text-white bg-blue-600 hover:bg-blue-800"
                         modalType={modalType}
                         handleDelete={(data) =>

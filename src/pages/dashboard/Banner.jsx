@@ -99,6 +99,7 @@ const BannerPage = () => {
                             )
                         }
                         imageFor="banner"
+                        buttonNameDua={"Delete"}
                     />
                 </ModalLayout>
             )}

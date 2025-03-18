@@ -40,7 +40,7 @@ const LoginPage = () => {
                 }
                 showPassword={showPassword}
                 loading={loadingButton}
-                buttonName="Login"
+                buttonNameSatu="Login"
                 buttonStyle="w-24 text-white bg-blue-600 hover:bg-blue-800"
             />
             <InformText
