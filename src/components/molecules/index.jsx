@@ -9,6 +9,7 @@ import Loading from "../atoms/Loading";
 import Card from "./Card";
 import Tooltip from "./Tooltip";
 import QuilTextEditor from "./QuillTextEditor";
+import Leaflet from "./Leaflet";
 
 export {
     InputForm,
@@ -21,5 +22,6 @@ export {
     Loading,
     Card,
     Tooltip,
+    Leaflet,
     QuilTextEditor,
 };

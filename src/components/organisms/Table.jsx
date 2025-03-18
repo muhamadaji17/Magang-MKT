@@ -1,10 +1,17 @@
-import { FaTrashAlt, FaRegEdit, FaCircle } from "react-icons/fa";
+import {
+    FaTrashAlt,
+    FaRegEdit,
+    FaCircle,
+    FaMapMarkerAlt,
+} from "react-icons/fa";
 // import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
+// import { Button } from "../atoms";
 import dayjs from "dayjs";
 import { ModalLayout } from "../organisms";
-// import { Button } from "../atoms";
-import { DeleteModal, FormModal } from "../molecules";
+import { DeleteModal, FormModal, Leaflet } from "../molecules";
 import { Link } from "react-router-dom";
+import { useGlobalHooks } from "../../hooks";
+import { getUrlDashboard } from "../../utils";
 
 const Table = ({
     datas,
@@ -26,6 +33,9 @@ const Table = ({
     imageFor,
     buttonNameDua,
 }) => {
+    const { location } = useGlobalHooks();
+    const url = getUrlDashboard(location);
+
     return (
         <div>
             <div className="relative overflow-x-auto">
@@ -124,8 +134,19 @@ const Table = ({
                                         </td>
                                     ))}
                                     <td className="px-6 py-7 w-full h-full flex gap-3 justify-center items-center">
+                                        {url[0].name === "Office" && (
+                                            <FaMapMarkerAlt
+                                                className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer text-blue-500"
+                                                onClick={() =>
+                                                    handleShowModalId(
+                                                        row,
+                                                        "map"
+                                                    )
+                                                }
+                                            />
+                                        )}
                                         <FaRegEdit
-                                            className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer text-blue-500"
+                                            className="w-5 h-5 lg:w-6 lg:h-6 cursor-pointer text-green-500"
                                             onClick={() =>
                                                 handleShowModalId(row, "edit")
                                             }
@@ -193,6 +214,12 @@ const Table = ({
                             loadingSubData={loadingSubData}
                             imageFor={imageFor}
                             buttonNameDua={buttonNameDua}
+                        />
+                    ) : modalType === "map" ? (
+                        <Leaflet
+                            latitude={getDetailsData.latitude}
+                            longitude={getDetailsData.longitude}
+                            office={getDetailsData.office_name}
                         />
                     ) : null}
                 </ModalLayout>
