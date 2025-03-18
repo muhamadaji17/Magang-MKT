@@ -175,7 +175,7 @@ const Calendar = ({ datas, setDatas, handleShowModalId, saveEvents }) => {
                                                         onClick={() =>
                                                             handleShowModalId(
                                                                 event,
-                                                                "special"
+                                                                "edit"
                                                             )
                                                         }
                                                     >
