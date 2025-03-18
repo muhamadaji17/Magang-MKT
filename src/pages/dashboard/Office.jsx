@@ -8,6 +8,7 @@ import {
     inputOffice,
     inputEditOffice,
     handleChange,
+    officeSearchPattern,
 } from "../../pattern";
 import {
     useGetDataWithSearchHook,
@@ -88,18 +89,25 @@ const OfficePage = () => {
                 setModalType={setModalType}
                 loadingSubData={loadingSubData}
             />
-            <div className="space-x-2 space-y-1">
-                {officeTablePattern.map((column, index) => (
-                    <Input
-                        variant="h-6 text-center text-sm text-black bg-white"
-                        placeholder={column.title}
-                        value={query[column.key] || ""}
-                        onChange={(e) =>
-                            handleChange(e, column.key, setQuery, setReGetDatas)
-                        }
-                        key={index}
-                    />
-                ))}
+            <div className="space-y-1">
+                <div className="space-x-8 pl-12">
+                    {officeSearchPattern.map((column, index) => (
+                        <Input
+                            variant="h-6 text-center text-sm text-black bg-white"
+                            placeholder={column.title}
+                            value={query[column.key] || ""}
+                            onChange={(e) =>
+                                handleChange(
+                                    e,
+                                    column.key,
+                                    setQuery,
+                                    setReGetDatas
+                                )
+                            }
+                            key={index}
+                        />
+                    ))}
+                </div>
                 <Table
                     datas={datas}
                     handleShowModalId={(data, type) =>

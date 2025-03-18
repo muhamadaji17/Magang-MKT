@@ -24,6 +24,11 @@ import { officeTablePattern } from "./table/officeTablePattern";
 import { inputOffice, inputEditOffice } from "./dashboard/office";
 import { inputFilm, inputEditFilm } from "./dashboard/films";
 import { filmTablePattern } from "./table/filmTablePattern";
+import { filmSearchPattern } from "./search/filmSearchPattern";
+import { officeSearchPattern } from "./search/officeSearchPattern";
+import { citySearchPattern } from "./search/citySearchPattern";
+import { provinceSearchPattern } from "./search/provinceSearchPattern";
+import { countrySearchPattern } from "./search/countrySearchPattern";
 
 export {
     inputLogin,
@@ -57,4 +62,9 @@ export {
     handleFileChange,
     handleChange,
     inputEditAbout,
+    filmSearchPattern,
+    officeSearchPattern,
+    citySearchPattern,
+    provinceSearchPattern,
+    countrySearchPattern,
 };

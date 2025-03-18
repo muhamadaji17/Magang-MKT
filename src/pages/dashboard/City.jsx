@@ -2,6 +2,7 @@ import { Input, Loading } from "../../components/atoms";
 import { DashboardHeader } from "../../components/molecules";
 import { Table } from "../../components/organisms";
 import {
+    citySearchPattern,
     cityTablePattern,
     handleCancelModal,
     handleChange,
@@ -88,10 +89,9 @@ const CityPage = () => {
                 setModalType={setModalType}
                 loadingSubData={loadingSubData}
             />
-            <div className="space-x-2 space-y-1">
-                {cityTablePattern
-                    .filter((pattern) => pattern.key !== "url_film")
-                    .map((column, index) => (
+            <div className="space-y-1">
+                <div className="space-x-8 pl-12">
+                    {citySearchPattern.map((column, index) => (
                         <Input
                             variant="h-6 text-center text-sm text-black bg-white"
                             placeholder={column.title}
@@ -107,6 +107,7 @@ const CityPage = () => {
                             key={index}
                         />
                     ))}
+                </div>
                 <Table
                     datas={datas}
                     handleShowModalId={(data, type) =>

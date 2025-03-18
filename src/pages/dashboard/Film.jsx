@@ -8,6 +8,7 @@ import {
     inputFilm,
     inputEditFilm,
     handleChange,
+    filmSearchPattern,
 } from "../../pattern";
 import { useGetDataWithSearchHook, useGlobalHooks } from "../../hooks";
 import {
@@ -64,10 +65,9 @@ const FilmPage = () => {
                 service={AddFilmService}
                 setModalType={setModalType}
             />
-            <div className="space-x-2 space-y-1">
-                {filmTablePattern
-                    .filter((pattern) => pattern.key !== "url_film")
-                    .map((column, index) => (
+            <div className="space-y-1">
+                <div className="space-x-8 pl-12">
+                    {filmSearchPattern.map((column, index) => (
                         <Input
                             variant="h-6 text-center text-sm text-black bg-white"
                             placeholder={column.title}
@@ -83,6 +83,7 @@ const FilmPage = () => {
                             key={index}
                         />
                     ))}
+                </div>
                 <Table
                     datas={datas}
                     handleShowModalId={(data, type) =>
