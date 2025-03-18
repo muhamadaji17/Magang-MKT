@@ -20,14 +20,14 @@ const DescriptionAbout = ({
     return (
         <>
             {datas.length > 0 ? (
-                datas.map((data, i) => (
+                datas.map((data) => (
                     <div
                         className="bg-white rounded-lg shadow-md p-4 flex flex-col gap-4"
                         key={data.id}
                     >
                         <div className="flex items-center justify-between">
                             <h2 className="text-xl font-semibold">
-                                About {i + 1}
+                                {data.about_meta}
                             </h2>
                             <div className="flex items-center gap-2">
                                 <BsPencilSquare
