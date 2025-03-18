@@ -61,6 +61,13 @@ const Office = () => {
     });
   };
 
+  const handleInputChange = (key, value) => {
+    setSearchQuery((prevQuery) => ({
+      ...prevQuery,
+      [key]: value,
+    }));
+  };
+
   if (loading)
     return (
       <Container>
@@ -73,12 +80,12 @@ const Office = () => {
         <HeaderContent
           handleOpenModal={() => handleOpenModal("add")}
           titleButton={"Add Office"}
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <Table
           handleOpenEditModal={handleOpenEditModal}
           dataTable={office}
+          inputValues={searchQuery}
+          onChangeValues={handleInputChange}
           label={tableHeadOfficePattern}
           deleteSubmit={deleteSubmit}
           className="w-full overflow-x-auto relative"

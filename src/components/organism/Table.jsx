@@ -1,5 +1,6 @@
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { Input } from "..";
 
 const Table = ({
   dataTable,
@@ -7,11 +8,26 @@ const Table = ({
   handleOpenEditModal,
   deleteSubmit,
   className,
+  inputValues,
+  onChangeValues,
 }) => {
   const imageURL = `${import.meta.env.VITE_IMAGE_URL}/image/films/`;
 
   return (
     <>
+      <div className="flex w-full justify-center gap-2">
+        {label.map((col, index) =>
+          col.key === "status" ? null : col.key === "created_by" ? null : (
+            <Input
+              key={index}
+              placeholder={col.name}
+              className="bg-slate-300 border-2 border-slate-400 focus:outline-none"
+              value={inputValues[col.key]}
+              onChange={(e) => onChangeValues(col.key, e.target.value)}
+            />
+          )
+        )}
+      </div>
       <table className={`w-full text-sm bg-white shadow-md ${className}`}>
         <thead>
           <tr>

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import useGlobalHook from "../useGlobalHook";
-import { fetchFilms } from "@/services/film/filmService";
+import { fetchFilms, getFilmById } from "@/services/film/filmService";
 
 export const useFilm = () => {
   const [film, setFilm] = useState([]);
   const [selectedFilm, setSelectedFilm] = useState(null);
+  const [searchQuery, setSearchQuery] = useState({});
   const {
     token,
     modalType,
@@ -21,8 +22,15 @@ export const useFilm = () => {
   };
 
   useEffect(() => {
-    fetchFilms(token, { setFilm });
-  }, [refresh]);
+    const fetchData = () => {
+      if (Object.values(searchQuery).some((value) => value)) {
+        getFilmById(searchQuery, { token, setFilm });
+      } else {
+        fetchFilms(token, { setFilm, setRefresh });
+      }
+    };
+    fetchData();
+  }, [refresh, searchQuery, token]);
   return {
     film,
     refresh,
@@ -34,5 +42,7 @@ export const useFilm = () => {
     modalIsOpen,
     modalType,
     token,
+    searchQuery,
+    setSearchQuery,
   };
 };

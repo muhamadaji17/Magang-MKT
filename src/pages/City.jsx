@@ -55,18 +55,25 @@ const City = () => {
     });
   };
 
+  const handleInputChange = (key, value) => {
+    setSearchQuery((prevQuery) => ({
+      ...prevQuery,
+      [key]: value,
+    }));
+  };
+
   return (
     <>
       <Container>
         <HeaderContent
           handleOpenModal={() => handleOpenModal("add")}
           titleButton={"Add City"}
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <Table
           handleOpenEditModal={handleOpenEditModal}
           dataTable={city}
+          onChangeValues={handleInputChange}
+          inputValues={searchQuery}
           label={tableHeadCityPattern}
           deleteSubmit={deleteSubmit}
           className={"w-full overflow-x-auto relative"}

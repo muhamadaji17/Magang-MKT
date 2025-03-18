@@ -9,7 +9,7 @@ export const useProvince = () => {
   const [countryOptions, setCountryOptions] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [province, setProvince] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState({});
   const {
     refresh,
     setRefresh,
@@ -27,14 +27,15 @@ export const useProvince = () => {
   };
 
   useEffect(() => {
-    if (searchQuery) {
-      getProvinceById(searchQuery, { token, setProvince });
-    } else {
-      fetchProvince(token, {
-        setProvince,
-        setCountryOptions,
-      });
-    }
+    const fetchData = () => {
+      if (Object.values(searchQuery).some((value) => value)) {
+        getProvinceById(searchQuery, { token, setProvince });
+      } else {
+        fetchProvince(token, { setProvince, setCountryOptions, setRefresh });
+      }
+    };
+
+    fetchData();
   }, [refresh, searchQuery, token]);
 
   return {

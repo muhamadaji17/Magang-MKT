@@ -30,6 +30,13 @@ const Country = () => {
     setSearchQuery,
   } = useCountry();
 
+  const handleInputChange = (key, value) => {
+    setSearchQuery((prevQuery) => ({
+      ...prevQuery,
+      [key]: value,
+    }));
+  };
+
   const postSubmit = async (data) => {
     handleSubmit(data, postCountry, {
       token,
@@ -59,28 +66,18 @@ const Country = () => {
     });
   };
 
-  // const handleSearch = async () => {
-  //   if (!searchQuery) return; // Pastikan input tidak kosong
-  //   try {
-  //     // Panggil getCountryById dengan id, token, dan setCountry
-  //     await getCountryById(searchQuery, { token, setCountry });
-  //   } catch (error) {
-  //     console.error("Error during search:", error);
-  //   }
-  // };
-
   return (
     <>
       <Container>
         <HeaderContent
           handleOpenModal={() => handleOpenModal("add")}
           titleButton={"Add Country"}
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <Table
           handleOpenEditModal={handleOpenEditModal}
           dataTable={country}
+          inputValues={searchQuery}
+          onChangeValues={handleInputChange}
           label={tableHeadCountryPattern}
           deleteSubmit={deleteSubmit}
           className={"w-full relative  overflow-x-auto"}

@@ -22,6 +22,8 @@ const Film = () => {
     handleOpenEditModal,
     selectedFilm,
     token,
+    searchQuery,
+    setSearchQuery,
   } = useFilm();
 
   const postSubmit = async (data) => {
@@ -60,6 +62,13 @@ const Film = () => {
     });
   };
 
+  const handleInputChange = (key, value) => {
+    setSearchQuery((prevQuery) => ({
+      ...prevQuery,
+      [key]: value,
+    }));
+  };
+
   return (
     <>
       <Container>
@@ -72,6 +81,8 @@ const Film = () => {
           dataTable={film}
           label={tableHeadFilmPattern}
           deleteSubmit={deleteSubmit}
+          inputValues={searchQuery}
+          onChangeValues={handleInputChange}
           className="w-full overflow-x-auto relative"
         />
       </Container>

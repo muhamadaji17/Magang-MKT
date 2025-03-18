@@ -1,13 +1,13 @@
 import {
   fetchCountry,
-  getCountryById,
+  getCountryByQuery,
 } from "@/services/country/countryService";
 import { useEffect, useState } from "react";
 import useGlobalHook from "../useGlobalHook";
 
 export const useCountry = () => {
   const [country, setCountry] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState({});
   const [selectedCountry, setSelectedCountry] = useState(null);
   const {
     handleCloseModal,
@@ -26,8 +26,8 @@ export const useCountry = () => {
 
   useEffect(() => {
     const fetchData = () => {
-      if (searchQuery) {
-        getCountryById(searchQuery, { token, setCountry });
+      if (Object.values(searchQuery).some((value) => value)) {
+        getCountryByQuery(searchQuery, { token, setCountry });
       } else {
         fetchCountry(token, { setCountry, setRefresh });
       }
@@ -49,6 +49,6 @@ export const useCountry = () => {
     setRefresh,
     selectedCountry,
     searchQuery,
-    setSearchQuery,
+    setSearchQuery, // Function untuk set pencarian
   };
 };

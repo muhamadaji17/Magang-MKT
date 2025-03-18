@@ -59,19 +59,26 @@ const Province = () => {
     });
   };
 
+  const handleInputChange = (key, value) => {
+    setSearchQuery((prevQuery) => ({
+      ...prevQuery,
+      [key]: value,
+    }));
+  };
+
   return (
     <>
       <Container>
         <HeaderContent
           handleOpenModal={() => handleOpenModal("add")}
           titleButton={"Add Province"}
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <Table
           handleOpenEditModal={handleOpenEditModal}
           dataTable={province}
           label={tableHeadProvincePattern}
+          onChangeValues={handleInputChange}
+          inputValues={searchQuery}
           deleteSubmit={deleteSubmit}
           className="w-full overflow-x-auto relative"
         />

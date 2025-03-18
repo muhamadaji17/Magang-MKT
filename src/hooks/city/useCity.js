@@ -6,7 +6,7 @@ export const useCity = () => {
   const [city, setCity] = useState([]);
   const [provinceOptions, setProvinceOptions] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState({});
 
   const {
     refresh,
@@ -24,14 +24,15 @@ export const useCity = () => {
   };
 
   useEffect(() => {
-    if (searchQuery) {
-      getCityById(searchQuery, { token, setCity });
-    } else {
-      fetchCity(token, {
-        setCity,
-        setProvinceOptions,
-      });
-    }
+    const fetchData = () => {
+      if (Object.values(searchQuery).some((value) => value)) {
+        getCityById(searchQuery, { token, setCity });
+      } else {
+        fetchCity(token, { setCity, setProvinceOptions, setRefresh });
+      }
+    };
+
+    fetchData();
   }, [refresh, searchQuery, token]);
 
   return {

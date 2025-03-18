@@ -25,11 +25,14 @@ export const useOffice = () => {
   };
 
   useEffect(() => {
-    if (searchQuery) {
-      getOfficeById(searchQuery, { token, setOffice });
-    } else {
-      fetchOffice(token, { setOffice, setCityOptions });
-    }
+    const fetchData = () => {
+      if (Object.values(searchQuery).some((value) => value)) {
+        getOfficeById(searchQuery, { token, setOffice });
+      } else {
+        fetchOffice(token, { setOffice, setCityOptions, setRefresh });
+      }
+    };
+    fetchData();
   }, [refresh, searchQuery, token]);
 
   return {

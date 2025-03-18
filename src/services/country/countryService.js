@@ -73,11 +73,17 @@ export const deleteCountry = async (countryId, extraOptions) => {
   }
 };
 
-export const getCountryById = async (id, extraOptions) => {
+export const getCountryByQuery = async (searchParams, extraOptions) => {
   const { token, setCountry } = extraOptions;
+
+  const queryString = Object.entries(searchParams)
+    .filter(([key, value]) => value)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join("&");
+
   try {
-    const response = await GET(`crud/country/by?country_name=${id}`, token);
-    console.log("Search: ", response.payload);
+    const response = await GET(`crud/country/by?${queryString}`, token);
+    console.log("Search Results: ", response.payload);
     setCountry(response.payload);
   } catch (error) {
     console.error("Error fetching country: ", error);

@@ -77,3 +77,19 @@ export const deleteFilm = async (filmId, extraOptions) => {
     console.error("error delete film: ", error);
   }
 };
+
+export const getFilmById = async (searchParams, extraOptions) => {
+  const { token, setFilm } = extraOptions;
+  const queryString = Object.entries(searchParams)
+    .filter(([key, value]) => value)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join("&");
+
+  try {
+    const response = await GET(`crud/films/by?${queryString}`, token);
+    setFilm(response.payload);
+  } catch (error) {
+    console.error("Error get film by id: ", error);
+    throw error;
+  }
+};

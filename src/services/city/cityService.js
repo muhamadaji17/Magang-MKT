@@ -78,12 +78,27 @@ export const deleteCity = async (cityId, extraOptions) => {
   }
 };
 
-export const getCityById = async (cityId, extraOptions) => {
-  const { setCity, token } = extraOptions;
+export const getCityById = async (searchParams, extraOptions) => {
+  const { token, setCity } = extraOptions;
+
+  const queryString = Object.entries(searchParams)
+    .filter(([key, value]) => value)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join("&");
+
   try {
-    const response = await GET(`crud/city/by?city_name=${cityId}`, token);
-    setCity(response.payload);
+    const response = await GET(`crud/city/by?${queryString}`, token);
+    const parse = response.payload.map((data) => ({
+      city_name: data.city_name,
+      city_code: data.city_code,
+      id_city: data.id_city,
+      province_name: data.created_province_city?.province_name || "-",
+      created_by: data.created_city.user_name,
+      status: data.status,
+    }));
+    setCity(parse);
+    console.log("Search Results: ", parse);
   } catch (error) {
-    console.error("Error during search:", error);
+    console.error("Error fetching city: ", error);
   }
 };
