@@ -8,6 +8,7 @@ const Leaflet = ({ selectedCoords }) => {
         center={[selectedCoords.latitude, selectedCoords.longitude]}
         zoom={16}
         style={{ height: "100%", width: "100%" }}
+        className="relative"
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Marker position={[selectedCoords.latitude, selectedCoords.longitude]}>

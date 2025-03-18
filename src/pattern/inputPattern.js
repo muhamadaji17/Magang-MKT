@@ -218,6 +218,10 @@ export const inputCountryPattern = [
     name: "country_code",
     validation: {
       required: "Country code is required",
+      maxLength: {
+        value: 3,
+        message: "Country code must be 3 characters",
+      },
     },
   },
   {

@@ -17,6 +17,7 @@ import {
   updateOffice,
 } from "@/services/office/officeService";
 import Leaflet from "@/components/organism/Leaflet";
+import { IoCloseCircle } from "react-icons/io5";
 
 const Office = () => {
   const {
@@ -94,7 +95,7 @@ const Office = () => {
           label={tableHeadOfficePattern}
           deleteSubmit={deleteSubmit}
           handleEyeModal={(row) => handleEyeClick(row)}
-          className="w-full overflow-x-auto relative"
+          className="relative w-full overflow-x-auto"
         />
       </Container>
       <ModalLayout isModalOpen={modalIsOpen} onClick={handleCloseModal}>
@@ -111,7 +112,12 @@ const Office = () => {
             defaultValues={selectedOffice}
           />
         ) : modalType === "map" ? (
-          <div className="w-[900px] flex flex-col h-96 bg-white">
+          <div className="w-[900px] flex flex-col h-96 bg-white relative">
+            <IoCloseCircle
+              onClick={handleCloseModal}
+              size={35}
+              className="absolute transition-all duration-300 cursor-pointer -top-4 -right-4 text-slate-500 hover:text-red-500"
+            />
             <h1 className="p-2">Address: {selectedCoords.address}</h1>
             <Leaflet selectedCoords={selectedCoords} />
           </div>

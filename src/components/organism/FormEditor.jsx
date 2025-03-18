@@ -25,13 +25,21 @@ const FormEditor = ({
         size={32}
         onClick={handleCloseModal}
       />
-      <Input
-        label="Meta"
-        placeholder="Insert meta"
-        className="w-full rounded-none"
-        {...register("about_meta", { required: "Meta is required" })}
-        error={errors.about_meta}
-      />
+      <div className="flex items-center justify-between w-full">
+        <Input
+          label="Meta"
+          placeholder="Insert meta"
+          className="w-full border-2"
+          {...register("about_meta", { required: "Meta is required" })}
+          error={errors.about_meta}
+        />
+        {defaultValues.about_meta && (
+          <select {...register("status", { required: "Status is required" })}>
+            <option value={true}>Active</option>
+            <option value={false}>Not Active</option>
+          </select>
+        )}
+      </div>
       <div className="flex flex-col w-full gap-4 md:flex-row">
         {inputPattern.map((field, index) => (
           <InputEditor

@@ -51,7 +51,7 @@ const InputEditor = ({ name, setValue, placeholder, error, defaultValues }) => {
                 </button>
                 {isDropdownOpen === index && btn.type === "dropdown" && (
                   <div
-                    className="absolute z-10 bg-white border rounded-md mt-2 p-2 shadow-md"
+                    className="absolute z-10 p-2 mt-2 bg-white border rounded-md shadow-md"
                     ref={dropDownRef}
                   >
                     {btn.options.map((option, index) => (
@@ -97,7 +97,7 @@ const InputEditor = ({ name, setValue, placeholder, error, defaultValues }) => {
         )}
         <EditorContent
           editor={editor}
-          className="p-2 break-words w-96 h-60"
+          className="p-2 break-words w-96 min-h-60"
           defaultValue={defaultValues}
         />
         {error && <TextError>{error.message}</TextError>}
