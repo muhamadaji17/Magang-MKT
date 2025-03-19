@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { InputForm } from ".";
 import { Button } from "../atom";
 import { useForm } from "react-hook-form";
@@ -35,9 +35,11 @@ const Form = ({
     reset,
     formState: { errors },
   } = useForm({ defaultValues: generateDefaultValue(configInput) });
+  const [imagePreview, setImagePreview] = useState(null);
+  const [fileName, setFileName] = useState("");
 
   const onSubmit = (data) => {
-    handleSubmitData(data);
+    handleSubmitData(data, { reset, setImagePreview, setFileName });
   };
 
   useEffect(() => {
@@ -50,6 +52,8 @@ const Form = ({
         return acc;
       }, {});
 
+      setImagePreview(null);
+      setFileName("");
       reset(emptyValues);
     }
   }, [type, dataDefault, reset]);
@@ -82,6 +86,12 @@ const Form = ({
                 <InputForm
                   data={data}
                   key={index}
+                  state={{
+                    fileName,
+                    setFileName,
+                    imagePreview,
+                    setImagePreview,
+                  }}
                   register={register}
                   control={control}
                   error={errors}

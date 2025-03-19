@@ -6,8 +6,11 @@ import {
 } from "../dashboardService/filmService";
 
 export const handleAddFilms = (extraOptions) => {
-  return (datas) => {
-    handleSubmitData(datas, addFilmService, extraOptions);
+  return (datas, extraOptionsForm) => {
+    handleSubmitData(datas, addFilmService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 

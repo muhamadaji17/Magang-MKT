@@ -45,8 +45,6 @@ export const addCityService = async (datas, extraOptions) => {
 };
 
 export const updateCityService = async (datas, extraOptions) => {
-  console.log(datas);
-
   const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
 
   const headers = generateHeaders({ accessToken });

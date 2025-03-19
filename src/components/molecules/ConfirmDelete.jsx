@@ -8,7 +8,7 @@ const ConfirmDelete = ({ handleCloseModal, onConfirm, dataRow }) => {
         <div className="bg-white p-4 flex flex-col items-center">
           <RiDeleteBinLine className="text-red-600 text-5xl text-center" />
           <p className="text-gray-700 mt-2">
-            Are you sure you want to delete {`"${dataRow.title}"`}?
+            Are you sure you want to delete ?
           </p>
           <div className="flex justify-center mt-4 space-x-5">
             <Button

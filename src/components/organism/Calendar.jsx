@@ -156,7 +156,9 @@ const Calendar = ({
           inputForm={inputForm}
           handleShow={stateShowSidebar.handleShow}
           handleOpenModal={stateShowModal.handleShow}
-          handleService={(datas) => handleService(datas, { setUpdatedEvents })}
+          handleService={(datas, extraOptionsForm) =>
+            handleService(datas, { setUpdatedEvents, ...extraOptionsForm })
+          }
         />
 
         <ModalLayout

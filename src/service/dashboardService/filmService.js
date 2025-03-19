@@ -26,7 +26,14 @@ export const getFilmService = async (accessToken, extraOptions) => {
 };
 
 export const addFilmService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const {
+    accessToken,
+    setRefreshData,
+    handleCloseSidebar,
+    reset,
+    setFileName,
+    setImagePreview,
+  } = extraOptions;
   const headers = generateHeaders({
     accessToken,
     contentType: "multipart/form-data",
@@ -42,7 +49,10 @@ export const addFilmService = async (datas, extraOptions) => {
     if (response.data.success) {
       alert(response.data.message);
       setRefreshData(false);
-      handleCloseModal();
+      handleCloseSidebar();
+      reset();
+      setFileName("");
+      setImagePreview(null);
     }
   } catch (error) {
     console.error(error);

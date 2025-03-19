@@ -25,7 +25,14 @@ export const getBannerService = async (accessToken, extraOptions) => {
 };
 
 export const addBannerService = async (datas, extraOptions) => {
-  const { accessToken, handleCloseSidebar, setRefreshData } = extraOptions;
+  const {
+    accessToken,
+    handleCloseSidebar,
+    setRefreshData,
+    reset,
+    setFileName,
+    setImagePreview,
+  } = extraOptions;
 
   const headers = generateHeaders({
     accessToken,
@@ -43,6 +50,9 @@ export const addBannerService = async (datas, extraOptions) => {
       alert(response.data.message);
       handleCloseSidebar();
       setRefreshData(false);
+      reset();
+      setFileName("");
+      setImagePreview(null);
     }
     console.log(response);
   } catch (error) {

@@ -5,8 +5,11 @@ import {
   updateBannerService,
 } from "../dashboardService/bannerService";
 
-export const handleAddBanner = (extraOptions) => (datas) =>
-  handleSubmitData(datas, addBannerService, extraOptions);
+export const handleAddBanner = (extraOptions) => (datas, extraOptionsForm) =>
+  handleSubmitData(datas, addBannerService, {
+    ...extraOptions,
+    ...extraOptionsForm,
+  });
 
 export const handleUpdateBanner = (extraOptions, dataRow) => {
   return (datas, extraOptionsCalendar) =>

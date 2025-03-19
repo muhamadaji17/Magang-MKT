@@ -84,7 +84,7 @@ const Table = ({
           ) : submitType === "delete" ? (
             <ConfirmDelete
               handleCloseModal={stateShowModal?.handleShow}
-              dataRow={{ ...dataRow, title: dataRow.name || dataRow.title }}
+              dataRow={dataRow}
               onConfirm={handleService}
             />
           ) : null}

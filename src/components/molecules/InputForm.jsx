@@ -3,10 +3,9 @@ import { Button } from "../atom";
 import { FaEyeSlash, FaUpload } from "react-icons/fa";
 import Editor from "../organism/Editor";
 
-const InputForm = ({ data, register, control, value, error }) => {
+const InputForm = ({ data, register, control, value, error, state }) => {
   const [showPassword, setShowPassword] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
-  const [fileName, setFileName] = useState("");
+  const { fileName, setFileName, imagePreview, setImagePreview } = state;
   const getImageDefault = data.type === "file" ? data.defaultValue : null;
   const imageURL = `${import.meta.env.VITE_API_PUBLIC_IMG}${
     data.tableImg
@@ -17,7 +16,7 @@ const InputForm = ({ data, register, control, value, error }) => {
       setImagePreview(imageURL);
       setFileName(getImageDefault);
     }
-  }, [getImageDefault]);
+  }, [getImageDefault, setImagePreview, setFileName]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
