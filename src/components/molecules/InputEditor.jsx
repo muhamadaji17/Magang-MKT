@@ -97,7 +97,7 @@ const InputEditor = ({ name, setValue, placeholder, error, defaultValues }) => {
         )}
         <EditorContent
           editor={editor}
-          className="p-2 break-words w-96 min-h-60"
+          className="p-2 break-words w-96 min-h-60 max-h-80 overflow-y-auto"
           defaultValue={defaultValues}
         />
         {error && <TextError>{error.message}</TextError>}
