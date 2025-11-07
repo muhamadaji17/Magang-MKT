@@ -1,17 +1,27 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Navlink from "./Navlink";
-import { Button } from "../atom";
 
 const Accordion = ({ submenus, config, currentPath, handleCloseSidebar }) => {
   const initialStatus = submenus.some((link) => link.path === currentPath);
   const [active, setActive] = useState(initialStatus);
+  const [height, setHeight] = useState("0px");
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (active && contentRef.current) {
+      setHeight(`${contentRef.current.scrollHeight}px`);
+    } else {
+      setHeight("0px");
+    }
+  }, [active]);
 
   const handleToggle = () => {
-    setActive(!active);
+    setActive((prev) => !prev);
   };
 
   return (
     <li>
+      {/* Header */}
       <div
         onClick={handleToggle}
         className="w-full hover:bg-blue-700 cursor-pointer text-white flex justify-between items-center p-2 rounded-md"
@@ -22,13 +32,12 @@ const Accordion = ({ submenus, config, currentPath, handleCloseSidebar }) => {
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className={`h-6 w-6 transform ${
+          className={`h-4 w-4 transform transition-transform duration-300 ease-in-out ${
             active ? "" : "-rotate-90"
-          } transition-translate duration-300 ease-in-out`}
+          }`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
         >
           <path
             strokeLinecap="round"
@@ -39,16 +48,21 @@ const Accordion = ({ submenus, config, currentPath, handleCloseSidebar }) => {
         </svg>
       </div>
 
-      <Navlink
-        links={submenus}
-        handleCloseSidebar={handleCloseSidebar}
-        currentPath={currentPath}
-        className={`pl-4 space-y-2 mt-2 transition-all duration-300 ease-in-out  ${
-          active
-            ? "translate-y-0 opacity-100 pointer-events-auto"
-            : "opacity-0 -translate-y-2.5 pointer-events-none"
-        }`}
-      />
+      {/* Submenu */}
+      <div
+        ref={contentRef}
+        style={{ maxHeight: height }}
+        className={`overflow-hidden transition-all duration-500 ease-in-out`}
+      >
+        <Navlink
+          links={submenus}
+          handleCloseSidebar={handleCloseSidebar}
+          currentPath={currentPath}
+          className={`pl-4 space-y-2 mt-2 transition-opacity duration-300 ease-in-out ${
+            active ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      </div>
     </li>
   );
 };

@@ -47,6 +47,7 @@ const Films = () => {
 
       <Table
         datasTable={datasFilms}
+        title={"Film"}
         dataRow={dataRow}
         configTable={configTableFilms}
         stateShowModal={stateShowModal}

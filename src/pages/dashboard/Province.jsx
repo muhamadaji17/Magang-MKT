@@ -34,6 +34,7 @@ const Province = () => {
         datasTable={datasProvince}
         dataRow={dataRow}
         configTable={configTableProvince}
+        title={"Province"}
         stateShowModal={stateShowModal}
         handleSearch={handleSearch(setSearchQuery)}
         inputForm={

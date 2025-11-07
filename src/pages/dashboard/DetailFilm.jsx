@@ -51,7 +51,6 @@ const DetailFilmPage = () => {
       setRefreshData,
     });
   }, []);
-  console.log(datasDetailFilms);
 
   return (
     <>
@@ -106,7 +105,7 @@ const DetailFilmPage = () => {
           <Form
             configInput={
               submitType === "add"
-                ? inputAddCastingFilms(datasFilms)
+                ? inputAddCastingFilms(datasDetailFilms)
                 : inputEditAbout(dataRow)
             }
             buttonText={"Submit"}

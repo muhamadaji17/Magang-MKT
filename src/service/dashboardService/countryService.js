@@ -1,5 +1,6 @@
 import { DELETE, GET, POST, PUT } from "../../api";
 import { generateHeaders, generateEndpointWithQuery } from "../";
+import { SwalAlertBasic } from "../../utils";
 
 export const getCountryService = async (accessToken, extraOptions) => {
   const { setDatasCountry, setRefreshData, searchQuery } = extraOptions;
@@ -37,7 +38,10 @@ export const addCountryService = async (datas, extraOptions) => {
     console.log(response);
 
     if (response.data.success) {
-      alert(response.data.message);
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
       setRefreshData(false);
       handleCloseModal();
     }

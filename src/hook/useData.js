@@ -6,6 +6,9 @@ export const useData = () => {
   const [datasRating, setDatasRating] = useState([]);
   const [datasFilms, setDatasFilms] = useState([]);
   const [datasDetailFilms, setDatasDetailFilms] = useState([]);
+  const [datasUser, setDatasUser] = useState([]);
+  const [datasRole, setDatasRole] = useState([]);
+
   return {
     datasRating,
     setDatasRating,
@@ -13,5 +16,9 @@ export const useData = () => {
     setDatasDetailFilms,
     datasFilms,
     setDatasFilms,
+    datasUser,
+    setDatasUser,
+    datasRole,
+    setDatasRole,
   };
 };

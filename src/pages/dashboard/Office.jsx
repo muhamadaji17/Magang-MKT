@@ -33,6 +33,7 @@ const Office = () => {
         dataRow={dataRow}
         configTable={configTableOffice}
         stateShowModal={stateShowModal}
+        title={"Office"}
         handleSearch={handleSearch(setSearchQuery)}
         inputForm={
           submitType === "add"

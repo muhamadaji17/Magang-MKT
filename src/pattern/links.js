@@ -3,6 +3,7 @@ import { PiSealWarning } from "react-icons/pi";
 import { PiFilmReel } from "react-icons/pi";
 import { GrMapLocation } from "react-icons/gr";
 import { IoImageOutline } from "react-icons/io5";
+import { HiOutlineLockClosed } from "react-icons/hi";
 
 export const navLink = [
   { text: "Dashboard", path: "/", icon: LuLayoutDashboard },
@@ -17,6 +18,14 @@ export const navLink = [
       { text: "Province", path: "/province" },
       { text: "City", path: "/city" },
       { text: "Office", path: "/office" },
+    ],
+  },
+  {
+    text: "Auth",
+    icon: HiOutlineLockClosed,
+    submenus: [
+      { text: "User", path: "/user" },
+      { text: "Role", path: "/role" },
     ],
   },
 ];

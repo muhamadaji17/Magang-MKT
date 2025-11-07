@@ -86,7 +86,7 @@ const About = () => {
       <ModalLayout
         isModalOpen={isModalOpen}
         className={`${submitType !== "delete" && "w-[1000px]"}`}
-        title={"Add About"}
+        title={submitType === "add" ? "Add About" : "Edit About"}
         handleCloseModal={handleCloseModal}
         closeButton={submitType !== "delete"}
       >

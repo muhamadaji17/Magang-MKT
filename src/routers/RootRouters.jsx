@@ -14,6 +14,8 @@ import {
   Office,
   Films,
   DetailFilmPage,
+  User,
+  Role,
 } from "../pages";
 import { ProtectedRoute, PublicRoute } from "./Middleware";
 
@@ -31,6 +33,8 @@ const RootRouters = () => {
           <Route path="/province" element={<Province />} />
           <Route path="/city" element={<City />} />
           <Route path="/office" element={<Office />} />
+          <Route path="/user" element={<User />} />
+          <Route path="/role" element={<Role />} />
         </Route>
         <Route path="/login" element={<PublicRoute element={<Login />} />} />
 

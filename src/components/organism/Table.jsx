@@ -70,7 +70,7 @@ const Table = ({
               : submitType === "location"
               ? "Location"
               : submitType === "edit"
-              ? "Update"
+              ? `Update ${title}`
               : null
           }
           closeButton={submitType !== "delete"}

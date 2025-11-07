@@ -99,6 +99,19 @@ export const configTableOffice = [
   },
 ];
 
+export const configTableUser = [
+  {
+    title: "Username",
+    key: "user_name",
+    type: "text",
+  },
+  {
+    title: "Phone",
+    key: "user_phone",
+    type: "number",
+  },
+];
+
 export const dayNames = [
   { title: "Sunday" },
   { title: "Monday" },

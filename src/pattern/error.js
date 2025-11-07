@@ -9,6 +9,14 @@ export const errorOptions = {
     },
   },
 
+  phone: {
+    required: "Phone Number is Required",
+    minLength: {
+      value: 10,
+      message: "Phone Number must be at least 10 characters",
+    },
+  },
+
   password: {
     required: "Password is Required",
     minLength: {
@@ -222,5 +230,8 @@ export const errorOptions = {
       value: /^-?\d+(\.\d+)?$/,
       message: "Hanya boleh angka",
     },
+  },
+  select_role: {
+    required: "Select Role is Required",
   },
 };

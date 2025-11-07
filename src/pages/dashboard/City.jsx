@@ -29,6 +29,7 @@ const City = () => {
         dataRow={dataRow}
         configTable={configTableCity}
         stateShowModal={stateShowModal}
+        title={"City"}
         handleSearch={handleSearch(setSearchQuery)}
         inputForm={
           submitType === "add"

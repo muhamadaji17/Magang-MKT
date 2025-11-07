@@ -32,6 +32,7 @@ const Country = () => {
         dataRow={dataRow}
         configTable={configTableCountry}
         stateShowModal={stateShowModal}
+        title={"Country"}
         handleSearch={handleSearch(setSearchQuery)}
         inputForm={
           submitType === "add" ? inputAddCountry : inputEditCountry(dataRow)
