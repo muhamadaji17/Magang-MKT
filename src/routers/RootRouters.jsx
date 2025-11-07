@@ -1,3 +1,5 @@
+/** @format */
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Dashboard } from "../components/layouts";
 import {
@@ -11,6 +13,7 @@ import {
   City,
   Office,
   Films,
+  DetailFilmPage,
 } from "../pages";
 import { ProtectedRoute, PublicRoute } from "./Middleware";
 
@@ -22,6 +25,7 @@ const RootRouters = () => {
           <Route index element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/films" element={<Films />} />
+          <Route path="/films/detail" element={<DetailFilmPage />} />
           <Route path="/banner" element={<Banner />} />
           <Route path="/country" element={<Country />} />
           <Route path="/province" element={<Province />} />

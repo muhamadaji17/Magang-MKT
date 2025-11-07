@@ -1,7 +1,10 @@
+/** @format */
+
 import { HeaderContent } from "../../components/molecules";
 import { Table } from "../../components/organism";
 import { useFilmsHook } from "../../hook";
 import {
+  getRatingService,
   handleAddFilms,
   handleDeleteFilms,
   handleEditFilms,
@@ -21,25 +24,46 @@ const Films = () => {
     setSearchQuery,
     extraOptions,
     stateShowModal,
-    stateShowSidebar,
+    searchQuery,
+    accessToken,
+    datasRating,
+    setDatasRating,
+    setRefreshData,
   } = useFilmsHook();
 
   return (
     <>
-      <HeaderContent title={"Film"} handleOpen={stateShowSidebar.handleShow} />
+      <HeaderContent
+        title={"Film"}
+        handleOpen={stateShowModal.handleShow}
+        handleAPI={() =>
+          getRatingService(accessToken, {
+            searchQuery,
+            setDatasRating,
+            setRefreshData,
+          })
+        }
+      />
 
       <Table
         datasTable={datasFilms}
         dataRow={dataRow}
         configTable={configTableFilms}
-        stateShowSidebar={stateShowSidebar}
         stateShowModal={stateShowModal}
         handleSearch={handleSearch(setSearchQuery)}
+        handleAPI={() =>
+          getRatingService(accessToken, {
+            searchQuery,
+            setDatasRating,
+            setRefreshData,
+          })
+        }
         inputForm={
-          submitType === "add" ? inputAddFilms : inputEditFilms(dataRow)
+          submitType === "add"
+            ? inputAddFilms(datasRating)
+            : inputEditFilms(dataRow, datasRating)
         }
         submitType={submitType}
-        tableType={"films"}
         handleService={
           submitType === "add"
             ? handleAddFilms(extraOptions)

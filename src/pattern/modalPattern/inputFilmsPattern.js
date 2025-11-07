@@ -1,6 +1,8 @@
+/** @format */
+
 import { errorOptions } from "../error";
 
-export const inputAddFilms = [
+export const inputAddFilms = (rating) => [
   {
     labelText: "Title Film",
     name: "nama_film",
@@ -8,13 +10,69 @@ export const inputAddFilms = [
     optionError: errorOptions.title_film,
   },
   {
-    labelText: "Sinopsis Film",
+    labelText: "Sinopsis Film ID (Bahasa)",
     name: "sinopsis_film_id",
-    type: "text",
-    optionError: errorOptions.sinopsis_film,
+    type: "textarea",
+    rows: 5,
+    optionError: errorOptions.sinopsis_film_id,
+    grid: 6,
   },
   {
-    labelText: "Trailer Film",
+    labelText: "Sinopsis Film EN (English)",
+    name: "sinopsis_film_en",
+    type: "textarea",
+    rows: 5,
+    optionError: errorOptions.sinopsis_film_en,
+    grid: 6,
+  },
+  {
+    labelText: "Genre Film",
+    name: "genre_film",
+    type: "text",
+    optionError: errorOptions.genre_film,
+    grid: 4,
+  },
+  {
+    labelText: "Durasi Film",
+    name: "durasi_film",
+    type: "number",
+    optionError: errorOptions.durasi_film,
+    grid: 4,
+    min: 0,
+  },
+  {
+    labelText: "Rating Film",
+    name: "id_rating",
+    type: "select",
+    options: rating,
+    optionDisabledText: "Pilih Rating",
+    optionError: errorOptions.id_rating,
+    grid: 4,
+  },
+
+  {
+    labelText: "Produser Film",
+    name: "produser_film",
+    type: "text",
+    optionError: errorOptions.produser_film,
+    grid: 6,
+  },
+  {
+    labelText: "Sutradara Film",
+    name: "sutradara_film",
+    type: "text",
+    optionError: errorOptions.sutradara_film,
+    grid: 6,
+  },
+  {
+    labelText: "Production House Film",
+    name: "produksi_film",
+    type: "text",
+    optionError: errorOptions.produksi_film,
+    grid: 12,
+  },
+  {
+    labelText: "Link Trailer Film",
     name: "trailer_film",
     type: "text",
     optionError: errorOptions.url,
@@ -28,27 +86,90 @@ export const inputAddFilms = [
   },
 ];
 
-export const inputEditFilms = (datasDefault) => [
+export const inputEditFilms = (datasDefault, rating) => [
   {
     labelText: "Title Film",
     name: "nama_film",
     type: "text",
-    defaultValue: datasDefault.nama_film,
     optionError: errorOptions.title_film,
+    defaultValue: datasDefault.nama_film,
   },
   {
-    labelText: "Sinopsis Film",
+    labelText: "Sinopsis Film ID (Bahasa)",
     name: "sinopsis_film_id",
-    type: "text",
+    type: "textarea",
+    rows: 5,
+    optionError: errorOptions.sinopsis_film_id,
+    grid: 6,
     defaultValue: datasDefault.sinopsis_film_id,
-    optionError: errorOptions.sinopsis_film,
   },
   {
-    labelText: "Trailer Film",
+    labelText: "Sinopsis Film EN (English)",
+    name: "sinopsis_film_en",
+    type: "textarea",
+    rows: 5,
+    optionError: errorOptions.sinopsis_film_en,
+    grid: 6,
+    defaultValue: datasDefault.sinopsis_film_en,
+  },
+  {
+    labelText: "Genre Film",
+    name: "genre_film",
+    type: "text",
+    optionError: errorOptions.genre_film,
+    grid: 4,
+    defaultValue: datasDefault.genre_film,
+  },
+  {
+    labelText: "Durasi Film",
+    name: "durasi_film",
+    type: "number",
+    optionError: errorOptions.durasi_film,
+    grid: 4,
+    min: 0,
+    defaultValue: datasDefault.durasi_film,
+  },
+  {
+    labelText: "Rating Film",
+    name: "id_rating",
+    type: "select",
+    options: rating,
+    optionDisabledText: "Pilih Rating",
+    optionError: errorOptions.id_rating,
+    grid: 4,
+    defaultValue: datasDefault?.rating?.id_rating,
+  },
+
+  {
+    labelText: "Produser Film",
+    name: "produser_film",
+    type: "text",
+    optionError: errorOptions.produser_film,
+    grid: 6,
+    defaultValue: datasDefault.produser_film,
+  },
+  {
+    labelText: "Sutradara Film",
+    name: "sutradara_film",
+    type: "text",
+    optionError: errorOptions.sutradara_film,
+    grid: 6,
+    defaultValue: datasDefault.sutradara_film,
+  },
+  {
+    labelText: "Production House Film",
+    name: "produksi_film",
+    type: "text",
+    optionError: errorOptions.produksi_film,
+    grid: 12,
+    defaultValue: datasDefault.produksi_film,
+  },
+  {
+    labelText: "Link Trailer Film",
     name: "trailer_film",
     type: "text",
-    defaultValue: datasDefault.trailer_film,
     optionError: errorOptions.url,
+    defaultValue: datasDefault.trailer_film,
   },
   {
     labelText: "Poster Film",

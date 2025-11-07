@@ -1,3 +1,5 @@
+/** @format */
+
 import { IoClose } from "react-icons/io5";
 import { Button } from "../atom";
 
@@ -21,9 +23,7 @@ const ModalLayout = ({
           ></div>
           <div className="flex justify-center items-center h-full">
             <div
-              className={`bg-white rounded-sm p-5 ${
-                submitType === "location" ? "w-[1000px]" : "w-[500px]"
-              } ${className} z-10 `}
+              className={`bg-white rounded-sm p-5 w-[1000px] ${className} z-10 `}
             >
               {closeButton && (
                 <div className="mb-5 flex justify-between">
@@ -33,8 +33,7 @@ const ModalLayout = ({
                       <span className="text-gray-600">{description}</span>
                     )}
                   </div>
-
-                  <div>
+                  <div className="">
                     <Button onClick={handleCloseModal} className={"text-2xl"}>
                       <IoClose />
                     </Button>

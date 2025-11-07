@@ -1,3 +1,5 @@
+/** @format */
+
 import { loginService, logoutService } from "./authService,";
 import { generateEndpointWithQuery } from "./generateEndpointWithQuery";
 import { generateHeaders } from "./generateHeaders";
@@ -7,7 +9,10 @@ import { getAboutService } from "./dashboardService/aboutService";
 import { getProvinceService } from "./dashboardService/provinceService";
 import { getCityService } from "./dashboardService/cityService";
 import { getOfficeService } from "./dashboardService/officeService";
-import { getFilmService } from "./dashboardService/filmService";
+import {
+  getFilmByIdService,
+  getFilmService,
+} from "./dashboardService/filmService";
 import {
   handleAddBanner,
   handleServiceWithOnClick,
@@ -48,8 +53,12 @@ import {
   handleEditFilms,
   handleDeleteFilms,
 } from "./handlers/filmsHandlers";
-
+import { addCastingFilmService } from "./dashboardService/detailFilmService";
+import { getRatingService } from "./dashboardService/ratingService";
 export {
+  getRatingService,
+  addCastingFilmService,
+  getFilmByIdService,
   loginService,
   logoutService,
   generateEndpointWithQuery,

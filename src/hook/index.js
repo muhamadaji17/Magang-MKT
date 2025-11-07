@@ -1,3 +1,5 @@
+/** @format */
+
 import { useCalendar } from "./useCalendar";
 import { useGlobalHook } from "./useGlobalHook";
 import { useBannerHook } from "./dashboardHook/useBannerHook";
@@ -8,8 +10,11 @@ import { useAboutHook } from "./dashboardHook/useAboutHook";
 import { useOfficeHook } from "./dashboardHook/useOfficeHook";
 import { useFilmsHook } from "./dashboardHook/useFilmsHook";
 import { useDataSub } from "./useSubDatas";
-
+import { useRating } from "./dashboardHook/useRating";
+import { useData } from "./useData";
 export {
+  useData,
+  useRating,
   useCalendar,
   useGlobalHook,
   useBannerHook,

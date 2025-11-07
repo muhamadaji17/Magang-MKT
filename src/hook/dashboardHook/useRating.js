@@ -2,10 +2,10 @@
 
 import { useEffect } from "react";
 import { useGlobalHook } from "../useGlobalHook";
-import { getFilmService } from "../../service";
+import { getRatingService } from "../../service";
 import { useData } from "../useData";
 
-export const useFilmsHook = () => {
+export const useRating = () => {
   const {
     accessToken,
     dataRow,
@@ -17,19 +17,21 @@ export const useFilmsHook = () => {
     searchQuery,
     setSearchQuery,
     handleCloseModal,
+    handleCloseSidebar,
   } = useGlobalHook();
-  const { datasFilms, setDatasFilms, datasRating, setDatasRating } = useData();
+  const { datasRating, setDatasRating } = useData();
   const extraOptions = {
     accessToken,
     setRefreshData,
+    handleCloseSidebar,
     handleCloseModal,
   };
 
   useEffect(() => {
     const fetchData = () => {
-      getFilmService(accessToken, {
+      getRatingService(accessToken, {
         searchQuery,
-        setDatasFilms,
+        setDatasRating,
         setRefreshData,
       });
     };
@@ -43,17 +45,12 @@ export const useFilmsHook = () => {
   }, [searchQuery, refreshData]);
 
   return {
-    datasFilms,
+    datasRating,
     dataRow,
     setSearchQuery,
     submitType,
     extraOptions,
     stateShowModal,
     stateShowSidebar,
-    searchQuery,
-    datasRating,
-    setDatasRating,
-    setRefreshData,
-    accessToken,
   };
 };

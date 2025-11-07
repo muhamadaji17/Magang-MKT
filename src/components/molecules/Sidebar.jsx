@@ -1,3 +1,5 @@
+/** @format */
+
 import { Link, useLocation } from "react-router-dom";
 import { navLink } from "../../pattern";
 import Navlink from "./Navlink";
@@ -42,7 +44,7 @@ const Sidebar = ({
           } ${
             type === "form"
               ? "bg-white px-6"
-              : "bg-blue-600 text-white md:translate-x-0"
+              : "bg-blue-950 text-white md:translate-x-0"
           }  ${
             isShow
               ? "translate-x-0 "

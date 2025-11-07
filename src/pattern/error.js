@@ -1,3 +1,5 @@
+/** @format */
+
 export const errorOptions = {
   username: {
     required: "Username is Required",
@@ -34,27 +36,55 @@ export const errorOptions = {
   title_film: {
     required: "Title Film is Required",
     minLength: {
-      value: 4,
-      message: "Title Film must be at least 4 characters",
+      value: 2,
+      message: "Title Film must be at least 2 characters",
     },
   },
 
-  sinopsis_film: {
-    required: "Sinopsis Film is Required",
+  sinopsis_film_id: {
+    required: "Sinopsis Film ID (Bahasa) is Required",
     minLength: {
       value: 6,
       message: "Sinopsis Film must be at least 6 characters",
     },
   },
+  sinopsis_film_en: {
+    required: "Sinopsis Film EN (English) is Required",
+    minLength: {
+      value: 6,
+      message: "Sinopsis Film must be at least 6 characters",
+    },
+  },
+  genre_film: {
+    required: "Genre Film is Required",
+    minLength: {
+      value: 3,
+      message: "Sinopsis Film must be at least 3 characters",
+    },
+  },
+  durasi_film: {
+    required: "Durasi Film is Required",
+  },
+  id_rating: {
+    required: "Rating Film is Required",
+  },
+  sutradara_film: {
+    required: "Sutradara Film is Required",
+  },
+  produser_film: {
+    required: "Produser Film is Required",
+  },
+  produksi_film: {
+    required: "Prodution House Film is Required",
+  },
 
   url: {
     required: "Url is Required",
-
-    pattern: {
-      value:
-        /^(https?:\/\/)?([\w\-]+\.)+[\w-]+(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/,
-      message: "Format link tidak valid",
-    },
+    // pattern: {
+    //   value:
+    //     /^(https?:\/\/)?([\w\-]+\.)+[\w-]+(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/,
+    //   message: "Format link tidak valid",
+    // },
   },
 
   name_banner: {
@@ -68,13 +98,25 @@ export const errorOptions = {
   start_date_banner: {
     required: "Start Date Banner is Required",
   },
+  nama_casting_film: {
+    required: "Nama Artis is Required",
+  },
 
   end_date_banner: {
     required: "End Date Banner is Required",
   },
 
-  status: {
-    required: "Status is Required",
+  sosmed_name_casting_film: {
+    required: "Nama Sosial Media is Required",
+  },
+  sosmed_url_casting_film: {
+    required: "URL Sosial Media is Required",
+  },
+  sebagai_casting_film: {
+    required: "Pemeran is Required",
+  },
+  sinopsis_casting_film_id: {
+    required: "Deskripsi is Required",
   },
 
   img: {

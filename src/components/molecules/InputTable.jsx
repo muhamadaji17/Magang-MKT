@@ -1,3 +1,5 @@
+/** @format */
+
 const InputTable = ({ configTable, handleSearch }) => {
   return (
     <>
@@ -8,14 +10,14 @@ const InputTable = ({ configTable, handleSearch }) => {
             type="text"
             placeholder={data.title}
             onChange={(e) => handleSearch(e.target.value, data.key)}
-            className="border border-gray-400 rounded-md py-2 px-3 outline-none w-full placeholder:text-black text-xs"
+            className="bg-white border border-gray-400 rounded-md py-2 px-3 outline-none w-full placeholder:text-black text-xs"
           />
         ) : data.type === "select" ? (
           <select
             key={index}
             onChange={(e) => handleSearch(e.target.value, data.key)}
             defaultValue={""}
-            className="border border-gray-400 rounded-md py-2 px-3 outline-none w-full text-xs"
+            className="bg-white border border-gray-400 rounded-md py-2 px-3 outline-none w-full text-xs"
           >
             <option value="" disabled>
               {data.placeholder}

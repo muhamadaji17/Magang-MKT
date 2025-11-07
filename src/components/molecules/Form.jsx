@@ -1,3 +1,5 @@
+/** @format */
+
 import { useEffect, useState } from "react";
 import { InputForm } from ".";
 import { Button } from "../atom";
@@ -94,6 +96,7 @@ const Form = ({
                   }}
                   register={register}
                   control={control}
+                  rows={5}
                   error={errors}
                   value={value}
                 />

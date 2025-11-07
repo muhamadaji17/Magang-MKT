@@ -1,3 +1,5 @@
+/** @format */
+
 import Form from "./Form";
 import InputForm from "./InputForm";
 import InputTable from "./InputTable";
@@ -12,8 +14,10 @@ import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import Navlink from "./Navlink";
 import Leaflet from "./Leaflet";
+import ShortenedCharacter from "./ShortCharacter";
 
 export {
+  ShortenedCharacter,
   Form,
   InputForm,
   InputTable,

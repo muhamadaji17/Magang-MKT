@@ -1,3 +1,5 @@
+/** @format */
+
 import { ModalLayout } from "../layouts";
 import {
   ConfirmDelete,
@@ -20,6 +22,8 @@ const Table = ({
   submitType,
   tableType,
   handleService,
+  title,
+  handleAPI,
 }) => {
   return (
     <div>
@@ -36,10 +40,11 @@ const Table = ({
             tableType={tableType}
             handleShowSidebar={stateShowSidebar?.handleShow}
             handleShowModal={stateShowModal?.handleShow}
+            handleAPI={handleAPI}
           />
         </table>
 
-        {tableType === "films" && (
+        {/* {tableType === "films" && (
           <Sidebar
             isShow={stateShowSidebar?.isShow}
             type="form"
@@ -52,7 +57,7 @@ const Table = ({
             handleShow={stateShowSidebar?.handleShow}
             handleService={handleService}
           />
-        )}
+        )} */}
 
         <ModalLayout
           isModalOpen={stateShowModal?.isShow}
@@ -61,7 +66,7 @@ const Table = ({
           description={submitType === "location" ? dataRow.address : null}
           title={
             submitType === "add"
-              ? "Create"
+              ? `Create ${title}`
               : submitType === "location"
               ? "Location"
               : submitType === "edit"
@@ -81,6 +86,14 @@ const Table = ({
               latitude={dataRow.latitude}
               longitude={dataRow.longitude}
             />
+          ) : submitType === "image" ? (
+            <>
+              <img
+                src={`${import.meta.env.VITE_API_PUBLIC_IMG}films/${
+                  dataRow.poster_film
+                }`}
+              />
+            </>
           ) : submitType === "delete" ? (
             <ConfirmDelete
               handleCloseModal={stateShowModal?.handleShow}

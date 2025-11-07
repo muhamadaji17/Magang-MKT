@@ -1,3 +1,5 @@
+/** @format */
+
 import { loginPattern } from "./authPattern";
 import { navLink } from "./links";
 import { handleSubmitData } from "./handleSubmitData";
@@ -40,8 +42,9 @@ import {
   inputAddFilms,
   inputEditFilms,
 } from "./modalPattern/inputFilmsPattern";
-
+import { inputAddCastingFilms } from "./modalPattern/inputCastingFilmsPattern";
 export {
+  inputAddCastingFilms,
   loginPattern,
   navLink,
   handleSubmitData,

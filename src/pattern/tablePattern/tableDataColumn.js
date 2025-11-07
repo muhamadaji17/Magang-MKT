@@ -1,19 +1,21 @@
+/** @format */
+
 export const configTableFilms = [
-  { title: "Title", key: "nama_film", type: "text" },
-  { title: "Sinopsis", key: "sinopsis_film_id", type: "text" },
-  { title: "Traier", key: "trailer_film", type: "text" },
   {
     title: "Poster",
     key: "poster_film",
-    type: "select",
-    placeholder: "Type File",
-    options: [
-      { label: "All", value: "" },
-      { label: "JPEG", value: "jpeg" },
-      { label: "JPG", value: "jpg" },
-      { label: "PNG", value: "png" },
-    ],
+    // type: "select",
+    // placeholder: "Type File",
+    // options: [
+    //   { label: "All", value: "" },
+    //   { label: "JPEG", value: "jpeg" },
+    //   { label: "JPG", value: "jpg" },
+    //   { label: "PNG", value: "png" },
+    // ],
   },
+  { title: "Title", key: "nama_film", type: "text" },
+  { title: "Sinopsis", key: "sinopsis_film_id", type: "text" },
+  { title: "Traier", key: "trailer_film", type: "text" },
   {
     title: "Status",
     key: "status",

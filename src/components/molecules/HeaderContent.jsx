@@ -1,8 +1,10 @@
+/** @format */
+
 import { useLocation } from "react-router-dom";
 import { Button } from "../atom";
 import Breadcrumb from "./Breadcrumb";
 
-const HeaderContent = ({ title, handleOpen }) => {
+const HeaderContent = ({ title, handleOpen, handleAPI }) => {
   const { pathname } = useLocation();
 
   return (
@@ -15,7 +17,10 @@ const HeaderContent = ({ title, handleOpen }) => {
       {pathname !== "/" && (
         <div className="flex justify-end mb-10">
           <Button
-            onClick={() => handleOpen("add")}
+            onClick={() => {
+              handleOpen("add");
+              handleAPI();
+            }}
             className={"bg-blue-500 text-white px-3 py-1 rounded-sm"}
           >
             Add {title}

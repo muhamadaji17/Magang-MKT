@@ -1,12 +1,14 @@
+/** @format */
+
 const TableHead = ({ configTable, type }) => (
   <thead
     className={
-      type === "table" ? "text-xs text-white text-center bg-blue-600 " : ""
+      type === "table" ? "text-xs text-white text-center bg-blue-950 " : ""
     }
   >
     <tr>
       {type === "table" && (
-        <th scope="col" className="px-6 py-3">
+        <th scope="col" className=" py-3">
           No
         </th>
       )}

@@ -1,3 +1,5 @@
+/** @format */
+
 import { useEffect, useState } from "react";
 import { Button } from "../atom";
 import { FaEyeSlash, FaUpload } from "react-icons/fa";
@@ -90,11 +92,30 @@ const InputForm = ({ data, register, control, value, error, state }) => {
           control={control}
           rules={data.optionError}
         />
+      ) : data.type === "textarea" ? (
+        <textarea
+          type={"text"}
+          {...register(data.name, data.optionError)}
+          id={data.name}
+          rows={data.rows}
+          className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 "
+        />
+      ) : data.type === "hidden" ? (
+        <input
+          type="hidden"
+          name={data.name}
+          value={data.value}
+          {...register(data.name)}
+          className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 "
+        />
       ) : (
         <input
           type={!showPassword ? data.type : "text"}
           {...register(data.name, data.optionError)}
           id={data.name}
+          onWheel={(e) => e.target.blur()}
+          max={data.max}
+          min={data.min}
           className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 "
         />
       )}
