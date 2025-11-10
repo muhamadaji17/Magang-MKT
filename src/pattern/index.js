@@ -20,6 +20,7 @@ import {
   configTableOffice,
   configTableProvince,
   configTableUser,
+  configTableRole,
 } from "./tablePattern/tableDataColumn";
 
 import {
@@ -45,6 +46,7 @@ import {
 } from "./modalPattern/inputFilmsPattern";
 import { inputAddCastingFilms } from "./modalPattern/inputCastingFilmsPattern";
 import { inputAddUser, inputEditUser } from "./modalPattern/inputUserPattern";
+import { inputAddRole, inputEditRole } from "./modalPattern/inputRolePattern";
 export {
   inputAddCastingFilms,
   loginPattern,
@@ -68,10 +70,13 @@ export {
   inputEditFilms,
   inputAddUser,
   inputEditUser,
+  inputAddRole,
+  inputEditRole,
   configTableCountry,
   configTableProvince,
   configTableCity,
   configTableOffice,
   configTableFilms,
   configTableUser,
+  configTableRole,
 };

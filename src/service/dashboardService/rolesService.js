@@ -3,25 +3,31 @@ import { SwalAlertBasic } from "../../utils";
 import { generateEndpointWithQuery } from "../generateEndpointWithQuery";
 import { generateHeaders } from "../generateHeaders";
 
-export const getUserService = async (accessToken, extraOptions) => {
-  const { setDatasUser, setRefreshData, searchQuery } = extraOptions;
+export const getRolesService = async (accessToken, extraOptions) => {
+  const { setDatasRole, setRefreshData, searchQuery } = extraOptions;
+
   const queryParams = generateEndpointWithQuery(searchQuery);
   try {
-    const response = await GET(`crud/admin/by?${queryParams}`, accessToken);
+    const response = await GET(`crud/roles/by?${queryParams}`, accessToken);
+    const gabung = response.data.payload?.map((data) => ({
+      ...data,
+      label: data.role_name,
+      value: data.id_roles,
+    }));
 
-    setDatasUser(response.data.payload);
+    setDatasRole(gabung);
     setRefreshData(true);
   } catch (error) {
     console.error(error);
   }
 };
 
-export const addUserService = async (datas, extraOptions) => {
+export const addRoleService = async (datas, extraOptions) => {
   const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
   const headers = generateHeaders({ accessToken });
 
   try {
-    const response = await POST("crud/admin", datas, headers);
+    const response = await POST("crud/roles", datas, headers);
 
     if (response.data.success) {
       SwalAlertBasic({
@@ -32,16 +38,16 @@ export const addUserService = async (datas, extraOptions) => {
       handleCloseModal();
     }
   } catch (error) {
-    console.error(error.response.data.message);
+    console.error(error);
   }
 };
 
-export const updateUserService = async (datas, extraOptions) => {
+export const updateRoleService = async (datas, extraOptions) => {
   const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
   const headers = generateHeaders({ accessToken });
 
   try {
-    const response = await PUT("crud/admin", datas, headers);
+    const response = await PUT("crud/roles", datas, headers);
 
     SwalAlertBasic({
       icon: "success",
@@ -54,11 +60,12 @@ export const updateUserService = async (datas, extraOptions) => {
   }
 };
 
-export const deleteUserService = async (id, extraOptions) => {
+export const deleteRoleService = async (id, extraOptions) => {
   const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
 
   try {
-    const response = await DELETE("crud/admin", accessToken, id);
+    const response = await DELETE("crud/roles", accessToken, id);
+
     if (response.data.success) {
       SwalAlertBasic({
         icon: "success",
@@ -68,7 +75,6 @@ export const deleteUserService = async (id, extraOptions) => {
       setRefreshData(false);
     }
   } catch (error) {
-    console.error("Delete Failed:", error);
-    throw error;
+    console.error(error);
   }
 };

@@ -23,6 +23,7 @@ const Table = ({
   tableType,
   handleService,
   title,
+  pathDetail,
   handleAPI,
 }) => {
   return (
@@ -32,19 +33,21 @@ const Table = ({
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full rounded-t-md overflow-hidden">
-          <TableHead configTable={configTable} type={"table"} />
+        <table className="w-full rounded-t-md min-w-max">
+          <TableHead configTable={configTable} type="table" />
           <TableBody
             datasTable={datasTable}
             configTable={configTable}
             tableType={tableType}
+            pathDetail={pathDetail}
             handleShowSidebar={stateShowSidebar?.handleShow}
             handleShowModal={stateShowModal?.handleShow}
             handleAPI={handleAPI}
           />
         </table>
+      </div>
 
-        {/* {tableType === "films" && (
+      {/* {tableType === "films" && (
           <Sidebar
             isShow={stateShowSidebar?.isShow}
             type="form"
@@ -59,50 +62,46 @@ const Table = ({
           />
         )} */}
 
-        <ModalLayout
-          isModalOpen={stateShowModal?.isShow}
-          handleCloseModal={stateShowModal?.handleShow}
-          submitType={submitType}
-          description={submitType === "location" ? dataRow.address : null}
-          title={
-            submitType === "add"
-              ? `Create ${title}`
-              : submitType === "location"
-              ? "Location"
-              : submitType === "edit"
-              ? `Update ${title}`
-              : null
-          }
-          closeButton={submitType !== "delete"}
-        >
-          {submitType == "add" || submitType === "edit" ? (
-            <Form
-              configInput={inputForm}
-              buttonText={"Submit"}
-              handleSubmitData={handleService}
+      <ModalLayout
+        isModalOpen={stateShowModal?.isShow}
+        handleCloseModal={stateShowModal?.handleShow}
+        submitType={submitType}
+        description={submitType === "location" ? dataRow.address : null}
+        title={
+          submitType === "add"
+            ? `Create ${title}`
+            : submitType === "location"
+            ? "Location"
+            : submitType === "edit"
+            ? `Update ${title}`
+            : null
+        }
+        closeButton={submitType !== "delete"}
+      >
+        {submitType == "add" || submitType === "edit" ? (
+          <Form
+            configInput={inputForm}
+            buttonText={"Submit"}
+            handleSubmitData={handleService}
+          />
+        ) : submitType === "location" ? (
+          <Leaflet latitude={dataRow.latitude} longitude={dataRow.longitude} />
+        ) : submitType === "image" ? (
+          <>
+            <img
+              src={`${import.meta.env.VITE_API_PUBLIC_IMG}films/${
+                dataRow.poster_film
+              }`}
             />
-          ) : submitType === "location" ? (
-            <Leaflet
-              latitude={dataRow.latitude}
-              longitude={dataRow.longitude}
-            />
-          ) : submitType === "image" ? (
-            <>
-              <img
-                src={`${import.meta.env.VITE_API_PUBLIC_IMG}films/${
-                  dataRow.poster_film
-                }`}
-              />
-            </>
-          ) : submitType === "delete" ? (
-            <ConfirmDelete
-              handleCloseModal={stateShowModal?.handleShow}
-              dataRow={dataRow}
-              onConfirm={handleService}
-            />
-          ) : null}
-        </ModalLayout>
-      </div>
+          </>
+        ) : submitType === "delete" ? (
+          <ConfirmDelete
+            handleCloseModal={stateShowModal?.handleShow}
+            dataRow={dataRow}
+            onConfirm={handleService}
+          />
+        ) : null}
+      </ModalLayout>
     </div>
   );
 };

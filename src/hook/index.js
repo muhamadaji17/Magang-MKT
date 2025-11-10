@@ -12,6 +12,10 @@ import { useFilmsHook } from "./dashboardHook/useFilmsHook";
 import { useDataSub } from "./useSubDatas";
 import { useRating } from "./dashboardHook/useRating";
 import { useData } from "./useData";
+import { useUserHook } from "./dashboardHook/useUserHook";
+import { useRolesHook } from "./dashboardHook/useRolesHook";
+import { useDebauncedEffect } from "./useDebouncedEffect";
+
 export {
   useData,
   useRating,
@@ -25,4 +29,7 @@ export {
   useOfficeHook,
   useFilmsHook,
   useDataSub,
+  useUserHook,
+  useRolesHook,
+  useDebauncedEffect,
 };

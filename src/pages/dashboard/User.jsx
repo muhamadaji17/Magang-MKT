@@ -1,41 +1,41 @@
-import { useEffect } from "react";
 import { HeaderContent } from "../../components/molecules";
 import { Table } from "../../components/organism";
-import { useData, useGlobalHook } from "../../hook";
+import { useUserHook } from "../../hook";
 import {
-  getRoleService,
-  getUserService,
+  getRolesService,
   handleAddUser,
+  handleDeleteUser,
   handleEditUser,
 } from "../../service";
-import { configTableUser, inputAddUser, inputEditUser } from "../../pattern";
+import {
+  configTableUser,
+  handleSearch,
+  inputAddUser,
+  inputEditUser,
+} from "../../pattern";
 
 const User = () => {
   const {
-    accessToken,
-    dataRow,
-    submitType,
-    refreshData,
-    stateShowSidebar,
     stateShowModal,
-    setRefreshData,
+    accessToken,
     searchQuery,
+    setRefreshData,
+    setDatasRole,
+    datasUser,
+    dataRow,
     setSearchQuery,
-    handleCloseModal,
-  } = useGlobalHook();
-  const { datasUser, setDatasUser, datasRole, setDatasRole } = useData();
-  const extraOptions = { accessToken, setRefreshData, handleCloseModal };
+    datasRole,
+    submitType,
+    extraOptions,
+  } = useUserHook();
 
-  useEffect(() => {
-    getUserService(accessToken, { setRefreshData, searchQuery, setDatasUser });
-  }, [refreshData]);
   return (
     <>
       <HeaderContent
         title={"User"}
         handleOpen={stateShowModal.handleShow}
         handleAPI={() =>
-          getRoleService(accessToken, {
+          getRolesService(accessToken, {
             searchQuery,
             setDatasRole,
             setRefreshData,
@@ -49,14 +49,14 @@ const User = () => {
         configTable={configTableUser}
         stateShowModal={stateShowModal}
         title={"User"}
-        // handleSearch={handleSearch(setSearchQuery)}
+        handleSearch={handleSearch(setSearchQuery)}
         inputForm={
           submitType === "add"
             ? inputAddUser(datasRole)
             : inputEditUser(dataRow, datasRole)
         }
         handleAPI={() =>
-          getRoleService(accessToken, {
+          getRolesService(accessToken, {
             searchQuery,
             setDatasRole,
             setRefreshData,
@@ -68,17 +68,10 @@ const User = () => {
             ? handleAddUser(extraOptions)
             : submitType === "edit"
             ? handleEditUser(extraOptions, dataRow)
+            : submitType === "delete"
+            ? handleDeleteUser(extraOptions)
             : null
         }
-        // handleService={
-        //   submitType === "add"
-        //     ? handleAddFilms(extraOptions)
-        //     : submitType === "edit"
-        //     ? handleEditFilms(extraOptions, dataRow)
-        //     : submitType === "delete"
-        //     ? handleDeleteFilms(extraOptions)
-        //     : null
-        // }
       />
     </>
   );

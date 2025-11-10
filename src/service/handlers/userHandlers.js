@@ -1,5 +1,9 @@
 import { handleSubmitData } from "../../pattern";
-import { addUserService } from "../dashboardService/userService";
+import {
+  addUserService,
+  deleteUserService,
+  updateUserService,
+} from "../dashboardService/userService";
 
 export const handleAddUser = (extraOptions) => {
   return (datas) => {
@@ -10,9 +14,15 @@ export const handleAddUser = (extraOptions) => {
 export const handleEditUser = (extraOptions, dataRow) => {
   return (datas) => {
     handleSubmitData(
-      { ...datas, id: dataRow.id },
-      addUserService,
+      { ...datas, id: dataRow.id_admin },
+      updateUserService,
       extraOptions
     );
+  };
+};
+
+export const handleDeleteUser = (extraOptions) => {
+  return (datas) => {
+    deleteUserService(datas.id_admin, extraOptions);
   };
 };

@@ -14,7 +14,7 @@ import {
   getFilmService,
 } from "./dashboardService/filmService";
 import { getUserService } from "./dashboardService/userService";
-import { getRoleService } from "./dashboardService/roleService";
+import { getRolesService } from "./dashboardService/rolesService";
 import {
   handleAddBanner,
   handleServiceWithOnClick,
@@ -55,7 +55,16 @@ import {
   handleEditFilms,
   handleDeleteFilms,
 } from "./handlers/filmsHandlers";
-import { handleAddUser, handleEditUser } from "./handlers/userHandlers";
+import {
+  handleAddUser,
+  handleEditUser,
+  handleDeleteUser,
+} from "./handlers/userHandlers";
+import {
+  handleAddRole,
+  handleEditRole,
+  handleDeleteRole,
+} from "./handlers/rolesHandler";
 import { addCastingFilmService } from "./dashboardService/detailFilmService";
 import { getRatingService } from "./dashboardService/ratingService";
 
@@ -75,7 +84,7 @@ export {
   getOfficeService,
   getFilmService,
   getUserService,
-  getRoleService,
+  getRolesService,
   handleAddBanner,
   handleServiceWithOnClick,
   handleAddCountry,
@@ -98,4 +107,8 @@ export {
   handleDeleteFilms,
   handleAddUser,
   handleEditUser,
+  handleDeleteUser,
+  handleAddRole,
+  handleEditRole,
+  handleDeleteRole,
 };

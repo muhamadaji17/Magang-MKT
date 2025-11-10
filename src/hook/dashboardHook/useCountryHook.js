@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import { useGlobalHook } from "../useGlobalHook";
 import { getCountryService } from "../../service";
+import { useDebauncedEffect } from "../useDebouncedEffect";
+import { useData } from "../useData";
 
 export const useCountryHook = () => {
-  const [datasCountry, setDatasCountry] = useState([]);
   const {
     accessToken,
     refreshData,
@@ -17,24 +17,20 @@ export const useCountryHook = () => {
   } = useGlobalHook();
 
   const extraOptions = { accessToken, setRefreshData, handleCloseModal };
+  const { datasCountry, setDatasCountry } = useData();
 
-  useEffect(() => {
-    const fetchData = () => {
+  useDebauncedEffect({
+    fn: () => {
       getCountryService(accessToken, {
         searchQuery,
         setDatasCountry,
         setRefreshData,
         handleCloseModal,
       });
-    };
-
-    if (Object.keys(searchQuery).length > 0) {
-      const timeout = setTimeout(fetchData, 300);
-      return () => clearTimeout(timeout);
-    } else {
-      fetchData();
-    }
-  }, [refreshData, searchQuery]);
+    },
+    deps: [searchQuery, refreshData],
+    condition: Object.keys(searchQuery).length > 0,
+  });
 
   return {
     datasCountry,

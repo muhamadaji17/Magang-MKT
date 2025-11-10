@@ -19,7 +19,9 @@ const HeaderContent = ({ title, handleOpen, handleAPI }) => {
           <Button
             onClick={() => {
               handleOpen("add");
-              handleAPI();
+              if (handleAPI) {
+                handleAPI();
+              }
             }}
             className={"bg-blue-500 text-white px-3 py-1 rounded-sm"}
           >

@@ -24,7 +24,7 @@ export const inputAddUser = (dataRole) => [
   },
   {
     labelText: "Role",
-    name: "id_role",
+    name: "id_roles",
     type: "select",
     options: dataRole,
     optionError: errorOptions.select_role,
@@ -36,7 +36,7 @@ export const inputAddUser = (dataRole) => [
 export const inputEditUser = (defaultValues, dataRole) => [
   {
     labelText: "Username",
-    name: "username",
+    name: "user_name",
     type: "text",
     defaultValue: defaultValues.user_name,
     optionError: errorOptions.username,
@@ -50,13 +50,7 @@ export const inputEditUser = (defaultValues, dataRole) => [
     optionError: errorOptions.phone,
     grid: 6,
   },
-  {
-    labelText: "Password",
-    name: "password",
-    type: "password",
-    optionError: errorOptions.password,
-    grid: 6,
-  },
+
   {
     labelText: "Role",
     name: "id_roles",
@@ -66,5 +60,17 @@ export const inputEditUser = (defaultValues, dataRole) => [
     options: dataRole,
     defaultValue: defaultValues?.roles?.id_roles,
     grid: 6,
+  },
+  {
+    name: "status",
+    type: "select",
+    labelText: "Status",
+    optionDisabledText: "Select Status",
+    defaultValue: defaultValues.status,
+    grid: 6,
+    options: [
+      { label: "Active", value: true },
+      { label: "Inactive", value: false },
+    ],
   },
 ];

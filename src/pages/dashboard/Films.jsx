@@ -50,6 +50,7 @@ const Films = () => {
         title={"Film"}
         dataRow={dataRow}
         configTable={configTableFilms}
+        pathDetail={"/films/detail?nama="}
         stateShowModal={stateShowModal}
         handleSearch={handleSearch(setSearchQuery)}
         handleAPI={() =>

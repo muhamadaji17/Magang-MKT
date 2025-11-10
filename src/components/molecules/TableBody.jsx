@@ -1,7 +1,7 @@
 /** @format */
 
 import { formatDate } from "date-fns";
-import { Button } from "../atom";
+import { Button, MenuOptions } from "../atom";
 import { FaExternalLinkAlt, FaEye, FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
@@ -14,6 +14,7 @@ const TableBody = ({
   handleShowModal,
   handleShowSidebar,
   handleAPI,
+  pathDetail,
 }) => {
   const pathname = useLocation().pathname;
 
@@ -68,14 +69,36 @@ const TableBody = ({
                 ) : col.key === "sinopsis_film_id" ? (
                   // <div className="max-w-96">
                   <ShortenedCharacter maxLength={50} sinopsis={data[col.key]} />
+                ) : // </div>
+
+                Array.isArray(col.key) ? (
+                  col.key.reduce((acc, curr) => acc[curr], data)
                 ) : (
-                  // </div>
                   data[col.key]
                 )}
               </td>
             ))}
             <td>
-              <div className="flex justify-center p-4 gap-3">
+              <MenuOptions
+                onEdit={() => {
+                  handleShowModal("edit", data);
+                  if (handleAPI) {
+                    handleAPI();
+                  }
+                }}
+                onDelete={() => handleShowModal("delete", data)}
+                onDetail={
+                  pathDetail
+                    ? {
+                        onClick: () => sessionStorage.setItem("id", data.id),
+                        to: `${pathDetail}${data.nama_film}`,
+                        data: data,
+                      }
+                    : null
+                }
+              />
+
+              {/* <div className="flex justify-center p-4 gap-3">
                 {pathname === "/office" && (
                   <Button
                     className={"text-2xl text-violet-600"}
@@ -90,7 +113,9 @@ const TableBody = ({
                   onClick={() => {
                     // if (tableType !== "films") {
                     handleShowModal("edit", data);
-                    handleAPI();
+                    if (handleAPI) {
+                      handleAPI();
+                    }
                     // } else {
                     //   handleShowSidebar("edit", data);
                     // }
@@ -114,7 +139,7 @@ const TableBody = ({
                 >
                   <FaExternalLinkAlt className="text-green-600" />
                 </Link>
-              </div>
+              </div> */}
             </td>
           </tr>
         ))

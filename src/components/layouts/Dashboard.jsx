@@ -33,7 +33,11 @@ const Dashboard = () => {
 
       <main className=" w-full h-screen overflow-x-hidden bg-gray-100">
         <Topbar handleShowSidebar={stateShowSidebar.handleShow} />
-        <div className="p-6 overflow-auto mt-11 md:mt-0">
+        {/* <div className="p-6 overflow-auto mt-11 md:mt-0">
+          <Outlet />
+        </div> */}
+
+        <div className="p-6 mt-11 md:mt-0">
           <Outlet />
         </div>
       </main>

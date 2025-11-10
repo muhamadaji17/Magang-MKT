@@ -110,6 +110,44 @@ export const configTableUser = [
     key: "user_phone",
     type: "number",
   },
+  {
+    title: "Role",
+    key: ["roles", "role_name"],
+    type: "text",
+  },
+  {
+    title: "Status",
+    key: "status",
+    type: "select",
+    placeholder: "Select Status",
+    options: [
+      { label: "Active", value: true },
+      { label: "Inactive", value: false },
+    ],
+  },
+];
+
+export const configTableRole = [
+  {
+    title: "Role Name",
+    key: "role_name",
+    type: "text",
+  },
+  {
+    title: "Priority",
+    key: "priority",
+    type: "number",
+  },
+  {
+    title: "Status",
+    key: "status",
+    type: "select",
+    placeholder: "Select Status",
+    options: [
+      { label: "Active", value: true },
+      { label: "Inactive", value: false },
+    ],
+  },
 ];
 
 export const dayNames = [
