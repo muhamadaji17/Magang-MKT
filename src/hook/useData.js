@@ -8,6 +8,8 @@ export const useData = () => {
   const [datasDetailFilms, setDatasDetailFilms] = useState([]);
   const [datasCountry, setDatasCountry] = useState([]);
   const [datasProvince, setDatasProvince] = useState([]);
+  const [datasCity, setDatasCity] = useState([]);
+  const [datasOffice, setDatasOffice] = useState([]);
   const [datasUser, setDatasUser] = useState([]);
   const [datasRole, setDatasRole] = useState([]);
 
@@ -22,6 +24,10 @@ export const useData = () => {
     setDatasCountry,
     datasProvince,
     setDatasProvince,
+    datasCity,
+    setDatasCity,
+    datasOffice,
+    setDatasOffice,
     datasUser,
     setDatasUser,
     datasRole,

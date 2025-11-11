@@ -15,14 +15,26 @@ const City = () => {
     stateShowModal,
     extraOptions,
     setSearchQuery,
-    optionsSelect,
+    getProvinceService,
+    setDatasProvince,
+    datasProvince,
     submitType,
     dataRow,
+    accessToken,
   } = useCityHook();
 
   return (
     <>
-      <HeaderContent title={"City"} handleOpen={stateShowModal.handleShow} />
+      <HeaderContent
+        title={"City"}
+        handleOpen={stateShowModal.handleShow}
+        handleAPI={() =>
+          getProvinceService(accessToken, {
+            setDatasProvince,
+            searchQuery: {},
+          })
+        }
+      />
 
       <Table
         datasTable={datasCity}
@@ -31,10 +43,13 @@ const City = () => {
         stateShowModal={stateShowModal}
         title={"City"}
         handleSearch={handleSearch(setSearchQuery)}
+        handleAPI={() =>
+          getProvinceService(accessToken, { setDatasProvince, searchQuery: {} })
+        }
         inputForm={
           submitType === "add"
-            ? inputAddCity(optionsSelect)
-            : inputEditCity(dataRow, optionsSelect)
+            ? inputAddCity(datasProvince)
+            : inputEditCity(dataRow, datasProvince)
         }
         submitType={submitType}
         handleService={

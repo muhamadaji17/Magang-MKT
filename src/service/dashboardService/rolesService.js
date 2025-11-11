@@ -39,6 +39,7 @@ export const addRoleService = async (datas, extraOptions) => {
     }
   } catch (error) {
     console.error(error);
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
   }
 };
 
@@ -57,6 +58,7 @@ export const updateRoleService = async (datas, extraOptions) => {
     handleCloseModal();
   } catch (error) {
     console.error(error);
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
   }
 };
 
@@ -76,5 +78,6 @@ export const deleteRoleService = async (id, extraOptions) => {
     }
   } catch (error) {
     console.error(error);
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
   }
 };

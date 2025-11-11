@@ -12,6 +12,7 @@ import {
   handleDeleteOffice,
   handleEditOffice,
 } from "../../service";
+import { se } from "date-fns/locale";
 
 const Office = () => {
   const {
@@ -20,13 +21,22 @@ const Office = () => {
     submitType,
     setSearchQuery,
     datasOffice,
-    optionsSelect,
     extraOptions,
+    getCityService,
+    setDatasCity,
+    datasCity,
+    accessToken,
   } = useOfficeHook();
 
   return (
     <>
-      <HeaderContent title={"Office"} handleOpen={stateShowModal.handleShow} />
+      <HeaderContent
+        title={"Office"}
+        handleOpen={stateShowModal.handleShow}
+        handleAPI={() =>
+          getCityService(accessToken, { setDatasCity, searchQuery: {} })
+        }
+      />
 
       <Table
         datasTable={datasOffice}
@@ -35,10 +45,13 @@ const Office = () => {
         stateShowModal={stateShowModal}
         title={"Office"}
         handleSearch={handleSearch(setSearchQuery)}
+        handleAPI={() => {
+          getCityService(accessToken, { setDatasCity, searchQuery: {} });
+        }}
         inputForm={
           submitType === "add"
-            ? inputAddOffice(optionsSelect)
-            : inputEditOffice(dataRow, optionsSelect)
+            ? inputAddOffice(datasCity)
+            : inputEditOffice(dataRow, datasCity)
         }
         submitType={submitType}
         handleService={

@@ -15,7 +15,7 @@ export const configTableFilms = [
   },
   { title: "Title", key: "nama_film", type: "text" },
   { title: "Sinopsis", key: "sinopsis_film_id", type: "text" },
-  { title: "Traier", key: "trailer_film", type: "text" },
+  // { title: "Traier", key: "trailer_film", type: "text" },
   {
     title: "Status",
     key: "status",

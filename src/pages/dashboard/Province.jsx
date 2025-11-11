@@ -16,7 +16,6 @@ import { HeaderContent } from "../../components/molecules";
 const Province = () => {
   const {
     datasProvince,
-    optionsSelect,
     submitType,
     extraOptions,
     dataRow,

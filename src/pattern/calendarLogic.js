@@ -7,6 +7,7 @@ import {
   startOfWeek,
   endOfWeek,
 } from "date-fns";
+import { SwalAlertBasic } from "../utils";
 
 export const moveEvent = (draggedEvent, date) => {
   if (!draggedEvent) return null;
@@ -57,7 +58,7 @@ export const handleDrop = (
 
 export const handleSave = (updatedEvents, handleService, setUpdatedEvents) => {
   if (updatedEvents.length === 0) {
-    alert("No changes to save.");
+    SwalAlertBasic({ icon: "warning", text: "Nothing has been changed." });
     return;
   }
 

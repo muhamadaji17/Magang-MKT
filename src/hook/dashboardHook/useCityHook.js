@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { useGlobalHook } from "../useGlobalHook";
 import { getCityService, getProvinceService } from "../../service";
-import { useDataSub } from "../useSubDatas";
+import { useData } from "../useData";
+import { useDebauncedEffect } from "../useDebouncedEffect";
 
 export const useCityHook = () => {
   const {
@@ -15,49 +15,36 @@ export const useCityHook = () => {
     dataRow,
     handleCloseModal,
   } = useGlobalHook();
-  const [datasCity, setDatasCity] = useState([]);
-  const [datasProvince, setDatasProvince] = useState([]);
+
+  const { datasProvince, setDatasProvince, datasCity, setDatasCity } =
+    useData();
 
   const extraOptions = { accessToken, setRefreshData, handleCloseModal };
 
-  const optionsSelect = datasProvince.map((data) => ({
-    value: data.id,
-    label: data.province_name,
-  }));
-
-  useDataSub(getProvinceService, {
-    searchQuery: {},
-    accessToken,
-    submitType,
-    setDatasProvince,
-  });
-
-  useEffect(() => {
-    const fetchData = () => {
+  useDebauncedEffect({
+    fn: () => {
       getCityService(accessToken, {
         searchQuery,
         setDatasCity,
         setRefreshData,
         handleCloseModal,
       });
-    };
-
-    if (Object.keys(searchQuery).length > 0) {
-      const timeout = setTimeout(fetchData, 300);
-      return () => clearTimeout(timeout);
-    } else {
-      fetchData();
-    }
-  }, [refreshData, searchQuery]);
+    },
+    deps: [searchQuery, refreshData],
+    condition: Object.keys(searchQuery).length > 0,
+  });
 
   return {
     datasCity,
     extraOptions,
-    optionsSelect,
     stateShowModal,
     setSearchQuery,
     submitType,
     dataRow,
     handleCloseModal,
+    getProvinceService,
+    datasProvince,
+    setDatasProvince,
+    accessToken,
   };
 };

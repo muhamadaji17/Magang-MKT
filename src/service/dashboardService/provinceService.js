@@ -17,6 +17,8 @@ export const getProvinceService = async (accessToken, extraOptions) => {
       country_name: data.created_province_country?.country_name || "-",
       status: data.status,
       username: data.created_province.user_name,
+      label: data.province_name,
+      value: data.id_province,
     }));
 
     setDatasProvince(parsing);
@@ -76,7 +78,6 @@ export const deleteProvinceService = async (id, extraOptions) => {
       handleCloseModal();
       setRefreshData(false);
     }
-    console.log(response);
   } catch (error) {
     console.error("Delete Failed:", error);
     throw error;

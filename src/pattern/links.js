@@ -1,9 +1,10 @@
 import { LuLayoutDashboard } from "react-icons/lu";
 import { PiSealWarning } from "react-icons/pi";
 import { PiFilmReel } from "react-icons/pi";
-import { GrMapLocation } from "react-icons/gr";
 import { IoImageOutline } from "react-icons/io5";
 import { HiOutlineLockClosed } from "react-icons/hi";
+import { GoDatabase } from "react-icons/go";
+import { HiOutlineBuildingOffice } from "react-icons/hi2";
 
 export const navLink = [
   { text: "Dashboard", path: "/", icon: LuLayoutDashboard },
@@ -11,13 +12,17 @@ export const navLink = [
   { text: "Films", path: "/films", icon: PiFilmReel },
   { text: "Banner", path: "/banner", icon: IoImageOutline },
   {
-    text: "Location",
-    icon: GrMapLocation,
+    text: "Office",
+    path: "/office",
+    icon: HiOutlineBuildingOffice,
+  },
+  {
+    text: "Master Data",
+    icon: GoDatabase,
     submenus: [
       { text: "Country", path: "/country" },
       { text: "Province", path: "/province" },
       { text: "City", path: "/city" },
-      { text: "Office", path: "/office" },
     ],
   },
   {

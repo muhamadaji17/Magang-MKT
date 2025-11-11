@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
 import { useGlobalHook } from "../useGlobalHook";
 import { getCityService, getOfficeService } from "../../service";
-import { useDataSub } from "../useSubDatas";
+
+import { useData } from "../useData";
+import { useDebauncedEffect } from "../useDebouncedEffect";
 
 export const useOfficeHook = () => {
   const {
@@ -15,38 +16,21 @@ export const useOfficeHook = () => {
     setSearchQuery,
     submitType,
   } = useGlobalHook();
-  const [datasOffice, setDatasOffice] = useState([]);
-  const [datasCity, setDatasCity] = useState([]);
+  const { datasOffice, setDatasOffice, datasCity, setDatasCity } = useData();
 
-  const optionsSelect = datasCity.map((data) => ({
-    value: data.id,
-    label: data.city_name,
-  }));
   const extraOptions = { accessToken, setRefreshData, handleCloseModal };
 
-  useEffect(() => {
-    const fetchData = () => {
+  useDebauncedEffect({
+    fn: () => {
       getOfficeService(accessToken, {
         searchQuery,
         setDatasOffice,
         setRefreshData,
         handleCloseModal,
       });
-    };
-
-    if (Object.keys(searchQuery).length > 0) {
-      const timeout = setTimeout(fetchData, 300);
-      return () => clearTimeout(timeout);
-    } else {
-      fetchData();
-    }
-  }, [refreshData, searchQuery]);
-
-  useDataSub(getCityService, {
-    accessToken,
-    searchQuery: {},
-    submitType,
-    setDatasCity,
+    },
+    deps: [searchQuery, refreshData],
+    condition: Object.keys(searchQuery).length > 0,
   });
 
   return {
@@ -58,7 +42,9 @@ export const useOfficeHook = () => {
     dataRow,
     submitType,
     datasOffice,
-    optionsSelect,
+    datasCity,
+    setDatasCity,
+    getCityService,
     extraOptions,
   };
 };
