@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import { useData } from "../useData";
 import { useGlobalHook } from "../useGlobalHook";
 import { getUserService } from "../../service";
+import { useDebauncedEffect } from "../useDebouncedEffect";
 
 export const useUserHook = () => {
   const {
@@ -14,26 +14,27 @@ export const useUserHook = () => {
     searchQuery,
     setSearchQuery,
     handleCloseModal,
+    isLoading,
+    setIsLoading,
   } = useGlobalHook();
   const { datasUser, setDatasUser, datasRole, setDatasRole } = useData();
   const extraOptions = { accessToken, setRefreshData, handleCloseModal };
 
-  useEffect(() => {
-    const fetchData = () => {
-      getUserService(accessToken, {
-        setRefreshData,
-        searchQuery,
-        setDatasUser,
-      });
-    };
+  useDebauncedEffect({
+    fn: () => {
+      Promise.all([
+        getUserService(accessToken, {
+          searchQuery,
+          setDatasUser,
+          setRefreshData,
+          handleCloseModal,
+        }),
+      ]).finally(() => setIsLoading(false));
+    },
+    deps: [searchQuery, refreshData],
+    condition: Object.keys(searchQuery).length > 0,
+  });
 
-    if (Object.keys(searchQuery).length > 0) {
-      const timeout = setTimeout(fetchData, 300);
-      return () => clearTimeout(timeout);
-    } else {
-      fetchData();
-    }
-  }, [refreshData, searchQuery]);
   return {
     datasUser,
     datasRole,
@@ -45,6 +46,7 @@ export const useUserHook = () => {
     stateShowModal,
     submitType,
     accessToken,
+    isLoading,
     setRefreshData,
   };
 };

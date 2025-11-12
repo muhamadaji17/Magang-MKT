@@ -15,6 +15,8 @@ export const useOfficeHook = () => {
     searchQuery,
     setSearchQuery,
     submitType,
+    isLoading,
+    setIsLoading,
   } = useGlobalHook();
   const { datasOffice, setDatasOffice, datasCity, setDatasCity } = useData();
 
@@ -22,12 +24,14 @@ export const useOfficeHook = () => {
 
   useDebauncedEffect({
     fn: () => {
-      getOfficeService(accessToken, {
-        searchQuery,
-        setDatasOffice,
-        setRefreshData,
-        handleCloseModal,
-      });
+      Promise.all([
+        getOfficeService(accessToken, {
+          searchQuery,
+          setDatasOffice,
+          setRefreshData,
+          handleCloseModal,
+        }),
+      ]).finally(() => setIsLoading(false));
     },
     deps: [searchQuery, refreshData],
     condition: Object.keys(searchQuery).length > 0,
@@ -46,5 +50,6 @@ export const useOfficeHook = () => {
     setDatasCity,
     getCityService,
     extraOptions,
+    isLoading,
   };
 };

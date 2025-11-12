@@ -1,10 +1,8 @@
 /** @format */
 
 import { formatDate } from "date-fns";
-import { Button, MenuOptions } from "../atom";
-import { FaExternalLinkAlt, FaEye, FaRegEdit } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { Link, useLocation } from "react-router-dom";
+import { Button, Loading, MenuOptions } from "../atom";
+import { Link } from "react-router-dom";
 import ShortenedCharacter from "./ShortCharacter";
 
 const TableBody = ({
@@ -13,14 +11,19 @@ const TableBody = ({
   tableType,
   handleShowModal,
   handleShowSidebar,
+  isLoading,
   handleAPI,
   pathDetail,
 }) => {
-  const pathname = useLocation().pathname;
-
   return (
-    <tbody className="">
-      {datasTable.length > 0 ? (
+    <tbody>
+      {isLoading ? (
+        <tr className="bg-white border border-gray-300">
+          <td colSpan={12}>
+            <Loading />
+          </td>
+        </tr>
+      ) : datasTable.length > 0 ? (
         datasTable?.map((data, index) => (
           <tr
             key={index}
@@ -52,9 +55,7 @@ const TableBody = ({
                   >
                     <img
                       className="w-20 h-28 object-cover"
-                      src={`${import.meta.env.VITE_API_PUBLIC_IMG}films/${
-                        data[col.key]
-                      }`}
+                      src={`http://${data[col.key]}`}
                     />
                   </div>
                 ) : col.key === "trailer_film" ? (
@@ -68,7 +69,18 @@ const TableBody = ({
                   </Link>
                 ) : col.key === "sinopsis_film_id" ? (
                   // <div className="max-w-96">
-                  <ShortenedCharacter maxLength={50} sinopsis={data[col.key]} />
+                  // <ShortenedCharacter
+                  //   maxLength={50}
+                  //   sinopsis={data[col.key]}
+                  //   handleShow={() => handleShowModal("synopsis", data)}
+                  // />
+
+                  <Button
+                    onClick={() => handleShowModal("synopsis", data)}
+                    className={"bg-blue-500 text-white p-2 rounded-md"}
+                  >
+                    Preview Synopsis
+                  </Button>
                 ) : // </div>
 
                 Array.isArray(col.key) ? (

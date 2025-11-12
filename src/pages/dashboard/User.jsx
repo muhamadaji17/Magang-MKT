@@ -26,6 +26,7 @@ const User = () => {
     setSearchQuery,
     datasRole,
     submitType,
+    isLoading,
     extraOptions,
   } = useUserHook();
 
@@ -49,6 +50,7 @@ const User = () => {
         configTable={configTableUser}
         stateShowModal={stateShowModal}
         title={"User"}
+        isLoading={isLoading}
         handleSearch={handleSearch(setSearchQuery)}
         inputForm={
           submitType === "add"

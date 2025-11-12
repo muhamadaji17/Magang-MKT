@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 export const useData = () => {
+  const [datasAbout, setDatasAbout] = useState([]);
   const [datasRating, setDatasRating] = useState([]);
   const [datasFilms, setDatasFilms] = useState([]);
   const [datasDetailFilms, setDatasDetailFilms] = useState([]);
@@ -14,6 +15,8 @@ export const useData = () => {
   const [datasRole, setDatasRole] = useState([]);
 
   return {
+    datasAbout,
+    setDatasAbout,
     datasRating,
     setDatasRating,
     datasDetailFilms,

@@ -26,6 +26,7 @@ const Province = () => {
     datasCountry,
     setDatasCountry,
     setRefreshData,
+    isLoading,
   } = useProvinceHook();
 
   return (
@@ -45,6 +46,7 @@ const Province = () => {
         datasTable={datasProvince}
         dataRow={dataRow}
         configTable={configTableProvince}
+        isLoading={isLoading}
         title={"Province"}
         stateShowModal={stateShowModal}
         handleSearch={handleSearch(setSearchQuery)}

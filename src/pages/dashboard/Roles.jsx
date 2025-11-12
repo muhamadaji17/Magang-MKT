@@ -16,6 +16,7 @@ const Roles = () => {
     setSearchQuery,
     dataRow,
     submitType,
+    isLoading,
     extraOptions,
   } = useRolesHook();
 
@@ -29,6 +30,7 @@ const Roles = () => {
         configTable={configTableRole}
         stateShowModal={stateShowModal}
         title={"Role"}
+        isLoading={isLoading}
         handleSearch={handleSearch(setSearchQuery)}
         inputForm={
           submitType === "add"

@@ -20,6 +20,7 @@ const City = () => {
     datasProvince,
     submitType,
     dataRow,
+    isLoading,
     accessToken,
   } = useCityHook();
 
@@ -39,6 +40,7 @@ const City = () => {
       <Table
         datasTable={datasCity}
         dataRow={dataRow}
+        isLoading={isLoading}
         configTable={configTableCity}
         stateShowModal={stateShowModal}
         title={"City"}

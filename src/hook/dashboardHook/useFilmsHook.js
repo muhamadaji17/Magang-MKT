@@ -1,6 +1,5 @@
 /** @format */
 
-import { useEffect } from "react";
 import { useGlobalHook } from "../useGlobalHook";
 import { getFilmService } from "../../service";
 import { useData } from "../useData";
@@ -18,6 +17,8 @@ export const useFilmsHook = () => {
     searchQuery,
     setSearchQuery,
     handleCloseModal,
+    isLoading,
+    setIsLoading,
   } = useGlobalHook();
   const { datasFilms, setDatasFilms, datasRating, setDatasRating } = useData();
   const extraOptions = {
@@ -28,11 +29,13 @@ export const useFilmsHook = () => {
 
   useDebauncedEffect({
     fn: () => {
-      getFilmService(accessToken, {
-        searchQuery,
-        setDatasFilms,
-        setRefreshData,
-      });
+      Promise.all([
+        getFilmService(accessToken, {
+          searchQuery,
+          setDatasFilms,
+          setRefreshData,
+        }).finally(() => setIsLoading(false)),
+      ]);
     },
     deps: [searchQuery, refreshData],
     condition: Object.keys(searchQuery).length > 0,
@@ -51,5 +54,6 @@ export const useFilmsHook = () => {
     setDatasRating,
     setRefreshData,
     accessToken,
+    isLoading,
   };
 };

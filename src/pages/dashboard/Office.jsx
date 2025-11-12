@@ -26,6 +26,7 @@ const Office = () => {
     setDatasCity,
     datasCity,
     accessToken,
+    isLoading,
   } = useOfficeHook();
 
   return (
@@ -44,6 +45,7 @@ const Office = () => {
         configTable={configTableOffice}
         stateShowModal={stateShowModal}
         title={"Office"}
+        isLoading={isLoading}
         handleSearch={handleSearch(setSearchQuery)}
         handleAPI={() => {
           getCityService(accessToken, { setDatasCity, searchQuery: {} });

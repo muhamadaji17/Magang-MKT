@@ -163,11 +163,12 @@ const Calendar = ({
 
         <ModalLayout
           isModalOpen={stateShowModal?.isShow}
-          handleCloseModal={stateShowModal?.handleCloseModal}
+          submitType={submitType}
+          handleCloseModal={stateShowModal?.handleShow}
         >
           <ConfirmDelete
             onConfirm={handleServiceWithOnClick}
-            handleCloseModal={stateShowModal.handleCloseModal}
+            handleCloseModal={stateShowModal.handleShow}
             dataRow={dataEvent}
           />
         </ModalLayout>

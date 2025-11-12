@@ -55,7 +55,7 @@ const Sidebar = ({
                 }`
           } ${
             className || ""
-          } inset-y-0 ${position} flex-1 p-4 transform transition-transform duration-300 shadow-xl`}
+          } inset-y-0 ${position} flex-1 p-4 transform transition-transform duration-300 shadow-xl `}
         >
           <div
             className={`flex flex-col h-full  ${
@@ -83,7 +83,7 @@ const Sidebar = ({
               />
             )}
 
-            {type !== "form" && (
+            {/* {type !== "form" && (
               <Link className="lg:hidden" to={"/login"}>
                 <Button
                   className={"hover:underline "}
@@ -92,7 +92,7 @@ const Sidebar = ({
                   Logout
                 </Button>
               </Link>
-            )}
+            )} */}
           </div>
         </div>
       </div>

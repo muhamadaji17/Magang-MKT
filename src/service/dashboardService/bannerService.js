@@ -1,4 +1,5 @@
 import { DELETE, GET, POST, PUT } from "../../api";
+import { SwalAlertBasic } from "../../utils";
 import { generateHeaders } from "../generateHeaders";
 
 export const getBannerService = async (accessToken, extraOptions) => {
@@ -16,10 +17,8 @@ export const getBannerService = async (accessToken, extraOptions) => {
 
     setDataBanner(parsing);
     setRefreshData(true);
-    console.log(response);
   } catch (error) {
-    console.error(error);
-    alert(error.response.data.message);
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
     console.log(error);
   }
 };
@@ -47,14 +46,16 @@ export const addBannerService = async (datas, extraOptions) => {
     );
 
     if (response.data.success) {
-      alert(response.data.message);
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
       handleCloseSidebar();
       setRefreshData(false);
       reset();
       setFileName("");
       setImagePreview(null);
     }
-    console.log(response);
   } catch (error) {
     console.error("Update Failed:", error);
     throw error;
@@ -88,7 +89,10 @@ export const updateBannerService = async (datas, extraOptions) => {
       const allSuccess = responses.every((response) => response.data.status);
 
       if (allSuccess) {
-        alert("Update Success");
+        SwalAlertBasic({
+          icon: "success",
+          text: responses[0].data.message,
+        });
         setRefreshData(false);
         setUpdatedEvents([]);
       }
@@ -101,9 +105,12 @@ export const updateBannerService = async (datas, extraOptions) => {
             ? datas.banner_img
             : datas?.banner_img[0],
       });
-      console.log(response);
+
       if (response.data.status) {
-        alert(response.data.message);
+        SwalAlertBasic({
+          icon: "success",
+          text: response.data.message,
+        });
         handleCloseSidebar();
         setUpdatedEvents([]);
         setRefreshData(false);
@@ -123,7 +130,10 @@ export const deleteBannerService = async (id, extraOptions) => {
   try {
     const response = await DELETE("crud/banner", accessToken, id);
     if (response.data.success) {
-      alert(response.data.message);
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
       handleCloseModal();
       handleCloseSidebar();
       setRefreshData(false);

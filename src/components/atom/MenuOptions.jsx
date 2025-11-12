@@ -19,7 +19,7 @@ const MenuOptions = ({ onEdit, onDelete, onDetail }) => {
   }, []);
 
   return (
-    <div ref={menuRef} className="">
+    <div ref={menuRef}>
       {/* Titik tiga */}
       <Button
         onClick={() => setOpen(!open)}
@@ -30,7 +30,7 @@ const MenuOptions = ({ onEdit, onDelete, onDetail }) => {
 
       {/* Dropdown Menu */}
       {open && (
-        <div className="absolute right-32 w-32 bg-white border border-gray-200 shadow-lg rounded-md z-50">
+        <div className="absolute right-20 w-32 bg-white border border-gray-200 shadow-lg rounded-md z-50">
           {onDetail && (
             <Link
               onClick={() => {

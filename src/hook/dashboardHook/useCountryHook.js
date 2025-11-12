@@ -14,6 +14,8 @@ export const useCountryHook = () => {
     submitType,
     stateShowModal,
     dataRow,
+    isLoading,
+    setIsLoading,
   } = useGlobalHook();
 
   const extraOptions = { accessToken, setRefreshData, handleCloseModal };
@@ -21,12 +23,14 @@ export const useCountryHook = () => {
 
   useDebauncedEffect({
     fn: () => {
-      getCountryService(accessToken, {
-        searchQuery,
-        setDatasCountry,
-        setRefreshData,
-        handleCloseModal,
-      });
+      Promise.all([
+        getCountryService(accessToken, {
+          searchQuery,
+          setDatasCountry,
+          setRefreshData,
+          handleCloseModal,
+        }),
+      ]).finally(() => setIsLoading(false));
     },
     deps: [searchQuery, refreshData],
     condition: Object.keys(searchQuery).length > 0,
@@ -35,6 +39,7 @@ export const useCountryHook = () => {
   return {
     datasCountry,
     setSearchQuery,
+    isLoading,
     submitType,
     dataRow,
     extraOptions,

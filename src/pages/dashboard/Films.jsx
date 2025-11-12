@@ -29,6 +29,7 @@ const Films = () => {
     datasRating,
     setDatasRating,
     setRefreshData,
+    isLoading,
   } = useFilmsHook();
 
   return (
@@ -48,6 +49,7 @@ const Films = () => {
       <Table
         datasTable={datasFilms}
         title={"Film"}
+        isLoading={isLoading}
         dataRow={dataRow}
         configTable={configTableFilms}
         pathDetail={"/films/detail?nama="}

@@ -10,6 +10,7 @@ import {
   TableBody,
   TableHead,
 } from "../molecules";
+import { Tab, Tabs } from "./Tabs";
 
 const Table = ({
   configTable,
@@ -18,6 +19,7 @@ const Table = ({
   stateShowSidebar,
   stateShowModal,
   handleSearch,
+  isLoading,
   inputForm,
   submitType,
   tableType,
@@ -27,27 +29,29 @@ const Table = ({
   handleAPI,
 }) => {
   return (
-    <div>
-      <div className="mb-3 flex flex-col gap-4 lg:flex-row justify-between">
-        <InputTable configTable={configTable} handleSearch={handleSearch} />
-      </div>
+    <div className="overflow-x-scroll 2xl:overflow-x-visible">
+      <div className="min-w-fit">
+        <div className="mb-3 flex flex-row gap-4 lg:flex-row justify-between w-full">
+          <InputTable configTable={configTable} handleSearch={handleSearch} />
+        </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full rounded-t-md min-w-max">
-          <TableHead configTable={configTable} type="table" />
-          <TableBody
-            datasTable={datasTable}
-            configTable={configTable}
-            tableType={tableType}
-            pathDetail={pathDetail}
-            handleShowSidebar={stateShowSidebar?.handleShow}
-            handleShowModal={stateShowModal?.handleShow}
-            handleAPI={handleAPI}
-          />
-        </table>
-      </div>
+        <div>
+          <table className="w-full rounded-t-md min-w-max">
+            <TableHead configTable={configTable} type="table" />
+            <TableBody
+              datasTable={datasTable}
+              configTable={configTable}
+              isLoading={isLoading}
+              tableType={tableType}
+              pathDetail={pathDetail}
+              handleShowSidebar={stateShowSidebar?.handleShow}
+              handleShowModal={stateShowModal?.handleShow}
+              handleAPI={handleAPI}
+            />
+          </table>
+        </div>
 
-      {/* {tableType === "films" && (
+        {/* {tableType === "films" && (
           <Sidebar
             isShow={stateShowSidebar?.isShow}
             type="form"
@@ -62,46 +66,64 @@ const Table = ({
           />
         )} */}
 
-      <ModalLayout
-        isModalOpen={stateShowModal?.isShow}
-        handleCloseModal={stateShowModal?.handleShow}
-        submitType={submitType}
-        description={submitType === "location" ? dataRow.address : null}
-        title={
-          submitType === "add"
-            ? `Create ${title}`
-            : submitType === "location"
-            ? "Location"
-            : submitType === "edit"
-            ? `Update ${title}`
-            : null
-        }
-        closeButton={submitType !== "delete"}
-      >
-        {submitType == "add" || submitType === "edit" ? (
-          <Form
-            configInput={inputForm}
-            buttonText={"Submit"}
-            handleSubmitData={handleService}
-          />
-        ) : submitType === "location" ? (
-          <Leaflet latitude={dataRow.latitude} longitude={dataRow.longitude} />
-        ) : submitType === "image" ? (
-          <>
-            <img
-              src={`${import.meta.env.VITE_API_PUBLIC_IMG}films/${
-                dataRow.poster_film
-              }`}
+        <ModalLayout
+          isModalOpen={stateShowModal?.isShow}
+          handleCloseModal={stateShowModal?.handleShow}
+          submitType={submitType}
+          description={submitType === "location" ? dataRow.address : null}
+          title={
+            submitType === "add"
+              ? `Create ${title}`
+              : submitType === "location"
+              ? "Location"
+              : submitType === "edit"
+              ? `Update ${title}`
+              : submitType === "synopsis"
+              ? "Synopsis Film"
+              : null
+          }
+          closeButton={submitType !== "delete"}
+        >
+          {submitType == "add" || submitType === "edit" ? (
+            <Form
+              configInput={inputForm}
+              buttonText={"Submit"}
+              handleSubmitData={handleService}
             />
-          </>
-        ) : submitType === "delete" ? (
-          <ConfirmDelete
-            handleCloseModal={stateShowModal?.handleShow}
-            dataRow={dataRow}
-            onConfirm={handleService}
-          />
-        ) : null}
-      </ModalLayout>
+          ) : submitType === "location" ? (
+            <Leaflet
+              latitude={dataRow.latitude}
+              longitude={dataRow.longitude}
+            />
+          ) : submitType === "image" ? (
+            <>
+              <img
+                src={`${import.meta.env.VITE_API_PUBLIC_IMG}films/${
+                  dataRow.poster_film
+                }`}
+              />
+            </>
+          ) : submitType === "synopsis" ? (
+            <div className="min-h-[500px]">
+              <Tabs defaultTab="id">
+                <Tab id="id" label={"Indonesia"}>
+                  {dataRow.sinopsis_film_id}
+                </Tab>
+
+                <Tab id="en" label={"English"}>
+                  {dataRow.sinopsis_film_en}
+                </Tab>
+              </Tabs>
+            </div>
+          ) : submitType === "delete" ? (
+            <ConfirmDelete
+              handleCloseModal={stateShowModal?.handleShow}
+              dataRow={dataRow}
+              onConfirm={handleService}
+            />
+          ) : null}
+        </ModalLayout>
+      </div>
     </div>
   );
 };

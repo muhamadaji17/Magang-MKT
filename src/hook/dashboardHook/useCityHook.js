@@ -14,6 +14,8 @@ export const useCityHook = () => {
     setSearchQuery,
     dataRow,
     handleCloseModal,
+    isLoading,
+    setIsLoading,
   } = useGlobalHook();
 
   const { datasProvince, setDatasProvince, datasCity, setDatasCity } =
@@ -23,12 +25,14 @@ export const useCityHook = () => {
 
   useDebauncedEffect({
     fn: () => {
-      getCityService(accessToken, {
-        searchQuery,
-        setDatasCity,
-        setRefreshData,
-        handleCloseModal,
-      });
+      Promise.all([
+        getCityService(accessToken, {
+          searchQuery,
+          setDatasCity,
+          setRefreshData,
+          handleCloseModal,
+        }),
+      ]).finally(() => setIsLoading(false));
     },
     deps: [searchQuery, refreshData],
     condition: Object.keys(searchQuery).length > 0,
@@ -45,6 +49,7 @@ export const useCityHook = () => {
     getProvinceService,
     datasProvince,
     setDatasProvince,
+    isLoading,
     accessToken,
   };
 };

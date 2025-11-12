@@ -14,6 +14,8 @@ export const useProvinceHook = () => {
     searchQuery,
     setSearchQuery,
     stateShowModal,
+    isLoading,
+    setIsLoading,
   } = useGlobalHook();
 
   const extraOptions = { accessToken, setRefreshData, handleCloseModal };
@@ -22,11 +24,13 @@ export const useProvinceHook = () => {
 
   useDebauncedEffect({
     fn: () => {
-      getProvinceService(accessToken, {
-        searchQuery,
-        setDatasProvince,
-        setRefreshData,
-      });
+      Promise.all([
+        getProvinceService(accessToken, {
+          searchQuery,
+          setDatasProvince,
+          setRefreshData,
+        }),
+      ]).finally(() => setIsLoading(false));
     },
     deps: [searchQuery, refreshData],
     condition: Object.keys(searchQuery).length > 0,
@@ -45,5 +49,7 @@ export const useProvinceHook = () => {
     datasCountry,
     accessToken,
     setRefreshData,
+    isLoading,
+    setIsLoading,
   };
 };

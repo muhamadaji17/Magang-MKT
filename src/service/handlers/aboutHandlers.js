@@ -13,7 +13,6 @@ export const handleAddAbout = (extraOptions) => {
 
 export const handleEditAbout = (extraOptions, dataRow) => {
   return (datas) => {
-    console.log(dataRow);
     handleSubmitData(
       { ...datas, id: dataRow.id_about },
       updateAboutService,
