@@ -13,6 +13,8 @@ import PageNotFound from "./PageNotFound";
 import DetailFilmPage from "./dashboard/DetailFilm";
 import User from "./dashboard/User";
 import Roles from "./dashboard/Roles";
+import Articles from "./dashboard/Articles";
+
 export {
   DetailFilmPage,
   Login,
@@ -27,4 +29,5 @@ export {
   Films,
   User,
   Roles,
+  Articles,
 };

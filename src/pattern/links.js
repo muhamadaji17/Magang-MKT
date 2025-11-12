@@ -5,6 +5,7 @@ import { IoImageOutline } from "react-icons/io5";
 import { HiOutlineLockClosed } from "react-icons/hi";
 import { GoDatabase } from "react-icons/go";
 import { HiOutlineBuildingOffice } from "react-icons/hi2";
+import { GrArticle } from "react-icons/gr";
 
 export const navLink = [
   { text: "Dashboard", path: "/", icon: LuLayoutDashboard },
@@ -15,6 +16,11 @@ export const navLink = [
     text: "Office",
     path: "/office",
     icon: HiOutlineBuildingOffice,
+  },
+  {
+    text: "Articles",
+    path: "/articles",
+    icon: GrArticle,
   },
   {
     text: "Master Data",

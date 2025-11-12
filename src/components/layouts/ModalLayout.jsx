@@ -23,7 +23,7 @@ const ModalLayout = ({
           ></div>
           <div className="flex justify-center items-center h-full">
             <div
-              className={`bg-white rounded-sm p-5 max-h-[80vh]  lg:max-h-[90vh] overflow-y-auto ${
+              className={`bg-white rounded-sm p-5 max-h-[100vh] z-[99] overflow-y-auto ${
                 submitType === "delete" ? "w-[400px]" : "w-[1000px]"
               } ${className} z-10 `}
             >

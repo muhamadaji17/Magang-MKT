@@ -81,7 +81,7 @@ const InputForm = ({ data, register, control, value, error, state }) => {
         </div>
       ) : data.type === "editor_about" ? (
         <Editor
-          className={"h-[200px] mb-24"}
+          className={"h-[200px] mb-28 lg:mb-24"}
           name={data.name}
           control={control}
           rules={data.optionError}
