@@ -28,7 +28,7 @@ const EventLabel = ({
         if (!isEventOnDate(event, date)) return null;
 
         return (
-          <div key={index} className="relative group">
+          <div key={index} className="group">
             <div
               draggable
               onDragStart={() => handleDragStart(index)}

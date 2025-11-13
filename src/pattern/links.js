@@ -6,6 +6,7 @@ import { HiOutlineLockClosed } from "react-icons/hi";
 import { GoDatabase } from "react-icons/go";
 import { HiOutlineBuildingOffice } from "react-icons/hi2";
 import { GrArticle } from "react-icons/gr";
+import { sub } from "date-fns";
 
 export const navLink = [
   { text: "Dashboard", path: "/", icon: LuLayoutDashboard },
@@ -19,8 +20,12 @@ export const navLink = [
   },
   {
     text: "Articles",
-    path: "/articles",
+
     icon: GrArticle,
+    submenus: [
+      { text: "Master Articles", path: "/articles" },
+      { text: "Article Categories", path: "/article-categories" },
+    ],
   },
   {
     text: "Master Data",

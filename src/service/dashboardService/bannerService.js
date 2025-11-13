@@ -96,7 +96,6 @@ export const updateBannerService = async (datas, extraOptions) => {
         setRefreshData(false);
         setUpdatedEvents([]);
       }
-      console.log(responses);
     } else {
       const response = await updateBanner({
         ...datas,

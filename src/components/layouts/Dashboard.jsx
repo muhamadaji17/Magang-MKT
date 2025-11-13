@@ -37,7 +37,7 @@ const Dashboard = () => {
           <Outlet />
         </div> */}
 
-        <div className="p-6 mt-11 md:mt-0 ">
+        <div className="p-6 mt-11">
           <Outlet />
         </div>
       </main>

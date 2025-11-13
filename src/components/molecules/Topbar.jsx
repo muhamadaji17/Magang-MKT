@@ -10,7 +10,7 @@ const Topbar = ({ handleShowSidebar }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <div className="bg-white fixed md:static top-0 left-0 right-0 p-4 shadow-md flex flex-row-reverse justify-between items-center z-50">
+    <div className="bg-white fixed md:sticky top-0 left-0 right-0 p-4 shadow-md flex flex-row-reverse justify-between items-center]">
       <div className="relative">
         {/* Profile button */}
         <div

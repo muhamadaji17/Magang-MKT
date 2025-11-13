@@ -31,7 +31,7 @@ const Sidebar = ({
       >
         {isShow && slide && (
           <div
-            className="flex-1 bg-black/60 h-screen absolute inset-0 "
+            className="flex-1 bg-black/60 h-screen inset-0"
             onClick={handleShow}
           />
         )}
@@ -39,7 +39,7 @@ const Sidebar = ({
         <div
           className={`${
             slide
-              ? `fixed w-96 z-40 ${type !== "form" ? "pt-20" : ""}`
+              ? `fixed w-96 z-[ ${type !== "form" ? "pt-20 " : ""}`
               : "static w-72"
           } ${
             type === "form"

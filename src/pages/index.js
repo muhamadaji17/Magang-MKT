@@ -14,6 +14,8 @@ import DetailFilmPage from "./dashboard/DetailFilm";
 import User from "./dashboard/User";
 import Roles from "./dashboard/Roles";
 import Articles from "./dashboard/Articles";
+import ArticleDetail from "./dashboard/ArticleDetail";
+import ArticleCategories from "./dashboard/ArticleCategories";
 
 export {
   DetailFilmPage,
@@ -30,4 +32,6 @@ export {
   User,
   Roles,
   Articles,
+  ArticleDetail,
+  ArticleCategories,
 };

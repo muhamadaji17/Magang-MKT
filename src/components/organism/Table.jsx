@@ -96,13 +96,14 @@ const Table = ({
               longitude={dataRow.longitude}
             />
           ) : submitType === "image" ? (
-            <>
+            <div className="flex flex-col items-center justify-center gap-2">
+              <h2>Preview Poster</h2>
+
               <img
-                src={`${import.meta.env.VITE_API_PUBLIC_IMG}films/${
-                  dataRow.poster_film
-                }`}
+                src={`http://${dataRow.poster_film}`}
+                className="max-w-[500px]"
               />
-            </>
+            </div>
           ) : submitType === "synopsis" ? (
             <div className="min-h-[500px]">
               <Tabs defaultTab="id">

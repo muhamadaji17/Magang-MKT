@@ -10,7 +10,7 @@ export function Tabs({ defaultTab, children, className = "" }) {
   return (
     <div className={`w-full ${className}`}>
       {/* === Tab Buttons === */}
-      <div className="flex gap-4 mt-8 border-b border-gray-300 mb-0.5">
+      <div className="flex gap-4 border-b border-gray-300 mb-0.5">
         {tabs.map((tab) => (
           <Button
             key={tab.props.id}

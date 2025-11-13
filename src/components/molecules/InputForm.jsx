@@ -49,7 +49,11 @@ const InputForm = ({ data, register, control, value, error, state }) => {
         />
       ) : data.type === "file" ? (
         <div className="flex flex-col">
-          <div className="relative w-56 h-64 border border-gray-300 rounded-md overflow-hidden bg-gray-100 flex items-center justify-center cursor-pointer hover:border-blue-500 transition-all">
+          <div
+            className={`relative ${
+              data.grid ? "w-full h-96" : "w-56 h-64"
+            } border border-gray-300 rounded-md overflow-hidden bg-gray-100 flex items-center justify-center cursor-pointer hover:border-blue-500 transition-all`}
+          >
             {imagePreview && (
               <img
                 src={imagePreview}
@@ -110,6 +114,7 @@ const InputForm = ({ data, register, control, value, error, state }) => {
           id={data.name}
           label={data.labelText}
           name={data.name}
+          onFocus={data.onFocus}
           max={data.max}
           min={data.min}
           sx={data.sx}

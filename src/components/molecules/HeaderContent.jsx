@@ -1,11 +1,18 @@
 /** @format */
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../atom";
 import Breadcrumb from "./Breadcrumb";
 
-const HeaderContent = ({ title, handleOpen, handleAPI }) => {
+const HeaderContent = ({
+  title,
+  handleOpen,
+  handleAPI,
+  path,
+  hiddenButton,
+}) => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   return (
     <div className="">
@@ -16,17 +23,24 @@ const HeaderContent = ({ title, handleOpen, handleAPI }) => {
 
       {pathname !== "/" && (
         <div className="flex justify-end mb-10">
-          <Button
-            onClick={() => {
-              handleOpen("add");
-              if (handleAPI) {
-                handleAPI();
-              }
-            }}
-            className={"bg-blue-500 text-white px-3 py-1 rounded-sm"}
-          >
-            Add {title}
-          </Button>
+          {!hiddenButton && (
+            <Button
+              onClick={() => {
+                if (handleAPI) {
+                  handleAPI();
+                }
+
+                if (path) {
+                  navigate(path);
+                } else {
+                  handleOpen("add");
+                }
+              }}
+              className={"bg-blue-500 text-white px-3 py-1 rounded-sm"}
+            >
+              Add {title}
+            </Button>
+          )}
         </div>
       )}
     </div>

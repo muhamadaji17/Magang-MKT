@@ -1,6 +1,6 @@
 import { Form } from "react-router-dom";
 import { Button } from "../../components/atom";
-import { ModalLayout } from "../../components/layouts";
+import { CardLayout, ModalLayout } from "../../components/layouts";
 import {
   ConfirmDelete,
   HeaderContent,
@@ -9,6 +9,8 @@ import {
 import { articleGroups } from "../../utils/dummy";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { useGlobalHook } from "../../hook";
+import { Tabs } from "../../components/organism";
+import { Tab } from "../../components/organism/Tabs";
 
 const Articles = () => {
   const {
@@ -21,68 +23,81 @@ const Articles = () => {
 
   return (
     <>
-      <HeaderContent title={"Articles"} handleOpen={handleOpenModal} />
+      <HeaderContent title={"Articles"} path={"/articles/create"} />
 
-      <div className="space-y-16 py-10">
-        {articleGroups.map((group, index) => (
-          <section key={index} className="space-y-6">
-            {/* Section title */}
-            <div className="flex items-center justify-between">
-              <h3 className="text-2xl font-bold text-blue-900 border-l-4 border-blue-600 pl-3">
-                {group.title}
-              </h3>
-            </div>
-
-            {/* Articles grid */}
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {group.articles.map((article, i) => (
-                <div
-                  key={i}
-                  className="group relative bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300"
-                >
-                  {/* Thumbnail */}
-                  <div className="overflow-hidden">
-                    <img
-                      src={article.thumbnail}
-                      alt={"thumbnail"}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-4 space-y-2">
-                    <h4 className="text-lg font-semibold line-clamp-2 text-gray-800 group-hover:text-blue-800">
-                      {article.title.en}
-                    </h4>
-                    <ShortenedCharacter sinopsis={article.description.en} />
-
-                    <div className="pt-2 flex items-center justify-between text-xs text-gray-400">
-                      <span>{article.author}</span>
-                      <span>{article.date}</span>
-                    </div>
-                  </div>
-                  <div className="pt-2 flex items-center justify-between text-xs text-gray-600 border-t border-gray-300 py-2 px-4">
-                    <div className="text-lg space-x-3">
-                      <Button
-                        className={"hover:text-blue-500"}
-                        onClick={() => handleOpenModal("edit", dataRow)}
-                      >
-                        <FaRegEdit />
-                      </Button>
-                      <Button
-                        className={"hover:text-red-500"}
-                        onClick={() => handleOpenModal("delete", dataRow)}
-                      >
-                        <FaRegTrashAlt />
-                      </Button>
-                    </div>
-                  </div>
+      <CardLayout>
+        <Tabs defaultTab="technology">
+          {articleGroups.map((group, index) => (
+            <Tab
+              key={index}
+              id={group.title.toLocaleLowerCase()}
+              label={group.title}
+            >
+              <div key={index} className="space-y-6">
+                {/* Section title */}
+                <div className="flex items-center justify-between">
+                  <h3 className="text-2xl font-bold text-blue-900 border-l-4 border-blue-600 pl-3">
+                    {group.title}
+                  </h3>
                 </div>
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
+
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                  {group.articles.map((article, i) => (
+                    <div
+                      key={i}
+                      className="group relative bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col"
+                    >
+                      {/* Thumbnail */}
+                      <div className="overflow-hidden">
+                        <img
+                          src={article.thumbnail}
+                          alt={"thumbnail"}
+                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex flex-col flex-1 justify-between">
+                        <div className="p-4 space-y-2 ">
+                          <h4 className="text-lg font-semibold line-clamp-2 text-gray-800 group-hover:text-blue-800">
+                            {article.title.en}
+                          </h4>
+                          <ShortenedCharacter
+                            sinopsis={article.description.en}
+                          />
+
+                          <div className="pt-2 flex items-center justify-between text-xs text-gray-400">
+                            <span>{article.author}</span>
+                            <span>{article.date}</span>
+                          </div>
+                        </div>
+
+                        {/* Footer (icon section) */}
+                        <div className="flex items-center justify-between text-xs text-gray-600 border-t border-gray-300 py-2 px-4">
+                          <div className="text-lg space-x-3">
+                            <Button
+                              className={"hover:text-blue-500"}
+                              onClick={() => handleOpenModal("edit", dataRow)}
+                            >
+                              <FaRegEdit />
+                            </Button>
+                            <Button
+                              className={"hover:text-red-500"}
+                              onClick={() => handleOpenModal("delete", dataRow)}
+                            >
+                              <FaRegTrashAlt />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Tab>
+          ))}
+        </Tabs>
+      </CardLayout>
 
       <ModalLayout
         isModalOpen={isModalOpen}
