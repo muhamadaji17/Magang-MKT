@@ -117,3 +117,24 @@ export const generateCalendar = (currentDate) => {
 
   return weeks;
 };
+
+export const sortByDayRage = (events) => {
+  const newEvents = [...events].map((ev) => {
+    const start = new Date(ev.startDate);
+    const end = new Date(ev.endDate);
+
+    // Pastikan waktu diset ke 00:00:00 agar perhitungan akurat
+    start.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+
+    const diffTime = end - start;
+    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+
+    return {
+      ...ev,
+      dayRange: diffDays,
+    };
+  });
+
+  return newEvents.sort((a, b) => b.dayRange - a.dayRange);
+};
