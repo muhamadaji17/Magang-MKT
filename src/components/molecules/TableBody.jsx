@@ -51,9 +51,7 @@ const TableBody = ({
                   >
                     <img
                       className="w-20 h-28 object-cover"
-                      src={`${import.meta.env.VITE_API_PUBLIC_IMG}films/${
-                        data[col.key]
-                      }`}
+                      src={`http://${data[col.key]}`}
                     />
                   </div>
                 ) : col.key === "trailer_film" ? (
