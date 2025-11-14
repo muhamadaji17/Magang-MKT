@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { InputForm } from ".";
 import { Button } from "../atom";
-import { useForm } from "react-hook-form";
+import { get, useForm } from "react-hook-form";
 
 const generateDefaultValue = (configInput) => {
   return configInput?.reduce((acc, curr) => {
@@ -38,11 +38,49 @@ const Form = ({
     reset,
     formState: { errors },
   } = useForm({ defaultValues: generateDefaultValue(configInput) });
-  const [imagePreview, setImagePreview] = useState(null);
-  const [fileName, setFileName] = useState("");
+  const [imagePreview, setImagePreview] = useState([]);
+
+  useEffect(() => {
+    const getImageDefault = configInput.filter(
+      (data) => data.type === "file" && data.defaultValue
+    );
+
+    if (getImageDefault.length === 0) return;
+
+    const generateImagePreview = getImageDefault.map((data) => ({
+      url: `http://${data.defaultValue}`,
+      fileName: data.defaultValue,
+      fieldName: data.name,
+    }));
+    setImagePreview(generateImagePreview);
+  }, [setImagePreview]);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const generateImagePreview = {
+        url: URL.createObjectURL(file),
+        fileName: file.name,
+        fieldName: e.target.name,
+      };
+      const newImagePreview = [...imagePreview];
+      const findIndex = newImagePreview.findIndex(
+        (data) => data.fieldName === e.target.name
+      );
+
+      if (findIndex === -1) {
+        newImagePreview.push(generateImagePreview);
+      } else {
+        newImagePreview[findIndex] = generateImagePreview;
+      }
+      setImagePreview(newImagePreview);
+    } else {
+      setImagePreview([]);
+    }
+  };
 
   const onSubmit = (data) => {
-    handleSubmitData(data, { reset, setImagePreview, setFileName });
+    handleSubmitData(data, { reset, setImagePreview });
   };
 
   useEffect(() => {
@@ -55,8 +93,7 @@ const Form = ({
         return acc;
       }, {});
 
-      setImagePreview(null);
-      setFileName("");
+      setImagePreview([]);
       reset(emptyValues);
     }
   }, [type, dataDefault, reset]);
@@ -80,6 +117,8 @@ const Form = ({
                     ? "md:col-span-4 col-span-12"
                     : data.grid === 6
                     ? "md:col-span-6 col-span-12"
+                    : data.grid === 8
+                    ? "md:col-span-8 col-span-12"
                     : data.grid === 12
                     ? "md:col-span-12 col-span-12"
                     : "col-span-12"
@@ -89,14 +128,12 @@ const Form = ({
                 <InputForm
                   data={data}
                   key={index}
-                  state={{
-                    fileName,
-                    setFileName,
-                    imagePreview,
-                    setImagePreview,
-                  }}
                   register={register}
+                  imagePreview={imagePreview.find(
+                    (item) => item.fieldName === data.name
+                  )}
                   control={control}
+                  handleFileChange={handleFileChange}
                   rows={5}
                   error={errors}
                   value={value}

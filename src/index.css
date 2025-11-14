@@ -73,6 +73,16 @@ input[type="number"] {
   font-family: monospace;
 }
 
+/* Fix dropdown label untuk size */
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  content: attr(data-value) !important;
+}
+
+.ql-size {
+  width: 70px !important;
+}
+
 @layer base {
   h1 {
     font-size: 2em;

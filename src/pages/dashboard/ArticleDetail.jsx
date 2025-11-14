@@ -12,7 +12,11 @@ const ArticleDetail = () => {
       <HeaderContent title={title} hiddenButton />
 
       <CardLayout>
-        <Form configInput={inputAddArticle} buttonText={"Create"} />
+        <Form
+          configInput={inputAddArticle}
+          buttonText={"Create"}
+          handleSubmitData={(data) => console.log(data)}
+        />
       </CardLayout>
     </>
   );

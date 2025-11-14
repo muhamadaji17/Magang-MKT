@@ -25,7 +25,7 @@ const Sidebar = ({
   return (
     <>
       <div
-        className={`${slide ? "fixed md:flex " : ""} flex ${
+        className={`${slide ? "fixed md:flex " : ""} flex z-10 ${
           isShow && slide ? "inset-0" : ""
         }`}
       >

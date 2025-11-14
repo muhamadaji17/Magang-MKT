@@ -25,7 +25,7 @@ export const inputAddBanner = [
   {
     name: "banner_img",
     type: "file",
-    labelText: "Image Banner: ",
+    labelText: "Banner",
     optionError: errorOptions.img,
   },
 ];
