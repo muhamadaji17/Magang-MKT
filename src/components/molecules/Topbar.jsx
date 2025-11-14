@@ -69,7 +69,7 @@ const Topbar = ({ handleShowSidebar }) => {
       {/* Mobile sidebar toggle */}
       <div className="flex space-x-4">
         <Button
-          className="md:hidden text-gray-800"
+          className="xl:hidden text-gray-800"
           id="hamburger-btn"
           onClick={handleShowSidebar}
         >

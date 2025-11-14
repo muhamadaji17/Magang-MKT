@@ -59,7 +59,7 @@ const InputForm = ({
         <div className="flex flex-col">
           <div
             className={`relative ${
-              data.grid ? "w-full h-96" : "w-56 h-64"
+              data.className ? `${data.className || ""}` : "w-56 h-64"
             } border border-gray-300 rounded-md overflow-hidden bg-gray-100 flex items-center justify-center cursor-pointer hover:border-blue-500 transition-all`}
           >
             {imagePreview && (
@@ -95,7 +95,7 @@ const InputForm = ({
         </div>
       ) : data.type === "editor_about" ? (
         <Editor
-          className={`h-[200px] mb-28 lg:mb-24 ${data.className}`}
+          className={`${data.className}`}
           name={data.name}
           control={control}
           rules={data.optionError}
@@ -131,7 +131,7 @@ const InputForm = ({
         />
       )}
 
-      {data.type === "editor_about" && (
+      {(data.type === "editor_about" || data.type === "textarea") && (
         <label
           htmlFor={data.name}
           style={{ pointerEvents: "none" }}
@@ -142,7 +142,7 @@ const InputForm = ({
               : value !== undefined && value !== ""
               ? "-top-2.5 text-xs px-1"
               : "top-2 text-base"
-          }  absolute left-4 transition-all bg-white peer-focus:text-xs peer-focus:px-1 peer-focus:-top-2.5 peer-focus:font-semibold cursor-text `}
+          }  absolute left-4 transition-all bg-white peer-focus:text-xs peer-focus:px-1 peer-focus:-top-2.5 peer-focus:font-semibold cursor-text text-gray-500`}
         >
           {data.labelText}
         </label>

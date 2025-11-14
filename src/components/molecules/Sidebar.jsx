@@ -5,7 +5,7 @@ import { navLink } from "../../pattern";
 import Navlink from "./Navlink";
 import Form from "./Form";
 import { Button } from "../atom";
-import { logoutService } from "../../service";
+import { MdClose } from "react-icons/md";
 
 const Sidebar = ({
   type = "",
@@ -38,13 +38,15 @@ const Sidebar = ({
 
         <div
           className={`${
-            slide
-              ? `fixed w-96 z-[ ${type !== "form" ? "pt-20 " : ""}`
-              : "static w-72"
+            // slide
+            //   ? `fixed w-96 ${type !== "form" ? "pt-20 " : ""}`
+            //   : "static w-72"
+
+            slide ? `fixed w-96` : "static w-72"
           } ${
             type === "form"
               ? "bg-white px-6"
-              : "bg-blue-950 text-white md:translate-x-0"
+              : "bg-blue-950 text-white xl:translate-x-0"
           }  ${
             isShow
               ? "translate-x-0 "
@@ -55,10 +57,18 @@ const Sidebar = ({
                 }`
           } ${
             className || ""
-          } inset-y-0 ${position} flex-1 p-4 transform transition-transform duration-300 shadow-xl `}
+          } inset-y-0 ${position} flex-1 p-4 transform transition-transform duration-300 shadow-xl`}
         >
+          <div className="px-2 mb-8 flex items-center justify-between">
+            <Link className="text-2xl">Logo</Link>
+
+            <Button className={"xl:hidden"}>
+              <MdClose />
+            </Button>
+          </div>
+
           <div
-            className={`flex flex-col h-full  ${
+            className={`flex flex-col h-full ${
               type !== "form" ? "justify-between" : ""
             }`}
           >
@@ -82,7 +92,6 @@ const Sidebar = ({
                 handleCloseSidebar={handleShow}
               />
             )}
-
             {/* {type !== "form" && (
               <Link className="lg:hidden" to={"/login"}>
                 <Button
