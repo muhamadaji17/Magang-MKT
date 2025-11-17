@@ -1,9 +1,16 @@
 import { handleSubmitData } from "../../pattern";
 import {
   addArticleCategoryService,
+  addArticlesService,
   deleteArticleCategoryService,
   editArticleCategoryService,
 } from "../dashboardService/articlesService";
+
+export const handleAddArticle = (extraOptions) => {
+  return (datas) => {
+    handleSubmitData(datas, addArticlesService, extraOptions);
+  };
+};
 
 export const handleAddArticleCategory = (extraOptions) => {
   return (datas) => {

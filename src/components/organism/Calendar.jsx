@@ -119,7 +119,7 @@ const Calendar = ({
                       >
                         <span
                           className={`${
-                            isToday(date) ? " bg-blue-600 text-white" : ""
+                            isToday(date) ? " bg-sky-400 text-white" : ""
                           } flex items-center justify-center w-8 h-8 rounded-full`}
                         >
                           {format(date, "d")}

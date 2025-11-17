@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-import { useData, useGlobalHook } from "../../hook";
+import { useArticleCategories } from "../../hook";
 import {
-  getArticleCategoryService,
   handleAddArticleCategory,
   handleDeleteArticleCategory,
   handleEditArticleCategory,
@@ -10,38 +8,21 @@ import { HeaderContent } from "../../components/molecules";
 import { Table } from "../../components/organism";
 import {
   configTableArticleCategories,
+  handleSearch,
   inputAddArticleCategories,
   inputEditArticleCategories,
 } from "../../pattern";
 
 const ArticleCategories = () => {
   const {
-    accessToken,
-    dataRow,
-    setSearchQuery,
-    searchQuery,
-    submitType,
-    refreshData,
-    setRefreshData,
-    isLoading,
-    setIsLoading,
+    datasArticleCategory,
     stateShowModal,
-    handleCloseModal,
-  } = useGlobalHook();
-
-  const { datasArticleCategory, setDatasArticleCategory } = useData();
-
-  useEffect(() => {
-    Promise.all([
-      getArticleCategoryService(accessToken, {
-        searchQuery,
-        setDatasArticleCategory,
-        setRefreshData,
-      }).then(() => setIsLoading(false)),
-    ]);
-  }, [refreshData]);
-
-  const extraOptions = { accessToken, setRefreshData, handleCloseModal };
+    dataRow,
+    submitType,
+    setSearchQuery,
+    isLoading,
+    extraOptions,
+  } = useArticleCategories();
 
   return (
     <>
@@ -56,6 +37,7 @@ const ArticleCategories = () => {
         title={"Article Categories"}
         stateShowModal={stateShowModal}
         dataRow={dataRow}
+        handleSearch={handleSearch(setSearchQuery)}
         submitType={submitType}
         isLoading={isLoading}
         handleService={

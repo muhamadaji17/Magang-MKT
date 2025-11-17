@@ -234,4 +234,33 @@ export const errorOptions = {
   select_role: {
     required: "Select Role is Required",
   },
+
+  role_name: {
+    required: "Role Name is Required",
+  },
+
+  priority: {
+    required: "Priority is Required",
+  },
+  status: {
+    required: "Status is Required",
+  },
+  category_name: {
+    required: "Category Name is Required",
+  },
+  select_category: {
+    required: "Select Category is Required",
+  },
+  article_img: {
+    required: "Article Image is Required",
+  },
+  article_title: {
+    required: "Article Title is Required",
+  },
+  article_slug: {
+    required: "Article Slug is Required",
+  },
+  article_content: {
+    required: "Article Content is Required",
+  },
 };
