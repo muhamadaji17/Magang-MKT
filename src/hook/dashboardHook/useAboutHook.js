@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGlobalHook } from "../useGlobalHook";
 import { getAboutService } from "../../service";
+import { useData } from "../useData";
 
 export const useAboutHook = () => {
   const {
@@ -14,13 +15,17 @@ export const useAboutHook = () => {
     searchQuery,
     setSearchQuery,
     dataRow,
+    isLoading,
+    setIsLoading,
   } = useGlobalHook();
-  const [datasAbout, setDatasAbout] = useState([]);
+  const { datasAbout, setDatasAbout } = useData();
 
   const extraOptions = { accessToken, setRefreshData, handleCloseModal };
 
   useEffect(() => {
-    getAboutService(accessToken, { setRefreshData, setDatasAbout });
+    Promise.all([
+      getAboutService(accessToken, { setRefreshData, setDatasAbout }),
+    ]).finally(() => setIsLoading(false));
   }, [refreshData]);
 
   return {
@@ -32,6 +37,8 @@ export const useAboutHook = () => {
     dataRow,
     extraOptions,
     handleOpenModal,
+    isLoading,
+    setIsLoading,
     handleCloseModal,
   };
 };

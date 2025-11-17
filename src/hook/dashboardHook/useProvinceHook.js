@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { useGlobalHook } from "../useGlobalHook";
 import { getCountryService, getProvinceService } from "../../service";
-import { useDataSub } from "../useSubDatas";
+import { useDebauncedEffect } from "../useDebouncedEffect";
+import { useData } from "../useData";
 
 export const useProvinceHook = () => {
   const {
@@ -14,48 +14,42 @@ export const useProvinceHook = () => {
     searchQuery,
     setSearchQuery,
     stateShowModal,
+    isLoading,
+    setIsLoading,
   } = useGlobalHook();
-  const [datasProvince, setDatasProvince] = useState([]);
-  const [datasCountry, setDatasCountry] = useState([]);
 
   const extraOptions = { accessToken, setRefreshData, handleCloseModal };
-  const optionsSelect = datasCountry.map((data) => ({
-    value: data.id,
-    label: data.country_name,
-  }));
+  const { datasCountry, setDatasCountry, datasProvince, setDatasProvince } =
+    useData();
 
-  useDataSub(getCountryService, {
-    accessToken,
-    searchQuery: {},
-    submitType,
-    setDatasCountry,
+  useDebauncedEffect({
+    fn: () => {
+      Promise.all([
+        getProvinceService(accessToken, {
+          searchQuery,
+          setDatasProvince,
+          setRefreshData,
+        }),
+      ]).finally(() => setIsLoading(false));
+    },
+    deps: [searchQuery, refreshData],
+    condition: Object.keys(searchQuery).length > 0,
   });
-
-  useEffect(() => {
-    const fetchData = () => {
-      getProvinceService(accessToken, {
-        searchQuery,
-        setDatasProvince,
-        setRefreshData,
-      });
-    };
-
-    if (Object.keys(searchQuery).length > 0) {
-      const timeout = setTimeout(fetchData, 300);
-      return () => clearTimeout(timeout);
-    } else {
-      fetchData();
-    }
-  }, [refreshData, datasCountry, searchQuery]);
 
   return {
     datasProvince,
-    optionsSelect,
     setSearchQuery,
     submitType,
     dataRow,
     stateShowModal,
     extraOptions,
     handleCloseModal,
+    getCountryService,
+    setDatasCountry,
+    datasCountry,
+    accessToken,
+    setRefreshData,
+    isLoading,
+    setIsLoading,
   };
 };

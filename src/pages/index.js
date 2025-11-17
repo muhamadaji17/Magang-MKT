@@ -11,6 +11,12 @@ import Office from "./dashboard/Office";
 import Films from "./dashboard/Films";
 import PageNotFound from "./PageNotFound";
 import DetailFilmPage from "./dashboard/DetailFilm";
+import User from "./dashboard/User";
+import Roles from "./dashboard/Roles";
+import Articles from "./dashboard/Articles";
+import ArticleDetail from "./dashboard/ArticleDetail";
+import ArticleCategories from "./dashboard/ArticleCategories";
+
 export {
   DetailFilmPage,
   Login,
@@ -23,4 +29,9 @@ export {
   City,
   Office,
   Films,
+  User,
+  Roles,
+  Articles,
+  ArticleDetail,
+  ArticleCategories,
 };

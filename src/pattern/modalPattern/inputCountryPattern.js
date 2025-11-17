@@ -23,6 +23,7 @@ export const inputEditCountry = (defaultValues) => {
       type: "text",
       defaultValue: defaultValues.country_name,
       optionError: errorOptions.name_country,
+      grid: 6,
     },
     {
       labelText: "Country Code",
@@ -30,6 +31,7 @@ export const inputEditCountry = (defaultValues) => {
       type: "text",
       defaultValue: defaultValues.country_code,
       optionError: errorOptions.code_country,
+      grid: 6,
     },
     {
       name: "status",
@@ -37,7 +39,7 @@ export const inputEditCountry = (defaultValues) => {
       labelText: "Status",
       optionDisabledText: "Select Status",
       defaultValue: defaultValues.status,
-      grid: 4,
+
       options: [
         { label: "Active", value: true },
         { label: "Inactive", value: false },

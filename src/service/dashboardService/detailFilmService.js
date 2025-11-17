@@ -13,19 +13,6 @@ export const getFilmByIdService = async (accessToken, extraOptions) => {
       accessToken
     );
 
-    // const parsing = response.data.payload.map((data) => ({
-    //   id: data.id_film,
-    //   nama_film: data.nama_film,
-    //   poster_film: data.poster_film,
-    //   trailer_film: data.trailer_film,
-    //   sinopsis_film_id: data.sinopsis_film_id,
-    //   casting: data.casting_with_film,
-    //   rating: data.rating_info,
-    //   bts: data.bts_with_film,
-    //   status: data.status,
-    // }));
-    console.log("service", response);
-
     setDatasDetailFilms(response.data.payload);
     setRefreshData(true);
   } catch (error) {
@@ -86,8 +73,8 @@ export const addCastingFilmService = async (datas, extraOptions) => {
   }
 };
 
-export const updateFilmService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseSidebar } = extraOptions;
+export const updateCastingFilmService = async (datas, extraOptions) => {
+  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
   const headers = generateHeaders({
     accessToken,
     contentType: "multipart/form-data",
@@ -95,19 +82,13 @@ export const updateFilmService = async (datas, extraOptions) => {
 
   try {
     const response = await PUT(
-      "crud/films",
-      {
-        ...datas,
-        poster_film:
-          typeof datas.poster_film === "string"
-            ? datas.poster_film
-            : datas.poster_film[0],
-      },
+      "crud/casting_film",
+      { ...datas, poster_casting_film: datas.poster_casting_film[0] },
       headers
     );
     if (response.data.status === true) {
       setRefreshData(false);
-      handleCloseSidebar();
+      handleCloseModal();
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,

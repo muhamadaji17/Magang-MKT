@@ -69,13 +69,14 @@ export const inputAddFilms = (rating) => [
     name: "produksi_film",
     type: "text",
     optionError: errorOptions.produksi_film,
-    grid: 12,
+    grid: 6,
   },
   {
     labelText: "Link Trailer Film",
     name: "trailer_film",
     type: "text",
     optionError: errorOptions.url,
+    grid: 6,
   },
 
   {
@@ -161,7 +162,7 @@ export const inputEditFilms = (datasDefault, rating) => [
     name: "produksi_film",
     type: "text",
     optionError: errorOptions.produksi_film,
-    grid: 12,
+    grid: 6,
     defaultValue: datasDefault.produksi_film,
   },
   {
@@ -170,6 +171,7 @@ export const inputEditFilms = (datasDefault, rating) => [
     type: "text",
     optionError: errorOptions.url,
     defaultValue: datasDefault.trailer_film,
+    grid: 6,
   },
   {
     labelText: "Poster Film",

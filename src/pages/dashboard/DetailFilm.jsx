@@ -7,19 +7,25 @@ import {
   handleAddAbout,
   handleDeleteAbout,
   handleEditAbout,
+  updateCastingFilmService,
 } from "../../service";
 import { useData, useGlobalHook } from "../../hook";
 import { ConfirmDelete, Form, HeaderContent } from "../../components/molecules";
-import { Table } from "../../components/organism";
+import { Table, Tabs } from "../../components/organism";
 import {
   configTableFilms,
   handleSearch,
   inputAddAbout,
   inputAddCastingFilms,
   inputEditAbout,
+  typeTabsCastingFilms,
 } from "../../pattern";
-import { FaInstagramSquare } from "react-icons/fa";
+import { FaInstagramSquare, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { ModalLayout } from "../../components/layouts";
+import { Tab } from "../../components/organism/Tabs";
+import { articleGroups } from "../../utils/dummy";
+import { Button } from "../../components/atom";
+import { inputEditCastingFilms } from "../../pattern/modalPattern/inputCastingFilmsPattern";
 
 const DetailFilmPage = () => {
   const {
@@ -32,6 +38,7 @@ const DetailFilmPage = () => {
     setSearchQuery,
     handleOpenModal,
     isModalOpen,
+    setDataRow,
   } = useGlobalHook();
 
   const extraOptions = {
@@ -51,48 +58,81 @@ const DetailFilmPage = () => {
       setRefreshData,
     });
   }, []);
-  console.log(datasDetailFilms);
+  // console.log(dataRow);
 
   return (
     <>
       <HeaderContent title={"Detail Film"} handleOpen={handleOpenModal} />
 
-      {/* <Table
-        datasTable={[datasFilms]}
-        dataRow={dataRow}
-        configTable={configTableFilms}
-        stateShowModal={stateShowModal}
-        handleSearch={handleSearch(setSearchQuery)}
-        inputForm={
-          submitType === "add" ? inputAddCastingFilms(datasFilms) : null
-        }
-        submitType={submitType}
-        title={"Detail Film"}
-        handleService={(e) =>
-          submitType === "add" ? addCastingFilmService(e, extraOptions) : null
-        }
-      /> */}
-      {datasDetailFilms.casting_with_film?.map((data, index) => (
-        <div className="grid grid-cols-4 gap-10" key={index}>
-          <div className="bg-white">
-            <img src="/images/poster/one-outs.jpg" className="rounded-md" />
-            <div className="m-2">
-              <h1 className="font-bold text-lg">Natasya Wilona</h1>
-              <small>Melati</small>
-              <div className="flex items-center">
-                <p className="flex items-center gap-1">
-                  {/* Instagram : <span>@Aji</span> */}
-                  <FaInstagramSquare /> : <span>@Aji</span>
-                </p>
-              </div>
+      <Tabs defaultTab="main_cast">
+        {typeTabsCastingFilms.map((tab, index) => (
+          <Tab key={index} id={tab.id} label={tab.title}>
+            <div className="flex items-center justify-between mb-5">
+              <h3 className="text-2xl font-bold text-blue-900 border-l-4 border-blue-600 pl-3">
+                {tab.title}
+              </h3>
             </div>
-          </div>
-        </div>
-      ))}
+            <div className="grid grid-cols-4 gap-10">
+              {(datasDetailFilms.casting_with_film ?? [])
+                .filter((c) => c.artis_kategori === tab.id) // ambil data sesuai tab
+                .map((c, i) => (
+                  // <div key={i}> {c.nama_casting_film} </div>
+                  <div
+                    key={i}
+                    className="group relative bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col"
+                  >
+                    <img
+                      src={
+                        c.poster_casting_film
+                          ? `http://${c.poster_casting_film}`
+                          : "/images/poster/one-outs.jpg"
+                      }
+                      className="rounded-md w-full
+                      group-hover:scale-105 transition-transform duration-500
+                      "
+                    />
+
+                    <div className="m-2">
+                      <h1 className="font-bold text-lg hover:text-blue-500 focus:text-blue-500 hover:underline focus:underline cursor-pointer">
+                        {c.nama_casting_film}
+                      </h1>
+                      <small>Melati</small>
+                    </div>
+
+                    {/* Footer (icon section) */}
+                    <div className="flex items-center justify-between text-xs text-gray-600 border-t border-gray-300 py-2 px-4">
+                      <div className="text-lg space-x-3">
+                        <Button
+                          className={"hover:text-blue-500"}
+                          onClick={() => handleOpenModal("edit", setDataRow(c))}
+                        >
+                          <FaRegEdit />
+                        </Button>
+                        <Button
+                          className={"hover:text-red-500"}
+                          onClick={() => handleOpenModal("delete", dataRow)}
+                        >
+                          <FaRegTrashAlt />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </Tab>
+        ))}
+      </Tabs>
+
       <ModalLayout
         isModalOpen={isModalOpen}
         className={`${submitType !== "delete" && "w-[1000px]"}`}
-        title={"Add Casting"}
+        title={
+          submitType === "add"
+            ? "Add Casting"
+            : submitType === "edit"
+            ? "Edit casting"
+            : null
+        }
         handleCloseModal={handleCloseModal}
         closeButton={submitType !== "delete"}
       >
@@ -106,14 +146,14 @@ const DetailFilmPage = () => {
           <Form
             configInput={
               submitType === "add"
-                ? inputAddCastingFilms(datasFilms)
-                : inputEditAbout(dataRow)
+                ? inputAddCastingFilms(datasDetailFilms)
+                : inputEditCastingFilms(dataRow, datasDetailFilms)
             }
             buttonText={"Submit"}
             handleSubmitData={(e) =>
               submitType === "add"
                 ? addCastingFilmService(e, extraOptions)
-                : handleEditAbout(extraOptions, dataRow)
+                : updateCastingFilmService(e, extraOptions)
             }
           />
         )}

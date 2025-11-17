@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { useGlobalHook } from "../useGlobalHook";
 import { getCityService, getProvinceService } from "../../service";
-import { useDataSub } from "../useSubDatas";
+import { useData } from "../useData";
+import { useDebauncedEffect } from "../useDebouncedEffect";
 
 export const useCityHook = () => {
   const {
@@ -14,50 +14,42 @@ export const useCityHook = () => {
     setSearchQuery,
     dataRow,
     handleCloseModal,
+    isLoading,
+    setIsLoading,
   } = useGlobalHook();
-  const [datasCity, setDatasCity] = useState([]);
-  const [datasProvince, setDatasProvince] = useState([]);
+
+  const { datasProvince, setDatasProvince, datasCity, setDatasCity } =
+    useData();
 
   const extraOptions = { accessToken, setRefreshData, handleCloseModal };
 
-  const optionsSelect = datasProvince.map((data) => ({
-    value: data.id,
-    label: data.province_name,
-  }));
-
-  useDataSub(getProvinceService, {
-    searchQuery: {},
-    accessToken,
-    submitType,
-    setDatasProvince,
+  useDebauncedEffect({
+    fn: () => {
+      Promise.all([
+        getCityService(accessToken, {
+          searchQuery,
+          setDatasCity,
+          setRefreshData,
+          handleCloseModal,
+        }),
+      ]).finally(() => setIsLoading(false));
+    },
+    deps: [searchQuery, refreshData],
+    condition: Object.keys(searchQuery).length > 0,
   });
-
-  useEffect(() => {
-    const fetchData = () => {
-      getCityService(accessToken, {
-        searchQuery,
-        setDatasCity,
-        setRefreshData,
-        handleCloseModal,
-      });
-    };
-
-    if (Object.keys(searchQuery).length > 0) {
-      const timeout = setTimeout(fetchData, 300);
-      return () => clearTimeout(timeout);
-    } else {
-      fetchData();
-    }
-  }, [refreshData, searchQuery]);
 
   return {
     datasCity,
     extraOptions,
-    optionsSelect,
     stateShowModal,
     setSearchQuery,
     submitType,
     dataRow,
     handleCloseModal,
+    getProvinceService,
+    datasProvince,
+    setDatasProvince,
+    isLoading,
+    accessToken,
   };
 };

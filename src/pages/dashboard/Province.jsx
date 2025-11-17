@@ -16,12 +16,17 @@ import { HeaderContent } from "../../components/molecules";
 const Province = () => {
   const {
     datasProvince,
-    optionsSelect,
     submitType,
     extraOptions,
     dataRow,
     setSearchQuery,
     stateShowModal,
+    accessToken,
+    getCountryService,
+    datasCountry,
+    setDatasCountry,
+    setRefreshData,
+    isLoading,
   } = useProvinceHook();
 
   return (
@@ -29,17 +34,33 @@ const Province = () => {
       <HeaderContent
         title={"Province"}
         handleOpen={stateShowModal?.handleShow}
+        handleAPI={() =>
+          getCountryService(accessToken, {
+            setDatasCountry,
+            setRefreshData,
+            searchQuery: {},
+          })
+        }
       />
       <Table
         datasTable={datasProvince}
         dataRow={dataRow}
         configTable={configTableProvince}
+        isLoading={isLoading}
+        title={"Province"}
         stateShowModal={stateShowModal}
         handleSearch={handleSearch(setSearchQuery)}
+        handleAPI={() =>
+          getCountryService(accessToken, {
+            setDatasCountry,
+            setRefreshData,
+            searchQuery: {},
+          })
+        }
         inputForm={
           submitType === "add"
-            ? inputAddProvince(optionsSelect)
-            : inputEditProvince(dataRow, optionsSelect)
+            ? inputAddProvince(datasCountry)
+            : inputEditProvince(dataRow, datasCountry)
         }
         submitType={submitType}
         handleService={

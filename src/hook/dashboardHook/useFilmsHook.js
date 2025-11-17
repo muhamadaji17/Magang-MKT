@@ -1,9 +1,9 @@
 /** @format */
 
-import { useEffect } from "react";
 import { useGlobalHook } from "../useGlobalHook";
 import { getFilmService } from "../../service";
 import { useData } from "../useData";
+import { useDebauncedEffect } from "../useDebouncedEffect";
 
 export const useFilmsHook = () => {
   const {
@@ -17,6 +17,8 @@ export const useFilmsHook = () => {
     searchQuery,
     setSearchQuery,
     handleCloseModal,
+    isLoading,
+    setIsLoading,
   } = useGlobalHook();
   const { datasFilms, setDatasFilms, datasRating, setDatasRating } = useData();
   const extraOptions = {
@@ -25,22 +27,19 @@ export const useFilmsHook = () => {
     handleCloseModal,
   };
 
-  useEffect(() => {
-    const fetchData = () => {
-      getFilmService(accessToken, {
-        searchQuery,
-        setDatasFilms,
-        setRefreshData,
-      });
-    };
-
-    if (Object.keys(searchQuery).length > 0) {
-      const timeout = setTimeout(fetchData, 300);
-      return () => clearTimeout(timeout);
-    } else {
-      fetchData();
-    }
-  }, [searchQuery, refreshData]);
+  useDebauncedEffect({
+    fn: () => {
+      Promise.all([
+        getFilmService(accessToken, {
+          searchQuery,
+          setDatasFilms,
+          setRefreshData,
+        }).finally(() => setIsLoading(false)),
+      ]);
+    },
+    deps: [searchQuery, refreshData],
+    condition: Object.keys(searchQuery).length > 0,
+  });
 
   return {
     datasFilms,
@@ -55,5 +54,6 @@ export const useFilmsHook = () => {
     setDatasRating,
     setRefreshData,
     accessToken,
+    isLoading,
   };
 };

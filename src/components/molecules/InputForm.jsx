@@ -1,7 +1,7 @@
 /** @format */
 
 import { useEffect, useState } from "react";
-import { Button } from "../atom";
+import { AtomSelect, Button, Input } from "../atom";
 import { FaEyeSlash, FaUpload } from "react-icons/fa";
 import Editor from "../organism/Editor";
 
@@ -9,9 +9,7 @@ const InputForm = ({ data, register, control, value, error, state }) => {
   const [showPassword, setShowPassword] = useState(null);
   const { fileName, setFileName, imagePreview, setImagePreview } = state;
   const getImageDefault = data.type === "file" ? data.defaultValue : null;
-  const imageURL = `${import.meta.env.VITE_API_PUBLIC_IMG}${
-    data.tableImg
-  }/${getImageDefault}`;
+  const imageURL = `http://${getImageDefault}`;
 
   useEffect(() => {
     if (getImageDefault) {
@@ -34,28 +32,28 @@ const InputForm = ({ data, register, control, value, error, state }) => {
   return (
     <>
       {data.type === "select" ? (
-        <select
-          {...register(data.name, data.optionError)}
-          id={data.name}
-          defaultValue={""}
-          className={`peer focus:text-black w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 bg-white ${
-            value === undefined || value === "" ? "text-transparent" : ""
-          }`}
-        >
-          <option value="" disabled>
-            {data.optionDisabledText}
-          </option>
-          {data.options?.map((option, index) => {
-            return (
-              <option key={index} value={option.value}>
-                {option.label}
-              </option>
-            );
-          })}
-        </select>
+        <AtomSelect
+          name={data.name}
+          title={data.labelText}
+          valueOptions={data.options}
+          label={data.labelText}
+          rules={data.optionError}
+          selectTitle={data.optionDisabledText}
+          // disabled={data.disabled || isDisabled}
+          sx={data.sx}
+          control={control}
+
+          // className={`peer focus:text-black w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 bg-white ${
+          //   value === undefined || value === "" ? "text-transparent" : ""
+          // }`}
+        />
       ) : data.type === "file" ? (
         <div className="flex flex-col">
-          <div className="relative w-56 h-64 border border-gray-300 rounded-md overflow-hidden bg-gray-100 flex items-center justify-center cursor-pointer hover:border-blue-500 transition-all">
+          <div
+            className={`relative ${
+              data.grid ? "w-full h-96" : "w-56 h-64"
+            } border border-gray-300 rounded-md overflow-hidden bg-gray-100 flex items-center justify-center cursor-pointer hover:border-blue-500 transition-all`}
+          >
             {imagePreview && (
               <img
                 src={imagePreview}
@@ -87,7 +85,7 @@ const InputForm = ({ data, register, control, value, error, state }) => {
         </div>
       ) : data.type === "editor_about" ? (
         <Editor
-          className={"h-[200px] mb-24"}
+          className={"h-[200px] mb-28 lg:mb-24"}
           name={data.name}
           control={control}
           rules={data.optionError}
@@ -109,38 +107,43 @@ const InputForm = ({ data, register, control, value, error, state }) => {
           className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 "
         />
       ) : (
-        <input
+        <Input
           type={!showPassword ? data.type : "text"}
-          {...register(data.name, data.optionError)}
+          register={register}
+          addOptionError={data.optionError}
           id={data.name}
-          onWheel={(e) => e.target.blur()}
+          label={data.labelText}
+          name={data.name}
+          onFocus={data.onFocus}
           max={data.max}
           min={data.min}
-          className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 "
+          sx={data.sx}
         />
       )}
 
-      {data.type !== "file" && (
-        <label
-          htmlFor={data.name}
-          style={{ pointerEvents: "none" }}
-          className={`
+      {data.type === "editor_about" ||
+        data.type === "select" ||
+        (data.type === "textarea" && (
+          <label
+            htmlFor={data.name}
+            style={{ pointerEvents: "none" }}
+            className={`
           ${
             data.type === "editor_about"
               ? "-top-2.5 text-xs px-1"
               : value !== undefined && value !== ""
               ? "-top-2.5 text-xs px-1"
               : "top-2 text-base"
-          }  absolute left-4 bg-white transition-all text-gray-600 peer-focus:text-xs peer-focus:px-1 peer-focus:-top-2.5 peer-focus:text-blue-500 peer-focus:font-semibold cursor-text`}
-        >
-          {data.labelText}
-        </label>
-      )}
+          }  absolute left-4 transition-all bg-white peer-focus:text-xs peer-focus:px-1 peer-focus:-top-2.5 peer-focus:font-semibold cursor-text `}
+          >
+            {data.labelText}
+          </label>
+        ))}
 
       {data.icon && (
         <Button
           type={"button"}
-          className="absolute right-4 top-3"
+          className="absolute right-4 top-5"
           onClick={() => setShowPassword(!showPassword)}
         >
           {!showPassword ? <data.icon /> : <FaEyeSlash />}

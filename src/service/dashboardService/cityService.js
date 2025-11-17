@@ -1,5 +1,6 @@
 import { DELETE, GET, POST, PUT } from "../../api";
 import { generateHeaders, generateEndpointWithQuery } from "../";
+import { SwalAlertBasic } from "../../utils";
 
 export const getCityService = async (accessToken, extraOptions) => {
   const { setDatasCity, setRefreshData, searchQuery } = extraOptions;
@@ -16,13 +17,14 @@ export const getCityService = async (accessToken, extraOptions) => {
       province_name: data.created_province_city?.province_name || "-",
       status: data.status,
       username: data.created_city.user_name,
+      label: data.city_name,
+      value: data.id_city,
     }));
 
     setDatasCity(parsing);
     if (setRefreshData) {
       setRefreshData(true);
     }
-    console.log(response);
   } catch (error) {
     console.error(error);
   }
@@ -33,9 +35,11 @@ export const addCityService = async (datas, extraOptions) => {
   const headers = generateHeaders({ accessToken });
   try {
     const response = await POST("crud/city", datas, headers);
-    console.log(response);
     if (response.data.success) {
-      alert(response.data.message);
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
       setRefreshData(false);
       handleCloseModal();
     }
@@ -53,7 +57,10 @@ export const updateCityService = async (datas, extraOptions) => {
     const response = await PUT("crud/city", datas, headers);
 
     if (response.data.status) {
-      alert(response.data.message);
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
       handleCloseModal();
       setRefreshData(false);
     }
@@ -67,7 +74,10 @@ export const deleteCityService = async (id, extraOptions) => {
   try {
     const response = await DELETE("crud/city", accessToken, id);
     if (response.data.success) {
-      alert(response.data.message);
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
       handleCloseModal();
       setRefreshData(false);
     }

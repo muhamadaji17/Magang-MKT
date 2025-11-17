@@ -48,7 +48,7 @@ export const getFilmService = async (accessToken, extraOptions) => {
   }
 };
 export const getFilmByIdService = async (accessToken, extraOptions) => {
-  const { setDatasFilms, setRefreshData, searchQuery } = extraOptions;
+  const { setDatasDetailFilms, setRefreshData, searchQuery } = extraOptions;
 
   try {
     const response = await GET(
@@ -56,7 +56,7 @@ export const getFilmByIdService = async (accessToken, extraOptions) => {
       accessToken
     );
 
-    setDatasFilms(response.data.payload);
+    setDatasDetailFilms(response?.data?.payload);
     setRefreshData(true);
   } catch (error) {
     // console.error(error);

@@ -8,7 +8,7 @@ const ModalLayout = ({
   isModalOpen,
   closeButton,
   description,
-  className,
+  className = "",
   submitType,
   children,
   handleCloseModal,
@@ -18,12 +18,14 @@ const ModalLayout = ({
       {isModalOpen && (
         <div className="absolute top-0 left-0 right-0 bottom-0">
           <div
-            className="absolute inset-0 h-screen bg-black/60"
+            className="absolute inset-0 h-screen bg-black/60 z-[999]"
             onClick={handleCloseModal}
           ></div>
           <div className="flex justify-center items-center h-full">
             <div
-              className={`bg-white rounded-sm p-5 w-[1000px] ${className} z-10 `}
+              className={`bg-white rounded-sm p-5 max-h-[100vh] z-[999] overflow-y-auto ${
+                submitType === "delete" ? "w-[400px]" : "w-[1000px]"
+              } ${className} z-10 `}
             >
               {closeButton && (
                 <div className="mb-5 flex justify-between">

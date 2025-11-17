@@ -1,5 +1,6 @@
 import { DELETE, GET, POST, PUT } from "../../api";
 import { generateHeaders, generateEndpointWithQuery } from "../";
+import { SwalAlertBasic } from "../../utils";
 
 export const getOfficeService = async (accessToken, extraOptions) => {
   const { setDatasOffice, setRefreshData, searchQuery } = extraOptions;
@@ -8,7 +9,6 @@ export const getOfficeService = async (accessToken, extraOptions) => {
 
   try {
     const response = await GET(`crud/office/by?${paramsQuery}`, accessToken);
-
     const parsing = response.data.payload.map((data) => ({
       id: data.id_office,
       office_name: data.office_name,
@@ -29,7 +29,6 @@ export const getOfficeService = async (accessToken, extraOptions) => {
     if (setRefreshData) {
       setRefreshData(true);
     }
-    console.log(response);
   } catch (error) {
     console.error(error);
   }
@@ -42,9 +41,11 @@ export const addOfficeService = async (datas, extraOptions) => {
 
   try {
     const response = await POST("crud/office", datas, headers);
-
     if (response.data.success) {
-      alert(response.data.message);
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
       handleCloseModal();
       setRefreshData(false);
     }
@@ -60,9 +61,11 @@ export const updateOfficeService = async (datas, extraOptions) => {
 
   try {
     const response = await PUT("crud/office", datas, headers);
-
     if (response.data.status) {
-      alert(response.data.message);
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
       handleCloseModal();
       setRefreshData(false);
     }
@@ -76,11 +79,13 @@ export const deleteOfficeService = async (id, extraOptions) => {
   try {
     const response = await DELETE("crud/office", accessToken, id);
     if (response.data.success) {
-      alert(response.data.message);
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
       handleCloseModal();
       setRefreshData(false);
     }
-    console.log(response);
   } catch (error) {
     console.error("Delete Failed:", error);
     throw error;

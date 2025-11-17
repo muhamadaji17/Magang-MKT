@@ -4,6 +4,7 @@ import {
   isEventOnDate,
   isToday,
   normalizeDate,
+  sortByDayRage,
 } from "../pattern/calendarLogic";
 
 export const useCalendar = (dataEvents) => {
@@ -15,8 +16,8 @@ export const useCalendar = (dataEvents) => {
   const [draggedEvent, setDraggedEvent] = useState(null);
 
   useEffect(() => {
-    setEvents(dataEvents);
-    setOriginalEvents(JSON.parse(JSON.stringify(dataEvents)));
+    setEvents(sortByDayRage(dataEvents));
+    setOriginalEvents(JSON.parse(JSON.stringify(sortByDayRage(dataEvents))));
     setCalendarData(generateCalendar(currentDate));
   }, [dataEvents, currentDate]);
 

@@ -24,6 +24,7 @@ const Form = ({
   forType,
   type,
   handleSubmitData,
+  buttonClassName = "",
   className,
   handleShowSidebar,
   dataDefault,
@@ -137,7 +138,8 @@ const Form = ({
           </div>
         ) : (
           <Button
-            className={`bg-blue-600 rounded-sm py-2 w-full text-center text-white cursor-pointer hover:bg-blue-700`}
+            className={`bg-blue-600 rounded-sm py-2 w-full text-center text-white cursor-pointer hover:bg-blue-700 ${buttonClassName}`}
+            type="submit"
           >
             {buttonText}
           </Button>

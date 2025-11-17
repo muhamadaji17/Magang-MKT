@@ -12,12 +12,14 @@ export const inputAddBanner = [
     name: "start_date_banner",
     type: "date",
     labelText: "Start Date Banner",
+    onFocus: true,
     optionError: errorOptions.start_date_banner,
   },
   {
     name: "end_date_banner",
     type: "date",
     labelText: "End Date Banner",
+    onFocus: true,
     optionError: errorOptions.end_date_banner,
   },
   {

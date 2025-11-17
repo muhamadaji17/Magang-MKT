@@ -19,7 +19,6 @@ export const handleDeleteOffice = (extraOptions) => {
 
 export const handleEditOffice = (extraOptions, dataRow) => {
   return (datas) => {
-    console.log(datas);
     handleSubmitData(
       { ...datas, id: dataRow.id },
       updateOfficeService,

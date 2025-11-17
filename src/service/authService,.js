@@ -38,5 +38,6 @@ export const loginService = async (data, extraOptions) => {
 };
 
 export const logoutService = () => {
+  window.location.href = "/login";
   removeCookies();
 };

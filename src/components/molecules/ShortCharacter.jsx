@@ -2,8 +2,9 @@
 
 "use client";
 import { useState } from "react";
+import { Button } from "../atom";
 
-const ShortenedCharacter = ({ sinopsis, maxLength }) => {
+const ShortenedCharacter = ({ sinopsis, maxLength, handleShow }) => {
   const [showFull, setShowFull] = useState(false);
   const shortenedSinopsis = showFull
     ? sinopsis
@@ -16,12 +17,12 @@ const ShortenedCharacter = ({ sinopsis, maxLength }) => {
           : shortenedSinopsis}
       </p>
       {sinopsis?.length > maxLength && (
-        <button
+        <Button
           className="mt-2 text-blue-300 underline"
-          onClick={() => setShowFull(!showFull)}
+          onClick={() => handleShow("synopsis", sinopsis)}
         >
           {showFull ? "Showless" : "Show More"}
-        </button>
+        </Button>
       )}
     </div>
   );

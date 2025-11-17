@@ -93,7 +93,7 @@ const Calendar = ({
             <TableHead configTable={dayNames} />
             <tbody>
               {calendarData.map((week, i) => (
-                <tr key={i}>
+                <tr key={i} className="">
                   {week.map((date, weekindex) => (
                     <td
                       key={weekindex}
@@ -163,11 +163,12 @@ const Calendar = ({
 
         <ModalLayout
           isModalOpen={stateShowModal?.isShow}
-          handleCloseModal={stateShowModal?.handleCloseModal}
+          submitType={submitType}
+          handleCloseModal={stateShowModal?.handleShow}
         >
           <ConfirmDelete
             onConfirm={handleServiceWithOnClick}
-            handleCloseModal={stateShowModal.handleCloseModal}
+            handleCloseModal={stateShowModal.handleShow}
             dataRow={dataEvent}
           />
         </ModalLayout>

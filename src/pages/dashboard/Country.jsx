@@ -21,6 +21,7 @@ const Country = () => {
     extraOptions,
     stateShowModal,
     setSearchQuery,
+    isLoading,
   } = useCountryHook();
 
   return (
@@ -32,6 +33,8 @@ const Country = () => {
         dataRow={dataRow}
         configTable={configTableCountry}
         stateShowModal={stateShowModal}
+        isLoading={isLoading}
+        title={"Country"}
         handleSearch={handleSearch(setSearchQuery)}
         inputForm={
           submitType === "add" ? inputAddCountry : inputEditCountry(dataRow)

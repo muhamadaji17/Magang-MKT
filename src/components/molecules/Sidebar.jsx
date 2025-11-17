@@ -31,7 +31,7 @@ const Sidebar = ({
       >
         {isShow && slide && (
           <div
-            className="flex-1 bg-black/60 h-screen absolute inset-0 "
+            className="flex-1 bg-black/60 h-screen inset-0"
             onClick={handleShow}
           />
         )}
@@ -39,7 +39,7 @@ const Sidebar = ({
         <div
           className={`${
             slide
-              ? `fixed w-96 z-40 ${type !== "form" ? "pt-20" : ""}`
+              ? `fixed w-96 z-[ ${type !== "form" ? "pt-20 " : ""}`
               : "static w-72"
           } ${
             type === "form"
@@ -55,7 +55,7 @@ const Sidebar = ({
                 }`
           } ${
             className || ""
-          } inset-y-0 ${position} flex-1 p-4 transform transition-transform duration-300 shadow-xl`}
+          } inset-y-0 ${position} flex-1 p-4 transform transition-transform duration-300 shadow-xl `}
         >
           <div
             className={`flex flex-col h-full  ${
@@ -83,7 +83,7 @@ const Sidebar = ({
               />
             )}
 
-            {type !== "form" && (
+            {/* {type !== "form" && (
               <Link className="lg:hidden" to={"/login"}>
                 <Button
                   className={"hover:underline "}
@@ -92,7 +92,7 @@ const Sidebar = ({
                   Logout
                 </Button>
               </Link>
-            )}
+            )} */}
           </div>
         </div>
       </div>

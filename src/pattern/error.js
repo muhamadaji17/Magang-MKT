@@ -8,6 +8,17 @@ export const errorOptions = {
       message: "Username must be at least 5 characters",
     },
   },
+  is_main_cast: {
+    required: "is_main_cast is Required",
+  },
+
+  phone: {
+    required: "Phone Number is Required",
+    minLength: {
+      value: 10,
+      message: "Phone Number must be at least 10 characters",
+    },
+  },
 
   password: {
     required: "Password is Required",
@@ -116,7 +127,10 @@ export const errorOptions = {
     required: "Pemeran is Required",
   },
   sinopsis_casting_film_id: {
-    required: "Deskripsi is Required",
+    required: "Deskripsi ID is Required ",
+  },
+  sinopsis_casting_film_en: {
+    required: "Deskripsi EN is Required ",
   },
 
   img: {
@@ -222,5 +236,8 @@ export const errorOptions = {
       value: /^-?\d+(\.\d+)?$/,
       message: "Hanya boleh angka",
     },
+  },
+  select_role: {
+    required: "Select Role is Required",
   },
 };
