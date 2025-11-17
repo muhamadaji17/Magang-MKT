@@ -8,8 +8,12 @@ const Breadcrumb = () => {
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ul className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse list-none">
-        {params.map((data, index) =>
-          index === 0 ? (
+        {params.map((data, index) => {
+          const text = data
+            .replace(/-/g, " ")
+            .replace(/\b[a-z]/g, (m) => m.toUpperCase());
+
+          return index === 0 ? (
             <li className="inline-flex items-center" key={index}>
               <Link
                 to={"/"}
@@ -49,17 +53,17 @@ const Breadcrumb = () => {
                 )}
                 {index == params.length - 1 ? (
                   <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2">
-                    {data}
+                    {text}
                   </span>
                 ) : (
                   <Link className="hover:text-blue-600" to={`/${data}`}>
-                    {data}
+                    {text}
                   </Link>
                 )}
               </div>
             </li>
-          )
-        )}
+          );
+        })}
       </ul>
     </nav>
   );

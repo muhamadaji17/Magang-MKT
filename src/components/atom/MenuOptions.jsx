@@ -19,7 +19,7 @@ const MenuOptions = ({ onEdit, onDelete, onDetail }) => {
   }, []);
 
   return (
-    <div ref={menuRef}>
+    <div ref={menuRef} className="">
       {/* Titik tiga */}
       <Button
         onClick={() => setOpen(!open)}

@@ -5,29 +5,37 @@ import { AtomSelect, Button, Input } from "../atom";
 import { FaEyeSlash, FaUpload } from "react-icons/fa";
 import Editor from "../organism/Editor";
 
-const InputForm = ({ data, register, control, value, error, state }) => {
+const InputForm = ({
+  data,
+  register,
+  control,
+  value,
+  error,
+  imagePreview,
+  handleFileChange,
+}) => {
   const [showPassword, setShowPassword] = useState(null);
-  const { fileName, setFileName, imagePreview, setImagePreview } = state;
-  const getImageDefault = data.type === "file" ? data.defaultValue : null;
-  const imageURL = `http://${getImageDefault}`;
+  // const { fileName, setFileName, imagePreview, setImagePreview } = state;
+  // const getImageDefault = data.type === "file" ? data.defaultValue : null;
+  // const imageURL = `http://${getImageDefault}`;
 
-  useEffect(() => {
-    if (getImageDefault) {
-      setImagePreview(imageURL);
-      setFileName(getImageDefault);
-    }
-  }, [getImageDefault, setImagePreview, setFileName]);
+  // useEffect(() => {
+  //   if (getImageDefault) {
+  //     setImagePreview({ url: imageURL, fieldName: data.name });
+  //     setFileName({ value: getImageDefault, fieldName: data.name });
+  //   }
+  // }, [getImageDefault, setImagePreview, setFileName]);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImagePreview(URL.createObjectURL(file));
-      setFileName(file.name);
-    } else {
-      setImagePreview(null);
-      setFileName("");
-    }
-  };
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setImagePreview({ url: URL.createObjectURL(file), fieldName: data.name });
+  //     setFileName({ value: file.name, fieldName: data.name });
+  //   } else {
+  //     setImagePreview(null);
+  //     setFileName("");
+  //   }
+  // };
 
   return (
     <>
@@ -51,21 +59,21 @@ const InputForm = ({ data, register, control, value, error, state }) => {
         <div className="flex flex-col">
           <div
             className={`relative ${
-              data.grid ? "w-full h-96" : "w-56 h-64"
+              data.className ? `${data.className || ""}` : "w-56 h-64"
             } border border-gray-300 rounded-md overflow-hidden bg-gray-100 flex items-center justify-center cursor-pointer hover:border-blue-500 transition-all`}
           >
             {imagePreview && (
               <img
-                src={imagePreview}
+                src={imagePreview?.url}
                 alt="Preview"
-                className="absolute inset-0 w-full h-full object-cover "
+                className="absolute inset-0 w-full h-full object-cover"
               />
             )}
 
             {!imagePreview && (
               <div className="flex flex-col items-center text-gray-500">
                 <FaUpload className="text-2xl mb-2" />
-                <span className="text-sm">Upload Image</span>
+                <span className="text-sm">Upload {data.labelText}</span>
               </div>
             )}
 
@@ -79,13 +87,15 @@ const InputForm = ({ data, register, control, value, error, state }) => {
             />
           </div>
 
-          {fileName && (
-            <span className="text-xs mt-2 text-gray-600">{fileName}</span>
+          {imagePreview && (
+            <span className="text-xs mt-2 text-gray-600">
+              {imagePreview?.fileName}
+            </span>
           )}
         </div>
       ) : data.type === "editor_about" ? (
         <Editor
-          className={"h-[200px] mb-28 lg:mb-24"}
+          className={`${data.className}`}
           name={data.name}
           control={control}
           rules={data.optionError}
@@ -121,25 +131,25 @@ const InputForm = ({ data, register, control, value, error, state }) => {
         />
       )}
 
-      {data.type === "editor_about" ||
+      {(data.type === "editor_about" ||
         data.type === "select" ||
-        (data.type === "textarea" && (
-          <label
-            htmlFor={data.name}
-            style={{ pointerEvents: "none" }}
-            className={`
+        data.type === "textarea") && (
+        <label
+          htmlFor={data.name}
+          style={{ pointerEvents: "none" }}
+          className={`
+
           ${
             data.type === "editor_about"
               ? "-top-2.5 text-xs px-1"
               : value !== undefined && value !== ""
               ? "-top-2.5 text-xs px-1"
               : "top-2 text-base"
-          }  absolute left-4 transition-all bg-white peer-focus:text-xs peer-focus:px-1 peer-focus:-top-2.5 peer-focus:font-semibold cursor-text `}
-          >
-            {data.labelText}
-          </label>
-        ))}
-
+          }  absolute left-4 transition-all bg-white peer-focus:text-xs peer-focus:px-1 peer-focus:-top-2.5 peer-focus:font-semibold cursor-text text-gray-500`}
+        >
+          {data.labelText}
+        </label>
+      )}
       {data.icon && (
         <Button
           type={"button"}

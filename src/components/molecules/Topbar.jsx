@@ -3,15 +3,29 @@ import { Button } from "../atom";
 import { logoutService } from "../../service";
 import { FaUser } from "react-icons/fa";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const Topbar = ({ handleShowSidebar }) => {
   const username = Cookies.get("username");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  // REF untuk mendeteksi klik di luar dropdown
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className="bg-white fixed md:sticky top-0 left-0 right-0 p-4 shadow-md flex flex-row-reverse justify-between items-center]">
-      <div className="relative">
+    <div className="bg-white fixed md:sticky top-0 left-0 right-0 p-4 shadow-md flex flex-row-reverse justify-between items-center z-[9]">
+      <div className="relative" ref={dropdownRef}>
         {/* Profile button */}
         <div
           className="text-gray-800 flex items-center cursor-pointer select-none"
@@ -29,7 +43,7 @@ const Topbar = ({ handleShowSidebar }) => {
           />
         </div>
 
-        {/* Dropdown with animation */}
+        {/* Dropdown */}
         <div
           className={`
             absolute top-10 right-0 mt-2 w-48 bg-white rounded-md shadow-md origin-top-right
@@ -44,9 +58,7 @@ const Topbar = ({ handleShowSidebar }) => {
           <ul>
             <li
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-800"
-              onClick={() => {
-                logoutService();
-              }}
+              onClick={() => logoutService()}
             >
               Logout
             </li>
@@ -57,7 +69,7 @@ const Topbar = ({ handleShowSidebar }) => {
       {/* Mobile sidebar toggle */}
       <div className="flex space-x-4">
         <Button
-          className="md:hidden text-gray-800"
+          className="xl:hidden text-gray-800"
           id="hamburger-btn"
           onClick={handleShowSidebar}
         >

@@ -1,29 +1,14 @@
 /** @format */
 
-import { useEffect, useState } from "react";
-import {
-  addCastingFilmService,
-  getFilmByIdService,
-  handleAddAbout,
-  handleDeleteAbout,
-  handleEditAbout,
-  updateCastingFilmService,
-} from "../../service";
+import { useEffect } from "react";
+import { handleDeleteAbout, getFilmByIdService } from "../../service";
 import { useData, useGlobalHook } from "../../hook";
 import { ConfirmDelete, Form, HeaderContent } from "../../components/molecules";
-import { Table, Tabs } from "../../components/organism";
-import {
-  configTableFilms,
-  handleSearch,
-  inputAddAbout,
-  inputAddCastingFilms,
-  inputEditAbout,
-  typeTabsCastingFilms,
-} from "../../pattern";
-import { FaInstagramSquare, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
+import { Tabs } from "../../components/organism";
+import { inputAddCastingFilms, typeTabsCastingFilms } from "../../pattern";
+import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { ModalLayout } from "../../components/layouts";
 import { Tab } from "../../components/organism/Tabs";
-import { articleGroups } from "../../utils/dummy";
 import { Button } from "../../components/atom";
 import { inputEditCastingFilms } from "../../pattern/modalPattern/inputCastingFilmsPattern";
 
@@ -150,11 +135,12 @@ const DetailFilmPage = () => {
                 : inputEditCastingFilms(dataRow, datasDetailFilms)
             }
             buttonText={"Submit"}
-            handleSubmitData={(e) =>
-              submitType === "add"
-                ? addCastingFilmService(e, extraOptions)
-                : updateCastingFilmService(e, extraOptions)
-            }
+            handleSubmitData={(e) => console.log(e)}
+            // handleSubmitData={(e) =>
+            //   submitType === "add"
+            //     ? addCastingFilmService(e, extraOptions)
+            //     : updateCastingFilmService(e, extraOptions)
+            // }
           />
         )}
       </ModalLayout>

@@ -66,14 +66,18 @@ import {
   handleDeleteRole,
 } from "./handlers/rolesHandler";
 import {
-  addCastingFilmService,
-  updateCastingFilmService,
-} from "./dashboardService/detailFilmService";
+  handleAddArticleCategory,
+  handleEditArticleCategory,
+  handleDeleteArticleCategory,
+} from "./handlers/articleHandlers";
+
+import {
+  getArticlesService,
+  getArticleCategoryService,
+} from "./dashboardService/articlesService";
 import { getRatingService } from "./dashboardService/ratingService";
 export {
-  updateCastingFilmService,
   getRatingService,
-  addCastingFilmService,
   getFilmByIdService,
   loginService,
   logoutService,
@@ -88,6 +92,8 @@ export {
   getFilmService,
   getUserService,
   getRolesService,
+  getArticlesService,
+  getArticleCategoryService,
   handleAddBanner,
   handleServiceWithOnClick,
   handleAddCountry,
@@ -114,4 +120,7 @@ export {
   handleAddRole,
   handleEditRole,
   handleDeleteRole,
+  handleAddArticleCategory,
+  handleEditArticleCategory,
+  handleDeleteArticleCategory,
 };
