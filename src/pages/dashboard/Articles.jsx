@@ -47,8 +47,6 @@ const Articles = () => {
     ]);
   }, [refreshData]);
 
-  console.log(datasArticle);
-
   return (
     <>
       <HeaderContent title={"Articles"} path={"/articles/create"} />
@@ -67,58 +65,61 @@ const Articles = () => {
                   </div>
 
                   <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    {datasArticle.map((article, i) => (
-                      <div
-                        key={i}
-                        className="group relative bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col"
-                      >
-                        {/* Thumbnail */}
-                        <div className="overflow-hidden">
-                          <img
-                            src={article?.article_img}
-                            alt={"thumbnail"}
-                            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-
-                        {/* Content */}
-                        <div className="flex flex-col flex-1 justify-between">
-                          <div className="p-4 space-y-2 ">
-                            <h4 className="text-lg font-semibold line-clamp-2 text-gray-800 group-hover:text-blue-800">
-                              {article?.article_title?.en}
-                            </h4>
-                            <ShortenedCharacter
-                              sinopsis={article?.description?.en}
+                    {datasArticle
+                      .filter(
+                        (article) => article.id_article_category === group.value
+                      )
+                      .map((article, i) => (
+                        <div
+                          key={i}
+                          className="group relative bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col"
+                        >
+                          {/* Thumbnail */}
+                          <div className="overflow-hidden">
+                            <img
+                              src={article?.article_img}
+                              alt={"thumbnail"}
+                              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                             />
-
-                            <div className="pt-2 flex items-center justify-between text-xs text-gray-400">
-                              <span>{article?.author}</span>
-                              <span>{article?.date}</span>
-                            </div>
                           </div>
 
-                          {/* Footer (icon section) */}
-                          <div className="flex items-center justify-between text-xs text-gray-600 border-t border-gray-300 py-2 px-4">
-                            <div className="text-lg space-x-3">
-                              <Link
-                                className={"hover:text-blue-500 inline-block"}
-                                to={"/articles/update"}
-                              >
-                                <FaRegEdit />
-                              </Link>
-                              <Button
-                                className={"hover:text-red-500"}
-                                onClick={() =>
-                                  handleOpenModal("delete", dataRow)
-                                }
-                              >
-                                <FaRegTrashAlt />
-                              </Button>
+                          {/* Content */}
+                          <div className="flex flex-col flex-1 justify-between">
+                            <div className="p-4 space-y-2 ">
+                              <h4 className="text-lg font-semibold line-clamp-2 text-gray-800 group-hover:text-blue-800">
+                                {article?.article_title}
+                              </h4>
+
+                              <div>{article.article_thumbnail_content}</div>
+
+                              <div className="pt-2 flex items-center justify-between text-xs text-gray-400">
+                                <span>{article?.author}</span>
+                                <span>{article?.date}</span>
+                              </div>
+                            </div>
+
+                            {/* Footer (icon section) */}
+                            <div className="flex items-center justify-between text-xs text-gray-600 border-t border-gray-300 py-2 px-4">
+                              <div className="text-lg space-x-3">
+                                <Link
+                                  className={"hover:text-blue-500 inline-block"}
+                                  to={"/articles/update"}
+                                >
+                                  <FaRegEdit />
+                                </Link>
+                                <Button
+                                  className={"hover:text-red-500"}
+                                  onClick={() =>
+                                    handleOpenModal("delete", dataRow)
+                                  }
+                                >
+                                  <FaRegTrashAlt />
+                                </Button>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </div>
               </Tab>

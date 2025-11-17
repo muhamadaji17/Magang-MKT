@@ -55,9 +55,15 @@ export const addBannerService = async (datas, extraOptions) => {
       reset();
       setFileName("");
       setImagePreview(null);
+    } else {
+      SwalAlertBasic({
+        icon: "error",
+        text: response.data.message,
+      });
     }
   } catch (error) {
     console.error("Update Failed:", error);
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
     throw error;
   }
 };
@@ -117,7 +123,11 @@ export const updateBannerService = async (datas, extraOptions) => {
     }
   } catch (error) {
     console.error("Update Failed:", error);
-    alert(error.response.data.message);
+    SwalAlertBasic({
+      title: "Error",
+      icon: "error",
+      text: error.response.data.message,
+    });
     throw error;
   }
 };
@@ -128,7 +138,7 @@ export const deleteBannerService = async (id, extraOptions) => {
 
   try {
     const response = await DELETE("crud/banner", accessToken, id);
-    if (response.data.success) {
+    if (response.data.status) {
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
@@ -137,7 +147,6 @@ export const deleteBannerService = async (id, extraOptions) => {
       handleCloseSidebar();
       setRefreshData(false);
     }
-    console.log(response);
   } catch (error) {
     console.error("Delete Failed:", error);
     throw error;

@@ -59,7 +59,7 @@ export const deleteAboutService = async (id, extraOptions) => {
 
   try {
     const response = await DELETE("crud/about", accessToken, id);
-    if (response.data.success) {
+    if (response.data.status) {
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,

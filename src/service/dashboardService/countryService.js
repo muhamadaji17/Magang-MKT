@@ -74,7 +74,7 @@ export const deleteCountryService = async (id, extraOptions) => {
 
   try {
     const response = await DELETE("crud/country", accessToken, id);
-    if (response.data.success) {
+    if (response.data.status) {
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
@@ -84,6 +84,11 @@ export const deleteCountryService = async (id, extraOptions) => {
     }
   } catch (error) {
     console.error("Delete Failed:", error);
+    SwalAlertBasic({
+      icon: "error",
+      text: "Delete Failed, Cuz have a children!",
+    });
+    handleCloseModal();
     throw error;
   }
 };

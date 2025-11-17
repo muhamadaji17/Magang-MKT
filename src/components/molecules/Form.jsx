@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { InputForm } from ".";
 import { Button } from "../atom";
-import { get, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const generateDefaultValue = (configInput) => {
   return configInput?.reduce((acc, curr) => {
@@ -53,7 +53,7 @@ const Form = ({
       fieldName: data.name,
     }));
     setImagePreview(generateImagePreview);
-  }, [setImagePreview]);
+  }, [setImagePreview, configInput]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];

@@ -99,11 +99,18 @@ export const deleteArticleCategoryService = async (id, extraOptions) => {
   try {
     const response = await DELETE("crud/article_category", accessToken, id);
 
-    SwalAlertBasic({ icon: "success", text: response.data.message });
-    setRefreshData(false);
-    handleCloseModal();
+    if (response.data.status) {
+      SwalAlertBasic({ icon: "success", text: response.data.message });
+      setRefreshData(false);
+      handleCloseModal();
+    }
   } catch (error) {
     console.error("Delete Failed:", error);
+    SwalAlertBasic({
+      icon: "error",
+      text: "Delete Failed, Cuz have a children!",
+    });
+    handleCloseModal();
     throw error;
   }
 };

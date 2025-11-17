@@ -8,6 +8,7 @@ import {
   endOfWeek,
 } from "date-fns";
 import { SwalAlertBasic } from "../utils";
+import { SwalAlertConfirm } from "../utils/alert";
 
 export const moveEvent = (draggedEvent, date) => {
   if (!draggedEvent) return null;
@@ -62,11 +63,16 @@ export const handleSave = (updatedEvents, handleService, setUpdatedEvents) => {
     return;
   }
 
-  const isConfirmed = confirm("Are you sure you want to save changes?");
-
-  if (isConfirmed) {
-    handleService(updatedEvents, { setUpdatedEvents, type: "updateSchedule" });
-  }
+  SwalAlertConfirm({
+    title: "Are you sure you want to save the changes?",
+    confirmButtonColor: "#4CAF50",
+    confirmButtonText: "Yes, save it!",
+    handleConfirm: () =>
+      handleService(updatedEvents, {
+        setUpdatedEvents,
+        type: "updateSchedule",
+      }),
+  });
 };
 
 export const handleCancel = (setEvents, originalEvents, setUpdatedEvents) => {
