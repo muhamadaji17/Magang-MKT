@@ -13,6 +13,8 @@ export const useData = () => {
   const [datasOffice, setDatasOffice] = useState([]);
   const [datasUser, setDatasUser] = useState([]);
   const [datasRole, setDatasRole] = useState([]);
+  const [datasArticle, setDatasArticle] = useState([]);
+  const [datasArticleCategory, setDatasArticleCategory] = useState([]);
 
   return {
     datasAbout,
@@ -35,5 +37,9 @@ export const useData = () => {
     setDatasUser,
     datasRole,
     setDatasRole,
+    datasArticle,
+    setDatasArticle,
+    datasArticleCategory,
+    setDatasArticleCategory,
   };
 };

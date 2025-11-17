@@ -150,6 +150,24 @@ export const configTableRole = [
   },
 ];
 
+export const configTableArticleCategories = [
+  {
+    title: "Category Name",
+    key: "article_category_name",
+    type: "text",
+  },
+  {
+    title: "Status",
+    key: "status",
+    type: "select",
+    placeholder: "Select Status",
+    options: [
+      { label: "Active", value: true },
+      { label: "Inactive", value: false },
+    ],
+  },
+];
+
 export const dayNames = [
   { title: "Sunday" },
   { title: "Monday" },

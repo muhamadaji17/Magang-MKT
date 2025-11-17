@@ -65,7 +65,16 @@ import {
   handleEditRole,
   handleDeleteRole,
 } from "./handlers/rolesHandler";
+import {
+  handleAddArticleCategory,
+  handleEditArticleCategory,
+  handleDeleteArticleCategory,
+} from "./handlers/articleHandlers";
 import { addCastingFilmService } from "./dashboardService/detailFilmService";
+import {
+  getArticlesService,
+  getArticleCategoryService,
+} from "./dashboardService/articlesService";
 import { getRatingService } from "./dashboardService/ratingService";
 
 export {
@@ -85,6 +94,8 @@ export {
   getFilmService,
   getUserService,
   getRolesService,
+  getArticlesService,
+  getArticleCategoryService,
   handleAddBanner,
   handleServiceWithOnClick,
   handleAddCountry,
@@ -111,4 +122,7 @@ export {
   handleAddRole,
   handleEditRole,
   handleDeleteRole,
+  handleAddArticleCategory,
+  handleEditArticleCategory,
+  handleDeleteArticleCategory,
 };

@@ -161,14 +161,14 @@ export const deleteFilmService = async (id, extraOptions) => {
   const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
   try {
     const response = await DELETE("crud/films", accessToken, id);
-    if (response.data.success === true) {
+    if (response.data.status === true) {
       setRefreshData(false);
       handleCloseModal();
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
       });
-    } else if (response.data.success === false) {
+    } else if (response.data.status === false) {
       SwalAlertBasic({
         icon: "error",
         text: response.data.message,

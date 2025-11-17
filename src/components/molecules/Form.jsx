@@ -103,7 +103,7 @@ const Form = ({
       <form
         key={type}
         onSubmit={handleSubmit(onSubmit)}
-        className={`${className || ""}`}
+        className={`${className || ""} `}
       >
         <div className="grid grid-cols-12 gap-x-4">
           {configInput.map((data, index) => {
@@ -145,7 +145,7 @@ const Form = ({
 
         {forType === "sidebar" ? (
           <div className="flex gap-32 items-center w-full absolute bottom-5">
-            <div className="space-x-2 ">
+            <div className="space-x-2 flex">
               <Button
                 className={"py-2 px-3 rounded-md bg-green-500 text-white"}
               >

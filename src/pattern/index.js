@@ -21,6 +21,7 @@ import {
   configTableProvince,
   configTableUser,
   configTableRole,
+  configTableArticleCategories,
 } from "./tablePattern/tableDataColumn";
 
 import {
@@ -47,6 +48,12 @@ import {
 import { inputAddCastingFilms } from "./modalPattern/inputCastingFilmsPattern";
 import { inputAddUser, inputEditUser } from "./modalPattern/inputUserPattern";
 import { inputAddRole, inputEditRole } from "./modalPattern/inputRolePattern";
+import {
+  inputAddArticle,
+  inputEditArticle,
+  inputAddArticleCategories,
+  inputEditArticleCategories,
+} from "./modalPattern/inputArticlePattern";
 export {
   inputAddCastingFilms,
   loginPattern,
@@ -72,6 +79,10 @@ export {
   inputEditUser,
   inputAddRole,
   inputEditRole,
+  inputAddArticle,
+  inputEditArticle,
+  inputAddArticleCategories,
+  inputEditArticleCategories,
   configTableCountry,
   configTableProvince,
   configTableCity,
@@ -79,4 +90,5 @@ export {
   configTableFilms,
   configTableUser,
   configTableRole,
+  configTableArticleCategories,
 };

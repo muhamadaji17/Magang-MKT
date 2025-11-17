@@ -6,6 +6,7 @@ import Navlink from "./Navlink";
 import Form from "./Form";
 import { Button } from "../atom";
 import { MdClose } from "react-icons/md";
+import Logo from "../../../public/images/logo/LOGO RAIN WHITE.svg";
 
 const Sidebar = ({
   type = "",
@@ -42,10 +43,10 @@ const Sidebar = ({
             //   ? `fixed w-96 ${type !== "form" ? "pt-20 " : ""}`
             //   : "static w-72"
 
-            slide ? `fixed w-96` : "static w-72"
+            slide ? `fixed w-72` : "static w-72"
           } ${
             type === "form"
-              ? "bg-white px-6"
+              ? "bg-white px-6 w-96"
               : "bg-blue-950 text-white xl:translate-x-0"
           }  ${
             isShow
@@ -57,18 +58,22 @@ const Sidebar = ({
                 }`
           } ${
             className || ""
-          } inset-y-0 ${position} flex-1 p-4 transform transition-transform duration-300 shadow-xl`}
+          } inset-y-0 ${position} flex-1 p-4 transform transition-transform duration-300 overflow-y-auto overflow-x-hidden h-screen shadow-xl`}
         >
-          <div className="px-2 mb-8 flex items-center justify-between">
-            <Link className="text-2xl">Logo</Link>
+          {type !== "form" && (
+            <div className="px-2 mb-8 flex items-center justify-between">
+              <Link className="text-2xl">
+                <img src={Logo} alt="logo-rain" className="w-40" />
+              </Link>
 
-            <Button className={"xl:hidden"}>
-              <MdClose />
-            </Button>
-          </div>
+              <Button className={"xl:hidden"}>
+                <MdClose />
+              </Button>
+            </div>
+          )}
 
           <div
-            className={`flex flex-col h-full ${
+            className={`flex flex-col ${
               type !== "form" ? "justify-between" : ""
             }`}
           >

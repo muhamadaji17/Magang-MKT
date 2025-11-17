@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Form, HeaderContent } from "../../components/molecules";
 import { CardLayout } from "../../components/layouts";
-import { inputAddArticle } from "../../pattern/modalPattern/inputArticlePattern";
+import { inputAddArticle, inputEditArticle } from "../../pattern";
 
 const ArticleDetail = () => {
   const { action } = useParams();
@@ -13,8 +13,8 @@ const ArticleDetail = () => {
 
       <CardLayout>
         <Form
-          configInput={inputAddArticle}
-          buttonText={"Create"}
+          configInput={action === "create" ? inputAddArticle : inputEditArticle}
+          buttonText={action === "create" ? "Create" : "Update"}
           handleSubmitData={(data) => console.log(data)}
         />
       </CardLayout>

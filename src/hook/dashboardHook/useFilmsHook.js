@@ -27,6 +27,8 @@ export const useFilmsHook = () => {
     handleCloseModal,
   };
 
+  console.log(refreshData);
+
   useDebauncedEffect({
     fn: () => {
       Promise.all([

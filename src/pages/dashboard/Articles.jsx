@@ -1,4 +1,4 @@
-import { Form } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import { Button } from "../../components/atom";
 import { CardLayout, ModalLayout } from "../../components/layouts";
 import {
@@ -8,9 +8,11 @@ import {
 } from "../../components/molecules";
 import { articleGroups } from "../../utils/dummy";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-import { useGlobalHook } from "../../hook";
+import { useData, useGlobalHook } from "../../hook";
 import { Tabs } from "../../components/organism";
 import { Tab } from "../../components/organism/Tabs";
+import { useEffect } from "react";
+import { getArticlesService } from "../../service";
 
 const Articles = () => {
   const {
@@ -18,8 +20,18 @@ const Articles = () => {
     handleOpenModal,
     handleCloseModal,
     isModalOpen,
+    refreshData,
     dataRow,
+    accessToken,
+    setRefreshData,
   } = useGlobalHook();
+  const { datasArticle, setDatasArticle } = useData();
+
+  useEffect(() => {
+    Promise.all([
+      getArticlesService(accessToken, { setDatasArticle, setRefreshData }),
+    ]);
+  }, [refreshData]);
 
   return (
     <>
@@ -75,12 +87,12 @@ const Articles = () => {
                         {/* Footer (icon section) */}
                         <div className="flex items-center justify-between text-xs text-gray-600 border-t border-gray-300 py-2 px-4">
                           <div className="text-lg space-x-3">
-                            <Button
-                              className={"hover:text-blue-500"}
-                              onClick={() => handleOpenModal("edit", dataRow)}
+                            <Link
+                              className={"hover:text-blue-500 inline-block"}
+                              to={"/articles/update"}
                             >
                               <FaRegEdit />
-                            </Button>
+                            </Link>
                             <Button
                               className={"hover:text-red-500"}
                               onClick={() => handleOpenModal("delete", dataRow)}
