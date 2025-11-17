@@ -146,7 +146,7 @@ export const inputEditCastingFilms = (datasDefault, dataDetail) => [
   {
     name: "artis_kategori",
     type: "select",
-    labelText: "is_main_cast",
+    // labelText: "is_main_cast",
     optionDisabledText: "Select is show is_main_cast",
     defaultValue: datasDefault.artis_kategori,
     options: [

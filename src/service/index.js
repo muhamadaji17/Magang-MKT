@@ -10,6 +10,7 @@ import { getProvinceService } from "./dashboardService/provinceService";
 import { getCityService } from "./dashboardService/cityService";
 import { getOfficeService } from "./dashboardService/officeService";
 import {
+  deleteFilmService,
   getFilmByIdService,
   getFilmService,
 } from "./dashboardService/filmService";
@@ -76,7 +77,16 @@ import {
   getArticleCategoryService,
 } from "./dashboardService/articlesService";
 import { getRatingService } from "./dashboardService/ratingService";
+import {
+  addCastingFilmService,
+  deleteCastingFilmService,
+  updateCastingFilmService,
+} from "./dashboardService/detailFilmService";
 export {
+  deleteCastingFilmService,
+  addCastingFilmService,
+  deleteFilmService,
+  updateCastingFilmService,
   getRatingService,
   getFilmByIdService,
   loginService,

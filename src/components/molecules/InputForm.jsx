@@ -131,9 +131,7 @@ const InputForm = ({
         />
       )}
 
-      {(data.type === "editor_about" ||
-        data.type === "select" ||
-        data.type === "textarea") && (
+      {(data.type === "editor_about" || data.type === "textarea") && (
         <label
           htmlFor={data.name}
           style={{ pointerEvents: "none" }}

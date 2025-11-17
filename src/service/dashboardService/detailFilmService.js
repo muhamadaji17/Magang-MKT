@@ -112,18 +112,23 @@ export const updateCastingFilmService = async (datas, extraOptions) => {
   }
 };
 
-export const deleteFilmService = async (id, extraOptions) => {
+export const deleteCastingFilmService = async (id, extraOptions) => {
   const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+
   try {
-    const response = await DELETE("crud/films", accessToken, id);
-    if (response.data.success === true) {
+    const response = await DELETE(
+      "crud/casting_film",
+      accessToken,
+      id.id_casting_film
+    );
+    if (response.data.status === true) {
       handleCloseModal();
       setRefreshData(false);
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
       });
-    } else if (response.data.success === false) {
+    } else if (response.data.status === false) {
       SwalAlertBasic({
         icon: "error",
         text: response.data.message,

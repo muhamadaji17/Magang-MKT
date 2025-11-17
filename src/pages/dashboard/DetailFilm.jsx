@@ -1,7 +1,14 @@
 /** @format */
 
 import { useEffect } from "react";
-import { handleDeleteAbout, getFilmByIdService } from "../../service";
+import {
+  handleDeleteAbout,
+  getFilmByIdService,
+  addCastingFilmService,
+  updateCastingFilmService,
+  deleteFilmService,
+  deleteCastingFilmService,
+} from "../../service";
 import { useData, useGlobalHook } from "../../hook";
 import { ConfirmDelete, Form, HeaderContent } from "../../components/molecules";
 import { Tabs } from "../../components/organism";
@@ -24,6 +31,7 @@ const DetailFilmPage = () => {
     handleOpenModal,
     isModalOpen,
     setDataRow,
+    refreshData,
   } = useGlobalHook();
 
   const extraOptions = {
@@ -42,7 +50,7 @@ const DetailFilmPage = () => {
       setDatasDetailFilms,
       setRefreshData,
     });
-  }, []);
+  }, [refreshData]);
   // console.log(dataRow);
 
   return (
@@ -57,7 +65,7 @@ const DetailFilmPage = () => {
                 {tab.title}
               </h3>
             </div>
-            <div className="grid grid-cols-4 gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  xl:lg:grid-cols-5 gap-10">
               {(datasDetailFilms.casting_with_film ?? [])
                 .filter((c) => c.artis_kategori === tab.id) // ambil data sesuai tab
                 .map((c, i) => (
@@ -72,7 +80,7 @@ const DetailFilmPage = () => {
                           ? `http://${c.poster_casting_film}`
                           : "/images/poster/one-outs.jpg"
                       }
-                      className="rounded-md w-full
+                      className="rounded-md w-full h-[400px]
                       group-hover:scale-105 transition-transform duration-500
                       "
                     />
@@ -95,7 +103,9 @@ const DetailFilmPage = () => {
                         </Button>
                         <Button
                           className={"hover:text-red-500"}
-                          onClick={() => handleOpenModal("delete", dataRow)}
+                          onClick={() =>
+                            handleOpenModal("delete", setDataRow(c))
+                          }
                         >
                           <FaRegTrashAlt />
                         </Button>
@@ -125,7 +135,7 @@ const DetailFilmPage = () => {
           <ConfirmDelete
             dataRow={{ ...dataRow, title: dataRow.about_meta }}
             handleCloseModal={handleCloseModal}
-            onConfirm={handleDeleteAbout(extraOptions, dataRow)}
+            onConfirm={() => deleteCastingFilmService(dataRow, extraOptions)}
           />
         ) : (
           <Form
@@ -135,12 +145,12 @@ const DetailFilmPage = () => {
                 : inputEditCastingFilms(dataRow, datasDetailFilms)
             }
             buttonText={"Submit"}
-            handleSubmitData={(e) => console.log(e)}
-            // handleSubmitData={(e) =>
-            //   submitType === "add"
-            //     ? addCastingFilmService(e, extraOptions)
-            //     : updateCastingFilmService(e, extraOptions)
-            // }
+            // handleSubmitData={(e) => console.log(e)}
+            handleSubmitData={(e) =>
+              submitType === "add"
+                ? addCastingFilmService(e, extraOptions)
+                : updateCastingFilmService(e, extraOptions)
+            }
           />
         )}
       </ModalLayout>
