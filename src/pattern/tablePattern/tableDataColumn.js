@@ -113,7 +113,6 @@ export const configTableUser = [
   {
     title: "Role",
     key: ["roles", "role_name"],
-    type: "text",
   },
   {
     title: "Status",
@@ -154,6 +153,29 @@ export const configTableArticleCategories = [
   {
     title: "Category Name",
     key: "article_category_name",
+    type: "text",
+  },
+  {
+    title: "Status",
+    key: "status",
+    type: "select",
+    placeholder: "Select Status",
+    options: [
+      { label: "Active", value: true },
+      { label: "Inactive", value: false },
+    ],
+  },
+];
+
+export const configTableRating = [
+  {
+    title: "Rating",
+    key: "nama_rating",
+    type: "text",
+  },
+  {
+    title: "Code Rating",
+    key: "kode_rating",
     type: "text",
   },
   {

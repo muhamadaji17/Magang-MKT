@@ -8,10 +8,24 @@ export const getArticlesService = async (accessToken, extraOptions) => {
   const queryParams = generateEndpointWithQuery(searchQuery);
   try {
     const response = await GET(`crud/article/by?${queryParams}`, accessToken);
-    const payload = response.data.payload;
+    const payload = response.data.payload.map((data) => ({
+      ...data,
+      article_img: `http://${data.article_img}`,
+    }));
 
     setDatasArticle(payload);
     setRefreshData(true);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getArticleByIdService = async (id, extraOptions) => {
+  const { setDatasDetailArticles, accessToken } = extraOptions;
+
+  try {
+    const response = await GET(`crud/article/getone/${id}`, accessToken);
+    setDatasDetailArticles(response.data.payload);
   } catch (error) {
     console.error(error);
   }
@@ -38,6 +52,7 @@ export const addArticlesService = async (datas, extraOptions) => {
       navigate("/articles");
     }
   } catch (error) {
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
     console.error(error);
   }
 };
@@ -75,6 +90,7 @@ export const addArticleCategoryService = async (datas, extraOptions) => {
     setRefreshData(false);
     handleCloseModal();
   } catch (error) {
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
     console.error(error);
   }
 };
@@ -89,6 +105,7 @@ export const editArticleCategoryService = async (datas, extraOptions) => {
     setRefreshData(false);
     handleCloseModal();
   } catch (error) {
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
     console.error(error);
   }
 };

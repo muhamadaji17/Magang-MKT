@@ -54,6 +54,12 @@ import {
   inputAddArticleCategories,
   inputEditArticleCategories,
 } from "./modalPattern/inputArticlePattern";
+import {
+  inputAddRating,
+  inputEditRating,
+} from "./modalPattern/inputRatingPattern";
+import { configTableRating } from "./tablePattern/tableDataColumn";
+
 export {
   inputAddCastingFilms,
   loginPattern,
@@ -83,6 +89,8 @@ export {
   inputEditArticle,
   inputAddArticleCategories,
   inputEditArticleCategories,
+  inputAddRating,
+  inputEditRating,
   configTableCountry,
   configTableProvince,
   configTableCity,
@@ -91,4 +99,5 @@ export {
   configTableUser,
   configTableRole,
   configTableArticleCategories,
+  configTableRating,
 };

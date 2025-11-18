@@ -16,6 +16,7 @@ import { useUserHook } from "./dashboardHook/useUserHook";
 import { useRolesHook } from "./dashboardHook/useRolesHook";
 import { useDebauncedEffect } from "./useDebouncedEffect";
 import { useArticleCategories } from "./dashboardHook/useArticleCategories";
+import { useArticles } from "./dashboardHook/useArticles";
 
 export {
   useData,
@@ -34,4 +35,5 @@ export {
   useRolesHook,
   useDebauncedEffect,
   useArticleCategories,
+  useArticles,
 };

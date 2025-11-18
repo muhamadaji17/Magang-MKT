@@ -19,6 +19,7 @@ import {
   Articles,
   ArticleDetail,
   ArticleCategories,
+  Rating,
 } from "../pages";
 import { ProtectedRoute, PublicRoute } from "./Middleware";
 
@@ -35,6 +36,7 @@ const RootRouters = () => {
           <Route path="/country" element={<Country />} />
           <Route path="/province" element={<Province />} />
           <Route path="/city" element={<City />} />
+          <Route path="/rating" element={<Rating />} />
           <Route path="/office" element={<Office />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/:action" element={<ArticleDetail />} />

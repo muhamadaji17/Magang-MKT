@@ -161,13 +161,13 @@ export const errorOptions = {
 
   code_province: {
     required: "Code Province is Required",
-    minLength: {
-      value: 3,
-      message: "Code Province must be at least 3 characters",
-    },
+    // minLength: {
+    //   value: 3,
+    //   message: "Code Province must be at least 3 characters",
+    // },
     maxLength: {
-      value: 3,
-      message: "Code Province must be at most 3 characters",
+      value: 5,
+      message: "Code Province must be at most 5 characters",
     },
   },
 
@@ -185,13 +185,13 @@ export const errorOptions = {
 
   code_city: {
     required: "Code City is Required",
-    minLength: {
-      value: 3,
-      message: "Code City must be at least 3 characters",
-    },
+    // minLength: {
+    //   value: 3,
+    //   message: "Code City must be at least 3 characters",
+    // },
     maxLength: {
-      value: 3,
-      message: "Code City must be at most 3 characters",
+      value: 5,
+      message: "Code City must be at most 5 characters",
     },
   },
 
@@ -262,5 +262,12 @@ export const errorOptions = {
   },
   article_content: {
     required: "Article Content is Required",
+  },
+  rating_name: {
+    required: "Rating Name is Required",
+  },
+
+  code_rating: {
+    required: "Code Rating is Required",
   },
 };
