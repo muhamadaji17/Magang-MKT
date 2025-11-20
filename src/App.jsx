@@ -1,12 +1,9 @@
-import "./App.css";
-import Routers from "./route/Routers";
+/** @format */
+
+import RootRouters from "./routers/RootRouters";
 
 function App() {
-  return (
-    <div className="w-full h-full">
-      <Routers />
-    </div>
-  );
+  return <RootRouters />;
 }
 
 export default App;

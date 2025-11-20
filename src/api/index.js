@@ -1,27 +1,32 @@
+/** @format */
+
 import axios from "axios";
 
-export const GET = async (endpoint, access_token) => {
-  const response = await axios.get(
-    `${import.meta.env.VITE_API_URL}/${endpoint}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        "x-token": `xgiandra ${access_token}`,
-      },
-    }
-  );
-  return response;
+export const POST = (endpoint, data, headers) => {
+  return axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, data, {
+    headers,
+  });
 };
 
-export const POST_AUTH = async (endpoint, data) => {
-  const response = await axios.post(
-    `${import.meta.env.VITE_API_URL}/${endpoint}`,
+export const GET = (endpoint, accessToken) => {
+  return axios.get(`${import.meta.env.VITE_API_URL}/${endpoint}`, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": `mktech ${accessToken}`,
+    },
+  });
+};
+
+export const PUT = (endpoint, data, headers) => {
+  return axios.put(
+    `${import.meta.env.VITE_API_URL}/${endpoint}/${data.id}`,
     data,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
+    { headers }
   );
-  return response;
+};
+
+export const DELETE = (endpoint, accessToken, id) => {
+  return axios.delete(`${import.meta.env.VITE_API_URL}/${endpoint}/${id}`, {
+    headers: { "x-access-token": `mktech ${accessToken}` },
+  });
 };

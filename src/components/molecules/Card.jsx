@@ -1,0 +1,62 @@
+import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { Button } from "../atom";
+
+const Card = ({
+  img,
+  title,
+  content,
+  pathUpdate,
+  extraInfo,
+  handleDelete,
+  handleUpdate,
+}) => {
+  return (
+    <div className="group relative bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col">
+      {/* Thumbnail */}
+      <div className="overflow-hidden">
+        <img
+          src={img}
+          alt={"thumbnail"}
+          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="flex flex-col flex-1 justify-between">
+        <div className="p-4 space-y-2 ">
+          <h4 className="text-lg font-semibold line-clamp-2 text-gray-800 group-hover:text-blue-800">
+            {title}
+          </h4>
+
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+
+          {extraInfo && (
+            <div className="pt-2 flex items-center justify-between text-xs text-gray-400">
+              {extraInfo.map((info) => (
+                <span key={info}>{info}</span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Footer (icon section) */}
+        <div className="flex items-center justify-between text-xs text-gray-600 border-t border-gray-300 py-2 px-4">
+          <div className="text-lg space-x-3">
+            <Button
+              onClick={handleUpdate}
+              className={"hover:text-blue-500 inline-block"}
+            >
+              <FaRegEdit />
+            </Button>
+            <Button className={"hover:text-red-500"} onClick={handleDelete}>
+              <FaRegTrashAlt />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Card;

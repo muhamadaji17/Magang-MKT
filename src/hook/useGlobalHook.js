@@ -1,56 +1,69 @@
+/** @format */
+
 import { useState } from "react";
-import { create } from "zustand";
-import { DataUSer } from "../utils/data/dataUser";
+
+import Cookies from "js-cookie";
 
 export const useGlobalHook = () => {
-  const [loadingButton, setLoadingButton] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [anchorEl, setAnchorEl] = useState();
-  const [openModal, setOpenModal] = useState(false);
-  const [openModal2, setOpenModal2] = useState(false);
-  const [openModal3, setOpenModal3] = useState(false);
-  const [selectedInputData, setSelectedInputData] = useState(null);
-  const [selectedSubmitData, setSelectedSubmitData] = useState(null);
-  const [page, setPage] = useState(1); // Halaman pertama
-  const [rowsPerPage, setRowsPerPage] = useState(10); // Rows per page
-  const openThreeDots = Boolean(anchorEl);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [refreshData, setRefreshData] = useState(true);
+  const [submitType, setSubmitType] = useState(null);
+  const [searchQuery, setSearchQuery] = useState({});
+  const [dataRow, setDataRow] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const accessToken = Cookies.get("accessToken");
+
+  const handleOpenModal = (type, dataDefault) => {
+    if (dataDefault) {
+      setDataRow(dataDefault);
+    }
+
+    setSubmitType(type);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleOpenSidebar = (type, dataDefault) => {
+    if (dataDefault) {
+      setDataRow(dataDefault);
+    }
+
+    setSubmitType(type);
+    setIsSidebarOpen(true);
+  };
+
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false);
+  };
 
   return {
-    loadingButton,
-    setLoadingButton,
-    showPassword,
-    setShowPassword,
-    openModal,
-    setOpenModal,
-    openModal2,
-    setOpenModal2,
-    openModal3,
-    setOpenModal3,
-    openThreeDots,
-    anchorEl,
-    setAnchorEl,
-    selectedInputData,
-    setSelectedInputData,
-    selectedSubmitData,
-    setSelectedSubmitData,
-    page,
-    setPage,
-    rowsPerPage,
-    setRowsPerPage,
+    refreshData,
+    setRefreshData,
+    accessToken,
+    isModalOpen,
+    submitType,
+    searchQuery,
+    setSearchQuery,
+    setSubmitType,
+    handleCloseModal,
+    handleOpenModal,
+    handleOpenSidebar,
+    handleCloseSidebar,
+    isLoading,
+    setIsLoading,
+    dataRow,
+    setDataRow,
+    stateShowModal: {
+      isShow: isModalOpen,
+      handleShow: isModalOpen ? handleCloseModal : handleOpenModal,
+    },
+    stateShowSidebar: {
+      isShow: isSidebarOpen,
+      handleShow: isSidebarOpen ? handleCloseSidebar : handleOpenSidebar,
+    },
   };
 };
-
-export const useZustand = create((set) => {
-  return {
-    status: null,
-    message: null,
-    dataModalTree: [],
-    dataUser: DataUSer,
-    setDataModalTree: (newDataModalTree) => {
-      set({ dataModalTree: newDataModalTree });
-    },
-    setDataUser: (newDataUser) => {
-      set({ DataUser: newDataUser });
-    },
-  };
-});
