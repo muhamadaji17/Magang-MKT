@@ -45,13 +45,68 @@ export const addArticlesService = async (datas, extraOptions) => {
   try {
     const response = await POST(
       "crud/article",
-      { ...datas, article_img: datas.article_img[0] },
+      {
+        ...datas,
+        article_img: datas.article_img[0],
+        article_thumbnail_img: datas.article_thumbnail_img[0],
+      },
       headers
     );
 
     if (response.data.success) {
       SwalAlertBasic({ icon: "success", text: response.data.message });
       navigate("/articles");
+    }
+  } catch (error) {
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    console.error(error);
+  }
+};
+
+export const updateArticlesService = async (datas, extraOptions) => {
+  const { accessToken, navigate } = extraOptions;
+  const headers = generateHeaders({
+    accessToken,
+    contentType: "multipart/form-data",
+  });
+
+  try {
+    const response = await PUT(
+      `crud/article`,
+      {
+        ...datas,
+        article_img:
+          typeof datas.article_img === "string"
+            ? datas?.article_img
+            : datas?.article_img[0],
+
+        article_thumbnail_img:
+          typeof datas.article_thumbnail_img === "string"
+            ? datas?.article_thumbnail_img
+            : datas?.article_thumbnail_img[0],
+      },
+      headers
+    );
+
+    if (response.data.success || response.data.status) {
+      SwalAlertBasic({ icon: "success", text: response.data.message });
+      navigate("/articles");
+    }
+  } catch (error) {
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    console.error(error);
+  }
+};
+
+export const deleteArticlesService = async (id, extraOptions) => {
+  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+
+  try {
+    const response = await DELETE("crud/article", accessToken, id);
+    if (response.data.status || response.data.success) {
+      SwalAlertBasic({ icon: "success", text: response.data.message });
+      setRefreshData(false);
+      handleCloseModal();
     }
   } catch (error) {
     SwalAlertBasic({ icon: "error", text: error.response.data.message });
@@ -125,10 +180,12 @@ export const deleteArticleCategoryService = async (id, extraOptions) => {
     }
   } catch (error) {
     console.error("Delete Failed:", error);
-    SwalAlertBasic({
-      icon: "error",
-      text: "Delete Failed, Cuz have a children!",
-    });
+    if (error.response.data.responseCode === 401) {
+      SwalAlertBasic({
+        icon: "error",
+        text: "Delete Failed, Cuz have a children!",
+      });
+    }
     handleCloseModal();
     throw error;
   }

@@ -21,6 +21,8 @@ export const useArticles = () => {
     setDatasArticleCategory,
   } = useData();
 
+  const extraOptions = { accessToken, setRefreshData, handleCloseModal };
+
   useEffect(() => {
     Promise.all([
       getArticlesService(accessToken, {
@@ -44,5 +46,6 @@ export const useArticles = () => {
     handleOpenModal,
     handleCloseModal,
     dataRow,
+    extraOptions,
   };
 };

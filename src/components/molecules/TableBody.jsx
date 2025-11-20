@@ -92,6 +92,7 @@ const TableBody = ({
             ))}
             <td>
               <MenuOptions
+                isLast={datasTable.length - 1 === index}
                 onEdit={() => {
                   handleShowModal("edit", data);
                   if (handleAPI) {
