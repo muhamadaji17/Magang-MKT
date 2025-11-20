@@ -1,3 +1,5 @@
+/** @format */
+
 import { errorOptions } from "../error";
 
 export const inputAddOffice = (options) => [
@@ -7,12 +9,7 @@ export const inputAddOffice = (options) => [
     type: "text",
     optionError: errorOptions.name_office,
   },
-  {
-    labelText: "Address",
-    name: "address",
-    type: "text",
-    optionError: errorOptions.adress,
-  },
+
   {
     name: "id_city",
     type: "select",
@@ -26,43 +23,22 @@ export const inputAddOffice = (options) => [
     labelText: "Latitude",
     name: "latitude",
     grid: 6,
-    type: "text",
+    type: "number",
     optionError: errorOptions.latitude,
   },
   {
     labelText: "Longitude",
     name: "longitude",
     grid: 6,
-    type: "text",
+    type: "number",
     optionError: errorOptions.longitute,
   },
   {
-    labelText: "Istagram",
-    name: "ig",
-    grid: 6,
-    type: "text",
-    optionError: errorOptions.social_media,
-  },
-  {
-    labelText: "Facebook",
-    name: "fb",
-    grid: 6,
-    type: "text",
-    optionError: errorOptions.social_media,
-  },
-  {
-    labelText: "X",
-    name: "x",
-    grid: 6,
-    type: "text",
-    optionError: errorOptions.social_media,
-  },
-  {
-    labelText: "Youtube",
-    name: "yt",
-    grid: 6,
-    type: "text",
-    optionError: errorOptions.social_media,
+    type: "textarea",
+    labelText: "Address",
+    name: "address",
+    optionError: errorOptions.adress,
+    rows: 5,
   },
 ];
 
@@ -75,13 +51,7 @@ export const inputEditOffice = (defaultValues, options) => {
       optionError: errorOptions.name_office,
       defaultValue: defaultValues.office_name,
     },
-    {
-      labelText: "Address",
-      name: "address",
-      type: "text",
-      optionError: errorOptions.adress,
-      defaultValue: defaultValues.address,
-    },
+
     {
       labelText: "Latitude",
       name: "latitude",
@@ -98,38 +68,7 @@ export const inputEditOffice = (defaultValues, options) => {
       optionError: errorOptions.longitute,
       defaultValue: defaultValues.longitude,
     },
-    {
-      labelText: "Istagram",
-      name: "ig",
-      type: "text",
-      grid: 6,
-      optionError: errorOptions.social_media,
-      defaultValue: defaultValues.ig,
-    },
-    {
-      labelText: "Facebook",
-      name: "fb",
-      type: "text",
-      grid: 6,
-      optionError: errorOptions.social_media,
-      defaultValue: defaultValues.fb,
-    },
-    {
-      labelText: "X",
-      name: "x",
-      type: "text",
-      grid: 6,
-      optionError: errorOptions.social_media,
-      defaultValue: defaultValues.x,
-    },
-    {
-      labelText: "Youtube",
-      name: "yt",
-      type: "text",
-      grid: 6,
-      optionError: errorOptions.social_media,
-      defaultValue: defaultValues.yt,
-    },
+
     {
       name: "id_city",
       type: "select",
@@ -152,6 +91,14 @@ export const inputEditOffice = (defaultValues, options) => {
         { label: "Active", value: true },
         { label: "Inactive", value: false },
       ],
+    },
+    {
+      type: "textarea",
+      labelText: "Address",
+      name: "address",
+      optionError: errorOptions.adress,
+      defaultValue: defaultValues.address,
+      rows: 5,
     },
   ];
 };

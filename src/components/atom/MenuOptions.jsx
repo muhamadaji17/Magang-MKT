@@ -4,7 +4,7 @@ import Button from "./Button";
 import { SlOptionsVertical } from "react-icons/sl";
 import { Link } from "react-router-dom";
 
-const MenuOptions = ({ onEdit, onDelete, onDetail }) => {
+const MenuOptions = ({ onEdit, onDelete, onDetail, isLast }) => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -19,7 +19,7 @@ const MenuOptions = ({ onEdit, onDelete, onDetail }) => {
   }, []);
 
   return (
-    <div ref={menuRef} className="">
+    <div ref={menuRef} className="relative">
       {/* Titik tiga */}
       <Button
         onClick={() => setOpen(!open)}
@@ -30,7 +30,11 @@ const MenuOptions = ({ onEdit, onDelete, onDetail }) => {
 
       {/* Dropdown Menu */}
       {open && (
-        <div className="absolute right-20 w-32 bg-white border border-gray-200 shadow-lg rounded-md z-50">
+        <div
+          className={`absolute ${
+            isLast ? "bottom-5" : ""
+          } right-20 w-32 bg-white border border-gray-200 shadow-lg rounded-md z-50`}
+        >
           {onDetail && (
             <Link
               onClick={() => {

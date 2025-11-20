@@ -7,6 +7,7 @@ import {
   getArticleByIdService,
   getArticleCategoryService,
   handleAddArticle,
+  handleEditArticle,
 } from "../../service";
 import { useData, useGlobalHook } from "../../hook";
 
@@ -42,14 +43,23 @@ const ArticleDetail = () => {
         ],
         getArticleByIdService(id, extraOptions)
       );
+    } else {
+      Promise.all([
+        getArticleCategoryService(accessToken, {
+          setDatasArticleCategory,
+          searchQuery: {},
+          setRefreshData,
+        }),
+      ]);
     }
-  }, [action]);
+  }, [action, id]);
 
   return (
     <>
       <HeaderContent title={title} hiddenButton />
 
-      {datasArticleCategory && (
+      {((Object.keys(datasDetailArticles).length > 0 && datasArticleCategory) ||
+        action === "create") && (
         <CardLayout>
           <Form
             configInput={
@@ -59,7 +69,9 @@ const ArticleDetail = () => {
             }
             buttonText={action === "create" ? "Create" : "Update"}
             handleSubmitData={
-              action === "create" ? handleAddArticle(extraOptions) : null
+              action === "create"
+                ? handleAddArticle(extraOptions)
+                : handleEditArticle(extraOptions, datasDetailArticles)
             }
           />
         </CardLayout>

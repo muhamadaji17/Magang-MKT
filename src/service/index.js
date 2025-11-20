@@ -68,6 +68,8 @@ import {
 } from "./handlers/rolesHandler";
 import {
   handleAddArticle,
+  handleEditArticle,
+  handleDeleteArticle,
   handleAddArticleCategory,
   handleEditArticleCategory,
   handleDeleteArticleCategory,
@@ -159,6 +161,8 @@ export {
   handleEditRole,
   handleDeleteRole,
   handleAddArticle,
+  handleEditArticle,
+  handleDeleteArticle,
   handleAddArticleCategory,
   handleEditArticleCategory,
   handleDeleteArticleCategory,

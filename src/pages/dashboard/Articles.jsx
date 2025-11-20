@@ -11,6 +11,7 @@ const Articles = () => {
     handleOpenModal,
     submitType,
     isModalOpen,
+    extraOptions,
   } = useArticles();
 
   return (
@@ -24,6 +25,7 @@ const Articles = () => {
         handleOpenModal={handleOpenModal}
         submitType={submitType}
         isModalOpen={isModalOpen}
+        extraOptions={extraOptions}
         handleCloseModal={handleCloseModal}
       />
     </>

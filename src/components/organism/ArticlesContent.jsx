@@ -2,12 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { CardLayout, ModalLayout } from "../layouts";
 import { Card, ConfirmDelete } from "../molecules";
 import { Tab, Tabs } from "./Tabs";
+import { handleDeleteArticle } from "../../service";
 
 const ArticlesContent = ({
   datasArticleCategory,
   datasArticle,
   handleOpenModal,
   dataRow,
+  extraOptions,
   handleCloseModal,
   isModalOpen,
   submitType,
@@ -38,14 +40,14 @@ const ArticlesContent = ({
                         <Card
                           key={i}
                           img={article.article_img}
-                          title={article.article_title}
+                          title={article.article_title_en}
                           handleUpdate={() => {
                             sessionStorage.setItem("id", article.id_article);
                             navigate("/articles/update");
                           }}
-                          content={article.article_content_en}
+                          content={article.article_thumbnail_content_en}
                           handleDelete={() =>
-                            handleOpenModal("delete", dataRow)
+                            handleOpenModal("delete", article)
                           }
                         />
                       ))}
@@ -66,9 +68,9 @@ const ArticlesContent = ({
       >
         {submitType === "delete" ? (
           <ConfirmDelete
-            dataRow={{ ...dataRow, title: dataRow.about_meta }}
+            dataRow={dataRow}
             handleCloseModal={handleCloseModal}
-            // onConfirm={handleDeleteAbout(extraOptions, dataRow)}
+            onConfirm={handleDeleteArticle(dataRow.id_article, extraOptions)}
           />
         ) : null}
       </ModalLayout>
