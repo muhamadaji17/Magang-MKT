@@ -17,8 +17,11 @@ import Articles from "./dashboard/Articles";
 import ArticleDetail from "./dashboard/ArticleDetail";
 import ArticleCategories from "./dashboard/ArticleCategories";
 import Rating from "./dashboard/Rating";
-
+import ContactPage from "./dashboard/Contact";
+import ContactCategoryPage from "./dashboard/ContactCategory";
 export {
+  ContactCategoryPage,
+  ContactPage,
   DetailFilmPage,
   Login,
   Home,

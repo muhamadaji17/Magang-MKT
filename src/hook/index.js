@@ -17,8 +17,11 @@ import { useRolesHook } from "./dashboardHook/useRolesHook";
 import { useDebauncedEffect } from "./useDebouncedEffect";
 import { useArticleCategories } from "./dashboardHook/useArticleCategories";
 import { useArticles } from "./dashboardHook/useArticles";
-
+import { useContactCategoryHook } from "./dashboardHook/useContactCategoryHook";
+import { useContactHook } from "./dashboardHook/useContactHook";
 export {
+  useContactHook,
+  useContactCategoryHook,
   useData,
   useRating,
   useCalendar,

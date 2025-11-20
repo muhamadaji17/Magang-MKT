@@ -128,6 +128,7 @@ const InputForm = ({
           max={data.max}
           min={data.min}
           sx={data.sx}
+          placeholder={data.placeholder}
         />
       )}
 

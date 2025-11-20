@@ -23,8 +23,12 @@ const ModalLayout = ({
           ></div>
           <div className="flex justify-center items-center h-full">
             <div
-              className={`bg-white rounded-sm p-5 max-h-[100vh] z-[999] overflow-y-auto ${
-                submitType === "delete" ? "w-[400px]" : "w-[1000px]"
+              className={` rounded-sm p-5 max-h-[100vh] z-[999] overflow-y-auto ${
+                submitType === "delete"
+                  ? "w-[400px] bg-white"
+                  : submitType === "image"
+                  ? "w-fit"
+                  : "w-[1000px] bg-white"
               } ${className} z-10 `}
             >
               {closeButton && (
@@ -35,11 +39,13 @@ const ModalLayout = ({
                       <span className="text-gray-600">{description}</span>
                     )}
                   </div>
-                  <div className="">
-                    <Button onClick={handleCloseModal} className={"text-2xl"}>
-                      <IoClose />
-                    </Button>
-                  </div>
+                  {submitType !== "image" && (
+                    <div className="">
+                      <Button onClick={handleCloseModal} className={"text-2xl"}>
+                        <IoClose />
+                      </Button>
+                    </div>
+                  )}
                 </div>
               )}
 

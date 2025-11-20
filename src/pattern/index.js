@@ -22,6 +22,8 @@ import {
   configTableUser,
   configTableRole,
   configTableArticleCategories,
+  configTableCategoryContact,
+  configTableContact,
 } from "./tablePattern/tableDataColumn";
 
 import {
@@ -62,8 +64,21 @@ import {
   inputEditRating,
 } from "./modalPattern/inputRatingPattern";
 import { configTableRating } from "./tablePattern/tableDataColumn";
-
+import {
+  inputAddContactCategory,
+  inputEditContactCategory,
+} from "./modalPattern/inputCategoryContactPattern";
+import {
+  inputAddContact,
+  inputEditContact,
+} from "./modalPattern/inputContactPattern";
 export {
+  inputEditContact,
+  inputAddContact,
+  configTableContact,
+  inputEditContactCategory,
+  inputAddContactCategory,
+  configTableCategoryContact,
   typeTabsCastingFilms,
   inputAddCastingFilms,
   loginPattern,

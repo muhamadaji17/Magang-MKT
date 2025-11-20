@@ -216,6 +216,21 @@ export const errorOptions = {
   social_media: {
     required: "Social Media is Required",
   },
+  contact_sosmed_name: {
+    required: "Contact Type is Required",
+  },
+  contact_sosmed_logo: {
+    required: "Contact Icon is Required",
+  },
+  contact_name: {
+    required: "Contact Name is Required",
+  },
+  contact_url: {
+    required: "Contact URL is Required",
+  },
+  contact_type: {
+    required: "Contact Type is Required",
+  },
 
   select_city: {
     required: "Select City is Required",

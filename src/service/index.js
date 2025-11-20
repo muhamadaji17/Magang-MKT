@@ -89,7 +89,27 @@ import {
   deleteCastingFilmService,
   updateCastingFilmService,
 } from "./dashboardService/detailFilmService";
+import {
+  addCategoryContactService,
+  deleteCategoryContactService,
+  getCategoryContactService,
+  updateCategoryContactService,
+} from "./dashboardService/contactCategoryService";
+import {
+  addContactService,
+  deleteContactService,
+  getContactService,
+  updateContactService,
+} from "./dashboardService/contactService";
 export {
+  getContactService,
+  addContactService,
+  updateContactService,
+  deleteContactService,
+  deleteCategoryContactService,
+  updateCategoryContactService,
+  addCategoryContactService,
+  getCategoryContactService,
   deleteCastingFilmService,
   updateCastingFilmService,
   addCastingFilmService,

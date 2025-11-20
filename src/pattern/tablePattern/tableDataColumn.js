@@ -98,6 +98,34 @@ export const configTableOffice = [
     ],
   },
 ];
+export const configTableContact = [
+  { title: "Contact Name", key: "contact_name" },
+  { title: "Contact URL", key: "contact_url", type: "text" },
+  {
+    title: "Status",
+    key: "status",
+    type: "select",
+    placeholder: "Select Status",
+    options: [
+      { label: "Active", value: true },
+      { label: "Inactive", value: false },
+    ],
+  },
+];
+export const configTableCategoryContact = [
+  { title: "Logo", key: "contact_sosmed_logo" },
+  { title: "Contact Type", key: "contact_sosmed_name", type: "text" },
+  {
+    title: "Status",
+    key: "status",
+    type: "select",
+    placeholder: "Select Status",
+    options: [
+      { label: "Active", value: true },
+      { label: "Inactive", value: false },
+    ],
+  },
+];
 
 export const configTableUser = [
   {

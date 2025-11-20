@@ -48,13 +48,13 @@ const TableBody = ({
                   ) : (
                     <p className="text-red-500">Inactive</p>
                   )
-                ) : col.key.includes("poster") ? (
+                ) : col.key.includes("poster") || col.key.includes("logo") ? (
                   <div
                     className="w-full flex justify-center"
                     onClick={() => handleShowModal("image", data)}
                   >
                     <img
-                      className="w-20 h-28 object-cover"
+                      className="w-20 h-28 "
                       src={`http://${data[col.key]}`}
                     />
                   </div>

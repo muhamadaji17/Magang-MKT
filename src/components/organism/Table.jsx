@@ -96,12 +96,12 @@ const Table = ({
               longitude={dataRow.longitude}
             />
           ) : submitType === "image" ? (
-            <div className="flex flex-col items-center justify-center gap-2">
-              <h2>Preview Poster</h2>
-
+            <div className="flex flex-col items-center justify-center">
               <img
-                src={`http://${dataRow.poster_film}`}
-                className="max-w-[500px]"
+                src={`http://${
+                  dataRow.poster_film || dataRow.contact_sosmed_logo
+                }`}
+                className="w-[500px] "
               />
             </div>
           ) : submitType === "synopsis" ? (
