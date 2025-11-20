@@ -31,35 +31,39 @@ const ArticleDetail = () => {
   };
 
   useEffect(() => {
-    Promise.all(
-      [
-        getArticleCategoryService(accessToken, {
-          setDatasArticleCategory,
-          searchQuery: {},
-          setRefreshData,
-        }),
-      ],
-      getArticleByIdService(id, extraOptions)
-    );
-  }, []);
+    if (action === "update") {
+      Promise.all(
+        [
+          getArticleCategoryService(accessToken, {
+            setDatasArticleCategory,
+            searchQuery: {},
+            setRefreshData,
+          }),
+        ],
+        getArticleByIdService(id, extraOptions)
+      );
+    }
+  }, [action]);
 
   return (
     <>
       <HeaderContent title={title} hiddenButton />
 
-      <CardLayout>
-        <Form
-          configInput={
-            action === "create"
-              ? inputAddArticle(datasArticleCategory)
-              : inputEditArticle(datasArticleCategory, datasDetailArticles)
-          }
-          buttonText={action === "create" ? "Create" : "Update"}
-          handleSubmitData={
-            action === "create" ? handleAddArticle(extraOptions) : null
-          }
-        />
-      </CardLayout>
+      {datasArticleCategory && (
+        <CardLayout>
+          <Form
+            configInput={
+              action === "create"
+                ? inputAddArticle(datasArticleCategory)
+                : inputEditArticle(datasArticleCategory, datasDetailArticles)
+            }
+            buttonText={action === "create" ? "Create" : "Update"}
+            handleSubmitData={
+              action === "create" ? handleAddArticle(extraOptions) : null
+            }
+          />
+        </CardLayout>
+      )}
     </>
   );
 };

@@ -61,12 +61,15 @@ const Sidebar = ({
           } inset-y-0 ${position} flex-1 p-4 transform transition-transform duration-300 overflow-y-auto overflow-x-hidden h-screen shadow-xl`}
         >
           {type !== "form" && (
-            <div className="px-2 mb-8 flex items-center justify-between">
+            <div className="px-2 mb-8 flex  justify-between">
               <Link className="text-2xl">
-                <img src={Logo} alt="logo-rain" className="w-40" />
+                <img src={Logo} alt="logo-rain" className="w-30 lg:w-40" />
               </Link>
 
-              <Button className={"xl:hidden"}>
+              <Button
+                className={"xl:hidden absolute top-4 right-4 text-2xl"}
+                onClick={handleShow}
+              >
                 <MdClose />
               </Button>
             </div>

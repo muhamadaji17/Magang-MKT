@@ -49,13 +49,14 @@ export const inputAddArticle = (articleCategory) => [
   },
 ];
 
-export const inputEditArticle = (articleCategory) => [
+export const inputEditArticle = (articleCategory, datasDetailArticle) => [
   {
     labelText: "Article Title",
     name: "article_title",
     type: "text",
     optionError: errorOptions.article_title,
     grid: 4,
+    defaultValue: datasDetailArticle.article_title,
   },
   {
     labelText: "Article Slug",

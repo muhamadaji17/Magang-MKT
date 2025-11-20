@@ -32,8 +32,7 @@ export const getArticleByIdService = async (id, extraOptions) => {
 };
 
 export const addArticlesService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal, navigate } =
-    extraOptions;
+  const { accessToken, navigate } = extraOptions;
   const headers = generateHeaders({
     accessToken,
     contentType: "multipart/form-data",
@@ -47,8 +46,6 @@ export const addArticlesService = async (datas, extraOptions) => {
     );
     if (response.data.success) {
       SwalAlertBasic({ icon: "success", text: response.data.message });
-      setRefreshData(false);
-      handleCloseModal();
       navigate("/articles");
     }
   } catch (error) {
