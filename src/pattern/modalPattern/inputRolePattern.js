@@ -5,7 +5,7 @@ export const inputAddRole = [
     labelText: "Role Name",
     name: "role_name",
     type: "text",
-    optionError: errorOptions.role,
+    optionError: errorOptions.role_name,
     grid: 6,
   },
   {
@@ -23,7 +23,7 @@ export const inputEditRole = (defaultValues) => [
     name: "role_name",
     type: "text",
     defaultValue: defaultValues.role_name,
-    optionError: errorOptions.role,
+    optionError: errorOptions.role_name,
     grid: 6,
   },
   {
