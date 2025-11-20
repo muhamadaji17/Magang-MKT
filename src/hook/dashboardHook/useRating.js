@@ -1,9 +1,9 @@
 /** @format */
 
-import { useEffect } from "react";
-import { useGlobalHook } from "../useGlobalHook";
 import { getRatingService } from "../../service";
 import { useData } from "../useData";
+import { useGlobalHook } from "../useGlobalHook";
+import { useDebauncedEffect } from "../useDebouncedEffect";
 
 export const useRating = () => {
   const {
@@ -17,40 +17,39 @@ export const useRating = () => {
     searchQuery,
     setSearchQuery,
     handleCloseModal,
-    handleCloseSidebar,
+    isLoading,
+    setIsLoading,
   } = useGlobalHook();
   const { datasRating, setDatasRating } = useData();
   const extraOptions = {
     accessToken,
     setRefreshData,
-    handleCloseSidebar,
     handleCloseModal,
   };
 
-  useEffect(() => {
-    const fetchData = () => {
-      getRatingService(accessToken, {
-        searchQuery,
-        setDatasRating,
-        setRefreshData,
-      });
-    };
-
-    if (Object.keys(searchQuery).length > 0) {
-      const timeout = setTimeout(fetchData, 300);
-      return () => clearTimeout(timeout);
-    } else {
-      fetchData();
-    }
-  }, [searchQuery, refreshData]);
+  useDebauncedEffect({
+    fn: () => {
+      Promise.all([
+        getRatingService(accessToken, {
+          searchQuery,
+          setDatasRating,
+          setRefreshData,
+        }),
+      ]).finally(() => setIsLoading(false));
+    },
+    deps: [searchQuery, refreshData],
+    condition: Object.keys(searchQuery).length > 0,
+  });
 
   return {
     datasRating,
     dataRow,
     setSearchQuery,
     submitType,
+    isLoading,
     extraOptions,
     stateShowModal,
     stateShowSidebar,
+    accessToken,
   };
 };

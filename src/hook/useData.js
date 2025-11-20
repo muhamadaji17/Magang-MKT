@@ -15,6 +15,7 @@ export const useData = () => {
   const [datasRole, setDatasRole] = useState([]);
   const [datasArticle, setDatasArticle] = useState([]);
   const [datasArticleCategory, setDatasArticleCategory] = useState([]);
+  const [datasDetailArticles, setDatasDetailArticles] = useState([]);
 
   return {
     datasAbout,
@@ -41,5 +42,7 @@ export const useData = () => {
     setDatasArticle,
     datasArticleCategory,
     setDatasArticleCategory,
+    datasDetailArticles,
+    setDatasDetailArticles,
   };
 };

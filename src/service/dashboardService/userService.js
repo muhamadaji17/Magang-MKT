@@ -59,7 +59,7 @@ export const deleteUserService = async (id, extraOptions) => {
 
   try {
     const response = await DELETE("crud/admin", accessToken, id);
-    if (response.data.success) {
+    if (response.data.status) {
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,

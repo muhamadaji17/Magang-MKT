@@ -3,50 +3,67 @@ import { Form, HeaderContent } from "../../components/molecules";
 import { CardLayout } from "../../components/layouts";
 import { inputAddArticle, inputEditArticle } from "../../pattern";
 import { useEffect } from "react";
-import { getArticleCategoryService, handleAddArticle } from "../../service";
+import {
+  getArticleByIdService,
+  getArticleCategoryService,
+  handleAddArticle,
+} from "../../service";
 import { useData, useGlobalHook } from "../../hook";
 
 const ArticleDetail = () => {
   const { action } = useParams();
   const title = `${action.replace(/^\s*\w/, (c) => c.toUpperCase())} Article`;
   const { accessToken, setRefreshData, handleCloseModal } = useGlobalHook();
-  const { datasArticleCategory, setDatasArticleCategory } = useData();
+  const {
+    datasArticleCategory,
+    setDatasArticleCategory,
+    datasDetailArticles,
+    setDatasDetailArticles,
+  } = useData();
   const navigate = useNavigate();
+  const id = sessionStorage.getItem("id");
 
   const extraOptions = {
-    setRefreshData,
     accessToken,
     handleCloseModal,
+    setDatasDetailArticles,
     navigate,
   };
 
   useEffect(() => {
-    Promise.all([
-      getArticleCategoryService(accessToken, {
-        setDatasArticleCategory,
-        searchQuery: {},
-        setRefreshData,
-      }),
-    ]);
-  }, []);
+    if (action === "update") {
+      Promise.all(
+        [
+          getArticleCategoryService(accessToken, {
+            setDatasArticleCategory,
+            searchQuery: {},
+            setRefreshData,
+          }),
+        ],
+        getArticleByIdService(id, extraOptions)
+      );
+    }
+  }, [action]);
 
   return (
     <>
       <HeaderContent title={title} hiddenButton />
 
-      <CardLayout>
-        <Form
-          configInput={
-            action === "create"
-              ? inputAddArticle(datasArticleCategory)
-              : inputEditArticle(datasArticleCategory)
-          }
-          buttonText={action === "create" ? "Create" : "Update"}
-          handleSubmitData={
-            action === "create" ? handleAddArticle(extraOptions) : null
-          }
-        />
-      </CardLayout>
+      {datasArticleCategory && (
+        <CardLayout>
+          <Form
+            configInput={
+              action === "create"
+                ? inputAddArticle(datasArticleCategory)
+                : inputEditArticle(datasArticleCategory, datasDetailArticles)
+            }
+            buttonText={action === "create" ? "Create" : "Update"}
+            handleSubmitData={
+              action === "create" ? handleAddArticle(extraOptions) : null
+            }
+          />
+        </CardLayout>
+      )}
     </>
   );
 };

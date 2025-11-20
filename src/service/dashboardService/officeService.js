@@ -78,7 +78,7 @@ export const deleteOfficeService = async (id, extraOptions) => {
   const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
   try {
     const response = await DELETE("crud/office", accessToken, id);
-    if (response.data.success) {
+    if (response.data.status) {
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,

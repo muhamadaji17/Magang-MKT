@@ -15,6 +15,7 @@ import TableBody from "./TableBody";
 import Navlink from "./Navlink";
 import Leaflet from "./Leaflet";
 import ShortenedCharacter from "./ShortCharacter";
+import Card from "./Card";
 
 export {
   ShortenedCharacter,
@@ -32,4 +33,5 @@ export {
   TableHead,
   TableBody,
   Navlink,
+  Card,
 };

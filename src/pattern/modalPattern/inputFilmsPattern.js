@@ -186,7 +186,7 @@ export const inputEditFilms = (datasDefault, rating) => [
     labelText: "Status",
     optionDisabledText: "Select Status",
     defaultValue: datasDefault.status,
-    grid: 6,
+    grid: 4,
     options: [
       { label: "Active", value: true },
       { label: "Inactive", value: false },

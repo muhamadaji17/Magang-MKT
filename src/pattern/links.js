@@ -35,6 +35,7 @@ export const navLink = [
       { text: "Country", path: "/country" },
       { text: "Province", path: "/province" },
       { text: "City", path: "/city" },
+      { text: "Rating", path: "/rating" },
     ],
   },
   {

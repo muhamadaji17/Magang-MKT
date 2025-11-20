@@ -19,7 +19,6 @@ export const inputAddCity = (options) => [
     labelText: "Name Province",
     optionDisabledText: "Select Province",
     options,
-    grid: 6,
     optionError: errorOptions.select_province,
   },
 ];

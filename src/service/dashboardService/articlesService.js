@@ -10,7 +10,10 @@ export const getArticlesService = async (accessToken, extraOptions) => {
   const queryParams = generateEndpointWithQuery(searchQuery);
   try {
     const response = await GET(`crud/article/by?${queryParams}`, accessToken);
-    const payload = response.data.payload;
+    const payload = response.data.payload.map((data) => ({
+      ...data,
+      article_img: `http://${data.article_img}`,
+    }));
 
     setDatasArticle(payload);
     setRefreshData(true);
@@ -19,9 +22,19 @@ export const getArticlesService = async (accessToken, extraOptions) => {
   }
 };
 
+export const getArticleByIdService = async (id, extraOptions) => {
+  const { setDatasDetailArticles, accessToken } = extraOptions;
+
+  try {
+    const response = await GET(`crud/article/getone/${id}`, accessToken);
+    setDatasDetailArticles(response.data.payload);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const addArticlesService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal, navigate } =
-    extraOptions;
+  const { accessToken, navigate } = extraOptions;
   const headers = generateHeaders({
     accessToken,
     contentType: "multipart/form-data",
@@ -38,11 +51,10 @@ export const addArticlesService = async (datas, extraOptions) => {
 
     if (response.data.success) {
       SwalAlertBasic({ icon: "success", text: response.data.message });
-      setRefreshData(false);
-      handleCloseModal();
       navigate("/articles");
     }
   } catch (error) {
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
     console.error(error);
   }
 };
@@ -80,6 +92,7 @@ export const addArticleCategoryService = async (datas, extraOptions) => {
     setRefreshData(false);
     handleCloseModal();
   } catch (error) {
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
     console.error(error);
   }
 };
@@ -94,6 +107,7 @@ export const editArticleCategoryService = async (datas, extraOptions) => {
     setRefreshData(false);
     handleCloseModal();
   } catch (error) {
+    SwalAlertBasic({ icon: "error", text: error.response.data.message });
     console.error(error);
   }
 };
@@ -104,11 +118,18 @@ export const deleteArticleCategoryService = async (id, extraOptions) => {
   try {
     const response = await DELETE("crud/article_category", accessToken, id);
 
-    SwalAlertBasic({ icon: "success", text: response.data.message });
-    setRefreshData(false);
-    handleCloseModal();
+    if (response.data.status) {
+      SwalAlertBasic({ icon: "success", text: response.data.message });
+      setRefreshData(false);
+      handleCloseModal();
+    }
   } catch (error) {
     console.error("Delete Failed:", error);
+    SwalAlertBasic({
+      icon: "error",
+      text: "Delete Failed, Cuz have a children!",
+    });
+    handleCloseModal();
     throw error;
   }
 };

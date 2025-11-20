@@ -75,9 +75,15 @@ import {
 
 import {
   getArticlesService,
+  getArticleByIdService,
   getArticleCategoryService,
 } from "./dashboardService/articlesService";
 import { getRatingService } from "./dashboardService/ratingService";
+import {
+  handleAddRating,
+  handleEditRating,
+  handleDeleteRating,
+} from "./handlers/ratingHandlers";
 import {
   addCastingFilmService,
   deleteCastingFilmService,
@@ -85,9 +91,9 @@ import {
 } from "./dashboardService/detailFilmService";
 export {
   deleteCastingFilmService,
+  updateCastingFilmService,
   addCastingFilmService,
   deleteFilmService,
-  updateCastingFilmService,
   getRatingService,
   getFilmByIdService,
   loginService,
@@ -104,6 +110,7 @@ export {
   getUserService,
   getRolesService,
   getArticlesService,
+  getArticleByIdService,
   getArticleCategoryService,
   handleAddBanner,
   handleServiceWithOnClick,
@@ -135,4 +142,7 @@ export {
   handleAddArticleCategory,
   handleEditArticleCategory,
   handleDeleteArticleCategory,
+  handleAddRating,
+  handleEditRating,
+  handleDeleteRating,
 };

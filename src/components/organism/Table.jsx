@@ -29,7 +29,7 @@ const Table = ({
   handleAPI,
 }) => {
   return (
-    <div className="overflow-x-scroll 2xl:overflow-x-visible">
+    <div className="overflow-x-scroll 2xl:overflow-x-auto">
       <div className="min-w-fit">
         <div className="mb-3 flex flex-row gap-4 lg:flex-row justify-between w-full">
           <InputTable configTable={configTable} handleSearch={handleSearch} />

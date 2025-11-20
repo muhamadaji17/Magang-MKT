@@ -16,6 +16,7 @@ import Roles from "./dashboard/Roles";
 import Articles from "./dashboard/Articles";
 import ArticleDetail from "./dashboard/ArticleDetail";
 import ArticleCategories from "./dashboard/ArticleCategories";
+import Rating from "./dashboard/Rating";
 
 export {
   DetailFilmPage,
@@ -34,4 +35,5 @@ export {
   Articles,
   ArticleDetail,
   ArticleCategories,
+  Rating,
 };
