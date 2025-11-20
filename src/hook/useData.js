@@ -15,7 +15,7 @@ export const useData = () => {
   const [datasRole, setDatasRole] = useState([]);
   const [datasArticle, setDatasArticle] = useState([]);
   const [datasArticleCategory, setDatasArticleCategory] = useState([]);
-  const [datasDetailArticles, setDatasDetailArticles] = useState([]);
+  const [datasDetailArticles, setDatasDetailArticles] = useState({});
 
   return {
     datasAbout,

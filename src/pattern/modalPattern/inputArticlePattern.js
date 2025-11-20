@@ -64,6 +64,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     type: "text",
     optionError: errorOptions.article_slug,
     grid: 4,
+    defaultValue: datasDetailArticle.article_slug,
   },
   {
     labelText: "Article Category",
@@ -71,6 +72,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     type: "select",
     optionError: errorOptions.select_category,
     options: articleCategory,
+    defaultValue: datasDetailArticle.id_article_category,
     grid: 4,
   },
   {
@@ -79,6 +81,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     type: "file",
     optionError: errorOptions.article_img,
     className: "w-full h-[400px]",
+    defaultValue: datasDetailArticle.article_banner,
     grid: 12,
   },
   {
@@ -88,6 +91,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     optionError: errorOptions.article_content,
     className: "h-[500px] mb-28 md:mb-36 xl:mb-20",
     grid: 6,
+    defaultValue: datasDetailArticle.article_content_en,
   },
   {
     labelText: "Article Content ID",
@@ -96,6 +100,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     optionError: errorOptions.article_content,
     className: "h-[500px] mb-28 md:mb-36 xl:mb-20",
     grid: 6,
+    defaultValue: datasDetailArticle.article_content_id,
   },
 ];
 

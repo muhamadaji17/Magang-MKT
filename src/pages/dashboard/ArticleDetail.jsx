@@ -42,8 +42,18 @@ const ArticleDetail = () => {
         ],
         getArticleByIdService(id, extraOptions)
       );
+    } else {
+      Promise.all([
+        getArticleCategoryService(accessToken, {
+          setDatasArticleCategory,
+          searchQuery: {},
+          setRefreshData,
+        }),
+      ]);
     }
   }, [action]);
+
+  console.log(datasDetailArticles);
 
   return (
     <>
