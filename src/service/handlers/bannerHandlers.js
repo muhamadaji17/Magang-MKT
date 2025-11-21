@@ -31,7 +31,7 @@ export const handleServiceWithOnClick = (extraOptions) => {
       case "updateSchedule":
         updateBannerService(datas, {
           ...extraOptions,
-          setUpdatedEvents: extraOptionsCalendar.setUpdatedEvents,
+          ...extraOptionsCalendar,
         });
         break;
     }

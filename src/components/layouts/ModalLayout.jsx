@@ -1,5 +1,4 @@
-/** @format */
-
+import { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { Button } from "../atom";
 
@@ -13,6 +12,23 @@ const ModalLayout = ({
   children,
   handleCloseModal,
 }) => {
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    // cleanup
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isModalOpen, handleCloseModal]);
+
   return (
     <>
       {isModalOpen && (
@@ -40,7 +56,7 @@ const ModalLayout = ({
                     )}
                   </div>
                   {submitType !== "image" && (
-                    <div className="">
+                    <div>
                       <Button onClick={handleCloseModal} className={"text-2xl"}>
                         <IoClose />
                       </Button>

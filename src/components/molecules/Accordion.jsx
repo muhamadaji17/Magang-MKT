@@ -19,6 +19,10 @@ const Accordion = ({ submenus, config, currentPath, handleCloseSidebar }) => {
     setActive((prev) => !prev);
   };
 
+  useEffect(() => {
+    setActive(submenus.some((link) => link.path === currentPath));
+  }, [currentPath]);
+
   return (
     <li>
       {/* Header */}

@@ -23,6 +23,7 @@ const Sidebar = ({
   isShow = true,
 }) => {
   const currentPath = useLocation().pathname;
+
   return (
     <>
       <div

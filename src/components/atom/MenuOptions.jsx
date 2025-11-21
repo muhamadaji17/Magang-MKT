@@ -32,7 +32,7 @@ const MenuOptions = ({ onEdit, onDelete, onDetail, isLast }) => {
       {open && (
         <div
           className={`absolute ${
-            isLast ? "bottom-5" : ""
+            isLast ? "bottom-0" : ""
           } right-20 w-32 bg-white border border-gray-200 shadow-lg rounded-md z-50`}
         >
           {onDetail && (
