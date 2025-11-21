@@ -63,7 +63,7 @@ const Sidebar = ({
         >
           {type !== "form" && (
             <div className="px-2 mb-8 flex  justify-between">
-              <Link className="text-2xl">
+              <Link className="text-2xl" to={"/dashboard"}>
                 <img src={Logo} alt="logo-rain" className="w-30 lg:w-40" />
               </Link>
 

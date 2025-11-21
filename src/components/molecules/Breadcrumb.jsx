@@ -16,7 +16,7 @@ const Breadcrumb = () => {
           return index === 0 ? (
             <li className="inline-flex items-center" key={index}>
               <Link
-                to={"/"}
+                to={"/dashboard"}
                 className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600"
               >
                 <svg

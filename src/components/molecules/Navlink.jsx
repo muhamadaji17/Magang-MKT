@@ -18,7 +18,7 @@ const Navlink = ({ links, className, currentPath, handleCloseSidebar }) => {
             <Link
               to={link.path}
               className={`block no-underline w-full hover:bg-blue-700 p-2 rounded mb-2.5 ml-0 ${
-                currentPath === link.path ? "bg-blue-700" : ""
+                currentPath.startsWith(link.path) ? "bg-blue-700" : ""
               }`}
             >
               <div className="flex gap-1.5 items-center">

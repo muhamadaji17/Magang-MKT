@@ -30,7 +30,7 @@ const RootRouters = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<ProtectedRoute element={<Dashboard />} />}>
-          <Route index element={<Home />} />
+          <Route path="/dashboard" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/films" element={<Films />} />
           <Route path="/films/detail" element={<DetailFilmPage />} />

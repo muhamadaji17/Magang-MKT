@@ -90,7 +90,7 @@ const TableBody = ({
                 )}
               </td>
             ))}
-            <td>
+            <td className="relative ">
               <MenuOptions
                 isLast={datasTable.length - 1 === index}
                 onEdit={() => {

@@ -11,7 +11,7 @@ import { GrArticle } from "react-icons/gr";
 import { RiContactsBook2Fill } from "react-icons/ri";
 
 export const navLink = [
-  { text: "Dashboard", path: "/", icon: LuLayoutDashboard },
+  { text: "Dashboard", path: "/dashboard", icon: LuLayoutDashboard },
   { text: "About", path: "/about", icon: PiSealWarning },
   { text: "Films", path: "/films", icon: PiFilmReel },
   { text: "Banner", path: "/banner", icon: IoImageOutline },

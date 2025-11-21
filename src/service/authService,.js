@@ -13,7 +13,7 @@ export const loginService = async (data, extraOptions) => {
     if (response.data.status === true) {
       // alert(response.data.message);
       setCookies(response);
-      extraOptions.navigate("/");
+      extraOptions.navigate("/dashboard");
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
