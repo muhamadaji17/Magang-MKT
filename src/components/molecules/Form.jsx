@@ -5,8 +5,6 @@ import { InputForm } from ".";
 import { Button, LoadingButton } from "../atom";
 import { useForm } from "react-hook-form";
 import { useGlobalHook } from "../../hook/useGlobalHook";
-import { set } from "date-fns";
-
 const generateDefaultValue = (configInput) => {
   return configInput?.reduce((acc, curr) => {
     if (curr.defaultValue === undefined) return acc;
@@ -42,8 +40,6 @@ const Form = ({
   } = useForm({ defaultValues: generateDefaultValue(configInput) });
   const [imagePreview, setImagePreview] = useState([]);
   const { loadingButton, setLoadingButton } = useGlobalHook();
-
-  console.log(loadingButton);
 
   useEffect(() => {
     const getImageDefault = configInput.filter(

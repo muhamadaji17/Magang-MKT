@@ -3,7 +3,6 @@
 import { formatDate } from "date-fns";
 import { Button, Loading, MenuOptions } from "../atom";
 import { Link } from "react-router-dom";
-import ShortenedCharacter from "./ShortCharacter";
 
 const TableBody = ({
   datasTable,
@@ -90,7 +89,7 @@ const TableBody = ({
                 )}
               </td>
             ))}
-            <td className="relative ">
+            <td className="">
               <MenuOptions
                 isLast={datasTable.length - 1 === index}
                 onEdit={() => {

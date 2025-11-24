@@ -43,7 +43,7 @@ const RootRouters = () => {
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/:action" element={<ArticleDetail />} />
           <Route path="/article-categories" element={<ArticleCategories />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/contacts" element={<ContactPage />} />
           <Route path="/contact-categories" element={<ContactCategoryPage />} />
           <Route path="/user" element={<User />} />
           <Route path="/role" element={<Roles />} />

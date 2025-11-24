@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import Button from "./Button";
 import { SlOptionsVertical } from "react-icons/sl";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const MenuOptions = ({ onEdit, onDelete, onDetail, isLast }) => {
   const [open, setOpen] = useState(false);
@@ -21,9 +21,9 @@ const MenuOptions = ({ onEdit, onDelete, onDetail, isLast }) => {
   return (
     <div ref={menuRef} className="">
       {/* Titik tiga */}
-      <Button
+      <div
         onClick={() => setOpen(!open)}
-        className="p-2 hover:bg-gray-200 rounded-full relative"
+        className="p-2 hover:bg-gray-200 rounded-full relative w-10 h-10 flex justify-center items-center cursor-pointer mx-auto"
       >
         <SlOptionsVertical />
 
@@ -66,7 +66,7 @@ const MenuOptions = ({ onEdit, onDelete, onDetail, isLast }) => {
             </Button>
           </div>
         )}
-      </Button>
+      </div>
     </div>
   );
 };

@@ -32,7 +32,7 @@ export const navLink = [
     text: "Contact ",
     icon: RiContactsBook2Fill,
     submenus: [
-      { text: "Contact Master", path: "/contact" },
+      { text: "Contact Master", path: "/contacts" },
       { text: "Contact Categories ", path: "/contact-categories" },
     ],
   },
