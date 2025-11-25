@@ -1,14 +1,19 @@
-import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaCheck, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
+import { TbCircleCheck } from "react-icons/tb";
 import { Button } from "../atom";
+import { PiCheckCircle } from "react-icons/pi";
+import { IoCloseCircleOutline } from "react-icons/io5";
+import { MdOutlineClose, MdOutlineCheck } from "react-icons/md";
 
 const Card = ({
   img,
   title,
   content,
+  status,
   pathUpdate,
   extraInfo,
   handleDelete,
+  handleUpdateStatus,
   handleUpdate,
 }) => {
   return (
@@ -29,7 +34,10 @@ const Card = ({
             {title}
           </h4>
 
-          <div dangerouslySetInnerHTML={{ __html: content }} />
+          <div
+            dangerouslySetInnerHTML={{ __html: content }}
+            className="line-clamp-3"
+          />
 
           {extraInfo && (
             <div className="pt-2 flex items-center justify-between text-xs text-gray-400">
@@ -42,12 +50,20 @@ const Card = ({
 
         {/* Footer (icon section) */}
         <div className="flex items-center justify-between text-xs text-gray-600 border-t border-gray-300 py-2 px-4">
-          <div className="text-lg space-x-3">
+          <div className="text-lg space-x-3 flex items-center">
             <Button
               onClick={handleUpdate}
               className={"hover:text-blue-500 inline-block"}
             >
               <FaRegEdit />
+            </Button>
+            <Button
+              onClick={handleUpdateStatus}
+              className={`text-xl ${
+                status ? "hover:text-red-500" : "hover:text-green-500"
+              }`}
+            >
+              {status ? <MdOutlineClose /> : <MdOutlineCheck />}
             </Button>
             <Button className={"hover:text-red-500"} onClick={handleDelete}>
               <FaRegTrashAlt />

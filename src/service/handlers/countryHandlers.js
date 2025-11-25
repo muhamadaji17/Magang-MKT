@@ -6,18 +6,20 @@ import {
 } from "../dashboardService/countryService";
 
 export const handleAddCountry = (extraOptions) => {
-  return (datas) => {
-    handleSubmitData(datas, addCountryService, extraOptions);
+  return (datas, extraOptionsForm) => {
+    handleSubmitData(datas, addCountryService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 
 export const handleEditCountry = (extraOptions, dataRow) => {
-  return (datas) => {
-    handleSubmitData(
-      { ...datas, id: dataRow.id },
-      updateCountryService,
-      extraOptions
-    );
+  return (datas, extraOptionsForm) => {
+    handleSubmitData({ ...datas, id: dataRow.id }, updateCountryService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 

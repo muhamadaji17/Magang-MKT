@@ -34,13 +34,11 @@ export const getArticleByIdService = async (id, extraOptions) => {
 };
 
 export const addArticlesService = async (datas, extraOptions) => {
-  const { accessToken, navigate } = extraOptions;
+  const { accessToken, navigate, setLoadingButton } = extraOptions;
   const headers = generateHeaders({
     accessToken,
     contentType: "multipart/form-data",
   });
-
-  // console.log(datas);
 
   try {
     const response = await POST(
@@ -56,15 +54,19 @@ export const addArticlesService = async (datas, extraOptions) => {
     if (response.data.success) {
       SwalAlertBasic({ icon: "success", text: response.data.message });
       navigate("/articles");
+      setLoadingButton(false);
     }
   } catch (error) {
-    SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
     console.error(error);
+    setLoadingButton(false);
   }
 };
 
 export const updateArticlesService = async (datas, extraOptions) => {
-  const { accessToken, navigate } = extraOptions;
+  const { accessToken, navigate, setLoadingButton } = extraOptions;
   const headers = generateHeaders({
     accessToken,
     contentType: "multipart/form-data",
@@ -75,6 +77,7 @@ export const updateArticlesService = async (datas, extraOptions) => {
       `crud/article`,
       {
         ...datas,
+
         article_img:
           typeof datas.article_img === "string"
             ? datas?.article_img
@@ -91,9 +94,32 @@ export const updateArticlesService = async (datas, extraOptions) => {
     if (response.data.success || response.data.status) {
       SwalAlertBasic({ icon: "success", text: response.data.message });
       navigate("/articles");
+      setLoadingButton(false);
     }
   } catch (error) {
-    SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
+    console.error(error);
+    setLoadingButton(false);
+  }
+};
+
+export const updateArticlesStatusService = async (datas, extraOptions) => {
+  const { accessToken, setRefreshData } = extraOptions;
+  const headers = generateHeaders({ accessToken });
+
+  try {
+    const response = await PUT("crud/article", datas, headers);
+
+    if (response.data.status || response.data.success) {
+      SwalAlertBasic({ icon: "success", text: response.data.message });
+      setRefreshData(false);
+    }
+  } catch (error) {
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
     console.error(error);
   }
 };
@@ -109,7 +135,9 @@ export const deleteArticlesService = async (id, extraOptions) => {
       handleCloseModal();
     }
   } catch (error) {
-    SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
     console.error(error);
   }
 };
@@ -125,7 +153,9 @@ export const getArticleCategoryService = async (accessToken, extraOptions) => {
     );
     const payload = response.data.payload.map((data) => ({
       ...data,
-      label: data.article_category_name,
+      label: data?.article_category_name_en?.replace(/^\w/, (m) =>
+        m.toUpperCase()
+      ),
       value: data.id_article_category,
     }));
     setDatasArticleCategory(payload);
@@ -162,7 +192,9 @@ export const editArticleCategoryService = async (datas, extraOptions) => {
     setRefreshData(false);
     handleCloseModal();
   } catch (error) {
-    SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
     console.error(error);
   }
 };
@@ -185,6 +217,10 @@ export const deleteArticleCategoryService = async (id, extraOptions) => {
         icon: "error",
         text: "Delete Failed, Cuz have a children!",
       });
+    }
+
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
     }
     handleCloseModal();
     throw error;

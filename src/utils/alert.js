@@ -49,14 +49,13 @@ export const SwalAlertConfirm = ({
     if (result.isConfirmed) {
       handleConfirm();
 
-      if (alertAfterConfirm) {
-        // Swal.fire({
-        //   title: titleConfirm,
-        //   text: textConfirm,
-        //   icon: iconConfirm,
-        // });
-        // handleSetSchedule();
-      }
+      // if (alertAfterConfirm) {
+      //   Swal.fire({
+      //     title: titleConfirm,
+      //     text: textConfirm,
+      //     icon: iconConfirm,
+      //   });
+      // }
     }
   });
 };

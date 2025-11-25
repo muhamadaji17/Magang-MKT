@@ -6,18 +6,20 @@ import {
 } from "../dashboardService/rolesService";
 
 export const handleAddRole = (extraOptions) => {
-  return (datas) => {
-    handleSubmitData(datas, addRoleService, extraOptions);
+  return (datas, extraOptionsForm) => {
+    handleSubmitData(datas, addRoleService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 
 export const handleEditRole = (extraOptions, dataRow) => {
-  return (datas) => {
-    handleSubmitData(
-      { ...datas, id: dataRow.id_roles },
-      updateRoleService,
-      extraOptions
-    );
+  return (datas, extraOptionsForm) => {
+    handleSubmitData({ ...datas, id: dataRow.id_roles }, updateRoleService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 

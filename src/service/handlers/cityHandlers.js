@@ -6,8 +6,11 @@ import {
 } from "../dashboardService/cityService";
 
 export const handleAddCity = (extraOptions) => {
-  return (datas) => {
-    handleSubmitData(datas, addCityService, extraOptions);
+  return (datas, extraOptionsForm) => {
+    handleSubmitData(datas, addCityService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 
@@ -18,11 +21,10 @@ export const handleDeleteCity = (extraOptions) => {
 };
 
 export const handleEditCity = (extraOptions, dataRow) => {
-  return (datas) => {
-    handleSubmitData(
-      { ...datas, id: dataRow.id },
-      updateCityService,
-      extraOptions
-    );
+  return (datas, extraOptionsForm) => {
+    handleSubmitData({ ...datas, id: dataRow.id }, updateCityService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };

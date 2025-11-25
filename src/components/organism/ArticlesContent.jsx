@@ -10,6 +10,7 @@ const ArticlesContent = ({
   handleOpenModal,
   dataRow,
   extraOptions,
+  handleUpdateStatus,
   handleCloseModal,
   isModalOpen,
   submitType,
@@ -39,8 +40,15 @@ const ArticlesContent = ({
                       .map((article, i) => (
                         <Card
                           key={i}
+                          status={article.status}
                           img={article.article_img}
                           title={article.article_title_en}
+                          handleUpdateStatus={() =>
+                            handleUpdateStatus({
+                              status: !article.status,
+                              id: article.id_article,
+                            })
+                          }
                           handleUpdate={() => {
                             sessionStorage.setItem("id", article.id_article);
                             navigate("/articles/update");

@@ -6,18 +6,20 @@ import {
 } from "../dashboardService/aboutService";
 
 export const handleAddAbout = (extraOptions) => {
-  return (datas) => {
-    handleSubmitData(datas, addAboutService, extraOptions);
+  return (datas, extraOptionsForm) => {
+    handleSubmitData(datas, addAboutService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 
 export const handleEditAbout = (extraOptions, dataRow) => {
-  return (datas) => {
-    handleSubmitData(
-      { ...datas, id: dataRow.id_about },
-      updateAboutService,
-      extraOptions
-    );
+  return (datas, extraOptionsForm) => {
+    handleSubmitData({ ...datas, id: dataRow.id_about }, updateAboutService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 

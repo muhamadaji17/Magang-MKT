@@ -2,28 +2,28 @@ import { errorOptions } from "../error";
 
 export const inputAddArticle = (articleCategory) => [
   {
-    labelText: "Article Title English",
+    labelText: "Article Title EN (English)",
     name: "article_title_en",
     type: "text",
     optionError: errorOptions.title_article,
     grid: 6,
   },
   {
-    labelText: "Article Title Indonesia",
+    labelText: "Article Title ID (Bahasa)",
     name: "article_title_id",
     type: "text",
     optionError: errorOptions.title_article,
     grid: 6,
   },
   {
-    labelText: "Article Slug English",
+    labelText: "Article Slug EN (English)",
     name: "article_slug_en",
     type: "text",
     optionError: errorOptions.slug_article,
     grid: 4,
   },
   {
-    labelText: "Article Slug Indonesia",
+    labelText: "Article Slug ID (Bahasa)",
     name: "article_slug_id",
     type: "text",
     optionError: errorOptions.slug_article,
@@ -54,7 +54,7 @@ export const inputAddArticle = (articleCategory) => [
     grid: 4,
   },
   {
-    labelText: "Thumbnail Article Content EN",
+    labelText: "Thumbnail Article Content EN (English)",
     name: "article_thumbnail_content_en",
     type: "textarea",
     optionError: errorOptions.article_thumbnail_content_en,
@@ -62,7 +62,7 @@ export const inputAddArticle = (articleCategory) => [
     grid: 6,
   },
   {
-    labelText: "Thumbnail Article Content ID",
+    labelText: "Thumbnail Article Content ID (Bahasa)",
     name: "article_thumbnail_content_id",
     type: "textarea",
     optionError: errorOptions.article_thumbnail_content_id,
@@ -70,7 +70,7 @@ export const inputAddArticle = (articleCategory) => [
     grid: 6,
   },
   {
-    labelText: "Article Content English",
+    labelText: "Article Content EN (English)",
     name: "article_content_en",
     type: "editor_about",
     optionError: errorOptions.article_content,
@@ -78,7 +78,7 @@ export const inputAddArticle = (articleCategory) => [
     grid: 6,
   },
   {
-    labelText: "Article Content Indonesia",
+    labelText: "Article Content ID (Bahasa)",
     name: "article_content_id",
     type: "editor_about",
     optionError: errorOptions.article_content,
@@ -89,7 +89,7 @@ export const inputAddArticle = (articleCategory) => [
 
 export const inputEditArticle = (articleCategory, datasDetailArticle) => [
   {
-    labelText: "Article Title English",
+    labelText: "Article Title EN (English)",
     name: "article_title_en",
     type: "text",
     optionError: errorOptions.article_title,
@@ -97,7 +97,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     defaultValue: datasDetailArticle.article_title_en,
   },
   {
-    labelText: "Article Title Indonesia",
+    labelText: "Article Title ID (Bahasa)",
     name: "article_title_id",
     type: "text",
     optionError: errorOptions.article_title,
@@ -105,7 +105,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     defaultValue: datasDetailArticle.article_title_id,
   },
   {
-    labelText: "Article Slug English",
+    labelText: "Article Slug EN (English)",
     name: "article_slug_en",
     type: "text",
     optionError: errorOptions.article_slug,
@@ -113,7 +113,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     defaultValue: datasDetailArticle.article_slug_en,
   },
   {
-    labelText: "Article Slug Indonesia",
+    labelText: "Article Slug ID (Bahasa)",
     name: "article_slug_id",
     type: "text",
     optionError: errorOptions.article_slug,
@@ -146,7 +146,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     grid: 4,
   },
   {
-    labelText: "Thumbnail Article Content EN",
+    labelText: "Thumbnail Article Content EN (English)",
     name: "article_thumbnail_content_en",
     type: "textarea",
     optionError: errorOptions.article_thumbnail_content_en,
@@ -155,7 +155,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     defaultValue: datasDetailArticle.article_thumbnail_content_en,
   },
   {
-    labelText: "Thumbnail Article Content ID",
+    labelText: "Thumbnail Article Content ID (Bahasa)",
     name: "article_thumbnail_content_id",
     type: "textarea",
     optionError: errorOptions.article_thumbnail_content_id,
@@ -164,7 +164,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     defaultValue: datasDetailArticle.article_thumbnail_content_id,
   },
   {
-    labelText: "Article Content EN",
+    labelText: "Article Content EN (English)",
     name: "article_content_en",
     type: "editor_about",
     optionError: errorOptions.article_content,
@@ -173,7 +173,7 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
     defaultValue: datasDetailArticle.article_content_en,
   },
   {
-    labelText: "Article Content ID",
+    labelText: "Article Content ID (Bahasa)",
     name: "article_content_id",
     type: "editor_about",
     optionError: errorOptions.article_content,
@@ -185,8 +185,15 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
 
 export const inputAddArticleCategories = [
   {
-    labelText: "Category Name",
-    name: "article_category_name",
+    labelText: "Category Name EN (English)",
+    name: "article_category_name_en",
+    type: "text",
+    optionError: errorOptions.category_name,
+    grid: 12,
+  },
+  {
+    labelText: "Category Name ID (Bahasa)",
+    name: "article_category_name_id",
     type: "text",
     optionError: errorOptions.category_name,
     grid: 12,
@@ -195,12 +202,20 @@ export const inputAddArticleCategories = [
 
 export const inputEditArticleCategories = (defaultValue) => [
   {
-    labelText: "Category Name",
-    name: "article_category_name",
+    labelText: "Category Name EN (English)",
+    name: "article_category_name_en",
     type: "text",
     optionError: errorOptions.category_name,
     grid: 12,
-    defaultValue: defaultValue.article_category_name,
+    defaultValue: defaultValue.article_category_name_en,
+  },
+  {
+    labelText: "Category Name ID (Bahasa)",
+    name: "article_category_name_id",
+    type: "text",
+    optionError: errorOptions.category_name,
+    grid: 12,
+    defaultValue: defaultValue.article_category_name_id,
   },
   {
     labelText: "Status",
