@@ -226,3 +226,24 @@ export const deleteArticleCategoryService = async (id, extraOptions) => {
     throw error;
   }
 };
+
+export const checkSlugArticleService = async (datas, accessToken) => {
+  const { article_slug_id } = datas;
+
+  const headers = generateHeaders({ accessToken });
+  try {
+    const response = await GET(
+      `check-slug/where?article_slug_id=${article_slug_id}`,
+
+      headers
+    );
+
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  }
+
+  // try {
+  // } catch (error) {
+  // }
+};

@@ -23,7 +23,9 @@ const MenuOptions = ({ onEdit, onDelete, onDetail, isLast }) => {
       {/* Titik tiga */}
       <div
         onClick={() => setOpen(!open)}
-        className="p-2 hover:bg-gray-200 rounded-full relative w-10 h-10 flex justify-center items-center cursor-pointer mx-auto"
+        className={`p-2 hover:bg-gray-200 rounded-full relative w-10 h-10 flex justify-center items-center cursor-pointer mx-auto ${
+          open ? "bg-gray-200" : ""
+        }`}
       >
         <SlOptionsVertical />
 

@@ -8,12 +8,14 @@ export const loginService = async (data, extraOptions) => {
   const headers = {
     "Content-Type": "application/json",
   };
+  const { navigate, setLoadingButton } = extraOptions;
+
   try {
     const response = await POST("auth/login", data, headers);
     if (response.data.status === true) {
       // alert(response.data.message);
       setCookies(response);
-      extraOptions.navigate("/dashboard");
+      navigate("/dashboard");
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
@@ -24,10 +26,13 @@ export const loginService = async (data, extraOptions) => {
         text: response.data.message,
       });
     }
+
+    setLoadingButton(false);
   } catch (error) {
     // console.error(error);
     // alert(error.response.data.message);
     // console.log(error);
+    setLoadingButton(false);
     if (error.response.data.status === false) {
       SwalAlertBasic({
         icon: "error",

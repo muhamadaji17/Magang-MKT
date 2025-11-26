@@ -23,8 +23,11 @@ const Login = () => {
             configInput={loginPattern}
             buttonText={"Login"}
             buttonClassName="bg-blue-900 hover:bg-blue-800"
-            handleSubmitData={(data) =>
-              handleSubmitData(data, loginService, { navigate })
+            handleSubmitData={(data, extraOptionsForm) =>
+              handleSubmitData(data, loginService, {
+                navigate,
+                ...extraOptionsForm,
+              })
             }
           />
         </div>

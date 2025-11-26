@@ -15,16 +15,20 @@ export function Tabs({ defaultTab, children, className = "" }) {
   return (
     <div className={`w-full ${className}`}>
       {/* === Tab Buttons === */}
-      <div className="flex gap-4 border-b border-gray-300 mb-0.5">
+      <div className="flex gap-4 border-b border-gray-300 mb-0.5 overflow-x-auto hide-scrollbar">
         {tabs.map((tab) => (
           <Button
             key={tab.props.id}
             onClick={() => setActiveTab(tab.props.id)}
-            className={`text-black w-24 h-8 text-sm transition-colors ${
-              activeTab === tab.props.id
-                ? "border-b-2 border-sky-600"
-                : "opacity-70 hover:opacity-100"
-            }`}
+            className={`
+              text-black text-sm transition-colors px-4 py-1.5
+              whitespace-nowrap flex-shrink-0
+              ${
+                activeTab === tab.props.id
+                  ? "border-b-2 border-sky-600 font-medium"
+                  : "opacity-70 hover:opacity-100"
+              }
+            `}
           >
             {tab.props.label}
           </Button>

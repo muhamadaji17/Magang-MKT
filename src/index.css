@@ -128,3 +128,12 @@ input[type="number"] {
     text-decoration: underline;
   }
 }
+
+/* Hide scrollbar but still scrollable */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}

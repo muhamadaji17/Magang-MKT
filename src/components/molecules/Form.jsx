@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { InputForm } from ".";
 import { Button, LoadingButton } from "../atom";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useGlobalHook } from "../../hook/useGlobalHook";
+import { useDebauncedEffect } from "../../hook/useDebouncedEffect";
+import { checkSlugArticleService } from "../../service";
 const generateDefaultValue = (configInput) => {
   return configInput?.reduce((acc, curr) => {
     if (curr.defaultValue === undefined) return acc;
@@ -36,10 +38,41 @@ const Form = ({
     watch,
     control,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({ defaultValues: generateDefaultValue(configInput) });
   const [imagePreview, setImagePreview] = useState([]);
-  const { loadingButton, setLoadingButton } = useGlobalHook();
+
+  const { loadingButton, setLoadingButton, accessToken } = useGlobalHook();
+
+  const [article_slug_en, article_slug_id] = watch([
+    "article_slug_en",
+    "article_slug_id",
+  ]);
+
+  useDebauncedEffect({
+    fn: () => {
+      if (!article_slug_en && !article_slug_id) return;
+
+      checkSlugArticleService(
+        { article_slug_en, article_slug_id },
+        accessToken
+      );
+    },
+    deps: [article_slug_en, article_slug_id],
+    delay: 500,
+  });
+
+  // set field slug
+  const handleSetSlug = (titleField, valueTitleField) => {
+    const result = valueTitleField.toLowerCase().replace(/\s+/g, "-");
+
+    if (titleField === "article_title_en") {
+      setValue("article_slug_en", result);
+    } else if (titleField === "article_title_id") {
+      setValue("article_slug_id", result);
+    }
+  };
 
   useEffect(() => {
     const getImageDefault = configInput.filter(
@@ -129,6 +162,7 @@ const Form = ({
               >
                 <InputForm
                   data={data}
+                  handleSetSlug={handleSetSlug}
                   key={index}
                   register={register}
                   imagePreview={imagePreview.find(

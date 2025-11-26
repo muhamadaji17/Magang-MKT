@@ -9,6 +9,7 @@ const InputForm = ({
   data,
   register,
   control,
+  handleSetSlug,
   value,
   error,
   imagePreview,
@@ -119,12 +120,14 @@ const InputForm = ({
       ) : (
         <Input
           type={!showPassword ? data.type : "text"}
-          register={register}
           addOptionError={data.optionError}
           id={data.name}
           label={data.labelText}
           name={data.name}
+          control={control}
+          rows={data.rows}
           onFocus={data.onFocus}
+          handleSetSlug={handleSetSlug}
           max={data.max}
           min={data.min}
           sx={data.sx}

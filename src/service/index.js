@@ -80,6 +80,7 @@ import {
   getArticleByIdService,
   getArticleCategoryService,
   updateArticlesStatusService,
+  checkSlugArticleService,
 } from "./dashboardService/articlesService";
 import { getRatingService } from "./dashboardService/ratingService";
 import {
@@ -136,6 +137,7 @@ export {
   updateArticlesStatusService,
   getArticleByIdService,
   getArticleCategoryService,
+  checkSlugArticleService,
   handleAddBanner,
   handleServiceWithOnClick,
   handleAddCountry,
