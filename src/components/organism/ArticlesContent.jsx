@@ -2,15 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { CardLayout, ModalLayout } from "../layouts";
 import { Card, ConfirmDelete } from "../molecules";
 import { Tab, Tabs } from "./Tabs";
-import { handleDeleteArticle } from "../../service";
+import {
+  handleDeleteArticle,
+  updateArticlesStatusService,
+} from "../../service";
+import { SwalAlertConfirm } from "../../utils/alert";
+import { handleSubmitData } from "../../pattern";
 
 const ArticlesContent = ({
   datasArticleCategory,
   datasArticle,
   handleOpenModal,
   dataRow,
+  isLoading,
   extraOptions,
-  handleUpdateStatus,
   handleCloseModal,
   isModalOpen,
   submitType,
@@ -20,7 +25,11 @@ const ArticlesContent = ({
   return (
     <>
       <CardLayout>
-        {datasArticleCategory.length > 0 && (
+        {isLoading ? (
+          <div className="flex justify-center items-center h-96">
+            <div className="loader" />
+          </div>
+        ) : datasArticleCategory.length > 0 ? (
           <Tabs defaultTab={datasArticleCategory[0]?.value}>
             {datasArticleCategory.map((group, index) => (
               <Tab key={index} id={group?.value} label={group.label}>
@@ -33,43 +42,70 @@ const ArticlesContent = ({
                   </div>
 
                   <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    {datasArticle
-                      .filter(
-                        (article) => article.id_article_category === group.value
-                      )
-                      .map((article, i) => (
-                        <Card
-                          key={i}
-                          status={article.status}
-                          img={article.article_img}
-                          title={article.article_title_en}
-                          handleUpdateStatus={() =>
-                            handleUpdateStatus({
-                              status: !article.status,
-                              id: article.id_article,
-                            })
-                          }
-                          handleUpdate={() => {
-                            sessionStorage.setItem("id", article.id_article);
-                            navigate("/articles/update");
-                          }}
-                          content={article.article_thumbnail_content_en}
-                          handleDelete={() =>
-                            handleOpenModal("delete", article)
-                          }
-                        />
-                      ))}
+                    {datasArticle.filter(
+                      (article) => article.id_article_category === group.value
+                    ) ? (
+                      datasArticle
+                        .filter(
+                          (article) =>
+                            article.id_article_category === group.value
+                        )
+                        .map((article, i) => (
+                          <Card
+                            key={i}
+                            status={article.status}
+                            img={article.article_img}
+                            title={article.article_title_en}
+                            handleUpdateStatus={
+                              // () =>
+                              // handleUpdateStatus({
+                              //   status: !article.status,
+                              //   id: article.id_article,
+                              // })
+
+                              () =>
+                                SwalAlertConfirm({
+                                  title: "Change Status Article",
+                                  text: "Are you sure to change status article?",
+                                  confirmButtonText: "Yes, change it!",
+                                  handleConfirm: () =>
+                                    handleSubmitData(
+                                      {
+                                        status: !article.status,
+                                        id: article.id_article,
+                                      },
+                                      updateArticlesStatusService,
+                                      extraOptions
+                                    ),
+                                })
+                            }
+                            handleUpdate={() => {
+                              sessionStorage.setItem("id", article.id_article);
+                              navigate("/articles/update");
+                            }}
+                            content={article.article_thumbnail_content_en}
+                            handleDelete={() =>
+                              handleOpenModal("delete", article)
+                            }
+                          />
+                        ))
+                    ) : (
+                      <span className="text-base block text-center">
+                        No data available
+                      </span>
+                    )}
                   </div>
                 </div>
               </Tab>
             ))}
           </Tabs>
+        ) : (
+          <span className="text-base block text-center">No data available</span>
         )}
       </CardLayout>
 
       <ModalLayout
         isModalOpen={isModalOpen}
-        title={submitType === "add" ? "Add About" : "Edit About"}
         handleCloseModal={handleCloseModal}
         submitType={submitType}
         closeButton={submitType !== "delete"}

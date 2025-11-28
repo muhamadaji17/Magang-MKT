@@ -6,7 +6,7 @@ import Navlink from "./Navlink";
 import Form from "./Form";
 import { Button } from "../atom";
 import { MdClose } from "react-icons/md";
-import Logo from "../../../public/images/logo/LOGO RAIN WHITE.svg";
+import Logo from "../../../public/images/logo/LOGO RAIN IJOBIRU.svg";
 
 const Sidebar = ({
   type = "",

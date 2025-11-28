@@ -1,8 +1,5 @@
-import { FaCheck, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-import { TbCircleCheck } from "react-icons/tb";
+import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { Button } from "../atom";
-import { PiCheckCircle } from "react-icons/pi";
-import { IoCloseCircleOutline } from "react-icons/io5";
 import { MdOutlineClose, MdOutlineCheck } from "react-icons/md";
 
 const Card = ({
@@ -10,7 +7,6 @@ const Card = ({
   title,
   content,
   status,
-  pathUpdate,
   extraInfo,
   handleDelete,
   handleUpdateStatus,

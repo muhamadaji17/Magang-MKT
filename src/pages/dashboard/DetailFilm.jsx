@@ -65,14 +65,25 @@ const DetailFilmPage = () => {
                 {tab.title}
               </h3>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  xl:lg:grid-cols-5 gap-10">
+            <div
+              className="
+  grid grid-cols-1 
+  sm:grid-cols-2 
+  md:grid-cols-3 
+  lg:grid-cols-4  
+  gap-6
+"
+            >
               {(datasDetailFilms.casting_with_film ?? [])
-                .filter((c) => c.artis_kategori === tab.id) // ambil data sesuai tab
+                .filter((c) => c.artis_kategori === tab.id)
                 .map((c, i) => (
-                  // <div key={i}> {c.nama_casting_film} </div>
                   <div
                     key={i}
-                    className="group relative bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col"
+                    className="
+          group bg-white rounded-xl overflow-hidden border border-gray-200 
+          shadow-sm hover:shadow-lg
+          transition-all duration-300 flex flex-col
+        "
                   >
                     <img
                       src={
@@ -80,29 +91,43 @@ const DetailFilmPage = () => {
                           ? `http://${c.poster_casting_film}`
                           : "/images/poster/one-outs.jpg"
                       }
-                      className="rounded-md w-full h-[400px]
-                      group-hover:scale-105 transition-transform duration-500
-                      "
+                      className="
+            w-full h-60 object-cover transition-transform duration-500
+          "
                     />
 
-                    <div className="m-2">
-                      <h1 className="font-bold text-lg hover:text-blue-500 focus:text-blue-500 hover:underline focus:underline cursor-pointer">
+                    {/* Konten */}
+                    <div className="p-3 flex-1">
+                      <h1
+                        className="
+            font-semibold text-base md:text-lg 
+            hover:text-blue-600 hover:underline cursor-pointer
+          "
+                      >
                         {c.nama_casting_film}
                       </h1>
-                      <small>Melati</small>
+
+                      <small className="text-gray-600">Melati</small>
                     </div>
 
-                    {/* Footer (icon section) */}
-                    <div className="flex items-center justify-between text-xs text-gray-600 border-t border-gray-300 py-2 px-4">
-                      <div className="text-lg space-x-3">
+                    {/* Footer */}
+                    <div
+                      className="
+          flex items-center justify-between 
+          border-t border-gray-200 
+          py-2 px-4 text-gray-600 text-sm
+        "
+                    >
+                      <div className="flex items-center gap-3 text-lg">
                         <Button
-                          className={"hover:text-blue-500"}
+                          className="hover:text-blue-500"
                           onClick={() => handleOpenModal("edit", setDataRow(c))}
                         >
                           <FaRegEdit />
                         </Button>
+
                         <Button
-                          className={"hover:text-red-500"}
+                          className="hover:text-red-500"
                           onClick={() =>
                             handleOpenModal("delete", setDataRow(c))
                           }
