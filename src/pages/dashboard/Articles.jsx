@@ -1,3 +1,5 @@
+/** @format */
+
 import { HeaderContent } from "../../components/molecules";
 import { useArticles } from "../../hook";
 import { ArticlesContent } from "../../components/organism";

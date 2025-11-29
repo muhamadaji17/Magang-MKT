@@ -1,3 +1,5 @@
+/** @format */
+
 import { errorOptions } from "../error";
 
 export const inputAddArticle = (articleCategory) => [
@@ -185,22 +187,37 @@ export const inputEditArticle = (articleCategory, datasDetailArticle) => [
 
 export const inputAddArticleCategories = [
   {
-    labelText: "Category Name",
-    name: "article_category_name",
+    labelText: "Category Name EN",
+    name: "article_category_name_en",
     type: "text",
     optionError: errorOptions.category_name,
+    grid: 12,
+  },
+  {
+    labelText: "Category Name ID",
+    name: "article_category_name_id",
+    type: "text",
+    // optionError: errorOptions.category_name,
     grid: 12,
   },
 ];
 
 export const inputEditArticleCategories = (defaultValue) => [
   {
-    labelText: "Category Name",
-    name: "article_category_name",
+    labelText: "Category Name EN",
+    name: "article_category_name_en",
     type: "text",
     optionError: errorOptions.category_name,
     grid: 12,
-    defaultValue: defaultValue.article_category_name,
+    defaultValue: defaultValue.article_category_name_en,
+  },
+  {
+    labelText: "Category Name ID",
+    name: "article_category_name_id",
+    type: "text",
+    // optionError: errorOptions.category_name,
+    grid: 12,
+    defaultValue: defaultValue.article_category_name_id,
   },
   {
     labelText: "Status",

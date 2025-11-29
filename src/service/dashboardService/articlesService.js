@@ -125,7 +125,7 @@ export const getArticleCategoryService = async (accessToken, extraOptions) => {
     );
     const payload = response.data.payload.map((data) => ({
       ...data,
-      label: data.article_category_name,
+      label: data.article_category_name_id,
       value: data.id_article_category,
     }));
     setDatasArticleCategory(payload);
