@@ -45,34 +45,34 @@ const Form = ({
 
   const { loadingButton, setLoadingButton, accessToken } = useGlobalHook();
 
-  const [article_slug_en, article_slug_id] = watch([
-    "article_slug_en",
-    "article_slug_id",
-  ]);
+  // const [article_slug_en, article_slug_id] = watch([
+  //   "article_slug_en",
+  //   "article_slug_id",
+  // ]);
 
-  useDebauncedEffect({
-    fn: () => {
-      if (!article_slug_en && !article_slug_id) return;
+  // useDebauncedEffect({
+  //   fn: () => {
+  //     if (!article_slug_en && !article_slug_id) return;
 
-      checkSlugArticleService(
-        { article_slug_en, article_slug_id },
-        accessToken
-      );
-    },
-    deps: [article_slug_en, article_slug_id],
-    delay: 500,
-  });
+  //     checkSlugArticleService(
+  //       { article_slug_en, article_slug_id },
+  //       accessToken
+  //     );
+  //   },
+  //   deps: [article_slug_en, article_slug_id],
+  //   delay: 500,
+  // });
 
   // set field slug
-  const handleSetSlug = (titleField, valueTitleField) => {
-    const result = valueTitleField.toLowerCase().replace(/\s+/g, "-");
+  // const handleSetSlug = (titleField, valueTitleField) => {
+  //   const result = valueTitleField.toLowerCase().replace(/\s+/g, "-");
 
-    if (titleField === "article_title_en") {
-      setValue("article_slug_en", result);
-    } else if (titleField === "article_title_id") {
-      setValue("article_slug_id", result);
-    }
-  };
+  //   if (titleField === "article_title_en") {
+  //     setValue("article_slug_en", result);
+  //   } else if (titleField === "article_title_id") {
+  //     setValue("article_slug_id", result);
+  //   }
+  // };
 
   useEffect(() => {
     const getImageDefault = configInput.filter(
@@ -162,7 +162,7 @@ const Form = ({
               >
                 <InputForm
                   data={data}
-                  handleSetSlug={handleSetSlug}
+                  // handleSetSlug={handleSetSlug}
                   key={index}
                   register={register}
                   imagePreview={imagePreview.find(

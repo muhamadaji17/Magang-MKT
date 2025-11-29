@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
-import { useDebauncedEffect } from "../../hook/useDebouncedEffect";
-import { useState } from "react";
 
 const Input = ({
   name,
@@ -30,12 +28,12 @@ const Input = ({
           {...field} // penting! membawa onChange, value, name, onBlur
           onChange={(e) => {
             field.onChange(e); // tetap update input title
-            const value = e.target.value;
+            // const value = e.target.value;
 
-            // isi form lain (slug)
-            if (name === "article_title_en" || name === "article_title_id") {
-              handleSetSlug(name, value);
-            }
+            // // isi form lain (slug)
+            // if (name === "article_title_en" || name === "article_title_id") {
+            //   handleSetSlug(name, value);
+            // }
           }}
           id="outlined-basic"
           label={label}

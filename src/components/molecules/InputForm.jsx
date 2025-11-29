@@ -1,6 +1,6 @@
 /** @format */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AtomSelect, Button, Input } from "../atom";
 import { FaEyeSlash, FaUpload } from "react-icons/fa";
 import Editor from "../organism/Editor";
