@@ -6,18 +6,20 @@ import {
 } from "../dashboardService/userService";
 
 export const handleAddUser = (extraOptions) => {
-  return (datas) => {
-    handleSubmitData(datas, addUserService, extraOptions);
+  return (datas, extraOptionsForm) => {
+    handleSubmitData(datas, addUserService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 
 export const handleEditUser = (extraOptions, dataRow) => {
-  return (datas) => {
-    handleSubmitData(
-      { ...datas, id: dataRow.id_admin },
-      updateUserService,
-      extraOptions
-    );
+  return (datas, extraOptionsForm) => {
+    handleSubmitData({ ...datas, id: dataRow.id_admin }, updateUserService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 

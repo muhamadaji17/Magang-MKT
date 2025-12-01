@@ -201,11 +201,11 @@ export const inputEditCastingFilms = (datasDefault, dataDetail) => [
 
 export const typeTabsCastingFilms = [
   {
-    id: "cast",
-    title: "Cast",
-  },
-  {
     id: "main_cast",
     title: "Main Cast",
+  },
+  {
+    id: "cast",
+    title: "Cast",
   },
 ];

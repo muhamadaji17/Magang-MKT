@@ -79,6 +79,8 @@ import {
   getArticlesService,
   getArticleByIdService,
   getArticleCategoryService,
+  updateArticlesStatusService,
+  checkSlugArticleService,
 } from "./dashboardService/articlesService";
 import { getRatingService } from "./dashboardService/ratingService";
 import {
@@ -132,8 +134,10 @@ export {
   getUserService,
   getRolesService,
   getArticlesService,
+  updateArticlesStatusService,
   getArticleByIdService,
   getArticleCategoryService,
+  checkSlugArticleService,
   handleAddBanner,
   handleServiceWithOnClick,
   handleAddCountry,

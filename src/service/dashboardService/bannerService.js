@@ -29,7 +29,7 @@ export const addBannerService = async (datas, extraOptions) => {
     handleCloseSidebar,
     setRefreshData,
     reset,
-    setFileName,
+    setLoadingButton,
     setImagePreview,
   } = extraOptions;
 
@@ -53,8 +53,8 @@ export const addBannerService = async (datas, extraOptions) => {
       handleCloseSidebar();
       setRefreshData(false);
       reset();
-      setFileName("");
-      setImagePreview(null);
+      setLoadingButton(false);
+      setImagePreview([]);
     } else {
       SwalAlertBasic({
         icon: "error",
@@ -64,13 +64,19 @@ export const addBannerService = async (datas, extraOptions) => {
   } catch (error) {
     console.error("Update Failed:", error);
     SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    setLoadingButton(false);
     throw error;
   }
 };
 
 export const updateBannerService = async (datas, extraOptions) => {
-  const { accessToken, handleCloseSidebar, setRefreshData, setUpdatedEvents } =
-    extraOptions;
+  const {
+    accessToken,
+    handleCloseSidebar,
+    setRefreshData,
+    setUpdatedEvents,
+    setLoadingButton,
+  } = extraOptions;
 
   const headers = generateHeaders({
     accessToken,
@@ -118,11 +124,13 @@ export const updateBannerService = async (datas, extraOptions) => {
         });
         handleCloseSidebar();
         setUpdatedEvents([]);
+        setLoadingButton(false);
         setRefreshData(false);
       }
     }
   } catch (error) {
     console.error("Update Failed:", error);
+    setLoadingButton(false);
     SwalAlertBasic({
       title: "Error",
       icon: "error",

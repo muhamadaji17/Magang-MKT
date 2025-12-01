@@ -6,16 +6,19 @@ import {
 } from "../dashboardService/ratingService";
 
 export const handleAddRating = (extraOption) => {
-  return (datas) => handleSubmitData(datas, addRatingService, extraOption);
+  return (datas, extraOptionForm) =>
+    handleSubmitData(datas, addRatingService, {
+      ...extraOption,
+      ...extraOptionForm,
+    });
 };
 
 export const handleEditRating = (extraOption, dataRow) => {
-  return (datas) =>
-    handleSubmitData(
-      { ...datas, id: dataRow.id_rating },
-      updateRatingService,
-      extraOption
-    );
+  return (datas, extraOptionForm) =>
+    handleSubmitData({ ...datas, id: dataRow.id_rating }, updateRatingService, {
+      ...extraOption,
+      ...extraOptionForm,
+    });
 };
 
 export const handleDeleteRating = (extraOption) => {

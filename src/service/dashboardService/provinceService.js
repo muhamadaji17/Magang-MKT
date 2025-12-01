@@ -31,7 +31,8 @@ export const getProvinceService = async (accessToken, extraOptions) => {
 };
 
 export const addProvinceService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({ accessToken });
   try {
     const response = await POST("crud/province", datas, headers);
@@ -41,16 +42,23 @@ export const addProvinceService = async (datas, extraOptions) => {
         text: response.data.message,
       });
       setRefreshData(false);
+      setLoadingButton(false);
       handleCloseModal();
     }
   } catch (error) {
     console.error(error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
   }
 };
 
 export const updateProvinceService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({ accessToken });
+
   try {
     const response = await PUT("crud/province", datas, headers);
     if (response.data.status) {
@@ -60,9 +68,14 @@ export const updateProvinceService = async (datas, extraOptions) => {
       });
       handleCloseModal();
       setRefreshData(false);
+      setLoadingButton(false);
     }
   } catch (error) {
     console.error(error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
   }
 };
 

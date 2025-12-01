@@ -9,6 +9,7 @@ export const useGlobalHook = () => {
   const [searchQuery, setSearchQuery] = useState({});
   const [dataRow, setDataRow] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [loadingButton, setLoadingButton] = useState(false);
   const accessToken = Cookies.get("accessToken");
 
   const handleOpenModal = (type, dataDefault) => {
@@ -50,6 +51,8 @@ export const useGlobalHook = () => {
     handleOpenModal,
     handleOpenSidebar,
     handleCloseSidebar,
+    loadingButton,
+    setLoadingButton,
     isLoading,
     setIsLoading,
     dataRow,

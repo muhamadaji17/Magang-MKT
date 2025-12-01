@@ -17,15 +17,15 @@ export const getFilmByIdService = async (accessToken, extraOptions) => {
     setRefreshData(true);
   } catch (error) {
     // console.error(error);
-    if (
-      error.response.data.status === false &&
-      error.response.data.message === "Unauthorized!"
-    ) {
-      SwalAlertBasic({
-        icon: "error",
-        text: error.response.data.message,
-      });
-    }
+    // if (
+    //   error.response.data.status === false &&
+    //   error.response.data.message === "Unauthorized!"
+    // ) {
+    //   SwalAlertBasic({
+    //     icon: "error",
+    //     text: error.response.data.message,
+    //   });
+    // }
   }
 };
 
@@ -61,15 +61,15 @@ export const addCastingFilmService = async (datas, extraOptions) => {
   } catch (error) {
     console.log(error);
 
-    if (
-      error.response.data.status === false &&
-      error.response.data.message === "Unauthorized!"
-    ) {
-      SwalAlertBasic({
-        icon: "error",
-        text: error.response.data.message,
-      });
-    }
+    // if (
+    //   error.response.data.status === false &&
+    //   error.response.data.message === "Unauthorized!"
+    // ) {
+    //   SwalAlertBasic({
+    //     icon: "error",
+    //     text: error.response.data.message,
+    //   });
+    // }
   }
 };
 
@@ -100,15 +100,15 @@ export const updateCastingFilmService = async (datas, extraOptions) => {
       });
     }
   } catch (error) {
-    if (
-      error.response.data.status === false &&
-      error.response.data.message === "Unauthorized!"
-    ) {
-      SwalAlertBasic({
-        icon: "error",
-        text: error.response.data.message,
-      });
-    }
+    // if (
+    //   error.response.data.status === false &&
+    //   error.response.data.message === "Unauthorized!"
+    // ) {
+    //   SwalAlertBasic({
+    //     icon: "error",
+    //     text: error.response.data.message,
+    //   });
+    // }
   }
 };
 
@@ -135,14 +135,14 @@ export const deleteCastingFilmService = async (id, extraOptions) => {
       });
     }
   } catch (error) {
-    if (
-      error.response.data.status === false &&
-      error.response.data.message === "Unauthorized!"
-    ) {
-      SwalAlertBasic({
-        icon: "error",
-        text: error.response.data.message,
-      });
-    }
+    // if (
+    //   error.response.data.status === false &&
+    //   error.response.data.message === "Unauthorized!"
+    // ) {
+    //   SwalAlertBasic({
+    //     icon: "error",
+    //     text: error.response.data.message,
+    //   });
+    // }
   }
 };

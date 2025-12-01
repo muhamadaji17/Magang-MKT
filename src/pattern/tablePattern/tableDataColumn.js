@@ -179,12 +179,12 @@ export const configTableRole = [
 
 export const configTableArticleCategories = [
   {
-    title: "Category Name EN",
+    title: "Category Name EN (English)",
     key: "article_category_name_en",
     type: "text",
   },
   {
-    title: "Category Name ID",
+    title: "Category Name ID (Bahasa)",
     key: "article_category_name_id",
     type: "text",
   },

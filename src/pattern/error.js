@@ -85,6 +85,9 @@ export const errorOptions = {
   produser_film: {
     required: "Produser Film is Required",
   },
+  language_film: {
+    required: "Language Film is Required",
+  },
   produksi_film: {
     required: "Prodution House Film is Required",
   },
@@ -275,11 +278,22 @@ export const errorOptions = {
   article_img: {
     required: "Article Image is Required",
   },
+  article_thumbnail_img: {
+    required: "Article Thumbnail Image is Required",
+  },
   article_title: {
     required: "Article Title is Required",
+    pattern: {
+      value: /^[A-Za-z0-9\s]+$/,
+      message:
+        "No punctuation marks allowed. only letters, numbers, and spaces.",
+    },
   },
   article_slug: {
     required: "Article Slug is Required",
+  },
+  article_thumbnail_content: {
+    required: "Article Thumbnail Content is Required",
   },
   article_content: {
     required: "Article Content is Required",
@@ -287,7 +301,6 @@ export const errorOptions = {
   rating_name: {
     required: "Rating Name is Required",
   },
-
   code_rating: {
     required: "Code Rating is Required",
   },

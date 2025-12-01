@@ -32,7 +32,8 @@ export const getCountryService = async (accessToken, extraOptions) => {
 };
 
 export const addCountryService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({ accessToken });
   try {
     const response = await POST("crud/country", datas, headers);
@@ -43,15 +44,21 @@ export const addCountryService = async (datas, extraOptions) => {
         text: response.data.message,
       });
       setRefreshData(false);
+      setLoadingButton(false);
       handleCloseModal();
     }
   } catch (error) {
     console.error(error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
   }
 };
 
 export const updateCountryService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({ accessToken });
   try {
     const response = await PUT("crud/country", datas, headers);
@@ -62,10 +69,15 @@ export const updateCountryService = async (datas, extraOptions) => {
         text: response.data.message,
       });
       handleCloseModal();
+      setLoadingButton(false);
       setRefreshData(false);
     }
   } catch (error) {
     console.error(error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
   }
 };
 

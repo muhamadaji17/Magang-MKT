@@ -35,16 +35,15 @@ export const getFilmService = async (accessToken, extraOptions) => {
     setDatasFilms(parsing);
     setRefreshData(true);
   } catch (error) {
-    // console.error(error);
-    if (
-      error.response.data.status === false &&
-      error.response.data.message === "Unauthorized!"
-    ) {
-      SwalAlertBasic({
-        icon: "error",
-        text: error.response.data.message,
-      });
-    }
+    // if (
+    //   error.response.data.status === false &&
+    //   error.response.data.message === "Unauthorized!"
+    // ) {
+    //   SwalAlertBasic({
+    //     icon: "error",
+    //     text: error.response.data.message,
+    //   });
+    // }
   }
 };
 export const getFilmByIdService = async (accessToken, extraOptions) => {
@@ -60,20 +59,21 @@ export const getFilmByIdService = async (accessToken, extraOptions) => {
     setRefreshData(true);
   } catch (error) {
     // console.error(error);
-    if (
-      error.response.data.status === false &&
-      error.response.data.message === "Unauthorized!"
-    ) {
-      SwalAlertBasic({
-        icon: "error",
-        text: error.response.data.message,
-      });
-    }
+    // if (
+    //   error.response.data.status === false &&
+    //   error.response.data.message === "Unauthorized!"
+    // ) {
+    //   SwalAlertBasic({
+    //     icon: "error",
+    //     text: error.response.data.message,
+    //   });
+    // }
   }
 };
 
 export const addFilmService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({
     accessToken,
     contentType: "multipart/form-data",
@@ -99,21 +99,25 @@ export const addFilmService = async (datas, extraOptions) => {
         text: response.data.message,
       });
     }
+
+    setLoadingButton(false);
   } catch (error) {
-    if (
-      error.response.data.status === false &&
-      error.response.data.message === "Unauthorized!"
-    ) {
-      SwalAlertBasic({
-        icon: "error",
-        text: error.response.data.message,
-      });
-    }
+    setLoadingButton(false);
+    // if (
+    //   error.response.data.status === false &&
+    //   error.response.data.message === "Unauthorized!"
+    // ) {
+    //   SwalAlertBasic({
+    //     icon: "error",
+    //     text: error.response.data.message,
+    //   });
+    // }
   }
 };
 
 export const updateFilmService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({
     accessToken,
     contentType: "multipart/form-data",
@@ -131,29 +135,32 @@ export const updateFilmService = async (datas, extraOptions) => {
       },
       headers
     );
-    if (response.data.status === true) {
+    if (response?.data?.status === true) {
       setRefreshData(false);
       handleCloseModal();
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
       });
-    } else if (response.data.success === false) {
+    } else if (response?.data?.success === false) {
       SwalAlertBasic({
         icon: "error",
         text: response.data.message,
       });
     }
+
+    setLoadingButton(false);
   } catch (error) {
-    if (
-      error.response.data.status === false &&
-      error.response.data.message === "Unauthorized!"
-    ) {
-      SwalAlertBasic({
-        icon: "error",
-        text: error.response.data.message,
-      });
-    }
+    setLoadingButton(false);
+    // if (
+    //   error.response?.data?.status === false &&
+    //   error.response?.data?.message === "Unauthorized!"
+    // ) {
+    //   SwalAlertBasic({
+    //     icon: "error",
+    //     text: "Unauthorized!",
+    //   });
+    // }
   }
 };
 
@@ -175,14 +182,14 @@ export const deleteFilmService = async (id, extraOptions) => {
       });
     }
   } catch (error) {
-    if (
-      error.response.data.status === false &&
-      error.response.data.message === "Unauthorized!"
-    ) {
-      SwalAlertBasic({
-        icon: "error",
-        text: error.response.data.message,
-      });
-    }
+    // if (
+    //   error.response.data.status === false &&
+    //   error.response.data.message === "Unauthorized!"
+    // ) {
+    //   SwalAlertBasic({
+    //     icon: "error",
+    //     text: error.response.data.message,
+    //   });
+    // }
   }
 };

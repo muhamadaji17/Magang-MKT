@@ -11,10 +11,10 @@ import { GrArticle } from "react-icons/gr";
 import { RiContactsBook2Fill } from "react-icons/ri";
 
 export const navLink = [
-  { text: "Dashboard", path: "/", icon: LuLayoutDashboard },
+  { text: "Dashboard", path: "/dashboard", icon: LuLayoutDashboard },
   { text: "About", path: "/about", icon: PiSealWarning },
   { text: "Films", path: "/films", icon: PiFilmReel },
-  { text: "Banner", path: "/banner", icon: IoImageOutline },
+  // { text: "Banner", path: "/banner", icon: IoImageOutline },
   {
     text: "Office",
     path: "/office",
@@ -32,7 +32,7 @@ export const navLink = [
     text: "Contact ",
     icon: RiContactsBook2Fill,
     submenus: [
-      { text: "Contact Master", path: "/contact" },
+      { text: "Contact Master", path: "/contacts" },
       { text: "Contact Categories ", path: "/contact-categories" },
     ],
   },

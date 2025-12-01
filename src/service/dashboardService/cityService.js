@@ -31,7 +31,8 @@ export const getCityService = async (accessToken, extraOptions) => {
 };
 
 export const addCityService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({ accessToken });
   try {
     const response = await POST("crud/city", datas, headers);
@@ -42,14 +43,20 @@ export const addCityService = async (datas, extraOptions) => {
       });
       setRefreshData(false);
       handleCloseModal();
+      setLoadingButton(false);
     }
   } catch (error) {
     console.error(error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
   }
 };
 
 export const updateCityService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   const headers = generateHeaders({ accessToken });
 
@@ -62,10 +69,15 @@ export const updateCityService = async (datas, extraOptions) => {
         text: response.data.message,
       });
       handleCloseModal();
+      setLoadingButton(false);
       setRefreshData(false);
     }
   } catch (error) {
     console.error(error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
   }
 };
 

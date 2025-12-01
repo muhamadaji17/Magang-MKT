@@ -1,3 +1,5 @@
+/** @format */
+
 import { DELETE, GET, POST, PUT } from "../../api";
 import { generateHeaders, generateEndpointWithQuery } from "../";
 import { SwalAlertBasic } from "../../utils";
@@ -26,16 +28,17 @@ export const getOfficeService = async (accessToken, extraOptions) => {
     }));
 
     setDatasOffice(parsing);
-    if (setRefreshData) {
-      setRefreshData(true);
-    }
+    // if (setRefreshData) {
+    // }
   } catch (error) {
     console.error(error);
   }
+  setRefreshData(true);
 };
 
 export const addOfficeService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   const headers = generateHeaders({ accessToken });
 
@@ -47,15 +50,21 @@ export const addOfficeService = async (datas, extraOptions) => {
         text: response.data.message,
       });
       handleCloseModal();
-      setRefreshData(false);
+      setLoadingButton(false);
     }
   } catch (error) {
     console.error(error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
+    setRefreshData(false);
   }
 };
 
 export const updateOfficeService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   const headers = generateHeaders({ accessToken });
 
@@ -66,12 +75,17 @@ export const updateOfficeService = async (datas, extraOptions) => {
         icon: "success",
         text: response.data.message,
       });
-      handleCloseModal();
-      setRefreshData(false);
     }
   } catch (error) {
+    // setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
     console.error(error);
   }
+  handleCloseModal();
+  setLoadingButton(false);
+  setRefreshData(false);
 };
 
 export const deleteOfficeService = async (id, extraOptions) => {

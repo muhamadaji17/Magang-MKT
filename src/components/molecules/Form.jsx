@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { InputForm } from ".";
-import { Button } from "../atom";
-import { useForm } from "react-hook-form";
-
+import { Button, LoadingButton } from "../atom";
+import { useForm, useWatch } from "react-hook-form";
+import { useGlobalHook } from "../../hook/useGlobalHook";
+import { useDebauncedEffect } from "../../hook/useDebouncedEffect";
+import { checkSlugArticleService } from "../../service";
 const generateDefaultValue = (configInput) => {
   return configInput?.reduce((acc, curr) => {
     if (curr.defaultValue === undefined) return acc;
@@ -36,9 +38,41 @@ const Form = ({
     watch,
     control,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({ defaultValues: generateDefaultValue(configInput) });
   const [imagePreview, setImagePreview] = useState([]);
+
+  const { loadingButton, setLoadingButton, accessToken } = useGlobalHook();
+
+  // const [article_slug_en, article_slug_id] = watch([
+  //   "article_slug_en",
+  //   "article_slug_id",
+  // ]);
+
+  // useDebauncedEffect({
+  //   fn: () => {
+  //     if (!article_slug_en && !article_slug_id) return;
+
+  //     checkSlugArticleService(
+  //       { article_slug_en, article_slug_id },
+  //       accessToken
+  //     );
+  //   },
+  //   deps: [article_slug_en, article_slug_id],
+  //   delay: 500,
+  // });
+
+  // set field slug
+  // const handleSetSlug = (titleField, valueTitleField) => {
+  //   const result = valueTitleField.toLowerCase().replace(/\s+/g, "-");
+
+  //   if (titleField === "article_title_en") {
+  //     setValue("article_slug_en", result);
+  //   } else if (titleField === "article_title_id") {
+  //     setValue("article_slug_id", result);
+  //   }
+  // };
 
   useEffect(() => {
     const getImageDefault = configInput.filter(
@@ -80,7 +114,8 @@ const Form = ({
   };
 
   const onSubmit = (data) => {
-    handleSubmitData(data, { reset, setImagePreview });
+    handleSubmitData(data, { reset, setImagePreview, setLoadingButton });
+    setLoadingButton(true);
   };
 
   useEffect(() => {
@@ -127,6 +162,7 @@ const Form = ({
               >
                 <InputForm
                   data={data}
+                  // handleSetSlug={handleSetSlug}
                   key={index}
                   register={register}
                   imagePreview={imagePreview.find(
@@ -149,7 +185,7 @@ const Form = ({
               <Button
                 className={"py-2 px-3 rounded-md bg-green-500 text-white"}
               >
-                Save
+                {loadingButton ? <LoadingButton /> : "Save"}
               </Button>
 
               <Button
@@ -178,7 +214,9 @@ const Form = ({
             className={`bg-blue-600 rounded-sm py-2 w-full text-center text-white cursor-pointer hover:bg-blue-700 ${buttonClassName}`}
             type="submit"
           >
-            {buttonText}
+            {/* {buttonText} */}
+
+            {loadingButton ? <LoadingButton /> : buttonText}
           </Button>
         )}
       </form>
