@@ -57,8 +57,11 @@ export const addArticlesService = async (datas, extraOptions) => {
       setLoadingButton(false);
     }
   } catch (error) {
-    if (error.response.data.message) {
-      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    if (error.response.status === 400) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
     }
     console.error(error);
     setLoadingButton(false);
@@ -97,8 +100,11 @@ export const updateArticlesService = async (datas, extraOptions) => {
       setLoadingButton(false);
     }
   } catch (error) {
-    if (error.response.data.message) {
-      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    if (error.response.status === 400) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
     }
     console.error(error);
     setLoadingButton(false);
@@ -227,23 +233,34 @@ export const deleteArticleCategoryService = async (id, extraOptions) => {
   }
 };
 
-export const checkSlugArticleService = async (datas, accessToken) => {
+export const checkSlugArticleIdService = async (datas, extraOptions) => {
   const { article_slug_id } = datas;
+  const { accessToken, setPayloadCheckSlug } = extraOptions;
 
-  const headers = generateHeaders({ accessToken });
   try {
     const response = await GET(
-      `check-slug/where?article_slug_id=${article_slug_id}`,
-
-      headers
+      `crud/check-slug/where?article_slug_id=${article_slug_id}`,
+      accessToken
     );
 
-    console.log(response);
+    setPayloadCheckSlug((prev) => ({ ...prev, id: response.data }));
   } catch (error) {
     console.error(error);
   }
+};
 
-  // try {
-  // } catch (error) {
-  // }
+export const checkSlugArticleEnService = async (datas, extraOptions) => {
+  const { article_slug_en } = datas;
+  const { accessToken, setPayloadCheckSlug } = extraOptions;
+
+  try {
+    const response = await GET(
+      `crud/check-slug/where?article_slug_en=${article_slug_en}`,
+      accessToken
+    );
+
+    setPayloadCheckSlug((prev) => ({ ...prev, en: response.data }));
+  } catch (error) {
+    console.error(error);
+  }
 };

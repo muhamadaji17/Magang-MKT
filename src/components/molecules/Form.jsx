@@ -1,12 +1,15 @@
 /** @format */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { InputForm } from ".";
 import { Button, LoadingButton } from "../atom";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useGlobalHook } from "../../hook/useGlobalHook";
 import { useDebauncedEffect } from "../../hook/useDebouncedEffect";
-import { checkSlugArticleService } from "../../service";
+import {
+  checkSlugArticleEnService,
+  checkSlugArticleIdService,
+} from "../../service";
 const generateDefaultValue = (configInput) => {
   return configInput?.reduce((acc, curr) => {
     if (curr.defaultValue === undefined) return acc;
@@ -42,37 +45,93 @@ const Form = ({
     formState: { errors },
   } = useForm({ defaultValues: generateDefaultValue(configInput) });
   const [imagePreview, setImagePreview] = useState([]);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const [payloadCheckSlug, setPayloadCheckSlug] = useState({
+    id: null,
+    en: null,
+  });
 
   const { loadingButton, setLoadingButton, accessToken } = useGlobalHook();
 
-  // const [article_slug_en, article_slug_id] = watch([
-  //   "article_slug_en",
-  //   "article_slug_id",
-  // ]);
+  const [article_slug_en, article_slug_id] = watch([
+    "article_slug_en",
+    "article_slug_id",
+  ]);
+
+  // check slug article id
+  useDebauncedEffect({
+    fn: () => {
+      if (!article_slug_id) return;
+
+      if (!isFirstRender) {
+        if (article_slug_id) {
+          checkSlugArticleIdService(
+            { article_slug_id },
+            { accessToken, setPayloadCheckSlug }
+          );
+        }
+      }
+    },
+    deps: [article_slug_id],
+    delay: 1000,
+  });
+
+  // // check slug article en
+  useDebauncedEffect({
+    fn: () => {
+      if (!article_slug_en) return;
+
+      if (!isFirstRender) {
+        if (article_slug_en) {
+          checkSlugArticleEnService(
+            { article_slug_en },
+            { accessToken, setPayloadCheckSlug }
+          );
+        }
+      }
+    },
+    deps: [article_slug_en],
+    delay: 1000,
+  });
 
   // useDebauncedEffect({
   //   fn: () => {
   //     if (!article_slug_en && !article_slug_id) return;
 
-  //     checkSlugArticleService(
-  //       { article_slug_en, article_slug_id },
-  //       accessToken
-  //     );
+  //     if (!isFirstRender) {
+  //       if (article_slug_id) {
+  //         checkSlugArticleIdService(
+  //           { article_slug_id },
+  //           { accessToken, setPayloadCheckSlug }
+  //         );
+  //       }
+
+  //       if (article_slug_en) {
+  //         checkSlugArticleEnService(
+  //           { article_slug_en },
+  //           { accessToken, setPayloadCheckSlug }
+  //         );
+  //       }
+  //     }
   //   },
   //   deps: [article_slug_en, article_slug_id],
-  //   delay: 500,
+  //   delay: 1000,
   // });
 
   // set field slug
-  // const handleSetSlug = (titleField, valueTitleField) => {
-  //   const result = valueTitleField.toLowerCase().replace(/\s+/g, "-");
+  const handleSetSlug = (titleField, valueTitleField) => {
+    const result = valueTitleField.toLowerCase().replace(/\s+/g, "-");
 
-  //   if (titleField === "article_title_en") {
-  //     setValue("article_slug_en", result);
-  //   } else if (titleField === "article_title_id") {
-  //     setValue("article_slug_id", result);
-  //   }
-  // };
+    if (titleField === "article_title_en") {
+      setValue("article_slug_en", result);
+    } else if (titleField === "article_title_id") {
+      setValue("article_slug_id", result);
+    }
+
+    if (isFirstRender !== false) {
+      setIsFirstRender(false);
+    }
+  };
 
   useEffect(() => {
     const getImageDefault = configInput.filter(
@@ -162,8 +221,9 @@ const Form = ({
               >
                 <InputForm
                   data={data}
-                  // handleSetSlug={handleSetSlug}
+                  handleSetSlug={handleSetSlug}
                   key={index}
+                  payloadCheckSlug={payloadCheckSlug}
                   register={register}
                   imagePreview={imagePreview.find(
                     (item) => item.fieldName === data.name

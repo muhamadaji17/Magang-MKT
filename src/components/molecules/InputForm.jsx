@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AtomSelect, Button, Input } from "../atom";
 import { FaEyeSlash, FaUpload } from "react-icons/fa";
 import Editor from "../organism/Editor";
@@ -11,11 +11,13 @@ const InputForm = ({
   control,
   handleSetSlug,
   value,
+  payloadCheckSlug,
   error,
   imagePreview,
   handleFileChange,
 }) => {
   const [showPassword, setShowPassword] = useState(null);
+
   // const { fileName, setFileName, imagePreview, setImagePreview } = state;
   // const getImageDefault = data.type === "file" ? data.defaultValue : null;
   // const imageURL = `http://${getImageDefault}`;
@@ -165,6 +167,26 @@ const InputForm = ({
       {error[data.name] && (
         <small className="block text-[10px] mt-2 text-red-600">
           {error[data.name]?.message}
+        </small>
+      )}
+
+      {data.name === "article_slug_id" && (
+        <small
+          className={`block text-[10px] mt-2 ${
+            payloadCheckSlug?.id?.status ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {payloadCheckSlug?.id?.message}
+        </small>
+      )}
+
+      {data.name === "article_slug_en" && (
+        <small
+          className={`block text-[10px] mt-2 ${
+            payloadCheckSlug?.en?.status ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {payloadCheckSlug?.en?.message}
         </small>
       )}
     </>
