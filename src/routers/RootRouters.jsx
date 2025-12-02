@@ -24,6 +24,7 @@ import {
   ContactPage,
 } from "../pages";
 import { ProtectedRoute, PublicRoute } from "./Middleware";
+import GetOtpPage from "../pages/authPage/GetOtp";
 
 const RootRouters = () => {
   return (
@@ -49,6 +50,10 @@ const RootRouters = () => {
           <Route path="/role" element={<Roles />} />
         </Route>
         <Route path="/login" element={<PublicRoute element={<Login />} />} />
+        <Route
+          path="/change-password"
+          element={<PublicRoute element={<GetOtpPage />} />}
+        />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>

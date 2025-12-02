@@ -1,12 +1,13 @@
 /** @format */
 
 import { Form } from "../../components/molecules";
-import { handleSubmitData, loginPattern } from "../../pattern";
-import { loginService } from "../../service/authService,";
+import { handleSubmitData } from "../../pattern";
+import { otpService } from "../../service/authService,";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../../public/images/logo/LOGO RAIN COLOR.SVG";
+import { getOTPPattern } from "../../pattern/authPattern";
 
-const Login = () => {
+const GetOtpPage = () => {
   const navigate = useNavigate();
 
   return (
@@ -17,17 +18,17 @@ const Login = () => {
             <img src={Logo} alt="logo rain" className="w-40 mx-auto" />
           </div>
           <Form
-            configInput={loginPattern}
+            configInput={getOTPPattern}
             buttonText={"Login"}
             buttonClassName="bg-blue-900 hover:bg-blue-800"
             handleSubmitData={(data, extraOptionsForm) =>
-              handleSubmitData(data, loginService, {
+              handleSubmitData(data, otpService, {
                 navigate,
                 ...extraOptionsForm,
               })
             }
-            LinkForgetPassword={"/change-password"}
-            ForgetPassword={"Forgot Password ? "}
+            LinkForgetPassword={"/login"}
+            ForgetPassword={"Click here if you want Login"}
           />
         </div>
       </div>
@@ -35,4 +36,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default GetOtpPage;

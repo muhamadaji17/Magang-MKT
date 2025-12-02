@@ -1,6 +1,6 @@
 /** @format */
 
-import { loginService, logoutService } from "./authService,";
+import { loginService, logoutService, otpService } from "./authService,";
 import { generateEndpointWithQuery } from "./generateEndpointWithQuery";
 import { generateHeaders } from "./generateHeaders";
 import { getBannerService } from "./dashboardService/bannerService";
@@ -106,6 +106,7 @@ import {
   updateContactService,
 } from "./dashboardService/contactService";
 export {
+  otpService,
   getContactService,
   addContactService,
   updateContactService,

@@ -129,6 +129,13 @@ export const errorOptions = {
   sebagai_casting_film: {
     required: "Pemeran is Required",
   },
+  email: {
+    required: "E-Mail is Required",
+    pattern: {
+      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: "Invalid email format",
+    },
+  },
   sinopsis_casting_film_id: {
     required: "Deskripsi ID is Required ",
   },

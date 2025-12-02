@@ -20,6 +20,48 @@ export const loginService = async (data, extraOptions) => {
         icon: "success",
         text: response.data.message,
       });
+    } else {
+      SwalAlertBasic({
+        icon: "error",
+        text: response.data.message,
+      });
+    }
+  } catch (error) {
+    // console.error(error);
+
+    const dataError = error.response.data;
+
+    if (dataError.status === false && dataError.defaultPassword === true) {
+      navigate("/change-password");
+      SwalAlertBasic({
+        icon: "error",
+        text: dataError.message,
+      });
+    } else {
+      SwalAlertBasic({
+        icon: "error",
+        text: dataError.message,
+      });
+    }
+  }
+  setLoadingButton(false);
+};
+export const otpService = async (data, extraOptions) => {
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  const { navigate, setLoadingButton } = extraOptions;
+
+  try {
+    const response = await POST("auth/get-otp", data, headers);
+    if (response.data.status === true) {
+      // alert(response.data.message);
+      setCookies(response);
+      // navigate("/dashboard");
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
     } else if (response.data.status === false) {
       SwalAlertBasic({
         icon: "error",
