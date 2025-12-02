@@ -103,15 +103,23 @@ export const addFilmService = async (datas, extraOptions) => {
     setLoadingButton(false);
   } catch (error) {
     setLoadingButton(false);
-    // if (
-    //   error.response.data.status === false &&
-    //   error.response.data.message === "Unauthorized!"
-    // ) {
-    //   SwalAlertBasic({
-    //     icon: "error",
-    //     text: error.response.data.message,
-    //   });
-    // }
+    console.error(error);
+    if (error.response.status === 400) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
+
+    if (
+      error.response.data.status === false &&
+      error.response.data.message === "Unauthorized!"
+    ) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
   }
 };
 
@@ -152,15 +160,21 @@ export const updateFilmService = async (datas, extraOptions) => {
     setLoadingButton(false);
   } catch (error) {
     setLoadingButton(false);
-    // if (
-    //   error.response?.data?.status === false &&
-    //   error.response?.data?.message === "Unauthorized!"
-    // ) {
-    //   SwalAlertBasic({
-    //     icon: "error",
-    //     text: "Unauthorized!",
-    //   });
-    // }
+    if (error.response.status === 400) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
+    if (
+      error.response?.data?.status === false &&
+      error.response?.data?.message === "Unauthorized!"
+    ) {
+      SwalAlertBasic({
+        icon: "error",
+        text: "Unauthorized!",
+      });
+    }
   }
 };
 
@@ -182,14 +196,14 @@ export const deleteFilmService = async (id, extraOptions) => {
       });
     }
   } catch (error) {
-    // if (
-    //   error.response.data.status === false &&
-    //   error.response.data.message === "Unauthorized!"
-    // ) {
-    //   SwalAlertBasic({
-    //     icon: "error",
-    //     text: error.response.data.message,
-    //   });
-    // }
+    if (
+      error.response?.data?.status === false &&
+      error.response?.data?.message === "Unauthorized!"
+    ) {
+      SwalAlertBasic({
+        icon: "error",
+        text: "Unauthorized!",
+      });
+    }
   }
 };

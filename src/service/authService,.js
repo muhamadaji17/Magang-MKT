@@ -3,6 +3,7 @@
 import { POST } from "../api";
 import { SwalAlertBasic } from "../utils/alert";
 import { removeCookies, setCookies } from "./handleCookies";
+import Cookies from "js-cookie";
 
 export const loginService = async (data, extraOptions) => {
   const headers = {
@@ -75,6 +76,14 @@ export const otpService = async (data, extraOptions) => {
     // alert(error.response.data.message);
     // console.log(error);
     setLoadingButton(false);
+
+    if (error.code) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.message,
+      });
+    }
+
     if (error.response.data.status === false) {
       SwalAlertBasic({
         icon: "error",

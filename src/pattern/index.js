@@ -1,6 +1,6 @@
 /** @format */
 
-import { loginPattern } from "./authPattern";
+import { loginPattern, forgotPasswordPattern } from "./authPattern";
 import { navLink } from "./links";
 import { handleSubmitData } from "./handleSubmitData";
 import { handleSearch } from "./handleSearch";
@@ -75,6 +75,7 @@ import {
 export {
   inputEditContact,
   inputAddContact,
+  forgotPasswordPattern,
   configTableContact,
   inputEditContactCategory,
   inputAddContactCategory,

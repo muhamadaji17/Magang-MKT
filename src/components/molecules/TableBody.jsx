@@ -54,7 +54,7 @@ const TableBody = ({
                   >
                     <img
                       className="w-20 h-28 "
-                      src={`http://${data[col.key]}`}
+                      src={`https://${data[col.key]}`}
                     />
                   </div>
                 ) : col.key === "trailer_film" || col.key === "contact_url" ? (

@@ -65,6 +65,10 @@ const Card = ({
               <FaRegTrashAlt />
             </Button>
           </div>
+
+          <span className={`${status ? "text-green-500" : "text-red-500"}`}>
+            {status ? "Active" : "Inactive"}
+          </span>
         </div>
       </div>
     </div>

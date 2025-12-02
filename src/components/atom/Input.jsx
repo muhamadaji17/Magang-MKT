@@ -25,15 +25,15 @@ const Input = ({
       defaultValue={""}
       render={({ field }) => (
         <TextField
-          {...field} // penting! membawa onChange, value, name, onBlur
+          {...field}
           onChange={(e) => {
-            field.onChange(e); // tetap update input title
-            // const value = e.target.value;
+            field.onChange(e);
+            const value = e.target.value;
 
             // // isi form lain (slug)
-            // if (name === "article_title_en" || name === "article_title_id") {
-            //   handleSetSlug(name, value);
-            // }
+            if (name === "article_title_en" || name === "article_title_id") {
+              handleSetSlug(name, value);
+            }
           }}
           id="outlined-basic"
           label={label}
@@ -65,10 +65,10 @@ const Input = ({
           InputProps={type ? { disableUnderline: true } : {}}
           onWheel={(e) => e.target.blur()}
           disabled={disabled}
+          type={type}
           className={`w-full ${className}`}
           multiline={multiline}
           rows={rows}
-          // Hati-hati: props terakhir jangan menimpa value/onChange dari RHF
           {...props}
         />
       )}

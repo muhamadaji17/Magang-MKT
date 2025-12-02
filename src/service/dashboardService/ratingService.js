@@ -1,6 +1,5 @@
 /** @format */
 
-import { set } from "react-hook-form";
 import { DELETE, GET, POST, PUT } from "../../api";
 import { SwalAlertBasic } from "../../utils";
 import { generateEndpointWithQuery } from "../generateEndpointWithQuery";

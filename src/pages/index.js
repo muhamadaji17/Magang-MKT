@@ -1,6 +1,7 @@
 /** @format */
 
 import Login from "./authPage/Login";
+import ForgotPassword from "./authPage/ForgotPassword";
 import Home from "./dashboard/Home";
 import Banner from "./dashboard/Banner";
 import About from "./dashboard/About";
@@ -24,6 +25,7 @@ export {
   ContactPage,
   DetailFilmPage,
   Login,
+  ForgotPassword,
   Home,
   PageNotFound,
   Banner,

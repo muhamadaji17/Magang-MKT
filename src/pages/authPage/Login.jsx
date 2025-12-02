@@ -3,8 +3,8 @@
 import { Form } from "../../components/molecules";
 import { handleSubmitData, loginPattern } from "../../pattern";
 import { loginService } from "../../service/authService,";
-import { useNavigate } from "react-router-dom";
-import Logo from "../../../public/images/logo/LOGO RAIN COLOR.SVG";
+import { Link, useNavigate } from "react-router-dom";
+import Logo from "../../../public/images/logo/LOGO RAIN IJOBIRU.SVG";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,6 +29,12 @@ const Login = () => {
             LinkForgetPassword={"/change-password"}
             ForgetPassword={"Forgot Password ? "}
           />
+
+          <div className="text-center mt-2 text-sm">
+            <Link to={"/forgot-password"} className="hover:underline">
+              Reset Your Password
+            </Link>
+          </div>
         </div>
       </div>
     </div>
