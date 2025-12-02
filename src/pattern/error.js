@@ -3,10 +3,6 @@
 export const errorOptions = {
   username: {
     required: "Username is Required",
-    minLength: {
-      value: 5,
-      message: "Username must be at least 5 characters",
-    },
   },
   is_main_cast: {
     required: "is_main_cast is Required",
@@ -22,11 +18,14 @@ export const errorOptions = {
 
   password: {
     required: "Password is Required",
-    minLength: {
-      value: 4,
-      message: "Password must be at least 4 characters",
-    },
   },
+
+  confirm_password: (getValues) => ({
+    required: "Konfirmasi password wajib diisi",
+    validate: (value) =>
+      value === getValues("password") ||
+      "Password and confirm password does not match",
+  }),
 
   title_about: {
     required: "Title is Required",
@@ -300,5 +299,13 @@ export const errorOptions = {
   },
   code_rating: {
     required: "Code Rating is Required",
+  },
+  email: {
+    required: "Email is Required",
+    pattern: {
+      value:
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      message: "Invalid email address",
+    },
   },
 };

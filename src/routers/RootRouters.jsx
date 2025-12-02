@@ -22,6 +22,7 @@ import {
   Rating,
   ContactCategoryPage,
   ContactPage,
+  ForgotPassword,
 } from "../pages";
 import { ProtectedRoute, PublicRoute } from "./Middleware";
 
@@ -49,6 +50,10 @@ const RootRouters = () => {
           <Route path="/role" element={<Roles />} />
         </Route>
         <Route path="/login" element={<PublicRoute element={<Login />} />} />
+        <Route
+          path="/forgot-password"
+          element={<PublicRoute element={<ForgotPassword />} />}
+        />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>

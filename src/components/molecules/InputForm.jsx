@@ -1,6 +1,6 @@
 /** @format */
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { AtomSelect, Button, Input } from "../atom";
 import { FaEyeSlash, FaUpload } from "react-icons/fa";
 import Editor from "../organism/Editor";
@@ -10,6 +10,7 @@ const InputForm = ({
   register,
   control,
   handleSetSlug,
+  getValues,
   value,
   payloadCheckSlug,
   error,
@@ -109,7 +110,7 @@ const InputForm = ({
           {...register(data.name, data.optionError)}
           id={data.name}
           rows={data.rows}
-          className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 "
+          className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
       ) : data.type === "hidden" ? (
         <input
@@ -117,12 +118,16 @@ const InputForm = ({
           name={data.name}
           value={data.value}
           {...register(data.name)}
-          className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 "
+          className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
       ) : (
         <Input
           type={!showPassword ? data.type : "text"}
-          addOptionError={data.optionError}
+          addOptionError={
+            typeof data.optionError === "function"
+              ? data.optionError(getValues)
+              : data.optionError
+          }
           id={data.name}
           label={data.labelText}
           name={data.name}

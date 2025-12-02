@@ -1,8 +1,8 @@
 import { Form } from "../../components/molecules";
 import { handleSubmitData, loginPattern } from "../../pattern";
 import { loginService } from "../../service/authService,";
-import { useNavigate } from "react-router-dom";
-import Logo from "../../../public/images/logo/LOGO RAIN COLOR.SVG";
+import { Link, useNavigate } from "react-router-dom";
+import Logo from "../../../public/images/logo/LOGO RAIN IJOBIRU.SVG";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,11 +12,6 @@ const Login = () => {
       <div className="flex justify-center items-center p-10 bg-white/10 backdrop-blur-sm text-white w-96 rounded-xl">
         <div className="w-full">
           <div className="text-center mb-7">
-            {/* <h2 className="text-2xl font-semibold text-center">Welcome</h2>
-            <span className="text-gray-400 mt-4 text-xs">
-              Please login first
-            </span> */}
-
             <img src={Logo} alt="logo rain" className="w-40 mx-auto" />
           </div>
           <Form
@@ -30,6 +25,12 @@ const Login = () => {
               })
             }
           />
+
+          <div className="text-center mt-2 text-sm">
+            <Link to={"/forgot-password"} className="hover:underline">
+              Reset Your Password
+            </Link>
+          </div>
         </div>
       </div>
     </div>

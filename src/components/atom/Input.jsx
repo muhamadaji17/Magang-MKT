@@ -6,7 +6,6 @@ const Input = ({
   name,
   addOptionError,
   label,
-
   onFocus,
   className,
   disabled,
@@ -26,9 +25,9 @@ const Input = ({
       defaultValue={""}
       render={({ field }) => (
         <TextField
-          {...field} // penting! membawa onChange, value, name, onBlur
+          {...field}
           onChange={(e) => {
-            field.onChange(e); // tetap update input title
+            field.onChange(e);
             const value = e.target.value;
 
             // // isi form lain (slug)
@@ -70,7 +69,6 @@ const Input = ({
           className={`w-full ${className}`}
           multiline={multiline}
           rows={rows}
-          // Hati-hati: props terakhir jangan menimpa value/onChange dari RHF
           {...props}
         />
       )}

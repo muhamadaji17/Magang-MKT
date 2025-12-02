@@ -40,6 +40,7 @@ const Form = ({
     handleSubmit,
     watch,
     control,
+    getValues,
     reset,
     setValue,
     formState: { errors },
@@ -229,6 +230,7 @@ const Form = ({
                     (item) => item.fieldName === data.name
                   )}
                   control={control}
+                  getValues={getValues}
                   handleFileChange={handleFileChange}
                   rows={5}
                   error={errors}
