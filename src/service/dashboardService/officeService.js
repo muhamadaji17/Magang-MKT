@@ -1,3 +1,5 @@
+/** @format */
+
 import { DELETE, GET, POST, PUT } from "../../api";
 import { generateHeaders, generateEndpointWithQuery } from "../";
 import { SwalAlertBasic } from "../../utils";
@@ -26,12 +28,12 @@ export const getOfficeService = async (accessToken, extraOptions) => {
     }));
 
     setDatasOffice(parsing);
-    if (setRefreshData) {
-      setRefreshData(true);
-    }
+    // if (setRefreshData) {
+    // }
   } catch (error) {
     console.error(error);
   }
+  setRefreshData(true);
 };
 
 export const addOfficeService = async (datas, extraOptions) => {
@@ -49,7 +51,6 @@ export const addOfficeService = async (datas, extraOptions) => {
       });
       handleCloseModal();
       setLoadingButton(false);
-      setRefreshData(false);
     }
   } catch (error) {
     console.error(error);
@@ -57,6 +58,7 @@ export const addOfficeService = async (datas, extraOptions) => {
     if (error.response.data.message) {
       SwalAlertBasic({ icon: "error", text: error.response.data.message });
     }
+    setRefreshData(false);
   }
 };
 
@@ -73,17 +75,17 @@ export const updateOfficeService = async (datas, extraOptions) => {
         icon: "success",
         text: response.data.message,
       });
-      handleCloseModal();
-      setLoadingButton(false);
-      setRefreshData(false);
     }
   } catch (error) {
-    setLoadingButton(false);
+    // setLoadingButton(false);
     if (error.response.data.message) {
       SwalAlertBasic({ icon: "error", text: error.response.data.message });
     }
     console.error(error);
   }
+  handleCloseModal();
+  setLoadingButton(false);
+  setRefreshData(false);
 };
 
 export const deleteOfficeService = async (id, extraOptions) => {

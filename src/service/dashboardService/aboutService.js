@@ -1,3 +1,5 @@
+/** @format */
+
 import { DELETE, GET, POST, PUT } from "../../api";
 import { SwalAlertBasic } from "../../utils";
 import { generateHeaders } from "../generateHeaders";
@@ -32,10 +34,10 @@ export const addAboutService = async (datas, extraOptions) => {
       setLoadingButton(false);
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     setLoadingButton(false);
-    if (error.response.data.message) {
-      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    if (error.response.data.error) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.error[0] });
     }
   }
 };

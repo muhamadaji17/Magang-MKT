@@ -84,6 +84,9 @@ export const errorOptions = {
   produser_film: {
     required: "Produser Film is Required",
   },
+  language_film: {
+    required: "Language Film is Required",
+  },
   produksi_film: {
     required: "Prodution House Film is Required",
   },
@@ -124,6 +127,13 @@ export const errorOptions = {
   },
   sebagai_casting_film: {
     required: "Pemeran is Required",
+  },
+  email: {
+    required: "E-Mail is Required",
+    pattern: {
+      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: "Invalid email format",
+    },
   },
   sinopsis_casting_film_id: {
     required: "Deskripsi ID is Required ",

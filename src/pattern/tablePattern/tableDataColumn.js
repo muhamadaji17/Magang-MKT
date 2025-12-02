@@ -165,16 +165,16 @@ export const configTableRole = [
     key: "priority",
     type: "number",
   },
-  {
-    title: "Status",
-    key: "status",
-    type: "select",
-    placeholder: "Select Status",
-    options: [
-      { label: "Active", value: true },
-      { label: "Inactive", value: false },
-    ],
-  },
+  // {
+  //   title: "Status",
+  //   key: "status",
+  //   type: "select",
+  //   placeholder: "Select Status",
+  //   options: [
+  //     { label: "Active", value: true },
+  //     { label: "Inactive", value: false },
+  //   ],
+  // },
 ];
 
 export const configTableArticleCategories = [

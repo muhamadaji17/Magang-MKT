@@ -57,14 +57,14 @@ const TableBody = ({
                       src={`https://${data[col.key]}`}
                     />
                   </div>
-                ) : col.key === "trailer_film" ? (
+                ) : col.key === "trailer_film" || col.key === "contact_url" ? (
                   <Link
                     to={data[col.key]}
                     target="_blank"
                     className=" bg-blue-500 px-3 py-2 text-white rounded-md hover:bg-blue-600"
                   >
                     {/* {data[col.key]} */}
-                    Preview Trailer
+                    Preview
                   </Link>
                 ) : col.key === "sinopsis_film_id" ? (
                   // <div className="max-w-96">

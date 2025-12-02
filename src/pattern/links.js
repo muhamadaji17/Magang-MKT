@@ -14,7 +14,7 @@ export const navLink = [
   { text: "Dashboard", path: "/dashboard", icon: LuLayoutDashboard },
   { text: "About", path: "/about", icon: PiSealWarning },
   { text: "Films", path: "/films", icon: PiFilmReel },
-  { text: "Banner", path: "/banner", icon: IoImageOutline },
+  // { text: "Banner", path: "/banner", icon: IoImageOutline },
   {
     text: "Office",
     path: "/office",

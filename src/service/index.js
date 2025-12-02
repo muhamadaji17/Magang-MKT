@@ -107,6 +107,7 @@ import {
   updateContactService,
 } from "./dashboardService/contactService";
 export {
+  otpService,
   getContactService,
   addContactService,
   updateContactService,
@@ -122,7 +123,6 @@ export {
   getRatingService,
   getFilmByIdService,
   loginService,
-  otpService,
   logoutService,
   generateEndpointWithQuery,
   generateHeaders,

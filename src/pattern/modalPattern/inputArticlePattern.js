@@ -1,3 +1,5 @@
+/** @format */
+
 import { errorOptions } from "../error";
 
 export const inputAddArticle = (articleCategory) => [
@@ -196,6 +198,13 @@ export const inputAddArticleCategories = [
     name: "article_category_name_id",
     type: "text",
     optionError: errorOptions.category_name,
+    grid: 12,
+  },
+  {
+    labelText: "Category Name ID",
+    name: "article_category_name_id",
+    type: "text",
+    // optionError: errorOptions.category_name,
     grid: 12,
   },
 ];

@@ -2,11 +2,9 @@
 
 import { useEffect } from "react";
 import {
-  handleDeleteAbout,
   getFilmByIdService,
   addCastingFilmService,
   updateCastingFilmService,
-  deleteFilmService,
   deleteCastingFilmService,
 } from "../../service";
 import { useData, useGlobalHook } from "../../hook";
@@ -26,8 +24,6 @@ const DetailFilmPage = () => {
     dataRow,
     submitType,
     handleCloseModal,
-    stateShowModal,
-    setSearchQuery,
     handleOpenModal,
     isModalOpen,
     setDataRow,
@@ -92,7 +88,7 @@ const DetailFilmPage = () => {
                           : "/images/poster/one-outs.jpg"
                       }
                       className="
-            w-full h-60 object-cover transition-transform duration-500
+            w-full h-90  transition-transform duration-500
           "
                     />
 
@@ -107,7 +103,9 @@ const DetailFilmPage = () => {
                         {c.nama_casting_film}
                       </h1>
 
-                      <small className="text-gray-600">Melati</small>
+                      <small className="text-gray-600">
+                        {c.sebagai_casting_film || ""}
+                      </small>
                     </div>
 
                     {/* Footer */}

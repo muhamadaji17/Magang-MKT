@@ -1,3 +1,5 @@
+/** @format */
+
 import { useGlobalHook } from "../useGlobalHook";
 import { getCityService, getOfficeService } from "../../service";
 
@@ -17,10 +19,16 @@ export const useOfficeHook = () => {
     submitType,
     isLoading,
     setIsLoading,
+    setLoadingButton,
   } = useGlobalHook();
   const { datasOffice, setDatasOffice, datasCity, setDatasCity } = useData();
 
-  const extraOptions = { accessToken, setRefreshData, handleCloseModal };
+  const extraOptions = {
+    accessToken,
+    setRefreshData,
+    handleCloseModal,
+    setLoadingButton,
+  };
 
   useDebauncedEffect({
     fn: () => {

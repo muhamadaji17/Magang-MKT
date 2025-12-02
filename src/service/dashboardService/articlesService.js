@@ -159,6 +159,7 @@ export const getArticleCategoryService = async (accessToken, extraOptions) => {
     );
     const payload = response.data.payload.map((data) => ({
       ...data,
+
       label: data?.article_category_name_en?.replace(/^\w/, (m) =>
         m.toUpperCase()
       ),

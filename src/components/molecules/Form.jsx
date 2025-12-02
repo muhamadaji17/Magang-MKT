@@ -6,6 +6,7 @@ import { Button, LoadingButton } from "../atom";
 import { useForm } from "react-hook-form";
 import { useGlobalHook } from "../../hook/useGlobalHook";
 import { useDebauncedEffect } from "../../hook/useDebouncedEffect";
+import { Link } from "react-router-dom";
 import {
   checkSlugArticleEnService,
   checkSlugArticleIdService,
@@ -34,6 +35,8 @@ const Form = ({
   handleShowSidebar,
   dataDefault,
   handleOpenModal,
+  ForgetPassword,
+  LinkForgetPassword,
 }) => {
   const {
     register,
@@ -94,30 +97,6 @@ const Form = ({
     deps: [article_slug_en],
     delay: 1000,
   });
-
-  // useDebauncedEffect({
-  //   fn: () => {
-  //     if (!article_slug_en && !article_slug_id) return;
-
-  //     if (!isFirstRender) {
-  //       if (article_slug_id) {
-  //         checkSlugArticleIdService(
-  //           { article_slug_id },
-  //           { accessToken, setPayloadCheckSlug }
-  //         );
-  //       }
-
-  //       if (article_slug_en) {
-  //         checkSlugArticleEnService(
-  //           { article_slug_en },
-  //           { accessToken, setPayloadCheckSlug }
-  //         );
-  //       }
-  //     }
-  //   },
-  //   deps: [article_slug_en, article_slug_id],
-  //   delay: 1000,
-  // });
 
   // set field slug
   const handleSetSlug = (titleField, valueTitleField) => {
@@ -200,7 +179,7 @@ const Form = ({
         onSubmit={handleSubmit(onSubmit)}
         className={`${className || ""} `}
       >
-        <div className="grid grid-cols-12 gap-x-4">
+        <div className="grid grid-cols-12">
           {configInput.map((data, index) => {
             const value = watch(data.name);
             return (
@@ -217,7 +196,7 @@ const Form = ({
                     : data.grid === 12
                     ? "md:col-span-12 col-span-12"
                     : "col-span-12"
-                } w-full mb-5 relative`}
+                } w-full mb-2 relative`}
                 key={index}
               >
                 <InputForm
@@ -240,6 +219,16 @@ const Form = ({
             );
           })}
         </div>
+        {LinkForgetPassword && (
+          <div className="mb-5">
+            <Link
+              to={`${LinkForgetPassword ? LinkForgetPassword : "#"}`}
+              className="hover:underline hover:text-blue-600 text-blue-500 underline text-sm"
+            >
+              {ForgetPassword}
+            </Link>
+          </div>
+        )}
 
         {forType === "sidebar" ? (
           <div className="flex gap-32 items-center w-full absolute bottom-5">

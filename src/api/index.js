@@ -1,4 +1,7 @@
+/** @format */
+
 import axios from "axios";
+import { SwalAlertBasic } from "../../../../../dashboard-festival/src/utils";
 
 export const POST = (endpoint, data, headers) => {
   return axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, data, {
@@ -6,13 +9,28 @@ export const POST = (endpoint, data, headers) => {
   });
 };
 
-export const GET = (endpoint, accessToken) => {
-  return axios.get(`${import.meta.env.VITE_API_URL}/${endpoint}`, {
-    headers: {
-      "Content-Type": "application/json",
-      "x-access-token": `mktech ${accessToken}`,
-    },
-  });
+export const GET = async (endpoint, accessToken) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/${endpoint}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": `mktech ${accessToken}`,
+        },
+      }
+    );
+
+    return response;
+  } catch (error) {
+    if (error.response.status === 403 || error.response.status === 401) {
+      SwalAlertBasic({
+        icon: "warning",
+        title: "Unauthorized",
+        text: error.response.data.errors[0].message,
+      });
+    }
+  }
 };
 
 export const PUT = (endpoint, data, headers) => {

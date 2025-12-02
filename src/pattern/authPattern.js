@@ -1,3 +1,5 @@
+/** @format */
+
 import { FaEye } from "react-icons/fa";
 import { errorOptions } from "./error";
 
@@ -134,6 +136,7 @@ export const forgotPasswordPattern = [
     type: "password",
     labelText: "Confirm Password",
     grid: 12,
+    optionError: errorOptions.confirm_password,
     icon: FaEye,
     sx: {
       "& .MuiOutlinedInput-root": {
@@ -158,6 +161,5 @@ export const forgotPasswordPattern = [
         color: "#aaa", // warna label saat fokus
       },
     },
-    optionError: errorOptions.confirm_password,
   },
 ];
