@@ -1,7 +1,7 @@
 /** @format */
 
 import axios from "axios";
-import { SwalAlertBasic } from "../../../../../dashboard-festival/src/utils";
+import { SwalAlertBasic } from "../utils";
 
 export const POST = (endpoint, data, headers) => {
   return axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, data, {

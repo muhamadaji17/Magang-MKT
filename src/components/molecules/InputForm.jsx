@@ -139,6 +139,7 @@ const InputForm = ({
           min={data.min}
           sx={data.sx}
           placeholder={data.placeholder}
+          size={data.size}
         />
       )}
 

@@ -23,7 +23,7 @@ const ConfirmDelete = ({ handleCloseModal, onConfirm, dataRow }) => {
             <Button
               className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
               onClick={() => {
-                onConfirm(dataRow, { type: "delete" });
+                onConfirm(dataRow, { type: "delete", setLoadingButton });
                 setLoadingButton(true);
               }}
             >

@@ -24,6 +24,7 @@ import {
   configTableArticleCategories,
   configTableCategoryContact,
   configTableContact,
+  configTableSubscribers,
 } from "./tablePattern/tableDataColumn";
 
 import {
@@ -72,7 +73,10 @@ import {
   inputAddContact,
   inputEditContact,
 } from "./modalPattern/inputContactPattern";
+import { inputEditSubscribers } from "./modalPattern/inputSubscribersPattern";
+
 export {
+  inputEditSubscribers,
   inputEditContact,
   inputAddContact,
   forgotPasswordPattern,
@@ -120,4 +124,5 @@ export {
   configTableRole,
   configTableArticleCategories,
   configTableRating,
+  configTableSubscribers,
 };

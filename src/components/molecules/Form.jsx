@@ -196,7 +196,7 @@ const Form = ({
                     : data.grid === 12
                     ? "md:col-span-12 col-span-12"
                     : "col-span-12"
-                } w-full mb-2 relative`}
+                } w-full mb-4 relative`}
                 key={index}
               >
                 <InputForm

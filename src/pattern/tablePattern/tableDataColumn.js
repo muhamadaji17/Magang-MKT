@@ -223,6 +223,14 @@ export const configTableRating = [
   },
 ];
 
+export const configTableSubscribers = [
+  {
+    title: "Email",
+    key: "email",
+    type: "text",
+  },
+];
+
 export const dayNames = [
   { title: "Sunday" },
   { title: "Monday" },

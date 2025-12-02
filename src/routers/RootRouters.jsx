@@ -23,6 +23,7 @@ import {
   ContactCategoryPage,
   ContactPage,
   ForgotPassword,
+  SubscribersPage,
 } from "../pages";
 import { ProtectedRoute, PublicRoute } from "./Middleware";
 
@@ -48,6 +49,7 @@ const RootRouters = () => {
           <Route path="/contact-categories" element={<ContactCategoryPage />} />
           <Route path="/user" element={<User />} />
           <Route path="/role" element={<Roles />} />
+          <Route path="/subscribers" element={<SubscribersPage />} />
         </Route>
         <Route path="/login" element={<PublicRoute element={<Login />} />} />
         <Route

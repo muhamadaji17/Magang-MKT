@@ -26,15 +26,15 @@ const Login = () => {
                 ...extraOptionsForm,
               })
             }
-            LinkForgetPassword={"/change-password"}
+            LinkForgetPassword={"/forgot-password"}
             ForgetPassword={"Forgot Password ? "}
           />
 
-          <div className="text-center mt-2 text-sm">
+          {/* <div className="text-center mt-2 text-sm">
             <Link to={"/forgot-password"} className="hover:underline">
               Reset Your Password
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

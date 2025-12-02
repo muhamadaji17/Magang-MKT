@@ -106,7 +106,13 @@ import {
   getContactService,
   updateContactService,
 } from "./dashboardService/contactService";
+import { getSubscribersService } from "./dashboardService/subscribersService";
+import {
+  handleEditSubscribers,
+  handleDeleteSubscribers,
+} from "./handlers/subscribershandlers";
 export {
+  getSubscribersService,
   otpService,
   getContactService,
   addContactService,
@@ -176,4 +182,6 @@ export {
   handleAddRating,
   handleEditRating,
   handleDeleteRating,
+  handleEditSubscribers,
+  handleDeleteSubscribers,
 };

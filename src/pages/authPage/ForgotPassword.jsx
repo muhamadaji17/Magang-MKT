@@ -28,7 +28,7 @@ const ForgotPassword = () => {
             <Form
               configInput={forgotPasswordPattern}
               buttonText={"Reset Password"}
-              buttonClassName="bg-blue-900 hover:bg-blue-800"
+              buttonClassName="bg-blue-900 hover:bg-blue-800 mt-2"
               handleSubmitData={(data, extraOptionsForm) => {
                 handleSubmitData(data, otpService, {
                   ...extraOptionsForm,
