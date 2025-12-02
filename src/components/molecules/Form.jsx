@@ -276,8 +276,6 @@ const Form = ({
             className={`bg-blue-600 rounded-sm py-2 w-full text-center text-white cursor-pointer hover:bg-blue-700 ${buttonClassName}`}
             type="submit"
           >
-            {/* {buttonText} */}
-
             {loadingButton ? <LoadingButton /> : buttonText}
           </Button>
         )}
