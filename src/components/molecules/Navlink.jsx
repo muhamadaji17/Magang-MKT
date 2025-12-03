@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import Accordion from "./Accordion";
 
 const Navlink = ({ links, className, currentPath, handleCloseSidebar }) => {
+  // links.map((link) => {
+  //   console.log(currentPath.startsWith(link.path));
+  // });
+
   return (
     <ul className={`${className} list-none`}>
       {links.map((link, index) =>

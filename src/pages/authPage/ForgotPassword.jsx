@@ -5,10 +5,10 @@ import { Form } from "../../components/molecules";
 import { forgotPasswordPattern, handleSubmitData } from "../../pattern";
 import { OtpInput } from "../../components/atom";
 import { useState } from "react";
-import { otpService } from "../../service";
+import { getOtpService } from "../../service";
 
 const ForgotPassword = () => {
-  const [type, setType] = useState(Cookies.get("type") || "form");
+  const [type, setType] = useState(Cookies.get("type") || "otp");
 
   const handleRemoveCookies = () => {
     const cookiesToRemove = ["datas", "type"]; // Array of cookie names to remove
@@ -30,7 +30,7 @@ const ForgotPassword = () => {
               buttonText={"Reset Password"}
               buttonClassName="bg-blue-900 hover:bg-blue-800 mt-2"
               handleSubmitData={(data, extraOptionsForm) => {
-                handleSubmitData(data, otpService, {
+                handleSubmitData(data, getOtpService, {
                   ...extraOptionsForm,
                   setType,
                 });

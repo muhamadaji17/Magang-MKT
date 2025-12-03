@@ -229,6 +229,16 @@ export const configTableSubscribers = [
     key: "email",
     type: "text",
   },
+  {
+    title: "Status",
+    key: "status",
+    type: "select",
+    placeholder: "Select Status",
+    options: [
+      { label: "Active", value: true },
+      { label: "Inactive", value: false },
+    ],
+  },
 ];
 
 export const dayNames = [

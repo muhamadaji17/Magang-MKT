@@ -1,8 +1,11 @@
-import { useEffect } from "react";
 import { HeaderContent } from "../../components/molecules";
 import { Table } from "../../components/organism";
 import { useData, useDebauncedEffect, useGlobalHook } from "../../hook";
-import { configTableSubscribers, inputEditSubscribers } from "../../pattern";
+import {
+  configTableSubscribers,
+  handleSearch,
+  inputEditSubscribers,
+} from "../../pattern";
 import {
   getSubscribersService,
   handleDeleteSubscribers,
@@ -54,7 +57,7 @@ const SubscribersPage = () => {
         stateShowModal={stateShowModal}
         title={"Subscribers"}
         isLoading={isLoading}
-        // handleSearch={handleSearch(setSearchQuery)}
+        handleSearch={handleSearch(setSearchQuery)}
         inputForm={inputEditSubscribers(dataRow)}
         submitType={submitType}
         handleService={

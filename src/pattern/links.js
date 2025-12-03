@@ -51,7 +51,8 @@ export const navLink = [
     icon: HiOutlineLockClosed,
     submenus: [
       { text: "User", path: "/user" },
-      { text: "Role", path: "/role" },
+      { text: "Role", path: "/roles" },
+      { text: "Role Menu", path: "/role-menu" },
       { text: "Subscribers", path: "/subscribers" },
     ],
   },

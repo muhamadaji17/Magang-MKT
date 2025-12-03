@@ -47,22 +47,22 @@ export const loginService = async (data, extraOptions) => {
   }
   setLoadingButton(false);
 };
-export const otpService = async (data, extraOptions) => {
+export const getOtpService = async (data, extraOptions) => {
   const headers = {
     "Content-Type": "application/json",
   };
-  const { navigate, setLoadingButton } = extraOptions;
+  const { setLoadingButton, setType } = extraOptions;
 
   try {
     const response = await POST("auth/get-otp", data, headers);
     if (response.data.status === true) {
-      // alert(response.data.message);
-      setCookies(response);
-      // navigate("/dashboard");
+      // setCookies(response);
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
       });
+      setType("otp");
+      Cookies.set("datas", JSON.stringify(data));
     } else if (response.data.status === false) {
       SwalAlertBasic({
         icon: "error",
@@ -77,6 +77,48 @@ export const otpService = async (data, extraOptions) => {
     // console.log(error);
     setLoadingButton(false);
 
+    if (error.code) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.message,
+      });
+    }
+
+    if (error.response.data.status === false) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
+  }
+};
+
+export const setPasswordService = async (data, extraOptions) => {
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  const { setLoadingButton, navigate, handleRemoveCookies } = extraOptions;
+
+  try {
+    const response = await POST("auth/set-pass", data, headers);
+
+    if (response.data.status === true) {
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
+      navigate("/login");
+      handleRemoveCookies();
+    } else if (response.data.status === false) {
+      SwalAlertBasic({
+        icon: "error",
+        text: response.data.message,
+      });
+    }
+    setLoadingButton(false);
+  } catch (error) {
+    console.error(error);
+    setLoadingButton(false);
     if (error.code) {
       SwalAlertBasic({
         icon: "error",
