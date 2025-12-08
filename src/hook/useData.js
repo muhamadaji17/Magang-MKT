@@ -20,8 +20,11 @@ export const useData = () => {
   const [datasDetailArticles, setDatasDetailArticles] = useState({});
   const [datasSubscribers, setDatasSubscribers] = useState([]);
   const [datasRoleMenu, setDatasRoleMenu] = useState([]);
+  const [dataMenu, setDataMenu] = useState([]);
 
   return {
+    dataMenu,
+    setDataMenu,
     datasContact,
     setDatasContact,
     datasContactCategory,

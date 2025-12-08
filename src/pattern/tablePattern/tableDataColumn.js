@@ -77,6 +77,12 @@ export const configTableCity = [
     ],
   },
 ];
+export const configTableMenu = [
+  { title: "Menu Name", key: "menu_name", type: "text" },
+  { title: "Menu URL", key: "menu_url", type: "text" },
+  { title: "Parrent Name", key: "parrent_name", type: "text" },
+  { title: "Menu Icon", key: "logo", type: "text" },
+];
 
 export const configTableOffice = [
   { title: "Office Name", key: "office_name", type: "text" },

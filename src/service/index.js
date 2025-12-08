@@ -117,11 +117,19 @@ import {
   handleDeleteSubscribers,
 } from "./handlers/subscribershandlers";
 import { getRoleMenuService } from "./dashboardService/roleMenuService";
+import {
+  addMenuService,
+  getMenuService,
+  updateMenuService,
+} from "./dashboardService/menuService";
 export {
   getRoleMenuService,
   getSubscribersService,
   getOtpService,
   setPasswordService,
+  updateMenuService,
+  addMenuService,
+  getMenuService,
   getContactService,
   addContactService,
   updateContactService,

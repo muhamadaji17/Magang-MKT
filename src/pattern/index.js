@@ -27,6 +27,7 @@ import {
   configTableSubscribers,
   configTableRating,
   configTableRoleMenu,
+  configTableMenu,
 } from "./tablePattern/tableDataColumn";
 
 import {
@@ -75,8 +76,12 @@ import {
   inputEditContact,
 } from "./modalPattern/inputContactPattern";
 import { inputEditSubscribers } from "./modalPattern/inputSubscribersPattern";
+import { inputAddMenu, inputEditMenu } from "./modalPattern/inputMenuPattren";
 
 export {
+  inputAddMenu,
+  inputEditMenu,
+  configTableMenu,
   inputEditSubscribers,
   inputEditContact,
   inputAddContact,

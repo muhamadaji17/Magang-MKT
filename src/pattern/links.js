@@ -54,6 +54,8 @@ export const navLink = [
       { text: "Roles", path: "/roles" },
       { text: "Role Menu", path: "/role-menu" },
       { text: "Subscribers", path: "/subscribers" },
+      { text: "Role", path: "/role" },
+      { text: "Menu", path: "/menu" },
     ],
   },
 ];

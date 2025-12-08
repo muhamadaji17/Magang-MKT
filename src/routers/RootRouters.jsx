@@ -25,6 +25,7 @@ import {
   ForgotPassword,
   SubscribersPage,
   RoleMenuPage,
+  MenuPage,
 } from "../pages";
 import { ProtectedRoute, PublicRoute } from "./Middleware";
 
@@ -52,6 +53,8 @@ const RootRouters = () => {
           <Route path="/roles" element={<Roles />} />
           <Route path="/subscribers" element={<SubscribersPage />} />
           <Route path="/role-menu" element={<RoleMenuPage />} />
+          <Route path="/role" element={<Roles />} />
+          <Route path="/menu" element={<MenuPage />} />
         </Route>
         <Route path="/login" element={<PublicRoute element={<Login />} />} />
         <Route
