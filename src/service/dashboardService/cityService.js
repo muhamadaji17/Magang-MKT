@@ -82,7 +82,8 @@ export const updateCityService = async (datas, extraOptions) => {
 };
 
 export const deleteCityService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   try {
     const response = await DELETE("crud/city", accessToken, id);
     if (response.data.success) {
@@ -94,7 +95,12 @@ export const deleteCityService = async (id, extraOptions) => {
       setRefreshData(false);
     }
     console.log(response);
+    setLoadingButton(false);
   } catch (error) {
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
     console.error("Delete Failed:", error);
     throw error;
   }

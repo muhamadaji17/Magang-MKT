@@ -22,7 +22,7 @@ const Roles = () => {
 
   return (
     <>
-      <HeaderContent title={"Role"} handleOpen={stateShowModal.handleShow} />
+      <HeaderContent title={"Roles"} handleOpen={stateShowModal.handleShow} />
 
       <Table
         datasTable={datasRole}

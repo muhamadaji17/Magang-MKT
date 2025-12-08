@@ -250,23 +250,18 @@ export const configTableSubscribers = [
 export const configTableRoleMenu = [
   {
     title: "Menu Name",
-    key: "menu_name",
+    key: ["role_menu_menu", "menu_name"],
+    type: "text",
+  },
+  {
+    title: "Menu URL",
+    key: ["role_menu_menu", "menu_url"],
     type: "text",
   },
   {
     title: "Role Name",
-    key: "role_name",
+    key: ["roles_menu", "role_name"],
     type: "text",
-  },
-  {
-    title: "Status",
-    key: "status",
-    type: "select",
-    placeholder: "Select Status",
-    options: [
-      { label: "Active", value: true },
-      { label: "Inactive", value: false },
-    ],
   },
 ];
 

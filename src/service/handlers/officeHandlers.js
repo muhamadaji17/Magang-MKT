@@ -24,11 +24,10 @@ export const handleDeleteOffice = (extraOptions) => {
 };
 
 export const handleEditOffice = (extraOptions, dataRow) => {
-  return (datas) => {
-    handleSubmitData(
-      { ...datas, id: dataRow.id },
-      updateOfficeService,
-      extraOptions
-    );
+  return (datas, extraOptionsForm) => {
+    handleSubmitData({ ...datas, id: dataRow.id }, updateOfficeService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };

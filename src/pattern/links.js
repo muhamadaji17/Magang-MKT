@@ -52,10 +52,9 @@ export const navLink = [
     submenus: [
       { text: "User", path: "/user" },
       { text: "Roles", path: "/roles" },
+      { text: "Menu", path: "/menu" },
       { text: "Role Menu", path: "/role-menu" },
       { text: "Subscribers", path: "/subscribers" },
-      { text: "Role", path: "/role" },
-      { text: "Menu", path: "/menu" },
     ],
   },
 ];

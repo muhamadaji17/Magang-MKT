@@ -14,7 +14,6 @@ export const loginService = async (data, extraOptions) => {
   try {
     const response = await POST("auth/login", data, headers);
     if (response.data.status === true) {
-      // alert(response.data.message);
       setCookies(response);
       navigate("/dashboard");
       SwalAlertBasic({
@@ -28,12 +27,10 @@ export const loginService = async (data, extraOptions) => {
       });
     }
   } catch (error) {
-    // console.error(error);
-
     const dataError = error.response.data;
 
     if (dataError.status === false && dataError.defaultPassword === true) {
-      navigate("/change-password");
+      navigate("/forgot-password");
       SwalAlertBasic({
         icon: "error",
         text: dataError.message,
@@ -56,7 +53,6 @@ export const getOtpService = async (data, extraOptions) => {
   try {
     const response = await POST("auth/get-otp", data, headers);
     if (response.data.status === true) {
-      // setCookies(response);
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
@@ -73,9 +69,6 @@ export const getOtpService = async (data, extraOptions) => {
 
     setLoadingButton(false);
   } catch (error) {
-    // console.error(error);
-    // alert(error.response.data.message);
-    // console.log(error);
     setLoadingButton(false);
 
     if (error.code) {

@@ -24,7 +24,10 @@ export const handleEditAbout = (extraOptions, dataRow) => {
 };
 
 export const handleDeleteAbout = (extraOptions, dataRow) => {
-  return () => {
-    deleteAboutService(dataRow.id_about, extraOptions);
+  return (datas, extraOptionsForm) => {
+    deleteAboutService(dataRow.id_about, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };

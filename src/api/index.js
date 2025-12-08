@@ -23,11 +23,17 @@ export const GET = async (endpoint, accessToken) => {
 
     return response;
   } catch (error) {
-    if (error.response.status === 403 || error.response.status === 401) {
+    if (error.response.status === 401) {
       SwalAlertBasic({
         icon: "warning",
         title: "Unauthorized",
         text: error.response.data.errors[0].message,
+      });
+    } else if (error.response.status === 403) {
+      SwalAlertBasic({
+        icon: "warning",
+        title: "Access Denied",
+        text: error.response.data.message,
       });
     }
   }

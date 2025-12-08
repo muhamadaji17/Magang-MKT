@@ -80,7 +80,8 @@ export const updateProvinceService = async (datas, extraOptions) => {
 };
 
 export const deleteProvinceService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   try {
     const response = await DELETE("crud/province", accessToken, id);
     if (response.data.success) {
@@ -91,7 +92,12 @@ export const deleteProvinceService = async (id, extraOptions) => {
       handleCloseModal();
       setRefreshData(false);
     }
+    setLoadingButton(false);
   } catch (error) {
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
     console.error("Delete Failed:", error);
     throw error;
   }

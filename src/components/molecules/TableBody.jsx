@@ -61,7 +61,7 @@ const TableBody = ({
                   <Link
                     to={data[col.key]}
                     target="_blank"
-                    className=" bg-blue-500 px-3 py-2 text-white rounded-md hover:bg-blue-600"
+                    className="underline"
                   >
                     {/* {data[col.key]} */}
                     Preview

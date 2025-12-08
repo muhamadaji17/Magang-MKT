@@ -77,8 +77,13 @@ import {
 } from "./modalPattern/inputContactPattern";
 import { inputEditSubscribers } from "./modalPattern/inputSubscribersPattern";
 import { inputAddMenu, inputEditMenu } from "./modalPattern/inputMenuPattren";
-
+import {
+  inputAddRoleMenu,
+  inputEditRoleMenu,
+} from "./modalPattern/inputRoleMenuPattern";
 export {
+  inputEditRoleMenu,
+  inputAddRoleMenu,
   inputAddMenu,
   inputEditMenu,
   configTableMenu,

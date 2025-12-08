@@ -106,6 +106,11 @@ import {
   updateCategoryContactService,
 } from "./dashboardService/contactCategoryService";
 import {
+  handleAddContactCategory,
+  handleEditContactCategory,
+  handleDeleteContactCategory,
+} from "./handlers/categoryContactHandlers";
+import {
   addContactService,
   deleteContactService,
   getContactService,
@@ -122,6 +127,16 @@ import {
   getMenuService,
   updateMenuService,
 } from "./dashboardService/menuService";
+import {
+  handleAddMenu,
+  handleEditMenu,
+  handleDeleteMenu,
+} from "./handlers/menuHandler";
+import {
+  handleAddRoleMenu,
+  handleEditRoleMenu,
+  handleDeleteRoleMenu,
+} from "./handlers/roleMenuHandlers";
 export {
   getRoleMenuService,
   getSubscribersService,
@@ -200,4 +215,13 @@ export {
   handleDeleteRating,
   handleEditSubscribers,
   handleDeleteSubscribers,
+  handleAddRoleMenu,
+  handleEditRoleMenu,
+  handleDeleteRoleMenu,
+  handleAddContactCategory,
+  handleEditContactCategory,
+  handleDeleteContactCategory,
+  handleAddMenu,
+  handleEditMenu,
+  handleDeleteMenu,
 };

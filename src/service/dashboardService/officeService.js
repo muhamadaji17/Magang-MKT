@@ -76,6 +76,7 @@ export const updateOfficeService = async (datas, extraOptions) => {
         text: response.data.message,
       });
     }
+    setLoadingButton(false);
   } catch (error) {
     // setLoadingButton(false);
     if (error.response.data.message) {
@@ -89,7 +90,8 @@ export const updateOfficeService = async (datas, extraOptions) => {
 };
 
 export const deleteOfficeService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   try {
     const response = await DELETE("crud/office", accessToken, id);
     if (response.data.status) {
@@ -100,8 +102,13 @@ export const deleteOfficeService = async (id, extraOptions) => {
       handleCloseModal();
       setRefreshData(false);
     }
+    setLoadingButton(false);
   } catch (error) {
     console.error("Delete Failed:", error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
     throw error;
   }
 };

@@ -28,29 +28,41 @@ export const handleEditArticle = (extraOptions, datasDetailArticle) => {
 };
 
 export const handleDeleteArticle = (id, extraOptions) => {
-  return () => {
-    handleSubmitData(id, deleteArticlesService, extraOptions);
+  return (datas, extraOptionsForm) => {
+    handleSubmitData(id, deleteArticlesService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 
 export const handleAddArticleCategory = (extraOptions) => {
-  return (datas) => {
-    handleSubmitData(datas, addArticleCategoryService, extraOptions);
+  return (datas, extraOptionsForm) => {
+    handleSubmitData(datas, addArticleCategoryService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 
 export const handleEditArticleCategory = (extraOptions, dataRow) => {
-  return (datas) => {
+  return (datas, extraOptionsForm) => {
     handleSubmitData(
       { ...datas, id: dataRow.id_article_category },
       editArticleCategoryService,
-      extraOptions
+      {
+        ...extraOptions,
+        ...extraOptionsForm,
+      }
     );
   };
 };
 
 export const handleDeleteArticleCategory = (extraOptions) => {
-  return (datas) => {
-    deleteArticleCategoryService(datas.id_article_category, extraOptions);
+  return (datas, extraOptionsForm) => {
+    deleteArticleCategoryService(datas.id_article_category, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };

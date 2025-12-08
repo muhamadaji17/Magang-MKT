@@ -316,4 +316,7 @@ export const errorOptions = {
   code_rating: {
     required: "Code Rating is Required",
   },
+  select_menu: {
+    required: "Select Menu is Required",
+  },
 };

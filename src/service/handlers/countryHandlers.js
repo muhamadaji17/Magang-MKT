@@ -24,7 +24,10 @@ export const handleEditCountry = (extraOptions, dataRow) => {
 };
 
 export const handleDeleteCountry = (extraOptions) => {
-  return (datas) => {
-    deleteCountryService(datas.id, extraOptions);
+  return (datas, extraOptionsForm) => {
+    deleteCountryService(datas.id, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };

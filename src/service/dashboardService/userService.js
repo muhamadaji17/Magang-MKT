@@ -67,7 +67,8 @@ export const updateUserService = async (datas, extraOptions) => {
 };
 
 export const deleteUserService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   try {
     const response = await DELETE("crud/admin", accessToken, id);
@@ -79,8 +80,13 @@ export const deleteUserService = async (id, extraOptions) => {
       handleCloseModal();
       setRefreshData(false);
     }
+    setLoadingButton(false);
   } catch (error) {
     console.error("Delete Failed:", error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
     throw error;
   }
 };

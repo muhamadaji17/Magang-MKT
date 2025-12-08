@@ -25,7 +25,10 @@ export const handleServiceWithOnClick = (extraOptions) => {
 
     switch (type) {
       case "delete":
-        deleteBannerService(datas.id, extraOptions);
+        deleteBannerService(datas.id, {
+          ...extraOptions,
+          ...extraOptionsCalendar,
+        });
         break;
 
       case "updateSchedule":

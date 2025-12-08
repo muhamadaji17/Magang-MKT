@@ -179,7 +179,8 @@ export const updateFilmService = async (datas, extraOptions) => {
 };
 
 export const deleteFilmService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   try {
     const response = await DELETE("crud/films", accessToken, id);
     if (response.data.status === true) {
@@ -195,7 +196,17 @@ export const deleteFilmService = async (id, extraOptions) => {
         text: response.data.message,
       });
     }
+
+    setLoadingButton(false);
   } catch (error) {
+    setLoadingButton(false);
+    console.error("Delete Failed:", error);
+    if (error.response.data.message) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
     if (
       error.response?.data?.status === false &&
       error.response?.data?.message === "Unauthorized!"

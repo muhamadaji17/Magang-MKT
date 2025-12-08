@@ -1,45 +1,64 @@
 import { HeaderContent } from "../../components/molecules";
 import { Table } from "../../components/organism";
 import { useRoleMenuHook } from "../../hook";
-import { configTableRole } from "../../pattern";
+import {
+  configTableRoleMenu,
+  handleSearch,
+  inputAddRoleMenu,
+  inputEditRoleMenu,
+} from "../../pattern";
+import {
+  handleAddRoleMenu,
+  handleDeleteRoleMenu,
+  handleEditRoleMenu,
+} from "../../service";
 
 const RoleMenuPage = () => {
   const {
     stateShowModal,
     dataRow,
-    setDataRow,
     submitType,
-    accessToken,
+    extraOptions,
+    setSearchQuery,
+    dataMenu,
+    datasRole,
     datasRoleMenu,
+    isLoading,
+    handleAPI,
   } = useRoleMenuHook();
 
   return (
     <>
-      <HeaderContent title={"Role"} handleOpen={stateShowModal.handleShow} />
+      <HeaderContent
+        title={"Role Menu"}
+        handleOpen={stateShowModal.handleShow}
+        handleAPI={handleAPI}
+      />
 
       <Table
-        datasTable={[]}
+        datasTable={datasRoleMenu}
         dataRow={dataRow}
-        configTable={configTableRole}
-        // stateShowModal={stateShowModal}
+        configTable={configTableRoleMenu}
+        stateShowModal={stateShowModal}
         title={"Role Menu"}
-        // isLoading={isLoading}
-        // handleSearch={handleSearch(setSearchQuery)}
-        // inputForm={
-        //   submitType === "add"
-        //     ? inputAddRole
-        //     : inputEditRole(dataRow, datasRole)
-        // }
-        // submitType={submitType}
-        // handleService={
-        //   submitType === "add"
-        //     ? handleAddRole(extraOptions)
-        //     : submitType === "edit"
-        //     ? handleEditRole(extraOptions, dataRow)
-        //     : submitType === "delete"
-        //     ? handleDeleteRole(extraOptions)
-        //     : null
-        // }
+        isLoading={isLoading}
+        handleAPI={handleAPI}
+        handleSearch={handleSearch(setSearchQuery)}
+        inputForm={
+          submitType === "add"
+            ? inputAddRoleMenu(dataMenu, datasRole)
+            : inputEditRoleMenu(dataMenu, datasRole, dataRow)
+        }
+        submitType={submitType}
+        handleService={
+          submitType === "add"
+            ? handleAddRoleMenu(extraOptions)
+            : submitType === "edit"
+            ? handleEditRoleMenu(extraOptions, dataRow)
+            : submitType === "delete"
+            ? handleDeleteRoleMenu(extraOptions)
+            : null
+        }
       />
     </>
   );

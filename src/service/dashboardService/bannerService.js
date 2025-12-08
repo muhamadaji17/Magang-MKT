@@ -141,8 +141,13 @@ export const updateBannerService = async (datas, extraOptions) => {
 };
 
 export const deleteBannerService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal, handleCloseSidebar } =
-    extraOptions;
+  const {
+    accessToken,
+    setRefreshData,
+    handleCloseModal,
+    handleCloseSidebar,
+    setLoadingButton,
+  } = extraOptions;
 
   try {
     const response = await DELETE("crud/banner", accessToken, id);
@@ -155,7 +160,15 @@ export const deleteBannerService = async (id, extraOptions) => {
       handleCloseSidebar();
       setRefreshData(false);
     }
+    setLoadingButton(false);
   } catch (error) {
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
     console.error("Delete Failed:", error);
     throw error;
   }

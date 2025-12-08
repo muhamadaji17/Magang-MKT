@@ -15,8 +15,11 @@ import {
 import {
   addMenuService,
   handleAddCity,
+  handleAddMenu,
   handleDeleteCity,
+  handleDeleteMenu,
   handleEditCity,
+  handleEditMenu,
   updateMenuService,
 } from "../../service";
 
@@ -49,13 +52,13 @@ const MenuPage = () => {
             : inputEditMenu(dataRow, dataMenu)
         }
         submitType={submitType}
-        handleService={(e) =>
+        handleService={
           submitType === "add"
-            ? addMenuService(e, extraOptions)
+            ? handleAddMenu(extraOptions)
             : submitType === "edit"
-            ? updateMenuService(e, extraOptions, dataRow.id)
+            ? handleEditMenu(extraOptions, dataRow)
             : submitType === "delete"
-            ? handleDeleteCity(extraOptions)
+            ? handleDeleteMenu(extraOptions)
             : null
         }
       />
