@@ -16,7 +16,7 @@ export const getFilmByIdService = async (accessToken, extraOptions) => {
     setDatasDetailFilms(response.data.payload);
     setRefreshData(true);
   } catch (error) {
-    // console.error(error);
+    console.error(error);
     // if (
     //   error.response.data.status === false &&
     //   error.response.data.message === "Unauthorized!"
@@ -30,7 +30,8 @@ export const getFilmByIdService = async (accessToken, extraOptions) => {
 };
 
 export const addCastingFilmService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({
     accessToken,
     contentType: "multipart/form-data",
@@ -58,8 +59,16 @@ export const addCastingFilmService = async (datas, extraOptions) => {
         text: response.data.message,
       });
     }
+    setLoadingButton(false);
   } catch (error) {
     console.log(error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
 
     // if (
     //   error.response.data.status === false &&
@@ -74,7 +83,8 @@ export const addCastingFilmService = async (datas, extraOptions) => {
 };
 
 export const updateCastingFilmService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({
     accessToken,
     contentType: "multipart/form-data",
@@ -99,7 +109,18 @@ export const updateCastingFilmService = async (datas, extraOptions) => {
         text: response.data.message,
       });
     }
+
+    setLoadingButton(false);
   } catch (error) {
+    console.error(error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
+
     // if (
     //   error.response.data.status === false &&
     //   error.response.data.message === "Unauthorized!"
@@ -113,7 +134,8 @@ export const updateCastingFilmService = async (datas, extraOptions) => {
 };
 
 export const deleteCastingFilmService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   try {
     const response = await DELETE(
@@ -134,7 +156,17 @@ export const deleteCastingFilmService = async (id, extraOptions) => {
         text: response.data.message,
       });
     }
+
+    setLoadingButton(false);
   } catch (error) {
+    console.error(error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
     // if (
     //   error.response.data.status === false &&
     //   error.response.data.message === "Unauthorized!"

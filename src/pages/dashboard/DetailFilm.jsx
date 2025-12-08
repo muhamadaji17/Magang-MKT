@@ -143,7 +143,7 @@ const DetailFilmPage = () => {
 
       <ModalLayout
         isModalOpen={isModalOpen}
-        className={`${submitType !== "delete" && "w-[1000px]"}`}
+        submitType={submitType}
         title={
           submitType === "add"
             ? "Add Casting"
@@ -169,10 +169,16 @@ const DetailFilmPage = () => {
             }
             buttonText={"Submit"}
             // handleSubmitData={(e) => console.log(e)}
-            handleSubmitData={(e) =>
+            handleSubmitData={(e, extraOptionsForm) =>
               submitType === "add"
-                ? addCastingFilmService(e, extraOptions)
-                : updateCastingFilmService(e, extraOptions)
+                ? addCastingFilmService(e, {
+                    ...extraOptions,
+                    ...extraOptionsForm,
+                  })
+                : updateCastingFilmService(e, {
+                    ...extraOptions,
+                    ...extraOptionsForm,
+                  })
             }
           />
         )}

@@ -27,6 +27,7 @@ export const getFilmService = async (accessToken, extraOptions) => {
       genre_film: data.genre_film,
       durasi_film: data.durasi_film,
       id_rating: data.id_rating,
+      language_film: data.language_film,
       produser_film: data.produser_film,
       sutradara_film: data.sutradara_film,
       produksi_film: data.produksi_film,
@@ -35,6 +36,8 @@ export const getFilmService = async (accessToken, extraOptions) => {
     setDatasFilms(parsing);
     setRefreshData(true);
   } catch (error) {
+    console.error(error);
+
     // if (
     //   error.response.data.status === false &&
     //   error.response.data.message === "Unauthorized!"

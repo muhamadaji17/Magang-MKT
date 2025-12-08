@@ -145,7 +145,7 @@ export const inputEditFilms = (datasDefault, rating) => [
     optionDisabledText: "Pilih Rating",
     optionError: errorOptions.id_rating,
     grid: 4,
-    defaultValue: datasDefault?.rating?.id_rating,
+    defaultValue: datasDefault?.id_rating,
   },
 
   {
