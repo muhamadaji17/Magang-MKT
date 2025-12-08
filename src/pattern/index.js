@@ -24,6 +24,7 @@ import {
   configTableArticleCategories,
   configTableCategoryContact,
   configTableContact,
+  configTableMenu,
 } from "./tablePattern/tableDataColumn";
 
 import {
@@ -72,7 +73,12 @@ import {
   inputAddContact,
   inputEditContact,
 } from "./modalPattern/inputContactPattern";
+import { inputAddMenu, inputEditMenu } from "./modalPattern/inputMenuPattren";
+
 export {
+  inputAddMenu,
+  inputEditMenu,
+  configTableMenu,
   inputEditContact,
   inputAddContact,
   forgotPasswordPattern,

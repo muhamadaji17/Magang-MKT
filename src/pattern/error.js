@@ -4,6 +4,12 @@ export const errorOptions = {
   username: {
     required: "Username is Required",
   },
+  menu_name: {
+    required: "Menu Name is Required",
+  },
+  menu_url: {
+    required: "Menu URL is Required",
+  },
   is_main_cast: {
     required: "is_main_cast is Required",
   },

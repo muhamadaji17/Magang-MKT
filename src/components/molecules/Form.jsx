@@ -179,7 +179,7 @@ const Form = ({
         onSubmit={handleSubmit(onSubmit)}
         className={`${className || ""} `}
       >
-        <div className="grid grid-cols-12">
+        <div className="grid grid-cols-12 gap-3">
           {configInput.map((data, index) => {
             const value = watch(data.name);
             return (

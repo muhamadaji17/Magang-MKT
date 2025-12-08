@@ -106,7 +106,16 @@ import {
   getContactService,
   updateContactService,
 } from "./dashboardService/contactService";
+import {
+  addMenuService,
+  getMenuService,
+  updateMenuService,
+} from "./dashboardService/menuService";
+
 export {
+  updateMenuService,
+  addMenuService,
+  getMenuService,
   otpService,
   getContactService,
   addContactService,

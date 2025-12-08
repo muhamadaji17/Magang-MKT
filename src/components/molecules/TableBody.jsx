@@ -67,13 +67,6 @@ const TableBody = ({
                     Preview
                   </Link>
                 ) : col.key === "sinopsis_film_id" ? (
-                  // <div className="max-w-96">
-                  // <ShortenedCharacter
-                  //   maxLength={50}
-                  //   sinopsis={data[col.key]}
-                  //   handleShow={() => handleShowModal("synopsis", data)}
-                  // />
-
                   <Button
                     onClick={() => handleShowModal("synopsis", data)}
                     className={"bg-blue-500 text-white p-2 rounded-md"}
@@ -109,49 +102,6 @@ const TableBody = ({
                     : null
                 }
               />
-
-              {/* <div className="flex justify-center p-4 gap-3">
-                {pathname === "/office" && (
-                  <Button
-                    className={"text-2xl text-violet-600"}
-                    onClick={() => handleShowModal("location", data)}
-                  >
-                    <FaEye />
-                  </Button>
-                )}
-
-                <Button
-                  className={"text-2xl"}
-                  onClick={() => {
-                    // if (tableType !== "films") {
-                    handleShowModal("edit", data);
-                    if (handleAPI) {
-                      handleAPI();
-                    }
-                    // } else {
-                    //   handleShowSidebar("edit", data);
-                    // }
-                  }}
-                >
-                  <FaRegEdit className="text-blue-600" />
-                </Button>
-                <Button
-                  className={"text-2xl"}
-                  onClick={() => {
-                    handleShowModal("delete", data);
-                  }}
-                >
-                  <RiDeleteBin6Line className="text-red-600" />
-                </Button>
-                <Link
-                  className={"text-2xl"}
-                  onClick={() => sessionStorage.setItem("id", data.id)}
-                  to={`/films/detail?nama=${data.nama_film}`}
-                  state={data}
-                >
-                  <FaExternalLinkAlt className="text-green-600" />
-                </Link>
-              </div> */}
             </td>
           </tr>
         ))
