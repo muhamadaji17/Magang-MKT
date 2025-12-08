@@ -19,7 +19,9 @@ import { useArticleCategories } from "./dashboardHook/useArticleCategories";
 import { useArticles } from "./dashboardHook/useArticles";
 import { useContactCategoryHook } from "./dashboardHook/useContactCategoryHook";
 import { useContactHook } from "./dashboardHook/useContactHook";
+import { useRoleMenuHook } from "./dashboardHook/useRoleMenuHook";
 export {
+  useRoleMenuHook,
   useContactHook,
   useContactCategoryHook,
   useData,

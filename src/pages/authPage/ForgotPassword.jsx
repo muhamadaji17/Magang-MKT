@@ -8,7 +8,7 @@ import { useState } from "react";
 import { getOtpService } from "../../service";
 
 const ForgotPassword = () => {
-  const [type, setType] = useState(Cookies.get("type") || "otp");
+  const [type, setType] = useState(Cookies.get("type") ?? "form");
 
   const handleRemoveCookies = () => {
     const cookiesToRemove = ["datas", "type"]; // Array of cookie names to remove

@@ -85,7 +85,7 @@ const DetailFilmPage = () => {
                       src={
                         c.poster_casting_film
                           ? `http://${c.poster_casting_film}`
-                          : "/images/poster/one-outs.jpg"
+                          : "/images/cast-default.svg"
                       }
                       className="
             w-full h-90  transition-transform duration-500

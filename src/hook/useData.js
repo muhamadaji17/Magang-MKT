@@ -19,6 +19,7 @@ export const useData = () => {
   const [datasContactCategory, setDatasContactCategory] = useState([]);
   const [datasDetailArticles, setDatasDetailArticles] = useState({});
   const [datasSubscribers, setDatasSubscribers] = useState([]);
+  const [datasRoleMenu, setDatasRoleMenu] = useState([]);
 
   return {
     datasContact,
@@ -53,5 +54,7 @@ export const useData = () => {
     setDatasDetailArticles,
     datasSubscribers,
     setDatasSubscribers,
+    datasRoleMenu,
+    setDatasRoleMenu,
   };
 };

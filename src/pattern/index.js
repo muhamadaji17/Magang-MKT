@@ -25,6 +25,8 @@ import {
   configTableCategoryContact,
   configTableContact,
   configTableSubscribers,
+  configTableRating,
+  configTableRoleMenu,
 } from "./tablePattern/tableDataColumn";
 
 import {
@@ -64,7 +66,6 @@ import {
   inputAddRating,
   inputEditRating,
 } from "./modalPattern/inputRatingPattern";
-import { configTableRating } from "./tablePattern/tableDataColumn";
 import {
   inputAddContactCategory,
   inputEditContactCategory,
@@ -125,4 +126,5 @@ export {
   configTableArticleCategories,
   configTableRating,
   configTableSubscribers,
+  configTableRoleMenu,
 };

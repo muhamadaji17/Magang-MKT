@@ -62,6 +62,7 @@ export const getOtpService = async (data, extraOptions) => {
         text: response.data.message,
       });
       setType("otp");
+      Cookies.set("type", "otp");
       Cookies.set("datas", JSON.stringify(data));
     } else if (response.data.status === false) {
       SwalAlertBasic({
