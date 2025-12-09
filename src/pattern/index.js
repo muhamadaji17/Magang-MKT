@@ -24,6 +24,9 @@ import {
   configTableArticleCategories,
   configTableCategoryContact,
   configTableContact,
+  configTableSubscribers,
+  configTableRating,
+  configTableRoleMenu,
   configTableMenu,
 } from "./tablePattern/tableDataColumn";
 
@@ -64,7 +67,6 @@ import {
   inputAddRating,
   inputEditRating,
 } from "./modalPattern/inputRatingPattern";
-import { configTableRating } from "./tablePattern/tableDataColumn";
 import {
   inputAddContactCategory,
   inputEditContactCategory,
@@ -73,12 +75,19 @@ import {
   inputAddContact,
   inputEditContact,
 } from "./modalPattern/inputContactPattern";
+import { inputEditSubscribers } from "./modalPattern/inputSubscribersPattern";
 import { inputAddMenu, inputEditMenu } from "./modalPattern/inputMenuPattren";
-
+import {
+  inputAddRoleMenu,
+  inputEditRoleMenu,
+} from "./modalPattern/inputRoleMenuPattern";
 export {
+  inputEditRoleMenu,
+  inputAddRoleMenu,
   inputAddMenu,
   inputEditMenu,
   configTableMenu,
+  inputEditSubscribers,
   inputEditContact,
   inputAddContact,
   forgotPasswordPattern,
@@ -126,4 +135,6 @@ export {
   configTableRole,
   configTableArticleCategories,
   configTableRating,
+  configTableSubscribers,
+  configTableRoleMenu,
 };

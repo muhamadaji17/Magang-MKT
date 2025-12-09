@@ -62,7 +62,7 @@ export const addMenuService = async (datas, extraOptions) => {
   }
 };
 
-export const updateMenuService = async (datas, extraOptions, id) => {
+export const updateMenuService = async (datas, extraOptions) => {
   const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
 
   const headers = generateHeaders({
@@ -79,7 +79,6 @@ export const updateMenuService = async (datas, extraOptions, id) => {
           typeof datas.menu_icon === "string"
             ? datas.menu_icon
             : datas.menu_icon[0],
-        id,
       },
       headers
     );
@@ -101,10 +100,12 @@ export const updateMenuService = async (datas, extraOptions, id) => {
 };
 
 export const deleteMenuService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   try {
     const response = await DELETE("crud/menu", accessToken, id);
-    if (response.data.status) {
+
+    if (response.data.status === true) {
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
@@ -112,9 +113,14 @@ export const deleteMenuService = async (id, extraOptions) => {
       handleCloseModal();
       setRefreshData(false);
     }
+
+    setLoadingButton(false);
   } catch (error) {
+    setLoadingButton(false);
+    console.error("Delete Failed:", error);
     if (error.response.data.message) {
       SwalAlertBasic({ icon: "error", text: error.response.data.message });
     }
+    throw error;
   }
 };

@@ -24,7 +24,7 @@ export const handleEditUser = (extraOptions, dataRow) => {
 };
 
 export const handleDeleteUser = (extraOptions) => {
-  return (datas) => {
-    deleteUserService(datas.id_admin, extraOptions);
+  return (datas, extraOptionsForm) => {
+    deleteUserService(datas.id_admin, { ...extraOptions, ...extraOptionsForm });
   };
 };

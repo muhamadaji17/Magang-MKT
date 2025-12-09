@@ -1,42 +1,29 @@
 import { DELETE, GET, POST, PUT } from "../../api";
-import { generateHeaders, generateEndpointWithQuery } from "../";
 import { SwalAlertBasic } from "../../utils";
+import { generateEndpointWithQuery } from "../generateEndpointWithQuery";
+import { generateHeaders } from "../generateHeaders";
 
-export const getCountryService = async (accessToken, extraOptions) => {
-  const { setDatasCountry, setRefreshData, searchQuery } = extraOptions;
+export const getRoleMenuService = async (accessToken, extraOptions) => {
+  const { setDatasRoleMenu, setRefreshData, searchQuery } = extraOptions;
 
   const queryParams = generateEndpointWithQuery(searchQuery);
 
   try {
-    const response = await GET(`crud/country/by?${queryParams}`, accessToken);
-
-    const parsing = response.data.payload.map((data) => {
-      return {
-        id: data.id_country,
-        country_name: data.country_name,
-        country_code: data.country_code,
-        username: data.created_country.user_name,
-        status: data.status,
-        label: data.country_name,
-        value: data.id_country,
-      };
-    });
-
-    setDatasCountry(parsing);
-    if (setRefreshData) {
-      setRefreshData(true);
-    }
+    const response = await GET(`crud/role_menu/by?${queryParams}`, accessToken);
+    setDatasRoleMenu(response.data.payload);
+    setRefreshData(true);
   } catch (error) {
     console.error(error);
   }
 };
 
-export const addCountryService = async (datas, extraOptions) => {
+export const addRoleMenuService = async (datas, extraOptions) => {
   const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
     extraOptions;
   const headers = generateHeaders({ accessToken });
+
   try {
-    const response = await POST("crud/country", datas, headers);
+    const response = await POST("crud/role_menu", datas, headers);
 
     if (response.data.success) {
       SwalAlertBasic({
@@ -56,21 +43,27 @@ export const addCountryService = async (datas, extraOptions) => {
   }
 };
 
-export const updateCountryService = async (datas, extraOptions) => {
+export const updateRoleMenuService = async (datas, extraOptions) => {
   const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
     extraOptions;
   const headers = generateHeaders({ accessToken });
-  try {
-    const response = await PUT("crud/country", datas, headers);
 
-    if (response.data.status) {
+  try {
+    const response = await PUT("crud/role_menu", datas, headers);
+
+    if (response.data.status === true) {
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
       });
-      handleCloseModal();
-      setLoadingButton(false);
       setRefreshData(false);
+      setLoadingButton(false);
+      handleCloseModal();
+    } else if (response.data.status === false) {
+      SwalAlertBasic({
+        icon: "error",
+        text: response.data.message,
+      });
     }
   } catch (error) {
     console.error(error);
@@ -81,13 +74,13 @@ export const updateCountryService = async (datas, extraOptions) => {
   }
 };
 
-export const deleteCountryService = async (id, extraOptions) => {
+export const deleteRoleMenuService = async (id, extraOptions) => {
   const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
     extraOptions;
 
   try {
-    const response = await DELETE("crud/country", accessToken, id);
-    if (response.data.status) {
+    const response = await DELETE("crud/role_menu", accessToken, id);
+    if (response.data.status || response.data.success) {
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
@@ -97,13 +90,7 @@ export const deleteCountryService = async (id, extraOptions) => {
     }
     setLoadingButton(false);
   } catch (error) {
-    console.error("Delete Failed:", error);
-    SwalAlertBasic({
-      icon: "error",
-      text: "Delete Failed, Cuz have a children!",
-    });
-    handleCloseModal();
+    console.error(error);
     setLoadingButton(false);
-    throw error;
   }
 };

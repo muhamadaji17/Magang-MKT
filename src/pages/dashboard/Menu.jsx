@@ -2,23 +2,14 @@
 
 import { HeaderContent } from "../../components/molecules";
 import { Table } from "../../components/organism";
-import { useCityHook, useMenuHook } from "../../hook";
+import { useMenuHook } from "../../hook";
 import {
-  configTableCity,
   configTableMenu,
   handleSearch,
-  inputAddCity,
   inputAddMenu,
-  inputEditCity,
   inputEditMenu,
 } from "../../pattern";
-import {
-  addMenuService,
-  handleAddCity,
-  handleDeleteCity,
-  handleEditCity,
-  updateMenuService,
-} from "../../service";
+import { handleEditMenu, handleAddMenu } from "../../service";
 import { deleteMenuService } from "../../service/dashboardService/menuService";
 
 const MenuPage = () => {
@@ -50,11 +41,11 @@ const MenuPage = () => {
             : inputEditMenu(dataRow, dataMenu)
         }
         submitType={submitType}
-        handleService={(e) =>
+        handleService={
           submitType === "add"
-            ? addMenuService(e, extraOptions)
+            ? handleAddMenu(extraOptions)
             : submitType === "edit"
-            ? updateMenuService(e, extraOptions, dataRow.id)
+            ? handleEditMenu(extraOptions, dataRow)
             : submitType === "delete"
             ? deleteMenuService(dataRow.id, extraOptions)
             : null

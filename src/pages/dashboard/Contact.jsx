@@ -51,13 +51,15 @@ const ContactPage = () => {
             : null
         }
         submitType={submitType}
-        handleService={(data) => {
+        handleService={(data, extraOptionsForm) => {
+          const newExtraOptions = { ...extraOptions, ...extraOptionsForm };
+
           submitType === "add"
-            ? addContactService(data, extraOptions)
+            ? addContactService(data, newExtraOptions)
             : submitType === "edit"
-            ? updateContactService(data, extraOptions)
+            ? updateContactService(data, newExtraOptions)
             : submitType === "delete"
-            ? deleteContactService(dataRow.id_contact, extraOptions)
+            ? deleteContactService(dataRow.id_contact, newExtraOptions)
             : null;
         }}
       />

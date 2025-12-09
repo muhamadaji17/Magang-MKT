@@ -24,7 +24,10 @@ export const handleEditFilms = (extraOptions, dataRow) => {
 };
 
 export const handleDeleteFilms = (extraOptions) => {
-  return (datas) => {
-    deleteFilmService(datas.id, extraOptions);
+  return (datas, extraOptionsForm) => {
+    deleteFilmService(datas.id, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };

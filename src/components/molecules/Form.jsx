@@ -179,7 +179,7 @@ const Form = ({
         onSubmit={handleSubmit(onSubmit)}
         className={`${className || ""} `}
       >
-        <div className="grid grid-cols-12 gap-3">
+        <div className="grid grid-cols-12 gap-4">
           {configInput.map((data, index) => {
             const value = watch(data.name);
             return (
@@ -196,7 +196,7 @@ const Form = ({
                     : data.grid === 12
                     ? "md:col-span-12 col-span-12"
                     : "col-span-12"
-                } w-full mb-2 relative`}
+                } w-full relative`}
                 key={index}
               >
                 <InputForm
@@ -221,7 +221,7 @@ const Form = ({
           })}
         </div>
         {LinkForgetPassword && (
-          <div className="mb-5">
+          <div className="mt-2">
             <Link
               to={`${LinkForgetPassword ? LinkForgetPassword : "#"}`}
               className="hover:underline hover:text-blue-600 text-blue-500 underline text-sm"
@@ -263,11 +263,9 @@ const Form = ({
           </div>
         ) : (
           <Button
-            className={`bg-blue-600 rounded-sm py-2 w-full text-center text-white cursor-pointer hover:bg-blue-700 ${buttonClassName}`}
+            className={`bg-blue-600 rounded-sm py-2 mt-4 w-full text-center text-white cursor-pointer hover:bg-blue-700 ${buttonClassName}`}
             type="submit"
           >
-            {/* {buttonText} */}
-
             {loadingButton ? <LoadingButton /> : buttonText}
           </Button>
         )}

@@ -12,6 +12,9 @@ import {
 import {
   addCategoryContactService,
   deleteCategoryContactService,
+  handleAddContactCategory,
+  handleDeleteContactCategory,
+  handleEditContactCategory,
   updateCategoryContactService,
 } from "../../service";
 
@@ -49,18 +52,15 @@ const ContactCategoryPage = () => {
             : null
         }
         submitType={submitType}
-        handleService={(data) => {
+        handleService={
           submitType === "add"
-            ? addCategoryContactService(data, extraOptions)
+            ? handleAddContactCategory(extraOptions)
             : submitType === "edit"
-            ? updateCategoryContactService(data, extraOptions)
+            ? handleEditContactCategory(extraOptions, dataRow)
             : submitType === "delete"
-            ? deleteCategoryContactService(
-                dataRow.id_contact_sosmed,
-                extraOptions
-              )
-            : null;
-        }}
+            ? handleDeleteContactCategory(extraOptions, dataRow)
+            : null
+        }
       />
     </>
   );

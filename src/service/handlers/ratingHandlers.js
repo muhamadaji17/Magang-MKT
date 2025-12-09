@@ -22,5 +22,9 @@ export const handleEditRating = (extraOption, dataRow) => {
 };
 
 export const handleDeleteRating = (extraOption) => {
-  return (datas) => deleteRatingService(datas.id_rating, extraOption);
+  return (datas, extraOptionForm) =>
+    deleteRatingService(datas.id_rating, {
+      ...extraOption,
+      ...extraOptionForm,
+    });
 };

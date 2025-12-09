@@ -27,6 +27,7 @@ export const getFilmService = async (accessToken, extraOptions) => {
       genre_film: data.genre_film,
       durasi_film: data.durasi_film,
       id_rating: data.id_rating,
+      language_film: data.language_film,
       produser_film: data.produser_film,
       sutradara_film: data.sutradara_film,
       produksi_film: data.produksi_film,
@@ -35,6 +36,8 @@ export const getFilmService = async (accessToken, extraOptions) => {
     setDatasFilms(parsing);
     setRefreshData(true);
   } catch (error) {
+    console.error(error);
+
     // if (
     //   error.response.data.status === false &&
     //   error.response.data.message === "Unauthorized!"
@@ -179,7 +182,8 @@ export const updateFilmService = async (datas, extraOptions) => {
 };
 
 export const deleteFilmService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   try {
     const response = await DELETE("crud/films", accessToken, id);
     if (response.data.status === true) {
@@ -195,7 +199,17 @@ export const deleteFilmService = async (id, extraOptions) => {
         text: response.data.message,
       });
     }
+
+    setLoadingButton(false);
   } catch (error) {
+    setLoadingButton(false);
+    console.error("Delete Failed:", error);
+    if (error.response.data.message) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
     if (
       error.response?.data?.status === false &&
       error.response?.data?.message === "Unauthorized!"

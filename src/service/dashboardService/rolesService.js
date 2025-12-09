@@ -79,7 +79,8 @@ export const updateRoleService = async (datas, extraOptions) => {
 };
 
 export const deleteRoleService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   try {
     const response = await DELETE("crud/roles", accessToken, id);
@@ -92,8 +93,10 @@ export const deleteRoleService = async (id, extraOptions) => {
       handleCloseModal();
       setRefreshData(false);
     }
+    setLoadingButton(false);
   } catch (error) {
     console.error(error);
+    setLoadingButton(false);
     SwalAlertBasic({ icon: "error", text: error.response.data.message });
   }
 };

@@ -99,6 +99,8 @@ export const updateArticlesService = async (datas, extraOptions) => {
       navigate("/articles");
       setLoadingButton(false);
     }
+
+    setLoadingButton(false);
   } catch (error) {
     if (error.response.status === 400) {
       SwalAlertBasic({
@@ -131,7 +133,8 @@ export const updateArticlesStatusService = async (datas, extraOptions) => {
 };
 
 export const deleteArticlesService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   try {
     const response = await DELETE("crud/article", accessToken, id);
@@ -140,7 +143,10 @@ export const deleteArticlesService = async (id, extraOptions) => {
       setRefreshData(false);
       handleCloseModal();
     }
+
+    setLoadingButton(false);
   } catch (error) {
+    setLoadingButton(false);
     if (error.response.data.message) {
       SwalAlertBasic({ icon: "error", text: error.response.data.message });
     }
@@ -174,7 +180,8 @@ export const getArticleCategoryService = async (accessToken, extraOptions) => {
 };
 
 export const addArticleCategoryService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({ accessToken });
 
   try {
@@ -182,32 +189,38 @@ export const addArticleCategoryService = async (datas, extraOptions) => {
 
     SwalAlertBasic({ icon: "success", text: response.data.message });
     setRefreshData(false);
+    setLoadingButton(false);
     handleCloseModal();
   } catch (error) {
+    setLoadingButton(false);
     SwalAlertBasic({ icon: "error", text: error.response.data.message });
     console.error(error);
   }
 };
 
 export const editArticleCategoryService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({ accessToken });
   try {
     const response = await PUT("crud/article_category", datas, headers);
 
     SwalAlertBasic({ icon: "success", text: response.data.message });
     setRefreshData(false);
+    setLoadingButton(false);
     handleCloseModal();
   } catch (error) {
     if (error.response.data.message) {
       SwalAlertBasic({ icon: "error", text: error.response.data.message });
     }
+    setLoadingButton(false);
     console.error(error);
   }
 };
 
 export const deleteArticleCategoryService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   try {
     const response = await DELETE("crud/article_category", accessToken, id);
@@ -217,8 +230,14 @@ export const deleteArticleCategoryService = async (id, extraOptions) => {
       setRefreshData(false);
       handleCloseModal();
     }
+
+    setLoadingButton(false);
   } catch (error) {
     console.error("Delete Failed:", error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
     if (error.response.data.responseCode === 401) {
       SwalAlertBasic({
         icon: "error",

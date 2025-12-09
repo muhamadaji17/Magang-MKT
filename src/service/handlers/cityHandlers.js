@@ -15,8 +15,11 @@ export const handleAddCity = (extraOptions) => {
 };
 
 export const handleDeleteCity = (extraOptions) => {
-  return (datas) => {
-    deleteCityService(datas.id, extraOptions);
+  return (datas, extraOptionsForm) => {
+    deleteCityService(datas.id, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 

@@ -15,7 +15,7 @@ export const configTableFilms = [
   },
   { title: "Title", key: "nama_film", type: "text" },
   { title: "Sinopsis", key: "sinopsis_film_id", type: "text" },
-  // { title: "Traier", key: "trailer_film", type: "text" },
+  { title: "Traier", key: "trailer_film" },
   {
     title: "Status",
     key: "status",
@@ -226,6 +226,42 @@ export const configTableRating = [
       { label: "Active", value: true },
       { label: "Inactive", value: false },
     ],
+  },
+];
+
+export const configTableSubscribers = [
+  {
+    title: "Email",
+    key: "email",
+    type: "text",
+  },
+  {
+    title: "Status",
+    key: "status",
+    type: "select",
+    placeholder: "Select Status",
+    options: [
+      { label: "Active", value: true },
+      { label: "Inactive", value: false },
+    ],
+  },
+];
+
+export const configTableRoleMenu = [
+  {
+    title: "Menu Name",
+    key: ["role_menu_menu", "menu_name"],
+    type: "text",
+  },
+  {
+    title: "Menu URL",
+    key: ["role_menu_menu", "menu_url"],
+    type: "text",
+  },
+  {
+    title: "Role Name",
+    key: ["roles_menu", "role_name"],
+    type: "text",
   },
 ];
 

@@ -20,6 +20,8 @@ import ArticleCategories from "./dashboard/ArticleCategories";
 import Rating from "./dashboard/Rating";
 import ContactPage from "./dashboard/Contact";
 import ContactCategoryPage from "./dashboard/ContactCategory";
+import SubscribersPage from "./dashboard/Subscribers";
+import RoleMenuPage from "./dashboard/RoleMenu";
 import MenuPage from "./dashboard/Menu";
 export {
   MenuPage,
@@ -43,4 +45,6 @@ export {
   ArticleDetail,
   ArticleCategories,
   Rating,
+  SubscribersPage,
+  RoleMenuPage,
 };

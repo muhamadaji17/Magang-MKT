@@ -21,7 +21,6 @@ export const getRatingService = async (accessToken, extraOptions) => {
 
     setDatasRating(gabung);
     setRefreshData(true);
-    // console.log(response);
   } catch (error) {
     if (
       error.response?.data?.status === false &&
@@ -88,7 +87,8 @@ export const updateRatingService = async (datas, extraOptions) => {
 };
 
 export const deleteRatingService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   try {
     const response = await DELETE("crud/rating", accessToken, id);
@@ -100,8 +100,13 @@ export const deleteRatingService = async (id, extraOptions) => {
       handleCloseModal();
       setRefreshData(false);
     }
+    setLoadingButton(false);
   } catch (error) {
     console.error("Delete Failed:", error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
     throw error;
   }
 };

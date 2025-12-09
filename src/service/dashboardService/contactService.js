@@ -29,7 +29,8 @@ export const addContactService = async (datas, extraOptions) => {
   //   contact_logo: datas.contact_logo[0],
   // };
 
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   const headers = generateHeaders({
     accessToken,
@@ -46,13 +47,23 @@ export const addContactService = async (datas, extraOptions) => {
       handleCloseModal();
       setRefreshData(false);
     }
+
+    setLoadingButton(false);
   } catch (error) {
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
     console.error(error);
   }
 };
 
 export const updateContactService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   const headers = generateHeaders({ accessToken });
 
@@ -65,14 +76,23 @@ export const updateContactService = async (datas, extraOptions) => {
       });
       handleCloseModal();
       setRefreshData(false);
+      setLoadingButton(false);
     }
   } catch (error) {
     console.error(error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
   }
 };
 
 export const deleteContactService = async (id, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
 
   try {
     const response = await DELETE("crud/contact", accessToken, id);
@@ -83,9 +103,17 @@ export const deleteContactService = async (id, extraOptions) => {
       });
       handleCloseModal();
       setRefreshData(false);
+      setLoadingButton(false);
     }
   } catch (error) {
     console.error("Delete Failed:", error);
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
     throw error;
   }
 };

@@ -15,8 +15,11 @@ export const handleAddProvince = (extraOptions) => {
 };
 
 export const handleDeleteProvince = (extraOptions) => {
-  return (datas) => {
-    deleteProvinceService(datas.id, extraOptions);
+  return (datas, extraOptionsForm) => {
+    deleteProvinceService(datas.id, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 

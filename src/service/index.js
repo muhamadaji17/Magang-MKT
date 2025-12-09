@@ -1,6 +1,11 @@
 /** @format */
 
-import { loginService, logoutService, otpService } from "./authService,";
+import {
+  loginService,
+  logoutService,
+  getOtpService,
+  setPasswordService,
+} from "./authService,";
 import { generateEndpointWithQuery } from "./generateEndpointWithQuery";
 import { generateHeaders } from "./generateHeaders";
 import { getBannerService } from "./dashboardService/bannerService";
@@ -101,22 +106,45 @@ import {
   updateCategoryContactService,
 } from "./dashboardService/contactCategoryService";
 import {
+  handleAddContactCategory,
+  handleEditContactCategory,
+  handleDeleteContactCategory,
+} from "./handlers/categoryContactHandlers";
+import {
   addContactService,
   deleteContactService,
   getContactService,
   updateContactService,
 } from "./dashboardService/contactService";
+import { getSubscribersService } from "./dashboardService/subscribersService";
+import {
+  handleEditSubscribers,
+  handleDeleteSubscribers,
+} from "./handlers/subscribershandlers";
+import { getRoleMenuService } from "./dashboardService/roleMenuService";
 import {
   addMenuService,
   getMenuService,
   updateMenuService,
 } from "./dashboardService/menuService";
-
+import {
+  handleAddMenu,
+  handleEditMenu,
+  handleDeleteMenu,
+} from "./handlers/menuHandler";
+import {
+  handleAddRoleMenu,
+  handleEditRoleMenu,
+  handleDeleteRoleMenu,
+} from "./handlers/roleMenuHandlers";
 export {
+  getRoleMenuService,
+  getSubscribersService,
+  getOtpService,
+  setPasswordService,
   updateMenuService,
   addMenuService,
   getMenuService,
-  otpService,
   getContactService,
   addContactService,
   updateContactService,
@@ -185,4 +213,15 @@ export {
   handleAddRating,
   handleEditRating,
   handleDeleteRating,
+  handleEditSubscribers,
+  handleDeleteSubscribers,
+  handleAddRoleMenu,
+  handleEditRoleMenu,
+  handleDeleteRoleMenu,
+  handleAddContactCategory,
+  handleEditContactCategory,
+  handleDeleteContactCategory,
+  handleAddMenu,
+  handleEditMenu,
+  handleDeleteMenu,
 };
