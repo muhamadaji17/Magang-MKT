@@ -58,7 +58,7 @@ const ContactCategoryPage = () => {
             : submitType === "edit"
             ? handleEditContactCategory(extraOptions, dataRow)
             : submitType === "delete"
-            ? handleDeleteContactCategory(extraOptions, dataRow)
+            ? handleDeleteContactCategory(extraOptions)
             : null
         }
       />

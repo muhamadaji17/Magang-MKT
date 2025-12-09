@@ -79,7 +79,10 @@ export const updateCategoryContactService = async (datas, extraOptions) => {
       "crud/contact_sosmed",
       {
         ...datas,
-        contact_sosmed_logo: datas.contact_sosmed_logo[0],
+        contact_sosmed_logo:
+          typeof datas.contact_sosmed_logo === "string"
+            ? datas.contact_sosmed_logo
+            : datas.contact_sosmed_logo[0],
       },
       headers
     );

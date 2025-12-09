@@ -1,6 +1,7 @@
 import { handleSubmitData } from "../../pattern";
 import {
   addCategoryContactService,
+  deleteCategoryContactService,
   updateCategoryContactService,
 } from "../dashboardService/contactCategoryService";
 
@@ -26,15 +27,11 @@ export const handleEditContactCategory = (extraOptions, dataRow) => {
   };
 };
 
-export const handleDeleteContactCategory = (extraOptions, dataRow) => {
+export const handleDeleteContactCategory = (extraOptions) => {
   return (datas, extraOptionsForm) => {
-    handleSubmitData(
-      { ...datas, id: dataRow.id_contact_sosmed },
-      updateCategoryContactService,
-      {
-        ...extraOptions,
-        ...extraOptionsForm,
-      }
-    );
+    handleSubmitData(datas.id_contact_sosmed, deleteCategoryContactService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };

@@ -48,7 +48,7 @@ export const inputEditContactCategory = (data) => [
     labelText: "Contact Icon",
     name: "contact_sosmed_logo",
     type: "file",
-    optionError: errorOptions.contact_sosmed_logo,
+    // optionError: errorOptions.contact_sosmed_logo,
     defaultValue: data.contact_sosmed_logo,
   },
 ];

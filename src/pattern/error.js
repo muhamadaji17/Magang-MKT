@@ -255,17 +255,9 @@ export const errorOptions = {
   },
   longitute: {
     required: "Longitute is Required",
-    pattern: {
-      value: /^-?\d+(\.\d+)?$/,
-      message: "Hanya boleh angka",
-    },
   },
   latitude: {
     required: "Latitude is Required",
-    pattern: {
-      value: /^-?\d+(\.\d+)?$/,
-      message: "Hanya boleh angka",
-    },
   },
   select_role: {
     required: "Select Role is Required",
