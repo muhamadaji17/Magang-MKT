@@ -19,6 +19,7 @@ import {
   handleEditCity,
   updateMenuService,
 } from "../../service";
+import { deleteMenuService } from "../../service/dashboardService/menuService";
 
 const MenuPage = () => {
   const {
@@ -55,7 +56,7 @@ const MenuPage = () => {
             : submitType === "edit"
             ? updateMenuService(e, extraOptions, dataRow.id)
             : submitType === "delete"
-            ? handleDeleteCity(extraOptions)
+            ? deleteMenuService(dataRow.id, extraOptions)
             : null
         }
       />

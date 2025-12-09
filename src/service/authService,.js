@@ -33,7 +33,7 @@ export const loginService = async (data, extraOptions) => {
     const dataError = error.response.data;
 
     if (dataError.status === false && dataError.defaultPassword === true) {
-      navigate("/change-password");
+      navigate("/forgot-password");
       SwalAlertBasic({
         icon: "error",
         text: dataError.message,

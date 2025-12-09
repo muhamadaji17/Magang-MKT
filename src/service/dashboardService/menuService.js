@@ -103,8 +103,8 @@ export const updateMenuService = async (datas, extraOptions, id) => {
 export const deleteMenuService = async (id, extraOptions) => {
   const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
   try {
-    const response = await DELETE("crud/Menu", accessToken, id);
-    if (response.data.success) {
+    const response = await DELETE("crud/menu", accessToken, id);
+    if (response.data.status) {
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
@@ -112,9 +112,9 @@ export const deleteMenuService = async (id, extraOptions) => {
       handleCloseModal();
       setRefreshData(false);
     }
-    console.log(response);
   } catch (error) {
-    console.error("Delete Failed:", error);
-    throw error;
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
   }
 };

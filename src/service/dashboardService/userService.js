@@ -1,3 +1,5 @@
+/** @format */
+
 import { DELETE, GET, POST, PUT } from "../../api";
 import { SwalAlertBasic } from "../../utils";
 import { generateEndpointWithQuery } from "../generateEndpointWithQuery";
@@ -17,6 +19,8 @@ export const getUserService = async (accessToken, extraOptions) => {
 };
 
 export const addUserService = async (datas, extraOptions) => {
+  // console.log(datas);
+
   const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
     extraOptions;
   const headers = generateHeaders({ accessToken });

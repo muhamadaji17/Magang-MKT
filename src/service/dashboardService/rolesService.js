@@ -1,3 +1,5 @@
+/** @format */
+
 import { DELETE, GET, POST, PUT } from "../../api";
 import { SwalAlertBasic } from "../../utils";
 import { generateEndpointWithQuery } from "../generateEndpointWithQuery";
@@ -8,7 +10,11 @@ export const getRolesService = async (accessToken, extraOptions) => {
 
   const queryParams = generateEndpointWithQuery(searchQuery);
   try {
-    const response = await GET(`crud/roles/by?${queryParams}`, accessToken);
+    const response = await GET(
+      `crud/roles/by?priority_not=0&${queryParams}`,
+      accessToken
+    );
+    // const response = await GET(`crud/roles/by?${queryParams}`, accessToken);
     const gabung = response.data.payload?.map((data) => ({
       ...data,
       label: data.role_name,

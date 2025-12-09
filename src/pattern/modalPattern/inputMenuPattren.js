@@ -62,7 +62,7 @@ export const inputEditMenu = (body, options) => [
     labelText: "Icon Menu",
     name: "menu_icon",
     type: "file",
-    // optionError: errorOptions.img,
-    defaultValue: body.menu_icon,
+    optionError: errorOptions.img,
+    defaultValue: body.logo,
   },
 ];

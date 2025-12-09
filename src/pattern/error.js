@@ -13,6 +13,9 @@ export const errorOptions = {
   is_main_cast: {
     required: "is_main_cast is Required",
   },
+  dob: {
+    required: "Date of Birthdate is Required",
+  },
 
   phone: {
     required: "Phone Number is Required",

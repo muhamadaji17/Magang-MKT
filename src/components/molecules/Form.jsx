@@ -214,6 +214,7 @@ const Form = ({
                   rows={5}
                   error={errors}
                   value={value}
+                  onFocus={data.onFocus}
                 />
               </div>
             );
