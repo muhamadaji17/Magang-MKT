@@ -1,6 +1,6 @@
 /** @format */
 
-import { loginService, logoutService } from "./authService,";
+import { loginService, logoutService, otpService } from "./authService,";
 import { generateEndpointWithQuery } from "./generateEndpointWithQuery";
 import { generateHeaders } from "./generateHeaders";
 import { getBannerService } from "./dashboardService/bannerService";
@@ -79,6 +79,9 @@ import {
   getArticlesService,
   getArticleByIdService,
   getArticleCategoryService,
+  updateArticlesStatusService,
+  checkSlugArticleIdService,
+  checkSlugArticleEnService,
 } from "./dashboardService/articlesService";
 import { getRatingService } from "./dashboardService/ratingService";
 import {
@@ -103,7 +106,17 @@ import {
   getContactService,
   updateContactService,
 } from "./dashboardService/contactService";
+import {
+  addMenuService,
+  getMenuService,
+  updateMenuService,
+} from "./dashboardService/menuService";
+
 export {
+  updateMenuService,
+  addMenuService,
+  getMenuService,
+  otpService,
   getContactService,
   addContactService,
   updateContactService,
@@ -132,8 +145,11 @@ export {
   getUserService,
   getRolesService,
   getArticlesService,
+  updateArticlesStatusService,
   getArticleByIdService,
   getArticleCategoryService,
+  checkSlugArticleIdService,
+  checkSlugArticleEnService,
   handleAddBanner,
   handleServiceWithOnClick,
   handleAddCountry,

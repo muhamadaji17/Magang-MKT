@@ -1,41 +1,35 @@
 /** @format */
 
 import { useGlobalHook } from "../useGlobalHook";
-import { getCityService, getOfficeService } from "../../service";
-
+import { getMenuService, getProvinceService } from "../../service";
 import { useData } from "../useData";
 import { useDebauncedEffect } from "../useDebouncedEffect";
 
-export const useOfficeHook = () => {
+export const useMenuHook = () => {
   const {
-    accessToken,
+    stateShowModal,
     refreshData,
     setRefreshData,
-    stateShowModal,
-    handleCloseModal,
-    dataRow,
+    accessToken,
+    submitType,
     searchQuery,
     setSearchQuery,
-    submitType,
+    dataRow,
+    handleCloseModal,
     isLoading,
     setIsLoading,
-    setLoadingButton,
   } = useGlobalHook();
-  const { datasOffice, setDatasOffice, datasCity, setDatasCity } = useData();
 
-  const extraOptions = {
-    accessToken,
-    setRefreshData,
-    handleCloseModal,
-    setLoadingButton,
-  };
+  const { dataMenu, setDataMenu } = useData();
+
+  const extraOptions = { accessToken, setRefreshData, handleCloseModal };
 
   useDebauncedEffect({
     fn: () => {
       Promise.all([
-        getOfficeService(accessToken, {
+        getMenuService(accessToken, {
           searchQuery,
-          setDatasOffice,
+          setDataMenu,
           setRefreshData,
           handleCloseModal,
         }),
@@ -46,18 +40,15 @@ export const useOfficeHook = () => {
   });
 
   return {
-    accessToken,
-    refreshData,
-    setRefreshData,
+    dataMenu,
+    extraOptions,
     stateShowModal,
     setSearchQuery,
-    dataRow,
     submitType,
-    datasOffice,
-    datasCity,
-    setDatasCity,
-    getCityService,
-    extraOptions,
+    dataRow,
+    handleCloseModal,
+    getProvinceService,
     isLoading,
+    accessToken,
   };
 };

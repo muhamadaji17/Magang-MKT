@@ -6,14 +6,20 @@ import {
 } from "../dashboardService/officeService";
 
 export const handleAddOffice = (extraOptions) => {
-  return (datas) => {
-    handleSubmitData(datas, addOfficeService, extraOptions);
+  return (datas, extraOptionsForm) => {
+    handleSubmitData(datas, addOfficeService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 
 export const handleDeleteOffice = (extraOptions) => {
-  return (datas) => {
-    deleteOfficeService(datas.id, extraOptions);
+  return (datas, extraOptionsForm) => {
+    deleteOfficeService(datas.id, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 

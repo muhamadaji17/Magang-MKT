@@ -1,6 +1,7 @@
 /** @format */
 
 import Login from "./authPage/Login";
+import ForgotPassword from "./authPage/ForgotPassword";
 import Home from "./dashboard/Home";
 import Banner from "./dashboard/Banner";
 import About from "./dashboard/About";
@@ -19,11 +20,14 @@ import ArticleCategories from "./dashboard/ArticleCategories";
 import Rating from "./dashboard/Rating";
 import ContactPage from "./dashboard/Contact";
 import ContactCategoryPage from "./dashboard/ContactCategory";
+import MenuPage from "./dashboard/Menu";
 export {
+  MenuPage,
   ContactCategoryPage,
   ContactPage,
   DetailFilmPage,
   Login,
+  ForgotPassword,
   Home,
   PageNotFound,
   Banner,

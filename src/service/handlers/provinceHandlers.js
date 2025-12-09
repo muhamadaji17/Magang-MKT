@@ -6,8 +6,11 @@ import {
 } from "../dashboardService/provinceService";
 
 export const handleAddProvince = (extraOptions) => {
-  return (datas) => {
-    handleSubmitData(datas, addProvinceService, extraOptions);
+  return (datas, extraOptionsForm) => {
+    handleSubmitData(datas, addProvinceService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 
@@ -18,11 +21,10 @@ export const handleDeleteProvince = (extraOptions) => {
 };
 
 export const handleEditProvince = (extraOptions, dataRow) => {
-  return (datas) => {
-    handleSubmitData(
-      { ...datas, id: dataRow.id },
-      updateProvinceService,
-      extraOptions
-    );
+  return (datas, extraOptionsForm) => {
+    handleSubmitData({ ...datas, id: dataRow.id }, updateProvinceService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };

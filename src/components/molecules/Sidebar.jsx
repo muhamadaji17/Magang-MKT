@@ -6,7 +6,7 @@ import Navlink from "./Navlink";
 import Form from "./Form";
 import { Button } from "../atom";
 import { MdClose } from "react-icons/md";
-import Logo from "../../../public/images/logo/LOGO RAIN WHITE.svg";
+import Logo from "../../../public/images/logo/LOGO RAIN IJOBIRU.svg";
 
 const Sidebar = ({
   type = "",
@@ -23,6 +23,7 @@ const Sidebar = ({
   isShow = true,
 }) => {
   const currentPath = useLocation().pathname;
+
   return (
     <>
       <div
@@ -62,7 +63,7 @@ const Sidebar = ({
         >
           {type !== "form" && (
             <div className="px-2 mb-8 flex  justify-between">
-              <Link className="text-2xl">
+              <Link className="text-2xl" to={"/dashboard"}>
                 <img src={Logo} alt="logo-rain" className="w-30 lg:w-40" />
               </Link>
 

@@ -1,3 +1,5 @@
+/** @format */
+
 import { errorOptions } from "../error";
 
 export const inputAddUser = (dataRole) => [
@@ -6,22 +8,37 @@ export const inputAddUser = (dataRole) => [
     name: "user_name",
     type: "text",
     optionError: errorOptions.username,
-    grid: 6,
+    grid: 4,
   },
   {
     labelText: "Phone Number",
     name: "user_phone",
     type: "mumber",
     optionError: errorOptions.phone,
-    grid: 6,
+    grid: 4,
   },
   {
-    labelText: "Password",
-    name: "password",
-    type: "password",
-    optionError: errorOptions.password,
+    labelText: "Date of Birthdate",
+    name: "dob",
+    type: "date",
+    optionError: errorOptions.dob,
+    grid: 4,
+    onFocus: true,
+  },
+  {
+    labelText: "E-Mail",
+    name: "email",
+    type: "email",
+    optionError: errorOptions.email,
     grid: 6,
   },
+  // {
+  //   labelText: "Password",
+  //   name: "password",
+  //   type: "password",
+  //   optionError: errorOptions.password,
+  //   grid: 6,
+  // },
   {
     labelText: "Role",
     name: "id_roles",
@@ -40,7 +57,7 @@ export const inputEditUser = (defaultValues, dataRole) => [
     type: "text",
     defaultValue: defaultValues.user_name,
     optionError: errorOptions.username,
-    grid: 6,
+    grid: 4,
   },
   {
     labelText: "Phone Number",
@@ -48,7 +65,26 @@ export const inputEditUser = (defaultValues, dataRole) => [
     type: "mumber",
     defaultValue: defaultValues.user_phone,
     optionError: errorOptions.phone,
-    grid: 6,
+    grid: 4,
+  },
+
+  {
+    labelText: "Date of Birthdate",
+    name: "dob",
+    type: "date",
+    optionError: errorOptions.dob,
+    grid: 4,
+    defaultValue: defaultValues.dob,
+  },
+
+  {
+    labelText: "E-Mail",
+    name: "email",
+    type: "email",
+    optionError: errorOptions.email,
+    defaultValue: defaultValues.email,
+
+    grid: 4,
   },
 
   {
@@ -59,7 +95,7 @@ export const inputEditUser = (defaultValues, dataRole) => [
     optionDisabledText: "Select Role",
     options: dataRole,
     defaultValue: defaultValues?.roles?.id_roles,
-    grid: 6,
+    grid: 4,
   },
   {
     name: "status",
@@ -67,7 +103,7 @@ export const inputEditUser = (defaultValues, dataRole) => [
     labelText: "Status",
     optionDisabledText: "Select Status",
     defaultValue: defaultValues.status,
-    grid: 6,
+    grid: 4,
     options: [
       { label: "Active", value: true },
       { label: "Inactive", value: false },

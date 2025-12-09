@@ -1,3 +1,5 @@
+/** @format */
+
 import { DELETE, GET, POST, PUT } from "../../api";
 import { SwalAlertBasic } from "../../utils";
 import { generateEndpointWithQuery } from "../generateEndpointWithQuery";
@@ -8,7 +10,11 @@ export const getRolesService = async (accessToken, extraOptions) => {
 
   const queryParams = generateEndpointWithQuery(searchQuery);
   try {
-    const response = await GET(`crud/roles/by?${queryParams}`, accessToken);
+    const response = await GET(
+      `crud/roles/by?priority_not=0&${queryParams}`,
+      accessToken
+    );
+    // const response = await GET(`crud/roles/by?${queryParams}`, accessToken);
     const gabung = response.data.payload?.map((data) => ({
       ...data,
       label: data.role_name,
@@ -23,7 +29,8 @@ export const getRolesService = async (accessToken, extraOptions) => {
 };
 
 export const addRoleService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({ accessToken });
 
   try {
@@ -35,16 +42,21 @@ export const addRoleService = async (datas, extraOptions) => {
         text: response.data.message,
       });
       setRefreshData(false);
+      setLoadingButton(false);
       handleCloseModal();
     }
   } catch (error) {
     console.error(error);
-    SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
   }
 };
 
 export const updateRoleService = async (datas, extraOptions) => {
-  const { accessToken, setRefreshData, handleCloseModal } = extraOptions;
+  const { accessToken, setRefreshData, handleCloseModal, setLoadingButton } =
+    extraOptions;
   const headers = generateHeaders({ accessToken });
 
   try {
@@ -56,9 +68,13 @@ export const updateRoleService = async (datas, extraOptions) => {
     });
     setRefreshData(false);
     handleCloseModal();
+    setLoadingButton(false);
   } catch (error) {
     console.error(error);
-    SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    setLoadingButton(false);
+    if (error.response.data.message) {
+      SwalAlertBasic({ icon: "error", text: error.response.data.message });
+    }
   }
 };
 

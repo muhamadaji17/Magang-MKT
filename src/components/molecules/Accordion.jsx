@@ -2,7 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import Navlink from "./Navlink";
 
 const Accordion = ({ submenus, config, currentPath, handleCloseSidebar }) => {
-  const initialStatus = submenus.some((link) => link.path === currentPath);
+  const initialStatus = submenus.some((link) =>
+    currentPath.startsWith(link.path)
+  );
   const [active, setActive] = useState(initialStatus);
   const [height, setHeight] = useState("0px");
   const contentRef = useRef(null);
@@ -18,6 +20,10 @@ const Accordion = ({ submenus, config, currentPath, handleCloseSidebar }) => {
   const handleToggle = () => {
     setActive((prev) => !prev);
   };
+
+  useEffect(() => {
+    setActive(submenus.some((link) => currentPath.startsWith(link.path)));
+  }, [currentPath]);
 
   return (
     <li>

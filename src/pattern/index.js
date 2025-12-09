@@ -1,6 +1,6 @@
 /** @format */
 
-import { loginPattern } from "./authPattern";
+import { loginPattern, forgotPasswordPattern } from "./authPattern";
 import { navLink } from "./links";
 import { handleSubmitData } from "./handleSubmitData";
 import { handleSearch } from "./handleSearch";
@@ -24,6 +24,7 @@ import {
   configTableArticleCategories,
   configTableCategoryContact,
   configTableContact,
+  configTableMenu,
 } from "./tablePattern/tableDataColumn";
 
 import {
@@ -72,9 +73,15 @@ import {
   inputAddContact,
   inputEditContact,
 } from "./modalPattern/inputContactPattern";
+import { inputAddMenu, inputEditMenu } from "./modalPattern/inputMenuPattren";
+
 export {
+  inputAddMenu,
+  inputEditMenu,
+  configTableMenu,
   inputEditContact,
   inputAddContact,
+  forgotPasswordPattern,
   configTableContact,
   inputEditContactCategory,
   inputAddContactCategory,

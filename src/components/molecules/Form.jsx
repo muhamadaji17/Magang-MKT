@@ -2,9 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { InputForm } from ".";
-import { Button } from "../atom";
+import { Button, LoadingButton } from "../atom";
 import { useForm } from "react-hook-form";
-
+import { useGlobalHook } from "../../hook/useGlobalHook";
+import { useDebauncedEffect } from "../../hook/useDebouncedEffect";
+import { Link } from "react-router-dom";
+import {
+  checkSlugArticleEnService,
+  checkSlugArticleIdService,
+} from "../../service";
 const generateDefaultValue = (configInput) => {
   return configInput?.reduce((acc, curr) => {
     if (curr.defaultValue === undefined) return acc;
@@ -29,16 +35,83 @@ const Form = ({
   handleShowSidebar,
   dataDefault,
   handleOpenModal,
+  ForgetPassword,
+  LinkForgetPassword,
 }) => {
   const {
     register,
     handleSubmit,
     watch,
     control,
+    getValues,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({ defaultValues: generateDefaultValue(configInput) });
   const [imagePreview, setImagePreview] = useState([]);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const [payloadCheckSlug, setPayloadCheckSlug] = useState({
+    id: null,
+    en: null,
+  });
+
+  const { loadingButton, setLoadingButton, accessToken } = useGlobalHook();
+
+  const [article_slug_en, article_slug_id] = watch([
+    "article_slug_en",
+    "article_slug_id",
+  ]);
+
+  // check slug article id
+  useDebauncedEffect({
+    fn: () => {
+      if (!article_slug_id) return;
+
+      if (!isFirstRender) {
+        if (article_slug_id) {
+          checkSlugArticleIdService(
+            { article_slug_id },
+            { accessToken, setPayloadCheckSlug }
+          );
+        }
+      }
+    },
+    deps: [article_slug_id],
+    delay: 1000,
+  });
+
+  // // check slug article en
+  useDebauncedEffect({
+    fn: () => {
+      if (!article_slug_en) return;
+
+      if (!isFirstRender) {
+        if (article_slug_en) {
+          checkSlugArticleEnService(
+            { article_slug_en },
+            { accessToken, setPayloadCheckSlug }
+          );
+        }
+      }
+    },
+    deps: [article_slug_en],
+    delay: 1000,
+  });
+
+  // set field slug
+  const handleSetSlug = (titleField, valueTitleField) => {
+    const result = valueTitleField.toLowerCase().replace(/\s+/g, "-");
+
+    if (titleField === "article_title_en") {
+      setValue("article_slug_en", result);
+    } else if (titleField === "article_title_id") {
+      setValue("article_slug_id", result);
+    }
+
+    if (isFirstRender !== false) {
+      setIsFirstRender(false);
+    }
+  };
 
   useEffect(() => {
     const getImageDefault = configInput.filter(
@@ -80,7 +153,8 @@ const Form = ({
   };
 
   const onSubmit = (data) => {
-    handleSubmitData(data, { reset, setImagePreview });
+    handleSubmitData(data, { reset, setImagePreview, setLoadingButton });
+    setLoadingButton(true);
   };
 
   useEffect(() => {
@@ -105,7 +179,7 @@ const Form = ({
         onSubmit={handleSubmit(onSubmit)}
         className={`${className || ""} `}
       >
-        <div className="grid grid-cols-12 gap-x-4">
+        <div className="grid grid-cols-12 gap-3">
           {configInput.map((data, index) => {
             const value = watch(data.name);
             return (
@@ -122,26 +196,40 @@ const Form = ({
                     : data.grid === 12
                     ? "md:col-span-12 col-span-12"
                     : "col-span-12"
-                } w-full mb-5 relative`}
+                } w-full mb-2 relative`}
                 key={index}
               >
                 <InputForm
                   data={data}
+                  handleSetSlug={handleSetSlug}
                   key={index}
+                  payloadCheckSlug={payloadCheckSlug}
                   register={register}
                   imagePreview={imagePreview.find(
                     (item) => item.fieldName === data.name
                   )}
                   control={control}
+                  getValues={getValues}
                   handleFileChange={handleFileChange}
                   rows={5}
                   error={errors}
                   value={value}
+                  onFocus={data.onFocus}
                 />
               </div>
             );
           })}
         </div>
+        {LinkForgetPassword && (
+          <div className="mb-5">
+            <Link
+              to={`${LinkForgetPassword ? LinkForgetPassword : "#"}`}
+              className="hover:underline hover:text-blue-600 text-blue-500 underline text-sm"
+            >
+              {ForgetPassword}
+            </Link>
+          </div>
+        )}
 
         {forType === "sidebar" ? (
           <div className="flex gap-32 items-center w-full absolute bottom-5">
@@ -149,7 +237,7 @@ const Form = ({
               <Button
                 className={"py-2 px-3 rounded-md bg-green-500 text-white"}
               >
-                Save
+                {loadingButton ? <LoadingButton /> : "Save"}
               </Button>
 
               <Button
@@ -178,7 +266,9 @@ const Form = ({
             className={`bg-blue-600 rounded-sm py-2 w-full text-center text-white cursor-pointer hover:bg-blue-700 ${buttonClassName}`}
             type="submit"
           >
-            {buttonText}
+            {/* {buttonText} */}
+
+            {loadingButton ? <LoadingButton /> : buttonText}
           </Button>
         )}
       </form>

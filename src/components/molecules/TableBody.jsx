@@ -3,7 +3,6 @@
 import { formatDate } from "date-fns";
 import { Button, Loading, MenuOptions } from "../atom";
 import { Link } from "react-router-dom";
-import ShortenedCharacter from "./ShortCharacter";
 
 const TableBody = ({
   datasTable,
@@ -55,26 +54,19 @@ const TableBody = ({
                   >
                     <img
                       className="w-20 h-28 "
-                      src={`http://${data[col.key]}`}
+                      src={`https://${data[col.key]}`}
                     />
                   </div>
-                ) : col.key === "trailer_film" ? (
+                ) : col.key === "trailer_film" || col.key === "contact_url" ? (
                   <Link
                     to={data[col.key]}
                     target="_blank"
                     className=" bg-blue-500 px-3 py-2 text-white rounded-md hover:bg-blue-600"
                   >
                     {/* {data[col.key]} */}
-                    Preview Trailer
+                    Preview
                   </Link>
                 ) : col.key === "sinopsis_film_id" ? (
-                  // <div className="max-w-96">
-                  // <ShortenedCharacter
-                  //   maxLength={50}
-                  //   sinopsis={data[col.key]}
-                  //   handleShow={() => handleShowModal("synopsis", data)}
-                  // />
-
                   <Button
                     onClick={() => handleShowModal("synopsis", data)}
                     className={"bg-blue-500 text-white p-2 rounded-md"}
@@ -90,7 +82,7 @@ const TableBody = ({
                 )}
               </td>
             ))}
-            <td>
+            <td className="">
               <MenuOptions
                 isLast={datasTable.length - 1 === index}
                 onEdit={() => {
@@ -110,49 +102,6 @@ const TableBody = ({
                     : null
                 }
               />
-
-              {/* <div className="flex justify-center p-4 gap-3">
-                {pathname === "/office" && (
-                  <Button
-                    className={"text-2xl text-violet-600"}
-                    onClick={() => handleShowModal("location", data)}
-                  >
-                    <FaEye />
-                  </Button>
-                )}
-
-                <Button
-                  className={"text-2xl"}
-                  onClick={() => {
-                    // if (tableType !== "films") {
-                    handleShowModal("edit", data);
-                    if (handleAPI) {
-                      handleAPI();
-                    }
-                    // } else {
-                    //   handleShowSidebar("edit", data);
-                    // }
-                  }}
-                >
-                  <FaRegEdit className="text-blue-600" />
-                </Button>
-                <Button
-                  className={"text-2xl"}
-                  onClick={() => {
-                    handleShowModal("delete", data);
-                  }}
-                >
-                  <RiDeleteBin6Line className="text-red-600" />
-                </Button>
-                <Link
-                  className={"text-2xl"}
-                  onClick={() => sessionStorage.setItem("id", data.id)}
-                  to={`/films/detail?nama=${data.nama_film}`}
-                  state={data}
-                >
-                  <FaExternalLinkAlt className="text-green-600" />
-                </Link>
-              </div> */}
             </td>
           </tr>
         ))

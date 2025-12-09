@@ -77,6 +77,12 @@ export const configTableCity = [
     ],
   },
 ];
+export const configTableMenu = [
+  { title: "Menu Name", key: "menu_name", type: "text" },
+  { title: "Menu URL", key: "menu_url", type: "text" },
+  { title: "Parrent Name", key: "parrent_name", type: "text" },
+  { title: "Menu Icon", key: "logo", type: "text" },
+];
 
 export const configTableOffice = [
   { title: "Office Name", key: "office_name", type: "text" },
@@ -165,22 +171,27 @@ export const configTableRole = [
     key: "priority",
     type: "number",
   },
-  {
-    title: "Status",
-    key: "status",
-    type: "select",
-    placeholder: "Select Status",
-    options: [
-      { label: "Active", value: true },
-      { label: "Inactive", value: false },
-    ],
-  },
+  // {
+  //   title: "Status",
+  //   key: "status",
+  //   type: "select",
+  //   placeholder: "Select Status",
+  //   options: [
+  //     { label: "Active", value: true },
+  //     { label: "Inactive", value: false },
+  //   ],
+  // },
 ];
 
 export const configTableArticleCategories = [
   {
-    title: "Category Name",
-    key: "article_category_name",
+    title: "Category Name EN (English)",
+    key: "article_category_name_en",
+    type: "text",
+  },
+  {
+    title: "Category Name ID (Bahasa)",
+    key: "article_category_name_id",
     type: "text",
   },
   {

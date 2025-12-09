@@ -12,6 +12,8 @@ export const useArticles = () => {
     refreshData,
     dataRow,
     accessToken,
+    isLoading,
+    setIsLoading,
     setRefreshData,
   } = useGlobalHook();
   const {
@@ -34,7 +36,7 @@ export const useArticles = () => {
         setDatasArticleCategory,
         setRefreshData,
         searchQuery: {},
-      }),
+      }).finally(() => setIsLoading(false)),
     ]);
   }, [refreshData]);
 
@@ -42,6 +44,7 @@ export const useArticles = () => {
     datasArticle,
     datasArticleCategory,
     isModalOpen,
+    isLoading,
     submitType,
     handleOpenModal,
     handleCloseModal,

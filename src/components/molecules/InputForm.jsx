@@ -1,6 +1,6 @@
 /** @format */
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AtomSelect, Button, Input } from "../atom";
 import { FaEyeSlash, FaUpload } from "react-icons/fa";
 import Editor from "../organism/Editor";
@@ -9,12 +9,16 @@ const InputForm = ({
   data,
   register,
   control,
+  handleSetSlug,
+  getValues,
   value,
+  payloadCheckSlug,
   error,
   imagePreview,
   handleFileChange,
 }) => {
   const [showPassword, setShowPassword] = useState(null);
+
   // const { fileName, setFileName, imagePreview, setImagePreview } = state;
   // const getImageDefault = data.type === "file" ? data.defaultValue : null;
   // const imageURL = `http://${getImageDefault}`;
@@ -106,7 +110,7 @@ const InputForm = ({
           {...register(data.name, data.optionError)}
           id={data.name}
           rows={data.rows}
-          className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 "
+          className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
       ) : data.type === "hidden" ? (
         <input
@@ -114,17 +118,23 @@ const InputForm = ({
           name={data.name}
           value={data.value}
           {...register(data.name)}
-          className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 "
+          className="peer w-full bg-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
         />
       ) : (
         <Input
           type={!showPassword ? data.type : "text"}
-          register={register}
-          addOptionError={data.optionError}
+          addOptionError={
+            typeof data.optionError === "function"
+              ? data.optionError(getValues)
+              : data.optionError
+          }
           id={data.name}
           label={data.labelText}
           name={data.name}
+          control={control}
+          rows={data.rows}
           onFocus={data.onFocus}
+          handleSetSlug={handleSetSlug}
           max={data.max}
           min={data.min}
           sx={data.sx}
@@ -162,6 +172,26 @@ const InputForm = ({
       {error[data.name] && (
         <small className="block text-[10px] mt-2 text-red-600">
           {error[data.name]?.message}
+        </small>
+      )}
+
+      {data.name === "article_slug_id" && (
+        <small
+          className={`block text-[10px] mt-2 ${
+            payloadCheckSlug?.id?.status ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {payloadCheckSlug?.id?.message}
+        </small>
+      )}
+
+      {data.name === "article_slug_en" && (
+        <small
+          className={`block text-[10px] mt-2 ${
+            payloadCheckSlug?.en?.status ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {payloadCheckSlug?.en?.message}
         </small>
       )}
     </>

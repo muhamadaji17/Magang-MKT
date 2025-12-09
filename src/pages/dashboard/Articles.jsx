@@ -1,3 +1,5 @@
+/** @format */
+
 import { HeaderContent } from "../../components/molecules";
 import { useArticles } from "../../hook";
 import { ArticlesContent } from "../../components/organism";
@@ -11,6 +13,7 @@ const Articles = () => {
     handleOpenModal,
     submitType,
     isModalOpen,
+    isLoading,
     extraOptions,
   } = useArticles();
 
@@ -24,6 +27,7 @@ const Articles = () => {
         datasArticle={datasArticle}
         handleOpenModal={handleOpenModal}
         submitType={submitType}
+        isLoading={isLoading}
         isModalOpen={isModalOpen}
         extraOptions={extraOptions}
         handleCloseModal={handleCloseModal}

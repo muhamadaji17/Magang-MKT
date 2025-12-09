@@ -3,17 +3,62 @@
 import { POST } from "../api";
 import { SwalAlertBasic } from "../utils/alert";
 import { removeCookies, setCookies } from "./handleCookies";
+import Cookies from "js-cookie";
 
 export const loginService = async (data, extraOptions) => {
   const headers = {
     "Content-Type": "application/json",
   };
+  const { navigate, setLoadingButton } = extraOptions;
+
   try {
     const response = await POST("auth/login", data, headers);
     if (response.data.status === true) {
       // alert(response.data.message);
       setCookies(response);
-      extraOptions.navigate("/");
+      navigate("/dashboard");
+      SwalAlertBasic({
+        icon: "success",
+        text: response.data.message,
+      });
+    } else {
+      SwalAlertBasic({
+        icon: "error",
+        text: response.data.message,
+      });
+    }
+  } catch (error) {
+    // console.error(error);
+
+    const dataError = error.response.data;
+
+    if (dataError.status === false && dataError.defaultPassword === true) {
+      navigate("/forgot-password");
+      SwalAlertBasic({
+        icon: "error",
+        text: dataError.message,
+      });
+    } else {
+      SwalAlertBasic({
+        icon: "error",
+        text: dataError.message,
+      });
+    }
+  }
+  setLoadingButton(false);
+};
+export const otpService = async (data, extraOptions) => {
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  const { navigate, setLoadingButton } = extraOptions;
+
+  try {
+    const response = await POST("auth/get-otp", data, headers);
+    if (response.data.status === true) {
+      // alert(response.data.message);
+      setCookies(response);
+      // navigate("/dashboard");
       SwalAlertBasic({
         icon: "success",
         text: response.data.message,
@@ -24,10 +69,21 @@ export const loginService = async (data, extraOptions) => {
         text: response.data.message,
       });
     }
+
+    setLoadingButton(false);
   } catch (error) {
     // console.error(error);
     // alert(error.response.data.message);
     // console.log(error);
+    setLoadingButton(false);
+
+    if (error.code) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.message,
+      });
+    }
+
     if (error.response.data.status === false) {
       SwalAlertBasic({
         icon: "error",

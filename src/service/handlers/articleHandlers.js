@@ -9,17 +9,20 @@ import {
 } from "../dashboardService/articlesService";
 
 export const handleAddArticle = (extraOptions) => {
-  return (datas) => {
-    handleSubmitData(datas, addArticlesService, extraOptions);
+  return (datas, extraOptionsForm) => {
+    handleSubmitData(datas, addArticlesService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 
 export const handleEditArticle = (extraOptions, datasDetailArticle) => {
-  return (datas) => {
+  return (datas, extraOptionsForm) => {
     handleSubmitData(
       { ...datas, id: datasDetailArticle?.id_article },
       updateArticlesService,
-      extraOptions
+      { ...extraOptions, ...extraOptionsForm }
     );
   };
 };

@@ -51,18 +51,25 @@ export const inputAddFilms = (rating) => [
   },
 
   {
+    labelText: "Language Film",
+    name: "language_film",
+    type: "text",
+    optionError: errorOptions.language_film,
+    grid: 4,
+  },
+  {
     labelText: "Produser Film",
     name: "produser_film",
     type: "text",
     optionError: errorOptions.produser_film,
-    grid: 6,
+    grid: 4,
   },
   {
     labelText: "Sutradara Film",
     name: "sutradara_film",
     type: "text",
     optionError: errorOptions.sutradara_film,
-    grid: 6,
+    grid: 4,
   },
   {
     labelText: "Production House Film",
@@ -142,11 +149,19 @@ export const inputEditFilms = (datasDefault, rating) => [
   },
 
   {
+    labelText: "Language Film",
+    name: "language_film",
+    type: "text",
+    optionError: errorOptions.language_film,
+    grid: 4,
+    defaultValue: datasDefault.language_film,
+  },
+  {
     labelText: "Produser Film",
     name: "produser_film",
     type: "text",
     optionError: errorOptions.produser_film,
-    grid: 6,
+    grid: 4,
     defaultValue: datasDefault.produser_film,
   },
   {
@@ -154,7 +169,7 @@ export const inputEditFilms = (datasDefault, rating) => [
     name: "sutradara_film",
     type: "text",
     optionError: errorOptions.sutradara_film,
-    grid: 6,
+    grid: 4,
     defaultValue: datasDefault.sutradara_film,
   },
   {

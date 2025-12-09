@@ -1,7 +1,10 @@
 import { RiDeleteBinLine } from "react-icons/ri";
-import { Button } from "../atom";
+import { Button, LoadingButton } from "../atom";
+import { useGlobalHook } from "../../hook/useGlobalHook";
 
 const ConfirmDelete = ({ handleCloseModal, onConfirm, dataRow }) => {
+  const { loadingButton, setLoadingButton } = useGlobalHook();
+
   return (
     <>
       <div className="flex justify-center">
@@ -19,9 +22,12 @@ const ConfirmDelete = ({ handleCloseModal, onConfirm, dataRow }) => {
             </Button>
             <Button
               className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
-              onClick={() => onConfirm(dataRow, { type: "delete" })}
+              onClick={() => {
+                onConfirm(dataRow, { type: "delete" });
+                setLoadingButton(true);
+              }}
             >
-              Delete
+              {loadingButton ? <LoadingButton /> : "Delete"}
             </Button>
           </div>
         </div>

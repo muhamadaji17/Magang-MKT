@@ -56,6 +56,12 @@ export const addCategoryContactService = async (datas, extraOptions) => {
     }
   } catch (error) {
     console.error(error);
+    if (error.response.status === 400) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
   }
 };
 
@@ -83,6 +89,12 @@ export const updateCategoryContactService = async (datas, extraOptions) => {
     }
   } catch (error) {
     console.error(error);
+    if (error.response.status === 400) {
+      SwalAlertBasic({
+        icon: "error",
+        text: error.response.data.message,
+      });
+    }
   }
 };
 

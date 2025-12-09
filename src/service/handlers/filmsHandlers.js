@@ -15,12 +15,11 @@ export const handleAddFilms = (extraOptions) => {
 };
 
 export const handleEditFilms = (extraOptions, dataRow) => {
-  return (datas) => {
-    handleSubmitData(
-      { ...datas, id: dataRow.id },
-      updateFilmService,
-      extraOptions
-    );
+  return (datas, extraOptionsForm) => {
+    handleSubmitData({ ...datas, id: dataRow.id }, updateFilmService, {
+      ...extraOptions,
+      ...extraOptionsForm,
+    });
   };
 };
 

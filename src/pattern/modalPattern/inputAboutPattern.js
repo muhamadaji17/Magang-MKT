@@ -1,3 +1,5 @@
+/** @format */
+
 import { errorOptions } from "../error";
 
 export const inputAddAbout = [

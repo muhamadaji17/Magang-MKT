@@ -3,13 +3,18 @@
 export const errorOptions = {
   username: {
     required: "Username is Required",
-    minLength: {
-      value: 5,
-      message: "Username must be at least 5 characters",
-    },
+  },
+  menu_name: {
+    required: "Menu Name is Required",
+  },
+  menu_url: {
+    required: "Menu URL is Required",
   },
   is_main_cast: {
     required: "is_main_cast is Required",
+  },
+  dob: {
+    required: "Date of Birthdate is Required",
   },
 
   phone: {
@@ -22,11 +27,14 @@ export const errorOptions = {
 
   password: {
     required: "Password is Required",
-    minLength: {
-      value: 4,
-      message: "Password must be at least 4 characters",
-    },
   },
+
+  confirm_password: (getValues) => ({
+    required: "Konfirmasi password wajib diisi",
+    validate: (value) =>
+      value === getValues("password") ||
+      "Password and confirm password does not match",
+  }),
 
   title_about: {
     required: "Title is Required",
@@ -85,6 +93,9 @@ export const errorOptions = {
   produser_film: {
     required: "Produser Film is Required",
   },
+  language_film: {
+    required: "Language Film is Required",
+  },
   produksi_film: {
     required: "Prodution House Film is Required",
   },
@@ -125,6 +136,13 @@ export const errorOptions = {
   },
   sebagai_casting_film: {
     required: "Pemeran is Required",
+  },
+  email: {
+    required: "E-Mail is Required",
+    pattern: {
+      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: "Invalid email format",
+    },
   },
   sinopsis_casting_film_id: {
     required: "Deskripsi ID is Required ",
@@ -275,11 +293,22 @@ export const errorOptions = {
   article_img: {
     required: "Article Image is Required",
   },
+  article_thumbnail_img: {
+    required: "Article Thumbnail Image is Required",
+  },
   article_title: {
     required: "Article Title is Required",
+    pattern: {
+      value: /^[A-Za-z0-9\s]+$/,
+      message:
+        "No punctuation marks allowed. only letters, numbers, and spaces.",
+    },
   },
   article_slug: {
     required: "Article Slug is Required",
+  },
+  article_thumbnail_content: {
+    required: "Article Thumbnail Content is Required",
   },
   article_content: {
     required: "Article Content is Required",
@@ -287,8 +316,15 @@ export const errorOptions = {
   rating_name: {
     required: "Rating Name is Required",
   },
-
   code_rating: {
     required: "Code Rating is Required",
+  },
+  email: {
+    required: "Email is Required",
+    pattern: {
+      value:
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      message: "Invalid email address",
+    },
   },
 };
