@@ -53,7 +53,9 @@ const TableBody = ({
                     onClick={() => handleShowModal("image", data)}
                   >
                     <img
-                      className="w-20 h-28 "
+                      className={`w-20 h-28 ${
+                        col.key.includes("logo") ? "bg-black/30 px-2" : ""
+                      }`}
                       src={`https://${data[col.key]}`}
                     />
                   </div>
